@@ -4,7 +4,7 @@
  */
 import http from 'http'
 import koa from 'koa'
-import koaStatic from 'koaStatic'
+import koaStatic from 'koa-static'
 import React from 'react'
 import { Server as WebSocketServer } from 'ws'
 import { createStore } from 'redux'
