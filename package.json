@@ -4,7 +4,7 @@
   "description": "Video synchronization and chat lounge",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha --compilers js:babel-register",
     "start": "node ./index.js"
   },
   "repository": {
@@ -34,6 +34,7 @@
     "babel-polyfill": "^6.3.14",
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-react": "^6.3.13",
+    "chai": "^3.4.1",
     "css-loader": "^0.23.1",
     "es6-promise": "^3.0.2",
     "es6-shim": "^0.34.0",
@@ -41,6 +42,7 @@
     "isomorphic-fetch": "^2.2.0",
     "koa": "^1.1.2",
     "koa-static": "^1.5.2",
+    "mocha": "^2.3.4",
     "node-sass": "^3.4.2",
     "normalize.css": "^3.0.3",
     "pm2": "^0.15.10",
