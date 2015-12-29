@@ -16,6 +16,7 @@ module.exports = {
         path: __dirname + '/static'
     },
     plugins: [
-        new ExtractTextPlugin('style.css')
+        new ExtractTextPlugin('style.css'),
+        //to minify for production: new webpack.optimize.UglifyJsPlugin({compress: true})
     ]
 }
