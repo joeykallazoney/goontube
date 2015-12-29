@@ -2,8 +2,9 @@ html {
   font-smoothing: antialiased; }
 
 body {
+  background: #222222;
   margin: 0 0;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 17px; }
 
 #origin {
