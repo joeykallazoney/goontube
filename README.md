@@ -18,16 +18,19 @@ Much needed overhaul + rewrite as an ES6 webapp with React + Redux.
 git clone https://github.com/goontube/goontube.git
 cd goontube
 npm install
+webpack
 ```
 
 #### Development
 
 ```
+webpack
 npm run dev
 ```
 
 #### Usage
 
 ```
+webpack
 npm start
 ```
