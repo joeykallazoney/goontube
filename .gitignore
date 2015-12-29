@@ -3,7 +3,6 @@
 !.gitattributes
 !.gitignore
 
-bundle.js
 config.js
 *.db
 

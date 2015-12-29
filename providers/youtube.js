@@ -1,6 +1,6 @@
-class YouTubePlayer {
+class YouTube {
     constructor(id) {
     }
 }
 
-export default YouTubePlayer
+export default YouTube

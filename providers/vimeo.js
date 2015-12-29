@@ -1,3 +1,6 @@
-module.exports = {
-
+class Vimeo {
+    constructor(id) {
+    }
 }
+
+export default Vimeo
