@@ -4,7 +4,6 @@ Video synchronization and chat lounge.
 
 Much needed overhaul + rewrite as an ES6 webapp with React + Redux.  
 
-Testing github account linking.
 ### Roadmap
 
 ####**Project Management**####
