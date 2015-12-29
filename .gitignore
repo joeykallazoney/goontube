@@ -3,6 +3,7 @@
 !.gitattributes
 !.gitignore
 
+bundle.js
 config.js
 *.db
 
@@ -11,4 +12,3 @@ config.js
 node_modules
 .DS_Store
 build
-static
