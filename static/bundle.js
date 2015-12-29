@@ -71,10 +71,14 @@
 	window.addEventListener('load', function load(event) {
 	    var origin = document.getElementById('origin');
 
-	    if (origin !== null) {
-	        _reactDom2.default.render(_react2.default.createElement(_app2.default, null), origin);
+	    if (origin === null) {
+	        origin = document.createElement('div');
+	        origin.id = 'origin';
+
+	        document.body.appendChild(origin);
 	    }
 
+	    _reactDom2.default.render(_react2.default.createElement(_app2.default, null), origin);
 	    window.removeEventListener('load', load, false);
 	}, false); /**
 	            * @file Provides an entry point for the client script bundle.

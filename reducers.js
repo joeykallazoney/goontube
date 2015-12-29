@@ -13,8 +13,17 @@ const defaultApplicationState = I.Map({
         provider:   null,
         position:   0
     },
-
-    playlist: []
+    banner: {
+        currentBannerIndex:  0,
+        possibilities:       []
+    },
+    room: {
+        name:       null,
+        motd:       null,
+        playlist:   [],
+        users:      [],
+        history:    []
+    }
 })
 
 function rootReducer(state = defaultApplicationState(), action) {

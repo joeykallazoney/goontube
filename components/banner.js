@@ -4,15 +4,20 @@ import ReactDOM from 'react-dom'
 class Banner extends React.Component {
     constructor(props) {
         super(props)
+
+        this.state = {}
     }
 
     componentDidMount() {
+    }
 
+    onClick() {
     }
 
     render() {
         return (
-            <div className="banner">
+            <div onclick={() => this.onClick()} className="banner">
+                <img src={this.state.bannerImageSrc} className="banner-image" />
             </div>
         )
     }

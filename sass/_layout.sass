@@ -1,6 +1,8 @@
+@import variables
+
 #origin
-    width: 960px
+    width: $container-width
     margin: 0 auto
 
-    @media screen and (max-width: 959px)
+    @media screen and (max-width: $container-width - 1)
         width: 100% !important
