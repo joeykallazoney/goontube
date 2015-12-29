@@ -9,6 +9,6 @@ module.exports = {
     },
     output: {
         filename: 'bundle.js',
-        type: 'text/javascript'
+        path: __dirname + '/static'
     }
 }
