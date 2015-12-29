@@ -4,11 +4,12 @@ import ReactDOM from 'react-dom'
 class Banner extends React.Component {
     constructor(props, context) {
         super(props, context)
-
-        console.log(context)
     }
 
     componentDidMount() {
+        if(this.context.store !== null) {
+            console.log(this.context.store.getState())
+        }
     }
 
     onClick() {
@@ -21,6 +22,10 @@ class Banner extends React.Component {
             </div>
         )
     }
+}
+
+Banner.contextTypes = {
+    store: React.PropTypes.object.isRequired
 }
 
 export default Banner

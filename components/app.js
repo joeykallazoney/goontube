@@ -1,9 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
+import Banner from './banner'
+
 class Goontube extends React.Component {
-    constructor(props) {
-        super(props)
+    constructor(props, context) {
+        super(props, context)
     }
 
     componentDidMount() {
@@ -14,6 +16,8 @@ class Goontube extends React.Component {
         return (
             <div id="goontube">
                 <h1>Goontube!</h1>
+
+                <Banner />
             </div>
         )
     }
