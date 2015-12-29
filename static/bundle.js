@@ -66,11 +66,11 @@
 
 	var _app2 = _interopRequireDefault(_app);
 
-	var _redux = __webpack_require__(163);
+	var _redux = __webpack_require__(164);
 
-	var _reactRedux = __webpack_require__(172);
+	var _reactRedux = __webpack_require__(173);
 
-	var _reducers = __webpack_require__(181);
+	var _reducers = __webpack_require__(182);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -80,6 +80,28 @@
 	 * @file Provides an entry point for the client script bundle.
 	 * @since 1.0.0
 	 */
+
+	function initWebSocket(store) {
+	    var socket = new WebSocket('ws://localhost:7070');
+
+	    socket.onopen = function () {
+	        console.log('Connection established to WebSocket server.');
+	    };
+
+	    socket.onmessage = function (message) {
+	        var decoded = JSON.parse(message.data);
+
+	        console.log(decoded.type + ' -> ' + decoded.data + ' dispatched to Redux store.');
+
+	        store.dispatch(decoded);
+	    };
+
+	    socket.onclose = function () {
+	        console.error('Lost connection to WebSocket server!');
+	    };
+
+	    return socket;
+	}
 
 	window.addEventListener('load', function load(event) {
 	    var origin = document.getElementById('origin');
@@ -92,6 +114,7 @@
 	    }
 
 	    var store = (0, _redux.createStore)(_reducers2.default);
+	    var socket = initWebSocket(store);
 
 	    _reactDom2.default.render(_react2.default.createElement(
 	        _reactRedux.Provider,
@@ -19777,6 +19800,10 @@
 
 	var _exenv2 = _interopRequireDefault(_exenv);
 
+	var _protocol = __webpack_require__(163);
+
+	var _protocol2 = _interopRequireDefault(_protocol);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -19797,22 +19824,40 @@
 	    _createClass(Banner, [{
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
+	            var _this2 = this;
+
 	            if (_exenv2.default.canUseDOM) {
-	                console.log(this.context.store.getState());
+	                (function () {
+	                    var lastBannerIndex = _this2.context.store.getIn(['banner', 'currentBannerIndex']);
+
+	                    _this2.context.store.subscribe(function () {
+	                        if (lastBannerIndex !== _this2.context.store.getIn(['banner', 'currentBannerIndex'])) {
+	                            _this2.forceUpdate();
+	                        }
+	                    });
+	                })();
 	            }
 	        }
 	    }, {
 	        key: 'onClick',
-	        value: function onClick() {}
+	        value: function onClick() {
+	            var p = this.context.store.getIn(['banner', 'possibilities']);
+	            var newBannerChoice = Math.floor(Math.random() * p.length);
+
+	            this.context.store.dispatch({
+	                type: BANNER_NEW_BANNER,
+	                data: newBannerChoice
+	            });
+	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var _this2 = this;
+	            var _this3 = this;
 
 	            return _react2.default.createElement(
 	                'div',
 	                { onclick: function onclick() {
-	                        return _this2.onClick();
+	                        return _this3.onClick();
 	                    }, className: 'banner' },
 	                _react2.default.createElement('img', { src: null, className: 'banner-image' })
 	            );
@@ -19877,6 +19922,61 @@
 
 /***/ },
 /* 163 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	/**
+	 * @file Exports the protocol used to mediate goontube actions between client, server, and Redux.
+	 * @since 1.0.0
+	 */
+	exports.default = {
+	    CLIENT_HELLO: 'CLIENT_HELLO',
+	    BANNER_LIST_UPDATE: 'BANNER_LIST_UPDATE',
+	    BANNER_NEW_BANNER: 'BANNER_NEW_BANNER',
+	    AUTHENTICATION_ATTEMPT: 'AUTHENTICATION_ATTEMPT',
+	    AUTHENTICATION_RESPONSE: 'AUTHENTICATION_RESPONSE',
+	    LOGIN_ACCEPTED: 'LOGIN_ACCEPTED',
+	    LOGIN_DENIED_BAD_DETAILS: 'LOGIN_DENIED_BAD_DETAILS',
+	    LOGIN_DENIED_NOT_EXIST: 'LOGIN_DENIED_NOT_EXIST',
+	    LOGOUT_USER: 'LOGOUT_USER',
+	    CREATE_NAME_TOO_SHORT: 'CREATE_NAME_TOO_SHORT',
+	    CREATE_NAME_TOO_LONG: 'CREATE_NAME_TOO_LONG',
+	    CREATE_NAME_BAD_CHARACTERS: 'CREATE_NAME_BAD_CHARACTERS',
+	    CREATE_PASS_TOO_SHORT: 'CREATE_PASS_TOO_SHORT',
+	    CREATE_EMAIL_TOO_SHORT: 'CREATE_EMAIL_TOO_SHORT',
+	    CREATE_NOT_EMAIL_ADDRESS: 'CREATE_NOT_EMAIL_ADDRESS',
+	    JOIN_ROOM: 'JOIN_ROOM',
+	    LEAVE_ROOM: 'LEAVE_ROOM',
+	    SEND_CHAT_MESSAGE: 'SEND_CHAT_MESSAGE',
+	    SEND_PRIVATE_MESSAGE: 'SEND_PRIVATE_MESSAGE',
+	    SERVER_BROADCAST_MESSAGE: 'SERVER_BROADCAST_MESSAGE',
+	    SERVER_PRIVATE_MESSAGE: 'SERVER_PRIVATE_MESSAGE',
+	    REQUEST_ADD_MEDIA_BY_URL: 'REQUEST_ADD_MEDIA_BY_URL',
+	    PLAYLIST_UPDATE: 'PLAYLIST_UPDATE',
+	    PLAYLIST_ITEM_ADDED: 'PLAYLIST_ITEM_ADDED',
+	    PLAYLIST_ITEM_REMOVED: 'PLAYLIST_ITEM_REMOVED',
+	    PLAYLIST_ITEM_MOVED: 'PLAYLIST_ITEM_MOVED',
+	    ROOM_STAT_CHANGE: 'ROOM_STAT_CHANGE',
+	    ROOM_USER_ENTERS: 'ROOM_USER_ENTERS',
+	    ROOM_USER_LEAVES: 'ROOM_USER_LEAVES',
+	    ROOM_USER_MESSAGE: 'ROOM_USER_MESSAGE',
+	    ROOM_BROADCAST: 'ROOM_BROADCAST',
+	    ROOM_CREATED: 'ROOM_CREATED',
+	    ROOM_DESTROYED: 'ROOM_DESTROYED',
+	    ROOM_UPDATED: 'ROOM_UPDATED',
+	    ROOM_LIST_UPDATE: 'ROOM_LIST_UPDATE',
+	    EMOTICON_LIST_UPDATE: 'EMOTICON_LIST_UPDATE',
+	    EMOTICON_ADDED: 'EMOTICON_ADDED',
+	    EMOTICON_REMOVED: 'EMOTICON_REMOVED',
+	    SERVER_REBOOT_PENDING: 'SERVER_REBOOT_PENDING'
+	};
+
+/***/ },
+/* 164 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -19885,23 +19985,23 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _createStore = __webpack_require__(164);
+	var _createStore = __webpack_require__(165);
 
 	var _createStore2 = _interopRequireDefault(_createStore);
 
-	var _utilsCombineReducers = __webpack_require__(166);
+	var _utilsCombineReducers = __webpack_require__(167);
 
 	var _utilsCombineReducers2 = _interopRequireDefault(_utilsCombineReducers);
 
-	var _utilsBindActionCreators = __webpack_require__(169);
+	var _utilsBindActionCreators = __webpack_require__(170);
 
 	var _utilsBindActionCreators2 = _interopRequireDefault(_utilsBindActionCreators);
 
-	var _utilsApplyMiddleware = __webpack_require__(170);
+	var _utilsApplyMiddleware = __webpack_require__(171);
 
 	var _utilsApplyMiddleware2 = _interopRequireDefault(_utilsApplyMiddleware);
 
-	var _utilsCompose = __webpack_require__(171);
+	var _utilsCompose = __webpack_require__(172);
 
 	var _utilsCompose2 = _interopRequireDefault(_utilsCompose);
 
@@ -19912,7 +20012,7 @@
 	exports.compose = _utilsCompose2['default'];
 
 /***/ },
-/* 164 */
+/* 165 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -19922,7 +20022,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _utilsIsPlainObject = __webpack_require__(165);
+	var _utilsIsPlainObject = __webpack_require__(166);
 
 	var _utilsIsPlainObject2 = _interopRequireDefault(_utilsIsPlainObject);
 
@@ -20080,7 +20180,7 @@
 	}
 
 /***/ },
-/* 165 */
+/* 166 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -20116,7 +20216,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 166 */
+/* 167 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -20126,17 +20226,17 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _createStore = __webpack_require__(164);
+	var _createStore = __webpack_require__(165);
 
-	var _isPlainObject = __webpack_require__(165);
+	var _isPlainObject = __webpack_require__(166);
 
 	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 
-	var _mapValues = __webpack_require__(167);
+	var _mapValues = __webpack_require__(168);
 
 	var _mapValues2 = _interopRequireDefault(_mapValues);
 
-	var _pick = __webpack_require__(168);
+	var _pick = __webpack_require__(169);
 
 	var _pick2 = _interopRequireDefault(_pick);
 
@@ -20253,7 +20353,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 167 */
+/* 168 */
 /***/ function(module, exports) {
 
 	/**
@@ -20278,7 +20378,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 168 */
+/* 169 */
 /***/ function(module, exports) {
 
 	/**
@@ -20305,7 +20405,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 169 */
+/* 170 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20315,7 +20415,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _mapValues = __webpack_require__(167);
+	var _mapValues = __webpack_require__(168);
 
 	var _mapValues2 = _interopRequireDefault(_mapValues);
 
@@ -20364,7 +20464,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 170 */
+/* 171 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20377,7 +20477,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _compose = __webpack_require__(171);
+	var _compose = __webpack_require__(172);
 
 	var _compose2 = _interopRequireDefault(_compose);
 
@@ -20430,7 +20530,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 171 */
+/* 172 */
 /***/ function(module, exports) {
 
 	/**
@@ -20460,18 +20560,18 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 172 */
+/* 173 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var Provider = __webpack_require__(173);
-	var connect = __webpack_require__(175);
+	var Provider = __webpack_require__(174);
+	var connect = __webpack_require__(176);
 
 	module.exports = { Provider: Provider, connect: connect };
 
 /***/ },
-/* 173 */
+/* 174 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20488,7 +20588,7 @@
 	var PropTypes = _require.PropTypes;
 	var Children = _require.Children;
 
-	var storeShape = __webpack_require__(174);
+	var storeShape = __webpack_require__(175);
 
 	var didWarnAboutReceivingStore = false;
 	function warnAboutReceivingStore() {
@@ -20546,7 +20646,7 @@
 	module.exports = Provider;
 
 /***/ },
-/* 174 */
+/* 175 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20564,7 +20664,7 @@
 	module.exports = storeShape;
 
 /***/ },
-/* 175 */
+/* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -20582,12 +20682,12 @@
 	var Component = _require.Component;
 	var createElement = _require.createElement;
 
-	var storeShape = __webpack_require__(174);
-	var shallowEqual = __webpack_require__(176);
-	var isPlainObject = __webpack_require__(177);
-	var wrapActionCreators = __webpack_require__(178);
-	var hoistStatics = __webpack_require__(179);
-	var invariant = __webpack_require__(180);
+	var storeShape = __webpack_require__(175);
+	var shallowEqual = __webpack_require__(177);
+	var isPlainObject = __webpack_require__(178);
+	var wrapActionCreators = __webpack_require__(179);
+	var hoistStatics = __webpack_require__(180);
+	var invariant = __webpack_require__(181);
 
 	var defaultMapStateToProps = function defaultMapStateToProps(state) {
 	  return {};
@@ -20836,7 +20936,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 176 */
+/* 177 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -20867,7 +20967,7 @@
 	module.exports = shallowEqual;
 
 /***/ },
-/* 177 */
+/* 178 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -20901,12 +21001,12 @@
 	module.exports = isPlainObject;
 
 /***/ },
-/* 178 */
+/* 179 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var _redux = __webpack_require__(163);
+	var _redux = __webpack_require__(164);
 
 	function wrapActionCreators(actionCreators) {
 	  return function (dispatch) {
@@ -20917,7 +21017,7 @@
 	module.exports = wrapActionCreators;
 
 /***/ },
-/* 179 */
+/* 180 */
 /***/ function(module, exports) {
 
 	/**
@@ -20959,7 +21059,7 @@
 
 
 /***/ },
-/* 180 */
+/* 181 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -21017,7 +21117,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 181 */
+/* 182 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21026,15 +21126,15 @@
 	    value: true
 	});
 
-	var _immutable = __webpack_require__(182);
+	var _immutable = __webpack_require__(183);
 
 	var _immutable2 = _interopRequireDefault(_immutable);
 
-	var _protocol = __webpack_require__(183);
+	var _protocol = __webpack_require__(163);
 
 	var _protocol2 = _interopRequireDefault(_protocol);
 
-	var _redux = __webpack_require__(163);
+	var _redux = __webpack_require__(164);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21082,7 +21182,7 @@
 	exports.default = rootReducer;
 
 /***/ },
-/* 182 */
+/* 183 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -26045,61 +26145,6 @@
 	  return Immutable;
 
 	}));
-
-/***/ },
-/* 183 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	/**
-	 * @file Exports the protocol used to mediate goontube actions between client, server, and Redux.
-	 * @since 1.0.0
-	 */
-	exports.default = {
-	    CLIENT_HELLO: 'CLIENT_HELLO',
-	    BANNER_LIST_UPDATE: 'BANNER_LIST_UPDATE',
-	    BANNER_NEW_BANNER: 'BANNER_NEW_BANNER',
-	    AUTHENTICATION_ATTEMPT: 'AUTHENTICATION_ATTEMPT',
-	    AUTHENTICATION_RESPONSE: 'AUTHENTICATION_RESPONSE',
-	    LOGIN_ACCEPTED: 'LOGIN_ACCEPTED',
-	    LOGIN_DENIED_BAD_DETAILS: 'LOGIN_DENIED_BAD_DETAILS',
-	    LOGIN_DENIED_NOT_EXIST: 'LOGIN_DENIED_NOT_EXIST',
-	    LOGOUT_USER: 'LOGOUT_USER',
-	    CREATE_NAME_TOO_SHORT: 'CREATE_NAME_TOO_SHORT',
-	    CREATE_NAME_TOO_LONG: 'CREATE_NAME_TOO_LONG',
-	    CREATE_NAME_BAD_CHARACTERS: 'CREATE_NAME_BAD_CHARACTERS',
-	    CREATE_PASS_TOO_SHORT: 'CREATE_PASS_TOO_SHORT',
-	    CREATE_EMAIL_TOO_SHORT: 'CREATE_EMAIL_TOO_SHORT',
-	    CREATE_NOT_EMAIL_ADDRESS: 'CREATE_NOT_EMAIL_ADDRESS',
-	    JOIN_ROOM: 'JOIN_ROOM',
-	    LEAVE_ROOM: 'LEAVE_ROOM',
-	    SEND_CHAT_MESSAGE: 'SEND_CHAT_MESSAGE',
-	    SEND_PRIVATE_MESSAGE: 'SEND_PRIVATE_MESSAGE',
-	    SERVER_BROADCAST_MESSAGE: 'SERVER_BROADCAST_MESSAGE',
-	    SERVER_PRIVATE_MESSAGE: 'SERVER_PRIVATE_MESSAGE',
-	    REQUEST_ADD_MEDIA_BY_URL: 'REQUEST_ADD_MEDIA_BY_URL',
-	    PLAYLIST_UPDATE: 'PLAYLIST_UPDATE',
-	    PLAYLIST_ITEM_ADDED: 'PLAYLIST_ITEM_ADDED',
-	    PLAYLIST_ITEM_REMOVED: 'PLAYLIST_ITEM_REMOVED',
-	    PLAYLIST_ITEM_MOVED: 'PLAYLIST_ITEM_MOVED',
-	    ROOM_STAT_CHANGE: 'ROOM_STAT_CHANGE',
-	    ROOM_USER_ENTERS: 'ROOM_USER_ENTERS',
-	    ROOM_USER_LEAVES: 'ROOM_USER_LEAVES',
-	    ROOM_USER_MESSAGE: 'ROOM_USER_MESSAGE',
-	    ROOM_BROADCAST: 'ROOM_BROADCAST',
-	    ROOM_CREATED: 'ROOM_CREATED',
-	    ROOM_DESTROYED: 'ROOM_DESTROYED',
-	    ROOM_UPDATED: 'ROOM_UPDATED',
-	    ROOM_LIST_UPDATE: 'ROOM_LIST_UPDATE',
-	    EMOTICON_LIST_UPDATE: 'EMOTICON_LIST_UPDATE',
-	    EMOTICON_ADDED: 'EMOTICON_ADDED',
-	    EMOTICON_REMOVED: 'EMOTICON_REMOVED',
-	    SERVER_REBOOT_PENDING: 'SERVER_REBOOT_PENDING'
-	};
 
 /***/ },
 /* 184 */

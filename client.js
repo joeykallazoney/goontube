@@ -10,6 +10,28 @@ import { createStore } from 'redux'
 import { connect, Provider } from 'react-redux'
 import rootReducer from './reducers'
 
+function initWebSocket(store) {
+    let socket = new WebSocket('ws://localhost:7070')
+
+    socket.onopen = () => {
+        console.log('Connection established to WebSocket server.')
+    }
+
+    socket.onmessage = (message) => {
+        let decoded = JSON.parse(message.data)
+
+        console.log(`${decoded.type} -> ${decoded.data} dispatched to Redux store.`)
+
+        store.dispatch(decoded)
+    }
+
+    socket.onclose = () => {
+        console.error('Lost connection to WebSocket server!')
+    }
+
+    return socket
+}
+
 window.addEventListener('load', function load(event) {
     let origin = document.getElementById('origin')
 
@@ -21,6 +43,7 @@ window.addEventListener('load', function load(event) {
     }
 
     let store = createStore(rootReducer)
+    let socket = initWebSocket(store)
 
     ReactDOM.render(
         <Provider store={store}>
