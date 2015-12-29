@@ -12,5 +12,17 @@ const defaultApplicationState = I.Map({
         provider:   null,
         position:   0
     },
+
     playlist: []
 })
+
+function rootReducer(state = defaultApplicationState(), action) {
+    switch(state) {
+        default:
+            return state
+    }
+    
+    return state
+}
+
+export rootReducer
