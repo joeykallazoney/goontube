@@ -1,4 +1,14 @@
-# :hamburger: [goontu.be](https://goontu.be/) - video synchronization and chat lounge
+# :hamburger: [goontube](https://goontu.be/)
+
+Video synchronization and chat lounge.  
+
+Much needed overhaul + rewrite as an ES6 webapp with React + Redux.  
+
+### Roadmap
+
+- [x] Thing
+- [ ] Another thing
+- [ ] Bring Google docs points in
 
 #### Installation + Setup
 
