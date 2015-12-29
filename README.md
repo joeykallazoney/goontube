@@ -9,6 +9,7 @@ Much needed overhaul + rewrite as an ES6 webapp with React + Redux.
 ####**Project Management**####
 - [ ] Set up dev server.
 - [ ] Discuss deployment/build process.
+- [ ] Discuss project structure/file organization.
 
 ####**Bug Fixes:**####
 - [ ] Repair fullscreen mode.
