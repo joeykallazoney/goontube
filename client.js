@@ -1,3 +1,7 @@
+/**
+ * @file Provides an entry point for the client script bundle.
+ * @since 1.0.0
+ */
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Goontube from './components/app'

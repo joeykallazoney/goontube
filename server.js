@@ -1,3 +1,7 @@
+/**
+ * @file Starts the various server loops required to handle goontube's server.
+ * @since 1.0.0
+ */
 import http from 'http'
 import koa from 'koa'
 import { Server as WebSocketServer } from 'ws'
