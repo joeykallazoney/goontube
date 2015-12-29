@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import ExecutionEnvironment from 'exenv'
 
 class Banner extends React.Component {
     constructor(props, context) {
@@ -7,7 +8,7 @@ class Banner extends React.Component {
     }
 
     componentDidMount() {
-        if(this.context.store !== null) {
+        if(ExecutionEnvironment.canUseDOM) {
             console.log(this.context.store.getState())
         }
     }
@@ -24,8 +25,10 @@ class Banner extends React.Component {
     }
 }
 
-Banner.contextTypes = {
-    store: React.PropTypes.object.isRequired
+if(ExecutionEnvironment.canUseDOM) {
+    Banner.contextTypes = {
+        store: React.PropTypes.object.isRequired
+    }
 }
 
 export default Banner
