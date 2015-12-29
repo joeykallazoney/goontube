@@ -10,18 +10,22 @@ class Banner extends React.Component {
 
     componentDidMount() {
         if(ExecutionEnvironment.canUseDOM) {
-            let lastBannerIndex = this.context.store.getIn(['banner', 'currentBannerIndex'])
+            let lastBannerIndex = this.context.store
+                .getState()
+                .getIn(['banner', 'currentBannerIndex'])
 
             this.context.store.subscribe(() => {
-                if(lastBannerIndex !== this.context.store.getIn(['banner', 'currentBannerIndex'])) {
-                    this.forceUpdate()
+                if(lastBannerIndex !== this.context.store
+                    .getState()
+                    .getIn(['banner', 'currentBannerIndex'])) {
+                        this.forceUpdate()
                 }
             })
         }
     }
 
     onClick() {
-        let p = this.context.store.getIn(['banner', 'possibilities'])
+        let p = this.context.store.getState().getIn(['banner', 'possibilities'])
         let newBannerChoice = Math.floor(Math.random() * p.length)
 
         this.context.store.dispatch({

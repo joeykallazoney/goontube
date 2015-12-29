@@ -19828,10 +19828,10 @@
 
 	            if (_exenv2.default.canUseDOM) {
 	                (function () {
-	                    var lastBannerIndex = _this2.context.store.getIn(['banner', 'currentBannerIndex']);
+	                    var lastBannerIndex = _this2.context.store.getState().getIn(['banner', 'currentBannerIndex']);
 
 	                    _this2.context.store.subscribe(function () {
-	                        if (lastBannerIndex !== _this2.context.store.getIn(['banner', 'currentBannerIndex'])) {
+	                        if (lastBannerIndex !== _this2.context.store.getState().getIn(['banner', 'currentBannerIndex'])) {
 	                            _this2.forceUpdate();
 	                        }
 	                    });
@@ -19841,7 +19841,7 @@
 	    }, {
 	        key: 'onClick',
 	        value: function onClick() {
-	            var p = this.context.store.getIn(['banner', 'possibilities']);
+	            var p = this.context.store.getState().getIn(['banner', 'possibilities']);
 	            var newBannerChoice = Math.floor(Math.random() * p.length);
 
 	            this.context.store.dispatch({
