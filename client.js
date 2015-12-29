@@ -6,7 +6,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Goontube from './components/app'
 
-import { createStore, connect, Provider } from 'react-redux'
+import { createStore } from 'redux'
+import { connect, Provider } from 'react-redux'
 import rootReducer from './reducers'
 
 window.addEventListener('load', function load(event) {
@@ -24,7 +25,7 @@ window.addEventListener('load', function load(event) {
     ReactDOM.render(
         <Provider store={store}>
             <Goontube />
-        </Provider>, 
+        </Provider>,
         origin)
     window.removeEventListener('load', load, false)
 }, false)

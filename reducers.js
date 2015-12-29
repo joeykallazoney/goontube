@@ -26,7 +26,7 @@ const defaultApplicationState = I.Map({
     }
 })
 
-function rootReducer(state = defaultApplicationState(), action) {
+function rootReducer(state = defaultApplicationState, action) {
     switch(action.type) {
         case BANNER_LIST_UPDATE:
             state = state.deleteIn(['banner', 'possibilities'])

@@ -2,8 +2,10 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 class Banner extends React.Component {
-    constructor(props) {
-        super(props)
+    constructor(props, context) {
+        super(props, context)
+
+        console.log(context)
     }
 
     componentDidMount() {
@@ -15,7 +17,7 @@ class Banner extends React.Component {
     render() {
         return (
             <div onclick={() => this.onClick()} className="banner">
-                <img src={this.state.bannerImageSrc} className="banner-image" />
+                <img src={null} className="banner-image" />
             </div>
         )
     }
