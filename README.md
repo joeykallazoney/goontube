@@ -10,6 +10,8 @@ Much needed overhaul + rewrite as an ES6 webapp with React + Redux.
 - [ ] Another thing
 - [ ] Bring Google docs points in
 
+### Streaming provider spec
+
 #### Installation + Setup
 
 ```

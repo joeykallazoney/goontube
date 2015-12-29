@@ -4,6 +4,7 @@
  * @since 1.0.0
  */
 import I from 'immutable'
+import p from './protocol'
 import { applyMiddleware, compose } from 'redux'
 
 const defaultApplicationState = I.Map({
@@ -21,7 +22,7 @@ function rootReducer(state = defaultApplicationState(), action) {
         default:
             return state
     }
-    
+
     return state
 }
 
