@@ -8,8 +8,7 @@ class Banner extends React.Component {
 
     render() {
         return (
-            <div id="origin">
-                <h1>Goontube!</h1>
+            <div className="banner">
             </div>
         )
     }
