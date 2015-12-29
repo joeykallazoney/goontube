@@ -1,3 +1,6 @@
-module.exports = {
-
+class YouTubePlayer {
+    constructor(id) {
+    }
 }
+
+export default YouTubePlayer
