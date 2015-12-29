@@ -1,5 +1,7 @@
 # :hamburger: [goontube](https://goontu.be/)
 
+![Travis CI build status](https://travis-ci.org/goontube/goontube.svg?branch=master)
+
 Video synchronization and chat lounge.  
 
 Much needed overhaul + rewrite as an ES6 webapp with React + Redux.  
@@ -40,13 +42,13 @@ Much needed overhaul + rewrite as an ES6 webapp with React + Redux.
 ####**Features:**####
 - [ ] allow users to queue videos, taking priority in a turn based/round-robin order? possibly a mod toggleable mode.
 - [ ] make timestamping work and work easily.
-- [ ] Minimize code for deployment. 
+- [ ] Minimize code for deployment.
 - [ ] possibly link <3ing a video to liking the video for a user’s youtube account?
 - [ ] possibly add more video adding modes, toggleable by mods, like a relevance mode somehow where people can more easily do a “this video is like the last one!” thing, maybe by limiting to one add per person, stuff like that. default mode should be applicable for most of the time still though. if no mods present should revert automatically in case of problems.
 - [ ] Responsive half screen mode.
 - [ ] allow banner toggle and persist for accounts.
 - Chat-stuff:
-  - [ ] Make whisper-mode more apparent (separate (floating?) chat window? Inverse-color-scheme?) to users. 
+  - [ ] Make whisper-mode more apparent (separate (floating?) chat window? Inverse-color-scheme?) to users.
   - [ ] Allow entering whisper mode through name clicking rather than chat commands
 - [ ] Re-institute Karma/Fame system.
   - Incentivize good content
