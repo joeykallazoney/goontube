@@ -4,12 +4,18 @@
  */
 import http from 'http'
 import koa from 'koa'
+import React from 'react'
 import { Server as WebSocketServer } from 'ws'
 import { createStore } from 'redux'
+import { renderToString as render } from 'react-dom/server'
+
+import Goontube from './components/app'
 
 let server  = http.createServer()
 let app     = koa()
 let wss     = new WebSocketServer({ server: server })
+
+console.log(render(<Goontube />))
 
 wss.on('connection', (ws) => {
     console.log('New WebSocket connection.')
