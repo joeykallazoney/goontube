@@ -6,9 +6,13 @@ class Goontube extends React.Component {
         super(props)
     }
 
+    componentDidMount() {
+
+    }
+
     render() {
         return (
-            <div id="origin">
+            <div id="goontube">
                 <h1>Goontube!</h1>
             </div>
         )

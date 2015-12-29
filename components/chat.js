@@ -6,6 +6,10 @@ class Chat extends React.Component {
         super(props)
     }
 
+    componentDidMount() {
+
+    }
+
     render() {
         return (
             <div id="origin">
