@@ -20939,12 +20939,12 @@
 	    var action = arguments[1];
 
 	    switch (action.type) {
-	        case BANNER_LIST_UPDATE:
+	        case _protocol2.default.BANNER_LIST_UPDATE:
 	            state = state.deleteIn(['banner', 'possibilities']);
 
 	            return state.mergeIn(['banner', 'possibilities'], action.data);
 
-	        case BANNER_NEW_BANNER:
+	        case _protocol2.default.BANNER_NEW_BANNER:
 	            return state.setIn(['banner', 'currentBannerIndex'], action.data);
 
 	        default:
