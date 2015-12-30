@@ -40,6 +40,7 @@ Much needed overhaul + rewrite as an ES6 webapp with React + Redux.
 
 
 ####**Features:**####
+- [ ] make commands ($ and /) not enter chat.
 - [ ] allow users to queue videos, taking priority in a turn based/round-robin order? possibly a mod toggleable mode.
 - [ ] make timestamping work and work easily.
 - [ ] Minimize code for deployment.
