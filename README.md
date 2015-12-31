@@ -6,6 +6,69 @@ Video synchronization and chat lounge.
 
 Much needed overhaul + rewrite as an ES6 webapp with React + Redux.  
 
+###Dev Notes###
+
+I didn't leave this quite ready but I'll make sure it's an easy workflow.  I had to run at the end of the evening we got this chat and repo started.  Missing dependency for immutable is all in the case of that error, I forgot to --save one dep.  We can use github's Issue tracker rather than working out of here (Slack is cool too) for project-related convos. 
+
+####**nine**####
+so far I've been able to build the frontend at least, getting some errors though:
+```
+ERROR in ./reducers.js
+Module not found: Error: Cannot resolve module 'immutable' in /Users/aria/Projects/goontube
+ @ ./reducers.js 7:17-37
+```
+Update: I manually did npm install reducers, cleared the error, but still this stuff:
+
+```
+WARNING in ./~/koa-static/~/koa-send/~/mz/fs.js
+Module not found: Error: Cannot resolve module 'graceful-fs' in /Users/aria/Projects/goontube/node_modules/koa-static/node_modules/koa-send/node_modules/mz
+ @ ./~/koa-static/~/koa-send/~/mz/fs.js 5:7-29
+
+WARNING in ./~/koa/~/composition/~/native-or-bluebird/promise.js
+Module not found: Error: Cannot resolve module 'bluebird' in /Users/aria/Projects/goontube/node_modules/koa/node_modules/composition/node_modules/native-or-bluebird
+ @ ./~/koa/~/composition/~/native-or-bluebird/promise.js 3:19-38
+
+WARNING in ./~/koa-static/~/koa-send/~/mz/~/native-or-bluebird/promise.js
+Module not found: Error: Cannot resolve module 'bluebird' in /Users/aria/Projects/goontube/node_modules/koa-static/node_modules/koa-send/node_modules/mz/node_modules/native-or-bluebird
+ @ ./~/koa-static/~/koa-send/~/mz/~/native-or-bluebird/promise.js 3:19-38
+ 
+ERROR in ./~/koa/~/statuses/codes.json
+Module parse failed: /Users/aria/Projects/goontube/node_modules/koa/node_modules/statuses/codes.json Line 2: Unexpected token :
+You may need an appropriate loader to handle this file type.
+| {
+|   "100": "Continue",
+|   "101": "Switching Protocols",
+|   "102": "Processing",
+ @ ./~/koa/~/statuses/index.js 2:12-35
+
+ERROR in ./~/koa/~/destroy/index.js
+Module not found: Error: Cannot resolve module 'fs' in /Users/aria/Projects/goontube/node_modules/koa/node_modules/destroy
+ @ ./~/koa/~/destroy/index.js 1:17-30
+
+ERROR in ./~/koa-static/~/koa-send/~/mz/fs.js
+Module not found: Error: Cannot resolve module 'fs' in /Users/aria/Projects/goontube/node_modules/koa-static/node_modules/koa-send/node_modules/mz
+ @ ./~/koa-static/~/koa-send/~/mz/fs.js 7:7-20
+
+ERROR in ./~/koa/~/mime-types/~/mime-db/db.json
+Module parse failed: /Users/aria/Projects/goontube/node_modules/koa/node_modules/mime-types/node_modules/mime-db/db.json Line 2: Unexpected token :
+You may need an appropriate loader to handle this file type.
+| {
+|   "application/1d-interleaved-parityfec": {
+|     "source": "iana"
+|   },
+ @ ./~/koa/~/mime-types/~/mime-db/index.js 11:17-37
+
+ERROR in ./~/koa-static/~/koa-send/~/resolve-path/~/http-errors/~/statuses/codes.json
+Module parse failed: /Users/aria/Projects/goontube/node_modules/koa-static/node_modules/koa-send/node_modules/resolve-path/node_modules/http-errors/node_modules/statuses/codes.json Line 2: Unexpected token :
+You may need an appropriate loader to handle this file type.
+| {
+|   "100": "Continue",
+|   "101": "Switching Protocols",
+|   "102": "Processing",
+ @ ./~/koa-static/~/koa-send/~/resolve-path/~/http-errors/~/statuses/index.js 2:12-35
+ ```
+
+
 ### Roadmap
 
 ####**Project Management**####
@@ -106,7 +169,7 @@ npm install
 webpack-dev-server ./client.js
 ```
 
-Then visit [http://localhost:8080/bundle](http://localhost:8080/bundle) to access a webpack-dev-server for the frontend.
+Then visit [http://localhost:8080/bundle](http://localhost:8080/bundle) (http://localhost:7070/bundle ??) to access a webpack-dev-server for the frontend.
 
 `npm install -g pm2` and then use `pm2-dev ./index.js` to work on the backend with reload on change.
 
