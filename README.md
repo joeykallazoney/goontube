@@ -114,7 +114,9 @@ Prerequisite for webpack-dev-server: `npm install -g webpack-dev-server`
 webpack-dev-server ./client.js
 ```
 
-Then visit [http://localhost:8080/bundle](http://localhost:8080/bundle) (http://localhost:7070/bundle ??) to access a webpack-dev-server for the frontend.
+Then visit [http://localhost:8080/bundle](http://localhost:8080/bundle)
+
+(http://localhost:7070/bundle ??  @nine: 7070 is hosting the webserver w/ static files and WebSocket as expected - 8080 in this instance is providing a separate bundling server for webpack-dev-server ... the significance is that using the webpack-dev-server gives you easy hot module reload/live reload while working on frontend - kind of handy to sidestep any extra messes with with gulp/grunt/the usual suspects) to access a webpack-dev-server for the frontend. -jskz
 
 `npm install -g pm2` and then use `pm2-dev ./index.js` to work on the backend with reload on change.
 
