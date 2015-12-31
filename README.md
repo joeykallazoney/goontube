@@ -8,7 +8,7 @@ Much needed overhaul + rewrite as an ES6 webapp with React + Redux.
 
 ###Dev Notes###
 
-I didn't leave this quite ready but I'll make sure it's an easy workflow.  I had to run at the end of the evening we got this chat and repo started.  Missing dependency for immutable is all in the case of that error, I forgot to --save one dep.  We can use github's Issue tracker rather than working out of here (Slack is cool too) for project-related convos. 
+I didn't leave this quite ready but I'll make sure it's an easy workflow.  I had to run at the end of the evening we got this chat and repo started.  Missing dependency for immutable is all in the case of that error, I forgot to --save one dep.  We can use github's Issue tracker rather than working out of here (Slack is cool too) for project-related convos.
 
 Ok. :) Will use issue tracker from now on; never used it.
 
@@ -107,6 +107,8 @@ npm install
 ```
 
 #### Development
+
+Prerequisite for webpack-dev-server: `npm install -g webpack-dev-server`
 
 ```
 webpack-dev-server ./client.js
