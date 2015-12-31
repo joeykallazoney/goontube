@@ -4,7 +4,7 @@ var webpack = require('webpack'),
     ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
-    entry: ['./client.js', './sass/style.sass'],
+    entry: ['./src/client.js', './sass/style.sass'],
     module: {
         loaders: [
             { test: /\.js$/, exclude: /node_modules/, loader: 'babel' },

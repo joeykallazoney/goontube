@@ -13,7 +13,7 @@ import { renderToString as render } from 'react-dom/server'
 import Goontube from './components/app'
 
 let server      = http.createServer()
-let staticFiles = new koaStatic(__dirname + '/static', {})
+let staticFiles = new koaStatic(__dirname + '/../static', {})
 let app         = koa()
 let wss         = new WebSocketServer({ server: server })
 
