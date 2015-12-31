@@ -1,4 +1,6 @@
-class DailyMotionPlayer {
+import React from 'react'
+
+class DailyMotionPlayer extends React.Component {
     constructor(props, context) {
         super(props, context)
 
@@ -21,7 +23,7 @@ class DailyMotionPlayer {
     }
 }
 
-VimeoPlayer.contextTypes = {
+DailyMotionPlayer.contextTypes = {
     store: React.PropTypes.object.isRequired
 }
 

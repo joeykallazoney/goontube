@@ -1,6 +1,7 @@
+import React from 'react'
 import YouTube from 'react-youtube'
 
-class YouTubePlayer {
+class YouTubePlayer extends React.Component {
     constructor(props, context) {
         super(props, context)
 

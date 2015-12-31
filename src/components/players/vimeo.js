@@ -1,6 +1,7 @@
+import React from 'react'
 import Vimeo from 'react-vimeo'
 
-class VimeoPlayer {
+class VimeoPlayer extends React.Component {
     constructor(props, context) {
         super(props, context)
 
@@ -53,4 +54,4 @@ VimeoPlayer.contextTypes = {
     store: React.PropTypes.object.isRequired
 }
 
-export default YouTubePlayer
+export default VimeoPlayer
