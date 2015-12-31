@@ -8,7 +8,7 @@ Much needed overhaul + rewrite as an ES6 webapp with React + Redux.
 
 ###Dev Notes###
 ####**nine**####
-Having trouble building. Current error:
+so far I've been able to build the frontend at least, getting some errors though:
 ```
 ERROR in ./reducers.js
 Module not found: Error: Cannot resolve module 'immutable' in /Users/aria/Projects/goontube
