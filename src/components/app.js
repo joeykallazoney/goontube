@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import Banner from './banner'
+import Layout from './layout'
 
 class Goontube extends React.Component {
     constructor(props, context) {
@@ -15,9 +15,9 @@ class Goontube extends React.Component {
     render() {
         return (
             <div id="goontube">
-                <h1>Goontube!</h1>
+                <Layout>
 
-                <Banner />
+                </Layout>
             </div>
         )
     }

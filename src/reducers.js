@@ -13,6 +13,13 @@ const defaultApplicationState = I.Map({
         provider:   'youtube',
         position:   0
     },
+    layout: {
+        banner:   {x: 0, y: 0, w: 12, h: 2},
+        player:   {x: 0, y: 2, w: 5, h: 4},
+        chat:     {x: 6, y: 2, w: 6, h: 4},
+        playlist: {x: 0, y: 6, w: 5, h: 4},
+        content:  {x: 6, y: 6, w: 5, h: 4}
+    },
     banner: {
         currentBannerIndex:  0,
         possibilities:       []
