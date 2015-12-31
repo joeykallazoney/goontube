@@ -20263,8 +20263,8 @@
 	        value: function render() {
 	            var videoID = this.context.store.getState().get('media').id;
 	            var options = {
-	                height: 550,
-	                width: 320,
+	                width: 550,
+	                height: 320,
 	                playerVars: {
 	                    autoplay: 1
 	                }
@@ -27380,8 +27380,8 @@
 	        value: function render() {
 	            var videoID = this.context.store.getState().get('media').id;
 	            var options = {
-	                height: 550,
-	                width: 320,
+	                width: 550,
+	                height: 320,
 	                playerVars: {
 	                    autoplay: 1
 	                }
