@@ -17,6 +17,44 @@ ERROR in ./reducers.js
 Module not found: Error: Cannot resolve module 'immutable' in /Users/aria/Projects/goontube
  @ ./reducers.js 7:17-37
 ```
+Update: I manually did npm install reducers, cleared the error, but still this stuff:
+
+```
+ERROR in ./~/koa/~/statuses/codes.json
+Module parse failed: /Users/aria/Projects/goontube/node_modules/koa/node_modules/statuses/codes.json Line 2: Unexpected token :
+You may need an appropriate loader to handle this file type.
+| {
+|   "100": "Continue",
+|   "101": "Switching Protocols",
+|   "102": "Processing",
+ @ ./~/koa/~/statuses/index.js 2:12-35
+
+ERROR in ./~/koa/~/destroy/index.js
+Module not found: Error: Cannot resolve module 'fs' in /Users/aria/Projects/goontube/node_modules/koa/node_modules/destroy
+ @ ./~/koa/~/destroy/index.js 1:17-30
+
+ERROR in ./~/koa-static/~/koa-send/~/mz/fs.js
+Module not found: Error: Cannot resolve module 'fs' in /Users/aria/Projects/goontube/node_modules/koa-static/node_modules/koa-send/node_modules/mz
+ @ ./~/koa-static/~/koa-send/~/mz/fs.js 7:7-20
+
+ERROR in ./~/koa/~/mime-types/~/mime-db/db.json
+Module parse failed: /Users/aria/Projects/goontube/node_modules/koa/node_modules/mime-types/node_modules/mime-db/db.json Line 2: Unexpected token :
+You may need an appropriate loader to handle this file type.
+| {
+|   "application/1d-interleaved-parityfec": {
+|     "source": "iana"
+|   },
+ @ ./~/koa/~/mime-types/~/mime-db/index.js 11:17-37
+
+ERROR in ./~/koa-static/~/koa-send/~/resolve-path/~/http-errors/~/statuses/codes.json
+Module parse failed: /Users/aria/Projects/goontube/node_modules/koa-static/node_modules/koa-send/node_modules/resolve-path/node_modules/http-errors/node_modules/statuses/codes.json Line 2: Unexpected token :
+You may need an appropriate loader to handle this file type.
+| {
+|   "100": "Continue",
+|   "101": "Switching Protocols",
+|   "102": "Processing",
+ @ ./~/koa-static/~/koa-send/~/resolve-path/~/http-errors/~/statuses/index.js 2:12-35
+ ```
 
 
 ### Roadmap
