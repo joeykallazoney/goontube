@@ -20,6 +20,18 @@ Module not found: Error: Cannot resolve module 'immutable' in /Users/aria/Projec
 Update: I manually did npm install reducers, cleared the error, but still this stuff:
 
 ```
+WARNING in ./~/koa-static/~/koa-send/~/mz/fs.js
+Module not found: Error: Cannot resolve module 'graceful-fs' in /Users/aria/Projects/goontube/node_modules/koa-static/node_modules/koa-send/node_modules/mz
+ @ ./~/koa-static/~/koa-send/~/mz/fs.js 5:7-29
+
+WARNING in ./~/koa/~/composition/~/native-or-bluebird/promise.js
+Module not found: Error: Cannot resolve module 'bluebird' in /Users/aria/Projects/goontube/node_modules/koa/node_modules/composition/node_modules/native-or-bluebird
+ @ ./~/koa/~/composition/~/native-or-bluebird/promise.js 3:19-38
+
+WARNING in ./~/koa-static/~/koa-send/~/mz/~/native-or-bluebird/promise.js
+Module not found: Error: Cannot resolve module 'bluebird' in /Users/aria/Projects/goontube/node_modules/koa-static/node_modules/koa-send/node_modules/mz/node_modules/native-or-bluebird
+ @ ./~/koa-static/~/koa-send/~/mz/~/native-or-bluebird/promise.js 3:19-38
+ 
 ERROR in ./~/koa/~/statuses/codes.json
 Module parse failed: /Users/aria/Projects/goontube/node_modules/koa/node_modules/statuses/codes.json Line 2: Unexpected token :
 You may need an appropriate loader to handle this file type.
