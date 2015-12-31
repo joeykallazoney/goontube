@@ -8,6 +8,10 @@ class YouTubePlayer {
         }
     }
 
+    componentWillUnmount() {
+
+    }
+
     _onReady(event) {
 
     }
@@ -19,7 +23,7 @@ class YouTubePlayer {
     render() {
         const videoID = this.context.store
             .getState()
-            .getIn(['media', 'id'])
+            .get('media').id
         const options = {
             height:    550,
             width:     320,

@@ -26,6 +26,7 @@ class Goontube extends React.Component {
                     <Player />
                     <Chat />
                     <Users />
+                    <Player />
                     <Playlist />
                     <ContentPane />
                 </Layout>

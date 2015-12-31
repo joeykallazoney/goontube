@@ -19794,6 +19794,7 @@
 	                    _react2.default.createElement(_player2.default, null),
 	                    _react2.default.createElement(_chat2.default, null),
 	                    _react2.default.createElement(_users2.default, null),
+	                    _react2.default.createElement(_player2.default, null),
 	                    _react2.default.createElement(_playlist2.default, null),
 	                    _react2.default.createElement(_contentPane2.default, null)
 	                )
