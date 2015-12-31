@@ -43,6 +43,20 @@ let bundledHTML = (rendered) =>
 
 wss.on('connection', (ws) => {
     console.log('New WebSocket connection.')
+
+    // check for too many concurrent connections
+
+    // append to client list, set defaults, drop in lobby, announce
+
+    ws.on('close', () => {
+        console.log('Lost client connection...')
+
+        // remove from clients list
+    })
+
+    ws.on('message', (message) => {
+        let decoded = JSON.parse(message.data)
+    })
 })
 
 app.use(function *(next) {

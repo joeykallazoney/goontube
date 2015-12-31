@@ -1,6 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import ExecutionEnvironment from 'exenv'
 import p from '../protocol'
 
 class Banner extends React.Component {
@@ -9,19 +8,17 @@ class Banner extends React.Component {
     }
 
     componentDidMount() {
-        if(ExecutionEnvironment.canUseDOM) {
-            let lastBannerIndex = this.context.store
-                .getState()
-                .getIn(['banner', 'currentBannerIndex'])
+        let lastBannerIndex = this.context.store
+            .getState()
+            .getIn(['banner', 'currentBannerIndex'])
 
-            this.context.store.subscribe(() => {
-                if(lastBannerIndex !== this.context.store
-                    .getState()
-                    .getIn(['banner', 'currentBannerIndex'])) {
-                        this.forceUpdate()
-                }
-            })
-        }
+        this.context.store.subscribe(() => {
+            if(lastBannerIndex !== this.context.store
+                .getState()
+                .getIn(['banner', 'currentBannerIndex'])) {
+                    this.forceUpdate()
+            }
+        })
     }
 
     onClick() {
@@ -43,10 +40,8 @@ class Banner extends React.Component {
     }
 }
 
-if(ExecutionEnvironment.canUseDOM) {
-    Banner.contextTypes = {
-        store: React.PropTypes.object.isRequired
-    }
+Banner.contextTypes = {
+    store: React.PropTypes.object.isRequired
 }
 
 export default Banner

@@ -9,8 +9,8 @@ import { applyMiddleware, compose } from 'redux'
 
 const defaultApplicationState = I.Map({
     media: {
-        id:         null,
-        provider:   null,
+        id:         'wP4aCZQic4s',
+        provider:   'youtube',
         position:   0
     },
     banner: {
