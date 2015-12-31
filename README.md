@@ -119,7 +119,7 @@ npm install
 webpack-dev-server ./client.js
 ```
 
-Then visit [http://localhost:8080/bundle](http://localhost:8080/bundle) to access a webpack-dev-server for the frontend.
+Then visit [http://localhost:7070/bundle](http://localhost:7070/bundle) to access a webpack-dev-server for the frontend.
 
 `npm install -g pm2` and then use `pm2-dev ./index.js` to work on the backend with reload on change.
 
