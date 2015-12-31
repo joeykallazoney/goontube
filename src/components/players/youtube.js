@@ -13,11 +13,11 @@ class YouTubePlayer extends React.Component {
 
     }
 
-    _onReady(event) {
+    onReady(event) {
 
     }
 
-    _onStateChange(event) {
+    onStateChange(event) {
 
     }
 
@@ -37,8 +37,8 @@ class YouTubePlayer extends React.Component {
             <div id="player">
                 <YouTube videoId={videoID}
                     opts={options}
-                    onReady={_this.onReady}
-                    onStateChange={_this.onStateChange} />
+                    onReady={this.onReady}
+                    onStateChange={this.onStateChange} />
             </div>
         )
     }

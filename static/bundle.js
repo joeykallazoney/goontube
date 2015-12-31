@@ -19794,7 +19794,6 @@
 	                    _react2.default.createElement(_player2.default, null),
 	                    _react2.default.createElement(_chat2.default, null),
 	                    _react2.default.createElement(_users2.default, null),
-	                    _react2.default.createElement(_player2.default, null),
 	                    _react2.default.createElement(_playlist2.default, null),
 	                    _react2.default.createElement(_contentPane2.default, null)
 	                )
@@ -20140,7 +20139,11 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            return _react2.default.createElement('div', { className: 'player' });
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'player' },
+	                _react2.default.createElement(_youtube2.default, null)
+	            );
 	        }
 	    }]);
 
@@ -20240,21 +20243,21 @@
 	    function YouTubePlayer(props, context) {
 	        _classCallCheck(this, YouTubePlayer);
 
-	        var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(YouTubePlayer).call(this, props, context));
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(YouTubePlayer).call(this, props, context));
 
-	        _this2.state = {};
-	        return _this2;
+	        _this.state = {};
+	        return _this;
 	    }
 
 	    _createClass(YouTubePlayer, [{
 	        key: 'componentWillUnmount',
 	        value: function componentWillUnmount() {}
 	    }, {
-	        key: '_onReady',
-	        value: function _onReady(event) {}
+	        key: 'onReady',
+	        value: function onReady(event) {}
 	    }, {
-	        key: '_onStateChange',
-	        value: function _onStateChange(event) {}
+	        key: 'onStateChange',
+	        value: function onStateChange(event) {}
 	    }, {
 	        key: 'render',
 	        value: function render() {
@@ -20272,8 +20275,8 @@
 	                { id: 'player' },
 	                _react2.default.createElement(_reactYoutube2.default, { videoId: videoID,
 	                    opts: options,
-	                    onReady: _this.onReady,
-	                    onStateChange: _this.onStateChange })
+	                    onReady: this.onReady,
+	                    onStateChange: this.onStateChange })
 	            );
 	        }
 	    }]);
