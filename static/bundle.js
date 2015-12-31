@@ -19856,10 +19856,10 @@
 	        value: function componentDidMount() {
 	            var _this2 = this;
 
-	            var lastBannerIndex = this.context.store.getState().getIn(['banner', 'currentBannerIndex']);
+	            var lastBannerIndex = this.context.store.getState().get('banner').currentBannerIndex;
 
 	            this.context.store.subscribe(function () {
-	                if (lastBannerIndex !== _this2.context.store.getState().getIn(['banner', 'currentBannerIndex'])) {
+	                if (lastBannerIndex !== _this2.context.store.getState().get('banner').currentBannerIndex) {
 	                    _this2.forceUpdate();
 	                }
 	            });
@@ -19867,11 +19867,11 @@
 	    }, {
 	        key: 'onClick',
 	        value: function onClick() {
-	            var p = this.context.store.getState().getIn(['banner', 'possibilities']);
-	            var newBannerChoice = Math.floor(Math.random() * p.length);
+	            var possibilities = this.context.store.getState().get('banner').possibilities;
+	            var newBannerChoice = Math.floor(Math.random() * possibilities.length);
 
 	            this.context.store.dispatch({
-	                type: BANNER_NEW_BANNER,
+	                type: _protocol2.default.BANNER_NEW_BANNER,
 	                data: newBannerChoice
 	            });
 	        }
@@ -19880,12 +19880,14 @@
 	        value: function render() {
 	            var _this3 = this;
 
+	            var bannerImgSrc = this.context.store.getState().get('banner').possibilities[this.context.store.getState().get('banner').currentBannerIndex];
+
 	            return _react2.default.createElement(
 	                'div',
-	                { onclick: function onclick() {
+	                { className: 'banner' },
+	                _react2.default.createElement('img', { onClick: function onClick() {
 	                        return _this3.onClick();
-	                    }, className: 'banner' },
-	                _react2.default.createElement('img', { src: null, className: 'banner-image' })
+	                    }, src: bannerImgSrc, className: 'banner-image' })
 	            );
 	        }
 	    }]);
@@ -20257,26 +20259,6 @@
 	var _ReactComponentWithPureRenderMixin = __webpack_require__(169);
 
 	var _ReactComponentWithPureRenderMixin2 = _interopRequireDefault(_ReactComponentWithPureRenderMixin);
-
-	var _banner = __webpack_require__(161);
-
-	var _banner2 = _interopRequireDefault(_banner);
-
-	var _chat = __webpack_require__(163);
-
-	var _chat2 = _interopRequireDefault(_chat);
-
-	var _users = __webpack_require__(164);
-
-	var _users2 = _interopRequireDefault(_users);
-
-	var _playlist = __webpack_require__(166);
-
-	var _playlist2 = _interopRequireDefault(_playlist);
-
-	var _contentPane = __webpack_require__(167);
-
-	var _contentPane2 = _interopRequireDefault(_contentPane);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21591,7 +21573,7 @@
 	    },
 	    banner: {
 	        currentBannerIndex: 0,
-	        possibilities: ['//localhost:7070/img/banners/5MeXvVv.jpg', '//localhost:7070/img/banners/9Nj8uNd.png', '//localhost:7070/img/banners/EhtdkPS.jpg', '//localhost:7070/img/banners/iwg4m.png', '//localhost:7070/img/banners/jeNmV9k.png', '//localhost:7070/img/banners/QmSNAyU.jpg', '//localhost:7070/img/banners/xBYdAMC.png', '//localhost:7070/img/banners/z1wLRl1.png']
+	        possibilities: ['//localhost:7070/img/banners/5MeXvVv.jpg', '//localhost:7070/img/banners/9Nj8uNd.png', '//localhost:7070/img/banners/EhtdkPS.jpg', '//localhost:7070/img/banners/iwg4m.png', '//localhost:7070/img/banners/jeNmV9k.png', '//localhost:7070/img/banners/QShC1ri.jpg', '//localhost:7070/img/banners/xBYdAMC.png', '//localhost:7070/img/banners/z1wLRl1.png']
 	    },
 	    room: {
 	        name: null,
@@ -21617,7 +21599,13 @@
 	            return state.mergeIn(['banner', 'possibilities'], action.data);
 
 	        case _protocol2.default.BANNER_NEW_BANNER:
-	            return state.setIn(['banner', 'currentBannerIndex'], action.data);
+	            var possibilities = state.get('banner').possibilities;
+	            var currentBannerIndex = parseInt(action.data);
+
+	            return state.set('banner', {
+	                possibilities: possibilities,
+	                currentBannerIndex: currentBannerIndex
+	            });
 
 	        default:
 	            return state;

@@ -19,7 +19,7 @@ let wss         = new WebSocketServer({ server: server })
 
 app.use(staticFiles)
 
-let bundledHTML = (rendered) =>
+const HTML =
 `<!DOCTYPE html>
 <html>
     <head>
@@ -35,7 +35,7 @@ let bundledHTML = (rendered) =>
     </head>
 
     <body>
-        <div id="origin">${rendered}</div>
+        <div id="origin"></div>
 
         <script src="/bundle.js" type="text/javascript"></script>
     </body>
@@ -60,10 +60,8 @@ wss.on('connection', (ws) => {
 })
 
 app.use(function *(next) {
-    let bundle  = bundledHTML(render(<Goontube />))
-
     this.status = 200
-    this.body   = bundle
+    this.body   = HTML
 })
 
 server.on('request', app.callback())

@@ -27,8 +27,8 @@ const defaultApplicationState = I.Map({
             '//localhost:7070/img/banners/9Nj8uNd.png',
             '//localhost:7070/img/banners/EhtdkPS.jpg',
             '//localhost:7070/img/banners/iwg4m.png',
-            '//localhost:7070/img/banners/jeNmV9k.png',        
-            '//localhost:7070/img/banners/QmSNAyU.jpg',
+            '//localhost:7070/img/banners/jeNmV9k.png',
+            '//localhost:7070/img/banners/QShC1ri.jpg',
             '//localhost:7070/img/banners/xBYdAMC.png',
             '//localhost:7070/img/banners/z1wLRl1.png'
         ]
@@ -51,8 +51,14 @@ function rootReducer(state = defaultApplicationState, action) {
                 .mergeIn(['banner', 'possibilities'], action.data)
 
         case p.BANNER_NEW_BANNER:
+            const possibilities = state.get('banner').possibilities
+            const currentBannerIndex = parseInt(action.data)
+
             return state
-                .setIn(['banner', 'currentBannerIndex'], action.data)
+                .set('banner', {
+                    possibilities:      possibilities,
+                    currentBannerIndex: currentBannerIndex
+                })
 
         default:
             return state

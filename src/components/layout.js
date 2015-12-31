@@ -5,12 +5,6 @@
 import React from 'react'
 import PureRenderMixin from 'react/lib/ReactComponentWithPureRenderMixin'
 
-import Banner from './banner'
-import Chat from './chat'
-import Users from './users'
-import Playlist from './playlist'
-import ContentPane from './content-pane'
-
 class Layout extends React.Component {
     constructor(props, context) {
         super(props, context)
