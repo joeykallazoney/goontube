@@ -28,7 +28,7 @@ const defaultApplicationState = I.Map({
             '//localhost:7070/img/banners/EhtdkPS.jpg',
             '//localhost:7070/img/banners/iwg4m.png',
             '//localhost:7070/img/banners/jeNmV9k.png',
-            '//localhost:7070/img/banners/QShC1ri.jpg',
+            '//localhost:7070/img/banners/QShC1ri.png',
             '//localhost:7070/img/banners/xBYdAMC.png',
             '//localhost:7070/img/banners/z1wLRl1.png'
         ]
