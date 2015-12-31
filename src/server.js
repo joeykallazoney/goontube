@@ -1,5 +1,5 @@
 /**
- * @file Starts the various server loops required to handle goontube's server.
+ * @file Starts the various server loops required to host goontube.
  * @since 1.0.0
  */
 import http from 'http'
@@ -29,7 +29,7 @@ let bundledHTML = (rendered) =>
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Humour and video lounge: add your favourite videos from streaming sites to share them in a public playlist synchronized with other users from all over.">
-        <meta name="keywords" content="goontube goontu.be synchtube hamburgers video lounge chat existential despair">
+        <meta name="keywords" content="goontube goontu.be hamburgers video lounge chat existential despair">
 
         <link rel="stylesheet" href="/style.css">
     </head>
