@@ -111,7 +111,7 @@ npm install
 Prerequisite for webpack-dev-server: `npm install -g webpack-dev-server`
 
 ```
-webpack-dev-server ./client.js
+webpack-dev-server ./src/client.js
 ```
 
 Then visit [http://localhost:8080/bundle](http://localhost:8080/bundle)
