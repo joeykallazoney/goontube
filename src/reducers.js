@@ -13,7 +13,7 @@ const defaultApplicationState = I.Map({
         provider:   'youtube',
         position:   0
     },
-    layout: {
+    layout: { // this will be relevant when react-grid-layout is up to date with react+usable again
         banner:   {x: 0, y: 0, w: 12, h: 2},
         player:   {x: 0, y: 2, w: 5, h: 4},
         chat:     {x: 6, y: 2, w: 6, h: 4},
