@@ -19793,7 +19793,6 @@
 	                    _react2.default.createElement(_banner2.default, null),
 	                    _react2.default.createElement(_player2.default, null),
 	                    _react2.default.createElement(_chat2.default, null),
-	                    _react2.default.createElement(_users2.default, null),
 	                    _react2.default.createElement(_playlist2.default, null),
 	                    _react2.default.createElement(_contentPane2.default, null)
 	                )
@@ -19976,6 +19975,10 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
+	var _users = __webpack_require__(164);
+
+	var _users2 = _interopRequireDefault(_users);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -19987,10 +19990,10 @@
 	var Chat = (function (_React$Component) {
 	    _inherits(Chat, _React$Component);
 
-	    function Chat(props) {
+	    function Chat(props, context) {
 	        _classCallCheck(this, Chat);
 
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Chat).call(this, props));
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Chat).call(this, props, context));
 
 	        _this.state = {
 	            buffer: []
@@ -20007,28 +20010,37 @@
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'chat' },
-	                this.state.buffer.map(function (message) {
-	                    return _react2.default.createElement(
-	                        'li',
-	                        { key: message.id, className: 'message' },
-	                        _react2.default.createElement(
-	                            'span',
-	                            { className: 'from' },
-	                            message.from
-	                        ),
-	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'body' },
-	                            message.body
-	                        )
-	                    );
-	                })
+	                _react2.default.createElement(
+	                    'ul',
+	                    { className: 'chat-list' },
+	                    this.state.buffer.map(function (message) {
+	                        return _react2.default.createElement(
+	                            'li',
+	                            { key: message.id, className: 'message' },
+	                            _react2.default.createElement(
+	                                'span',
+	                                { className: 'from' },
+	                                message.from
+	                            ),
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'body' },
+	                                message.body
+	                            )
+	                        );
+	                    })
+	                ),
+	                _react2.default.createElement(_users2.default, null)
 	            );
 	        }
 	    }]);
 
 	    return Chat;
 	})(_react2.default.Component);
+
+	Chat.contextTypes = {
+	    store: _react2.default.PropTypes.object.isRequired
+	};
 
 	exports.default = Chat;
 
@@ -20063,10 +20075,10 @@
 	var Users = (function (_React$Component) {
 	    _inherits(Users, _React$Component);
 
-	    function Users(props) {
+	    function Users(props, context) {
 	        _classCallCheck(this, Users);
 
-	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Users).call(this, props));
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Users).call(this, props, context));
 	    }
 
 	    _createClass(Users, [{
@@ -20081,6 +20093,10 @@
 
 	    return Users;
 	})(_react2.default.Component);
+
+	Users.contextTypes = {
+	    store: _react2.default.PropTypes.object.isRequired
+	};
 
 	exports.default = Users;
 
@@ -20266,7 +20282,7 @@
 	                width: 550,
 	                height: 320,
 	                playerVars: {
-	                    autoplay: 1
+	                    autoplay: 0
 	                }
 	            };
 
@@ -27381,10 +27397,7 @@
 	            var videoID = this.context.store.getState().get('media').id;
 	            var options = {
 	                width: 550,
-	                height: 320,
-	                playerVars: {
-	                    autoplay: 1
-	                }
+	                height: 320
 	            };
 
 	            return _react2.default.createElement(

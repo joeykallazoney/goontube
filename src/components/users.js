@@ -2,8 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 class Users extends React.Component {
-    constructor(props) {
-        super(props)
+    constructor(props, context) {
+        super(props, context)
     }
 
     componentDidMount() {
@@ -16,6 +16,10 @@ class Users extends React.Component {
             </div>
         )
     }
+}
+
+Users.contextTypes = {
+    store: React.PropTypes.object.isRequired
 }
 
 export default Users

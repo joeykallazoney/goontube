@@ -26,10 +26,10 @@ class YouTubePlayer extends React.Component {
             .getState()
             .get('media').id
         const options = {
-            width:     550,
-            height:    320,
+            width:          550,
+            height:         320,
             playerVars: {
-                autoplay: 1
+                autoplay:   0
             }
         }
 
