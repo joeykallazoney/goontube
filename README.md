@@ -11,6 +11,7 @@ Much needed overhaul + rewrite as an ES6 webapp with React + Redux.
 I didn't leave this quite ready but I'll make sure it's an easy workflow.  I had to run at the end of the evening we got this chat and repo started.  Missing dependency for immutable is all in the case of that error, I forgot to --save one dep.  We can use github's Issue tracker rather than working out of here (Slack is cool too) for project-related convos. 
 
 ####**nine**####
+Update: all this stuff is fixed from adding missing dependencies, leaving it here just in case for a bit.
 so far I've been able to build the frontend at least, getting some errors though:
 ```
 ERROR in ./reducers.js
