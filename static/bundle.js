@@ -45,7 +45,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(1);
-	module.exports = __webpack_require__(192);
+	module.exports = __webpack_require__(191);
 
 
 /***/ },
@@ -66,11 +66,11 @@
 
 	var _app2 = _interopRequireDefault(_app);
 
-	var _redux = __webpack_require__(172);
+	var _redux = __webpack_require__(171);
 
-	var _reactRedux = __webpack_require__(181);
+	var _reactRedux = __webpack_require__(180);
 
-	var _reducers = __webpack_require__(190);
+	var _reducers = __webpack_require__(189);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -19733,7 +19733,31 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _layout = __webpack_require__(161);
+	var _banner = __webpack_require__(161);
+
+	var _banner2 = _interopRequireDefault(_banner);
+
+	var _chat = __webpack_require__(163);
+
+	var _chat2 = _interopRequireDefault(_chat);
+
+	var _users = __webpack_require__(164);
+
+	var _users2 = _interopRequireDefault(_users);
+
+	var _player = __webpack_require__(165);
+
+	var _player2 = _interopRequireDefault(_player);
+
+	var _playlist = __webpack_require__(166);
+
+	var _playlist2 = _interopRequireDefault(_playlist);
+
+	var _contentPane = __webpack_require__(167);
+
+	var _contentPane2 = _interopRequireDefault(_contentPane);
+
+	var _layout = __webpack_require__(168);
 
 	var _layout2 = _interopRequireDefault(_layout);
 
@@ -19763,13 +19787,26 @@
 	            return _react2.default.createElement(
 	                'div',
 	                { id: 'goontube' },
-	                _react2.default.createElement(_layout2.default, null)
+	                _react2.default.createElement(
+	                    _layout2.default,
+	                    null,
+	                    _react2.default.createElement(_banner2.default, null),
+	                    _react2.default.createElement(_player2.default, null),
+	                    _react2.default.createElement(_chat2.default, null),
+	                    _react2.default.createElement(_users2.default, null),
+	                    _react2.default.createElement(_playlist2.default, null),
+	                    _react2.default.createElement(_contentPane2.default, null)
+	                )
 	            );
 	        }
 	    }]);
 
 	    return Goontube;
 	})(_react2.default.Component);
+
+	Goontube.contextTypes = {
+	    store: _react2.default.PropTypes.object.isRequired
+	};
 
 	exports.default = Goontube;
 
@@ -19789,172 +19826,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _ReactComponentWithPureRenderMixin = __webpack_require__(162);
-
-	var _ReactComponentWithPureRenderMixin2 = _interopRequireDefault(_ReactComponentWithPureRenderMixin);
-
-	var _banner = __webpack_require__(164);
-
-	var _banner2 = _interopRequireDefault(_banner);
-
-	var _chat = __webpack_require__(166);
-
-	var _chat2 = _interopRequireDefault(_chat);
-
-	var _users = __webpack_require__(167);
-
-	var _users2 = _interopRequireDefault(_users);
-
-	var _playlist = __webpack_require__(168);
-
-	var _playlist2 = _interopRequireDefault(_playlist);
-
-	var _contentPane = __webpack_require__(169);
-
-	var _contentPane2 = _interopRequireDefault(_contentPane);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var ReactGridLayout = __webpack_require__(170).Responsive;
-
-	var Layout = (function (_React$Component) {
-	    _inherits(Layout, _React$Component);
-
-	    function Layout(props, context) {
-	        _classCallCheck(this, Layout);
-
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Layout).call(this, props, context));
-
-	        _this.state = {
-	            layout: {}
-	        };
-	        return _this;
-	    }
-
-	    _createClass(Layout, [{
-	        key: 'render',
-	        value: function render() {
-	            return _react2.default.createElement(ReactGridLayout, { className: 'layout', layout: this.state.layout });
-	        }
-	    }]);
-
-	    return Layout;
-	})(_react2.default.Component);
-
-	Layout.contextTypes = {
-	    store: _react2.default.PropTypes.object.isRequired
-	};
-	Layout.mixins = [_ReactComponentWithPureRenderMixin2.default];
-
-	exports.default = Layout;
-
-/***/ },
-/* 162 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright 2013-2015, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule ReactComponentWithPureRenderMixin
-	 */
-
-	'use strict';
-
-	var shallowCompare = __webpack_require__(163);
-
-	/**
-	 * If your React component's render function is "pure", e.g. it will render the
-	 * same result given the same props and state, provide this Mixin for a
-	 * considerable performance boost.
-	 *
-	 * Most React components have pure render functions.
-	 *
-	 * Example:
-	 *
-	 *   var ReactComponentWithPureRenderMixin =
-	 *     require('ReactComponentWithPureRenderMixin');
-	 *   React.createClass({
-	 *     mixins: [ReactComponentWithPureRenderMixin],
-	 *
-	 *     render: function() {
-	 *       return <div className={this.props.className}>foo</div>;
-	 *     }
-	 *   });
-	 *
-	 * Note: This only checks shallow equality for props and state. If these contain
-	 * complex data structures this mixin may have false-negatives for deeper
-	 * differences. Only mixin to components which have simple props and state, or
-	 * use `forceUpdate()` when you know deep data structures have changed.
-	 */
-	var ReactComponentWithPureRenderMixin = {
-	  shouldComponentUpdate: function (nextProps, nextState) {
-	    return shallowCompare(this, nextProps, nextState);
-	  }
-	};
-
-	module.exports = ReactComponentWithPureRenderMixin;
-
-/***/ },
-/* 163 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright 2013-2015, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	* @providesModule shallowCompare
-	*/
-
-	'use strict';
-
-	var shallowEqual = __webpack_require__(118);
-
-	/**
-	 * Does a shallow comparison for props and state.
-	 * See ReactComponentWithPureRenderMixin
-	 */
-	function shallowCompare(instance, nextProps, nextState) {
-	  return !shallowEqual(instance.props, nextProps) || !shallowEqual(instance.state, nextState);
-	}
-
-	module.exports = shallowCompare;
-
-/***/ },
-/* 164 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
 	var _reactDom = __webpack_require__(159);
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _protocol = __webpack_require__(165);
+	var _protocol = __webpack_require__(162);
 
 	var _protocol2 = _interopRequireDefault(_protocol);
 
@@ -20024,7 +19900,7 @@
 	exports.default = Banner;
 
 /***/ },
-/* 165 */
+/* 162 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -20079,7 +19955,7 @@
 	};
 
 /***/ },
-/* 166 */
+/* 163 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20155,7 +20031,7 @@
 	exports.default = Chat;
 
 /***/ },
-/* 167 */
+/* 164 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20207,7 +20083,59 @@
 	exports.default = Users;
 
 /***/ },
-/* 168 */
+/* 165 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(159);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Player = (function (_React$Component) {
+	    _inherits(Player, _React$Component);
+
+	    function Player(props) {
+	        _classCallCheck(this, Player);
+
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Player).call(this, props));
+	    }
+
+	    _createClass(Player, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {}
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement('div', { className: 'player' });
+	        }
+	    }]);
+
+	    return Player;
+	})(_react2.default.Component);
+
+	exports.default = Player;
+
+/***/ },
+/* 166 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20259,7 +20187,7 @@
 	exports.default = Playlist;
 
 /***/ },
-/* 169 */
+/* 167 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20311,833 +20239,182 @@
 	exports.default = ContentPane;
 
 /***/ },
+/* 168 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _ReactComponentWithPureRenderMixin = __webpack_require__(169);
+
+	var _ReactComponentWithPureRenderMixin2 = _interopRequireDefault(_ReactComponentWithPureRenderMixin);
+
+	var _banner = __webpack_require__(161);
+
+	var _banner2 = _interopRequireDefault(_banner);
+
+	var _chat = __webpack_require__(163);
+
+	var _chat2 = _interopRequireDefault(_chat);
+
+	var _users = __webpack_require__(164);
+
+	var _users2 = _interopRequireDefault(_users);
+
+	var _playlist = __webpack_require__(166);
+
+	var _playlist2 = _interopRequireDefault(_playlist);
+
+	var _contentPane = __webpack_require__(167);
+
+	var _contentPane2 = _interopRequireDefault(_contentPane);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @module Exports a React component class abstracting the app layout.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @since 1.0.0
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+	var Layout = (function (_React$Component) {
+	    _inherits(Layout, _React$Component);
+
+	    function Layout(props, context) {
+	        _classCallCheck(this, Layout);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Layout).call(this, props, context));
+
+	        _this.state = {
+	            layout: {}
+	        };
+	        return _this;
+	    }
+
+	    _createClass(Layout, [{
+	        key: 'render',
+	        value: function render() {
+	            return(
+	                /*
+	                 * RGL needs some updating and its author its aware.
+	                 <ReactGridLayout className="layout" layout={this.state.layout}>
+	                </ReactGridLayout>
+	                * RGL will probably be merged into react-draggable.
+	                */
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'layout' },
+	                    this.props.children
+	                )
+	            );
+	        }
+	    }]);
+
+	    return Layout;
+	})(_react2.default.Component);
+
+	Layout.contextTypes = {
+	    store: _react2.default.PropTypes.object.isRequired
+	};
+
+	Layout.mixins = [_ReactComponentWithPureRenderMixin2.default];
+
+	exports.default = Layout;
+
+/***/ },
+/* 169 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright 2013-2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule ReactComponentWithPureRenderMixin
+	 */
+
+	'use strict';
+
+	var shallowCompare = __webpack_require__(170);
+
+	/**
+	 * If your React component's render function is "pure", e.g. it will render the
+	 * same result given the same props and state, provide this Mixin for a
+	 * considerable performance boost.
+	 *
+	 * Most React components have pure render functions.
+	 *
+	 * Example:
+	 *
+	 *   var ReactComponentWithPureRenderMixin =
+	 *     require('ReactComponentWithPureRenderMixin');
+	 *   React.createClass({
+	 *     mixins: [ReactComponentWithPureRenderMixin],
+	 *
+	 *     render: function() {
+	 *       return <div className={this.props.className}>foo</div>;
+	 *     }
+	 *   });
+	 *
+	 * Note: This only checks shallow equality for props and state. If these contain
+	 * complex data structures this mixin may have false-negatives for deeper
+	 * differences. Only mixin to components which have simple props and state, or
+	 * use `forceUpdate()` when you know deep data structures have changed.
+	 */
+	var ReactComponentWithPureRenderMixin = {
+	  shouldComponentUpdate: function (nextProps, nextState) {
+	    return shallowCompare(this, nextProps, nextState);
+	  }
+	};
+
+	module.exports = ReactComponentWithPureRenderMixin;
+
+/***/ },
 /* 170 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module) {"use strict";
+	/**
+	 * Copyright 2013-2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	* @providesModule shallowCompare
+	*/
 
-	function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj; }
+	'use strict';
 
-	!(function (t, e) {
-		"object" == ( false ? "undefined" : _typeof(exports)) && "object" == ( false ? "undefined" : _typeof(module)) ? module.exports = e(__webpack_require__(2)) :  true ? !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(2)], __WEBPACK_AMD_DEFINE_FACTORY__ = (e), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : "object" == (typeof exports === "undefined" ? "undefined" : _typeof(exports)) ? exports.ReactGridLayout = e(require("react")) : t.ReactGridLayout = e(t.React);
-	})(undefined, function (t) {
-		return (function (t) {
-			function e(n) {
-				if (r[n]) return r[n].exports;var o = r[n] = { exports: {}, id: n, loaded: !1 };return t[n].call(o.exports, o, o.exports, e), o.loaded = !0, o.exports;
-			}var r = {};return e.m = t, e.c = r, e.p = "", e(0);
-		})((function (t) {
-			for (var e in t) {
-				if (Object.prototype.hasOwnProperty.call(t, e)) switch (_typeof(t[e])) {case "function":
-						break;case "object":
-						t[e] = (function (e) {
-							var r = e.slice(1),
-							    n = t[e[0]];return function (t, e, o) {
-								n.apply(this, [t, e, o].concat(r));
-							};
-						})(t[e]);break;default:
-						t[e] = t[t[e]];}
-			}return t;
-		})([function (t, e, r) {
-			"use strict";
-			t.exports = r(6), t.exports.Responsive = r(14);
-		}, function (e, r) {
-			e.exports = t;
-		}, function (t, e, r) {
-			"use strict";
-			var n = r(20),
-			    o = t.exports = { bottom: function bottom(t) {
-					for (var e, r = 0, n = 0, o = t.length; o > n; n++) {
-						e = t[n].y + t[n].h, e > r && (r = e);
-					}return r;
-				}, clone: function clone(t) {
-					return n({}, t);
-				}, collides: function collides(t, e) {
-					return t === e ? !1 : t.x + t.w <= e.x ? !1 : t.x >= e.x + e.w ? !1 : t.y + t.h <= e.y ? !1 : t.y >= e.y + e.h ? !1 : !0;
-				}, compact: function compact(t, e) {
-					for (var r = o.getStatics(t), n = [], i = o.sortLayoutItemsByRowCol(t), s = 0, a = i.length; a > s; s++) {
-						var p = i[s];p["static"] || (p = o.compactItem(r, p, e), r.push(p)), n[t.indexOf(p)] = p, delete p.moved;
-					}return n;
-				}, compactItem: function compactItem(t, e, r) {
-					if (r) for (; e.y > 0 && !o.getFirstCollision(t, e);) {
-						e.y--;
-					}for (var n; n = o.getFirstCollision(t, e);) {
-						e.y = n.y + n.h;
-					}return e;
-				}, correctBounds: function correctBounds(t, e) {
-					for (var r = o.getStatics(t), n = 0, i = t.length; i > n; n++) {
-						var s = t[n];if ((s.x + s.w > e.cols && (s.x = e.cols - s.w), s.x < 0 && (s.x = 0, s.w = e.cols), s["static"])) for (; o.getFirstCollision(r, s);) {
-							s.y++;
-						} else r.push(s);
-					}return t;
-				}, getLayoutItem: function getLayoutItem(t, e) {
-					e = "" + e;for (var r = 0, n = t.length; n > r; r++) {
-						if ("" + t[r].i === e) return t[r];
-					}
-				}, getFirstCollision: function getFirstCollision(t, e) {
-					for (var r = 0, n = t.length; n > r; r++) {
-						if (o.collides(t[r], e)) return t[r];
-					}
-				}, getAllCollisions: function getAllCollisions(t, e) {
-					for (var r = [], n = 0, i = t.length; i > n; n++) {
-						o.collides(t[n], e) && r.push(t[n]);
-					}return r;
-				}, getStatics: function getStatics(t) {
-					for (var e = [], r = 0, n = t.length; n > r; r++) {
-						t[r]["static"] && e.push(t[r]);
-					}return e;
-				}, moveElement: function moveElement(t, e, r, n, i) {
-					if (e["static"]) return t;if (e.y === n && e.x === r) return t;var s = e.y > n;void 0 !== r && (e.x = r), void 0 !== n && (e.y = n), e.moved = !0;var a = o.sortLayoutItemsByRowCol(t);s && (a = a.reverse());for (var p = o.getAllCollisions(a, e), l = 0, u = p.length; u > l; l++) {
-						var c = p[l];c.moved || e.y > c.y && e.y - c.y > c.h / 4 || (t = c["static"] ? o.moveElementAwayFromCollision(t, c, e, i) : o.moveElementAwayFromCollision(t, e, c, i));
-					}return t;
-				}, moveElementAwayFromCollision: function moveElementAwayFromCollision(t, e, r, n) {
-					if (n) {
-						var i = { x: r.x, y: r.y, w: r.w, h: r.h };if ((i.y = Math.max(e.y - r.h, 0), !o.getFirstCollision(t, i))) return o.moveElement(t, r, void 0, i.y);
-					}return o.moveElement(t, r, void 0, r.y + 1);
-				}, perc: function perc(t) {
-					return 100 * t + "%";
-				}, setTransform: function setTransform(t, e) {
-					var r = ("" + e[0]).replace(/(\d)$/, "$1px"),
-					    n = ("" + e[1]).replace(/(\d)$/, "$1px");return t.transform = "translate(" + r + "," + n + ")", t.WebkitTransform = "translate(" + r + "," + n + ")", t.MozTransform = "translate(" + r + "," + n + ")", t.msTransform = "translate(" + r + "," + n + ")", t.OTransform = "translate(" + r + "," + n + ")", t;
-				}, sortLayoutItemsByRowCol: function sortLayoutItemsByRowCol(t) {
-					return [].concat(t).sort(function (t, e) {
-						return t.y > e.y || t.y === e.y && t.x > e.x ? 1 : -1;
-					});
-				}, synchronizeLayoutWithChildren: function synchronizeLayoutWithChildren(t, e, r, i) {
-					Array.isArray(e) || (e = [e]), t = t || [];for (var s = [], a = 0, p = e.length; p > a; a++) {
-						var l = e[a],
-						    u = o.getLayoutItem(t, l.key);if (u) u.i = "" + u.i, s.push(u);else {
-							var c = l.props._grid;c ? (o.validateLayout([c], "ReactGridLayout.child"), i ? s.push(n({}, c, { y: Math.min(o.bottom(s), c.y), i: l.key })) : s.push(n({}, c, { y: c.y, i: l.key }))) : s.push({ w: 1, h: 1, x: 0, y: o.bottom(s), i: l.key });
-						}
-					}return s = o.correctBounds(s, { cols: r }), s = o.compact(s, i);
-				}, validateLayout: function validateLayout(t, e) {
-					e = e || "Layout";var r = ["x", "y", "w", "h"];if (!Array.isArray(t)) throw new Error(e + " must be an array!");for (var n = 0, o = t.length; o > n; n++) {
-						for (var i = 0; i < r.length; i++) {
-							if ("number" != typeof t[n][r[i]]) throw new Error("ReactGridLayout: " + e + "[" + n + "]." + r[i] + " must be a Number!");
-						}if (void 0 !== t[n]["static"] && "boolean" != typeof t[n]["static"]) throw new Error("ReactGridLayout: " + e + "[" + n + "].static must be a Boolean!");
-					}
-				} };
-		}, function (t, e, r) {
-			"use strict";
-			var n = r(17),
-			    o = { shouldComponentUpdate: function shouldComponentUpdate(t, e) {
-					return !n(this.props, t) || !n(this.state, e);
-				} };t.exports = o;
-		}, function (t, e) {
-			"use strict";
-			function r(t, e) {
-				if (null == t) throw new TypeError("Object.assign target cannot be null or undefined");for (var r = Object(t), n = Object.prototype.hasOwnProperty, o = 1; o < arguments.length; o++) {
-					var i = arguments[o];if (null != i) {
-						var s = Object(i);for (var a in s) {
-							n.call(s, a) && (r[a] = s[a]);
-						}
-					}
-				}return r;
-			}t.exports = r;
-		}, function (t, e, r) {
-			"use strict";
-			var n = r(12),
-			    o = n;t.exports = o;
-		}, function (t, e, r) {
-			"use strict";
-			function n(t, e) {
-				var r = {};for (var n in t) {
-					e.indexOf(n) >= 0 || Object.prototype.hasOwnProperty.call(t, n) && (r[n] = t[n]);
-				}return r;
-			}var o = Object.assign || function (t) {
-				for (var e = 1; e < arguments.length; e++) {
-					var r = arguments[e];for (var n in r) {
-						Object.prototype.hasOwnProperty.call(r, n) && (t[n] = r[n]);
-					}
-				}return t;
-			},
-			    i = r(1),
-			    s = r(13),
-			    a = r(2),
-			    p = r(3),
-			    l = r(7),
-			    u = i.createClass({ displayName: "ReactGridLayout", mixins: [p, l], propTypes: { autoSize: i.PropTypes.bool, cols: i.PropTypes.number, draggableCancel: i.PropTypes.string, draggableHandle: i.PropTypes.string, verticalCompact: i.PropTypes.bool, layout: function c(t, e, r) {
-						var c = t.layout;void 0 !== c && a.validateLayout(c, "layout");
-					}, layouts: function layouts(t, e, r) {
-						if (t.layouts) throw new Error("ReactGridLayout does not use `layouts`: Use ReactGridLayout.Responsive.");
-					}, margin: i.PropTypes.array, rowHeight: i.PropTypes.number, isDraggable: i.PropTypes.bool, isResizable: i.PropTypes.bool, useCSSTransforms: i.PropTypes.bool, onLayoutChange: i.PropTypes.func, onDragStart: i.PropTypes.func, onDrag: i.PropTypes.func, onDragStop: i.PropTypes.func, onResizeStart: i.PropTypes.func, onResize: i.PropTypes.func, onResizeStop: i.PropTypes.func, children: function h(t, e, r) {
-						i.PropTypes.node.apply(this, arguments);var h = t[e],
-						    n = {};i.Children.forEach(h, function (t, e, r) {
-							if (n[t.key]) throw new Error("Duplicate child key found! This will cause problems in ReactGridLayout.");n[t.key] = !0;
-						});
-					} }, getDefaultProps: function getDefaultProps() {
-					return { autoSize: !0, cols: 12, rowHeight: 150, layout: [], margin: [10, 10], isDraggable: !0, isResizable: !0, useCSSTransforms: !0, verticalCompact: !0, onLayoutChange: function onLayoutChange() {}, onDragStart: function onDragStart() {}, onDrag: function onDrag() {}, onDragStop: function onDragStop() {}, onResizeStart: function onResizeStart() {}, onResize: function onResize() {}, onResizeStop: function onResizeStop() {} };
-				}, getInitialState: function getInitialState() {
-					return { activeDrag: null, isMounted: !1, layout: a.synchronizeLayoutWithChildren(this.props.layout, this.props.children, this.props.cols, this.props.verticalCompact), width: this.props.initialWidth, oldDragItem: null, oldResizeItem: null };
-				}, componentDidMount: function componentDidMount() {
-					this.props.onLayoutChange(this.state.layout), this.setState({ isMounted: !0 });
-				}, componentWillReceiveProps: function componentWillReceiveProps(t) {
-					t.width !== this.props.width && this.onWidthChange(t.width), t.children.length !== this.props.children.length && this.setState({ layout: a.synchronizeLayoutWithChildren(this.state.layout, t.children, t.cols, this.props.verticalCompact) }), t.layout && JSON.stringify(t.layout) !== JSON.stringify(this.state.layout) && this.setState({ layout: a.synchronizeLayoutWithChildren(t.layout, t.children, t.cols, this.props.verticalCompact) });
-				}, componentDidUpdate: function componentDidUpdate(t, e) {
-					this.state.layout === e.layout || this.state.activeDrag || this.props.onLayoutChange(this.state.layout, this.state.layouts);
-				}, containerHeight: function containerHeight() {
-					return this.props.autoSize ? a.bottom(this.state.layout) * this.props.rowHeight + this.props.margin[1] + "px" : void 0;
-				}, onWidthChange: function onWidthChange(t) {
-					this.setState({ width: t });
-				}, onDragStart: function onDragStart(t, e, r, n) {
-					var o = n.e,
-					    i = (n.element, n.position, this.state.layout),
-					    s = a.getLayoutItem(i, t);this.setState({ oldDragItem: a.clone(s) }), this.props.onDragStart(i, s, s, null, o);
-				}, onDrag: function onDrag(t, e, r, n) {
-					var o = n.e,
-					    i = (n.element, n.position, this.state.layout),
-					    s = a.getLayoutItem(i, t),
-					    p = this.state.oldDragItem,
-					    l = { w: s.w, h: s.h, x: s.x, y: s.y, placeholder: !0, i: t };i = a.moveElement(i, s, e, r, !0), this.props.onDrag(i, p, s, l, o), this.setState({ layout: a.compact(i, this.props.verticalCompact), activeDrag: l });
-				}, onDragStop: function onDragStop(t, e, r, n) {
-					var o = n.e,
-					    i = (n.element, n.position, this.state.layout),
-					    s = a.getLayoutItem(i, t),
-					    p = this.state.oldDragItem;i = a.moveElement(i, s, e, r, !0), this.props.onDragStop(i, p, s, null, o), this.setState({ layout: a.compact(i, this.props.verticalCompact), activeDrag: null, oldDragItem: null });
-				}, onResizeStart: function onResizeStart(t, e, r, n) {
-					var o = n.e,
-					    i = (n.element, n.size, this.state.layout),
-					    s = a.getLayoutItem(i, t);this.setState({ oldResizeItem: a.clone(s) }), this.props.onResizeStart(i, s, s, null, o);
-				}, onResize: function onResize(t, e, r, n) {
-					var o = n.e,
-					    i = (n.element, n.size, this.state.layout),
-					    s = a.getLayoutItem(i, t),
-					    p = this.state.oldResizeItem;s.w = e, s.h = r;var l = { w: e, h: r, x: s.x, y: s.y, placeholder: !0, i: t };this.props.onResize(i, p, s, l, o), this.setState({ layout: a.compact(i, this.props.verticalCompact), activeDrag: l });
-				}, onResizeStop: function onResizeStop(t, e, r, n) {
-					var o = n.e,
-					    i = (n.element, n.size, this.state.layout),
-					    s = a.getLayoutItem(i, t),
-					    p = this.state.oldResizeItem;this.props.onResizeStop(i, p, s, null, o), this.setState({ layout: a.compact(i, this.props.verticalCompact), activeDrag: null, oldResizeItem: null });
-				}, placeholder: function placeholder() {
-					return this.state.activeDrag ? i.createElement(s, { w: this.state.activeDrag.w, h: this.state.activeDrag.h, x: this.state.activeDrag.x, y: this.state.activeDrag.y, i: this.state.activeDrag.i, isPlaceholder: !0, className: "react-grid-placeholder", containerWidth: this.state.width, cols: this.props.cols, margin: this.props.margin, rowHeight: this.props.rowHeight, isDraggable: !1, isResizable: !1, useCSSTransforms: this.props.useCSSTransforms }, i.createElement("div", null)) : "";
-				}, processGridItem: function processGridItem(t) {
-					var e,
-					    r,
-					    n = t.key,
-					    p = a.getLayoutItem(this.state.layout, n),
-					    l = !(this.state.activeDrag && this.state.activeDrag.i === n);return (p["static"] || this.props.isDraggable === !1) && (e = !1), (p["static"] || this.props.isResizable === !1) && (r = !1), i.createElement(s, o({ containerWidth: this.state.width, cols: this.props.cols, margin: this.props.margin, rowHeight: this.props.rowHeight, moveOnStartChange: l, cancel: this.props.draggableCancel, handle: this.props.draggableHandle, onDragStop: this.onDragStop, onDragStart: this.onDragStart, onDrag: this.onDrag, onResizeStart: this.onResizeStart, onResize: this.onResize, onResizeStop: this.onResizeStop, isDraggable: e, isResizable: r, useCSSTransforms: this.props.useCSSTransforms && this.state.isMounted, usePercentages: !this.state.isMounted }, p), t);
-				}, render: function render() {
-					var t = this.props,
-					    e = t.className,
-					    r = n(t, ["className"]);return e = "react-grid-layout " + (e || ""), i.createElement("div", o({}, r, { className: e, style: { height: this.containerHeight() } }), i.Children.map(this.props.children, this.processGridItem), this.placeholder());
-				} });t.exports = u;
-		}, function (t, e, r) {
-			"use strict";
-			var n = r(1),
-			    o = { propTypes: { initialWidth: n.PropTypes.number, listenToWindowResize: n.PropTypes.bool }, getDefaultProps: function getDefaultProps() {
-					return { initialWidth: 1280, listenToWindowResize: !0 };
-				}, componentDidMount: function componentDidMount() {
-					this.props.listenToWindowResize && (window.addEventListener("resize", this.onWindowResize), this.onWindowResize(), this.onWindowResize());
-				}, componentWillUnmount: function componentWillUnmount() {
-					window.removeEventListener("resize", this.onWindowResize);
-				}, onWindowResize: function onWindowResize() {
-					this.onWidthChange(this.getDOMNode().offsetWidth);
-				} };t.exports = o;
-		}, function (t, e, r) {
-			t.exports = r(21);
-		}, function (t, e, r) {
-			"use strict";
-			function n(t, e) {
-				var r = t.initialWidth,
-				    n = t.initialHeight,
-				    o = e.left,
-				    i = e.top;return { width: r + o, height: n + i };
-			}var o = Object.assign || function (t) {
-				for (var e = 1; e < arguments.length; e++) {
-					var r = arguments[e];for (var n in r) {
-						Object.prototype.hasOwnProperty.call(r, n) && (t[n] = r[n]);
-					}
-				}return t;
-			},
-			    i = r(1),
-			    s = r(8),
-			    a = r(11),
-			    p = r(10),
-			    l = r(25);t.exports = i.createClass({ displayName: "Resizable", mixins: [a], propTypes: { children: i.PropTypes.element.isRequired, onResizeStop: i.PropTypes.func, onResizeStart: i.PropTypes.func, onResize: i.PropTypes.func, width: i.PropTypes.number.isRequired, height: i.PropTypes.number.isRequired, handleSize: i.PropTypes.array, draggableOpts: i.PropTypes.object }, getDefaultProps: function getDefaultProps() {
-					return { handleSize: [20, 20] };
-				}, getInitialState: function getInitialState() {
-					return { bounds: this.constraintsToBounds(), initialWidth: this.props.width, initialHeight: this.props.height };
-				}, componentWillReceiveProps: function componentWillReceiveProps(t) {
-					this.state.resizing || (this.setState({ initialWidth: t.width, initialHeight: t.height, bounds: this.constraintsToBounds() }), this.refs.draggable.resetState());
-				}, constraintsToBounds: function constraintsToBounds() {
-					var t = this.props,
-					    e = t.minConstraints || t.handleSize,
-					    r = t.maxConstraints || [1 / 0, 1 / 0];return { left: e[0] - t.width, top: e[1] - t.height, right: r[0] - t.width, bottom: r[1] - t.height };
-				}, resizeHandler: function resizeHandler(t) {
-					var e = this;return function (r, o) {
-						var i = o.node,
-						    s = o.position;e.props[t] && e.props[t](r, { node: i, size: n(e.state, s) }), "onResizeStart" === t ? e.setState({ resizing: !0 }) : "onResizeStop" === t && e.setState({ resizing: !1 });
-					};
-				}, render: function render() {
-					var t = this.props;this.state;return l(t.children, p({}, t, { children: [t.children.props.children, i.createElement(s, o({}, t.draggableOpts, { ref: "draggable", onStop: this.resizeHandler("onResizeStop"), onStart: this.resizeHandler("onResizeStart"), onDrag: this.resizeHandler("onResize"), bounds: this.state.bounds }), i.createElement("span", { className: "react-resizable-handle" }))] }));
-				} });
-		}, function (t, e) {
-			"use strict";
-			function r(t) {
-				if (null == t) throw new TypeError("Object.assign cannot be called with null or undefined");return Object(t);
-			}t.exports = Object.assign || function (t, e) {
-				for (var n, o, i = r(t), s = 1; s < arguments.length; s++) {
-					n = arguments[s], o = Object.keys(Object(n));for (var a = 0; a < o.length; a++) {
-						i[o[a]] = n[o[a]];
-					}
-				}return i;
-			};
-		}, function (t, e, r) {
-			"use strict";
-			var n = r(35),
-			    o = { shouldComponentUpdate: function shouldComponentUpdate(t, e) {
-					return !n(this.props, t) || !n(this.state, e);
-				} };t.exports = o;
-		}, function (t, e) {
-			function r(t) {
-				return function () {
-					return t;
-				};
-			}function n() {}n.thatReturns = r, n.thatReturnsFalse = r(!1), n.thatReturnsTrue = r(!0), n.thatReturnsNull = r(null), n.thatReturnsThis = function () {
-				return this;
-			}, n.thatReturnsArgument = function (t) {
-				return t;
-			}, t.exports = n;
-		}, function (t, e, r) {
-			"use strict";
-			function n(t, e) {
-				throw delete e.children, new Error(t + " overrides contraints on gridItem " + e.i + ". Full props: " + JSON.stringify(e));
-			}var o = r(1),
-			    i = r(31),
-			    s = r(2),
-			    a = r(8),
-			    p = r(26).Resizable,
-			    l = r(3),
-			    u = o.createClass({ displayName: "GridItem", mixins: [l], propTypes: { children: o.PropTypes.element, cols: o.PropTypes.number.isRequired, containerWidth: o.PropTypes.number.isRequired, rowHeight: o.PropTypes.number.isRequired, margin: o.PropTypes.array.isRequired, x: o.PropTypes.number.isRequired, y: o.PropTypes.number.isRequired, w: o.PropTypes.number.isRequired, h: o.PropTypes.number.isRequired, minW: function minW(t, e, r) {
-						o.PropTypes.number.apply(this, arguments), (t.minW > t.w || t.minW > t.maxW) && n("minW", t);
-					}, maxW: function maxW(t, e, r) {
-						o.PropTypes.number.apply(this, arguments), (t.maxW < t.w || t.maxW < t.minW) && n("maxW", t);
-					}, minH: function minH(t, e, r) {
-						o.PropTypes.number.apply(this, arguments), (t.minH > t.h || t.minH > t.maxH) && n("minH", t);
-					}, maxH: function maxH(t, e, r) {
-						o.PropTypes.number.apply(this, arguments), (t.maxH < t.h || t.maxH < t.minH) && n("maxH", t);
-					}, i: o.PropTypes.string.isRequired, moveOnStartChange: o.PropTypes.bool, onDragStop: o.PropTypes.func, onDragStart: o.PropTypes.func, onDrag: o.PropTypes.func, onResizeStop: o.PropTypes.func, onResizeStart: o.PropTypes.func, onResize: o.PropTypes.func, isDraggable: o.PropTypes.bool, isResizable: o.PropTypes.bool, useCSSTransforms: o.PropTypes.bool, isPlaceholder: o.PropTypes.bool, className: o.PropTypes.string, handle: o.PropTypes.string, cancel: o.PropTypes.string }, getDefaultProps: function getDefaultProps() {
-					return { isDraggable: !0, isResizable: !0, useCSSTransforms: !0, className: "", cancel: "", minH: 1, minW: 1, maxH: 1 / 0, maxW: 1 / 0 };
-				}, getInitialState: function getInitialState() {
-					return { resizing: !1, className: "" };
-				}, calcPosition: function calcPosition(t, e, r, n) {
-					var o = this.props,
-					    i = o.containerWidth - o.margin[0],
-					    s = { left: i * (t / o.cols) + o.margin[0], top: o.rowHeight * e + o.margin[1], width: i * (r / o.cols) - o.margin[0], height: n * o.rowHeight - o.margin[1] };return s;
-				}, calcXY: function calcXY(t) {
-					var e = t.left,
-					    r = t.top;e -= this.props.margin[0], r -= this.props.margin[1];var n = Math.round(e / this.props.containerWidth * this.props.cols),
-					    o = Math.floor(r / this.props.rowHeight);return n = Math.max(Math.min(n, this.props.cols), 0), o = Math.max(o, 0), { x: n, y: o };
-				}, calcWH: function calcWH(t) {
-					var e = t.height,
-					    r = t.width;r += this.props.margin[0], e += this.props.margin[1];var n = Math.round(r / this.props.containerWidth * this.props.cols),
-					    o = Math.round(e / this.props.rowHeight);return n = Math.max(Math.min(n, this.props.cols - this.props.x), 0), o = Math.max(o, 0), { w: n, h: o };
-				}, createStyle: function createStyle(t) {
-					var e = { width: t.width + "px", height: t.height + "px", left: t.left + "px", top: t.top + "px", position: "absolute" };return this.props.usePercentages && (t.left = s.perc(t.left / this.props.containerWidth), e.left = t.left, e.width = s.perc(t.width / this.props.containerWidth)), this.props.useCSSTransforms && (s.setTransform(e, [t.left, t.top]), delete e.left, delete e.top), e;
-				}, mixinDraggable: function mixinDraggable(t, e) {
-					var r = "string" == typeof e.left ? void 0 : { x: e.left, y: e.top };return o.createElement(a, { start: r, moveOnStartChange: this.props.moveOnStartChange, onStop: this.onDragHandler("onDragStop"), onStart: this.onDragHandler("onDragStart"), onDrag: this.onDragHandler("onDrag"), handle: this.props.handle, cancel: ".react-resizable-handle " + this.props.cancel, useCSSTransforms: this.props.useCSSTransforms }, t);
-				}, mixinResizable: function mixinResizable(t, e) {
-					var r = this.props,
-					    n = this.calcPosition(0, 0, r.cols - r.x, 0).width,
-					    i = this.calcPosition(0, 0, r.minW, r.minH),
-					    s = this.calcPosition(0, 0, r.maxW, r.maxH),
-					    a = [i.width, i.height],
-					    l = [Math.min(s.width, n), Math.min(s.height, 1 / 0)];return o.createElement(p, { width: e.width, height: e.height, minConstraints: a, maxConstraints: l, onResizeStop: this.onResizeHandler("onResizeStop"), onResizeStart: this.onResizeHandler("onResizeStart"), onResize: this.onResizeHandler("onResize") }, t);
-				}, onDragHandler: function onDragHandler(t) {
-					var e = this;return function (r, n) {
-						var o = n.element,
-						    i = n.position;if (e.props[t]) {
-							var s = e.calcXY(i),
-							    a = s.x,
-							    p = s.y;a = Math.min(a, e.props.cols - e.props.w), e.props[t](e.props.i, a, p, { e: r, element: o, position: i });
-						}
-					};
-				}, onResizeHandler: function onResizeHandler(t) {
-					var e = this;return function (r, n) {
-						var o = n.element,
-						    i = n.size;if (e.props[t]) {
-							var s = e.calcWH(i),
-							    a = s.w,
-							    p = s.h;a = Math.min(a, e.props.cols - e.props.x), a = Math.max(a, 1), a = Math.max(Math.min(a, e.props.maxW), e.props.minW), p = Math.max(Math.min(p, e.props.maxH), e.props.minH), e.setState({ resizing: "onResizeStop" === t ? null : i }), e.props[t](e.props.i, a, p, { e: r, element: o, size: i });
-						}
-					};
-				}, render: function render() {
-					var t = this.props,
-					    e = this.calcPosition(t.x, t.y, t.w, t.h);this.state.resizing && (e.width = this.state.resizing.width, e.height = this.state.resizing.height);var r = i(this.props.children, { className: ["react-grid-item", this.props.className, this.state.resizing ? "resizing" : "", this.props.useCSSTransforms ? "cssTransforms" : ""].join(" "), style: this.createStyle(e) });return this.props.isResizable && (r = this.mixinResizable(r, e)), this.props.isDraggable && (r = this.mixinDraggable(r, e)), r;
-				} });t.exports = u;
-		}, function (t, e, r) {
-			"use strict";
-			function n(t, e) {
-				var r = {};for (var n in t) {
-					e.indexOf(n) >= 0 || Object.prototype.hasOwnProperty.call(t, n) && (r[n] = t[n]);
-				}return r;
-			}var o = Object.assign || function (t) {
-				for (var e = 1; e < arguments.length; e++) {
-					var r = arguments[e];for (var n in r) {
-						Object.prototype.hasOwnProperty.call(r, n) && (t[n] = r[n]);
-					}
-				}return t;
-			},
-			    i = r(1),
-			    s = r(2),
-			    a = r(15),
-			    p = r(3),
-			    l = r(7),
-			    u = r(6),
-			    c = i.createClass({ displayName: "ResponsiveReactGridLayout", mixins: [p, l], propTypes: { breakpoint: i.PropTypes.string, breakpoints: i.PropTypes.object, cols: i.PropTypes.object, layouts: function h(t, e, r) {
-						i.PropTypes.object.isRequired.apply(this, arguments);var h = t.layouts;Object.keys(h).map(function (t) {
-							s.validateLayout(h[t], "layouts." + t);
-						});
-					}, onBreakpointChange: i.PropTypes.func, onLayoutChange: i.PropTypes.func }, getDefaultProps: function getDefaultProps() {
-					return { breakpoints: { lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }, cols: { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }, layouts: {}, onBreakpointChange: function onBreakpointChange() {}, onLayoutChange: function onLayoutChange() {} };
-				}, getInitialState: function getInitialState() {
-					var t = this.props.breakpoint || a.getBreakpointFromWidth(this.props.breakpoints, this.props.initialWidth),
-					    e = a.getColsFromBreakpoint(t, this.props.cols),
-					    r = a.findOrGenerateResponsiveLayout(this.props.layouts, this.props.breakpoints, t, t, e, this.props.verticalCompact);return { layout: r, layouts: this.props.layouts || {}, breakpoint: t, cols: e, width: this.props.initialWidth };
-				}, componentWillReceiveProps: function componentWillReceiveProps(t) {
-					if ((t.width && this.onWidthChange(t.width), t.breakpoint !== this.props.breakpoint && this.onWidthChange(this.state.width), t.layouts && t.layouts !== this.state.layouts)) {
-						var e = a.findOrGenerateResponsiveLayout(t.layouts, t.breakpoints, this.state.breakpoint, this.state.breakpoint, this.state.cols, this.props.verticalLayout);this.setState({ layouts: t.layouts, layout: e });
-					}
-				}, onLayoutChange: function onLayoutChange(t) {
-					this.state.layouts[this.state.breakpoint] = t, this.setState({ layout: t, layouts: this.state.layouts }), this.props.onLayoutChange(t, this.state.layouts);
-				}, onWidthChange: function onWidthChange(t) {
-					var e = { width: t };e.breakpoint = this.props.breakpoint || a.getBreakpointFromWidth(this.props.breakpoints, e.width), e.cols = a.getColsFromBreakpoint(e.breakpoint, this.props.cols), e.cols !== this.state.cols && (e.layouts = this.state.layouts, e.layouts[this.state.breakpoint] = JSON.parse(JSON.stringify(this.state.layout)), e.layout = a.findOrGenerateResponsiveLayout(e.layouts, this.props.breakpoints, e.breakpoint, this.state.breakpoint, e.cols, this.props.verticalLayout), e.layout = s.synchronizeLayoutWithChildren(e.layout, this.props.children, e.cols, this.props.verticalCompact), e.layouts[e.breakpoint] = e.layout, this.props.onBreakpointChange(e.breakpoint, e.cols)), this.setState(e);
-				}, render: function render() {
-					var t = this.props,
-					    e = (t.layouts, t.onBreakpointChange, t.breakpoints, n(t, ["layouts", "onBreakpointChange", "breakpoints"]));return i.createElement(u, o({}, e, { layout: this.state.layout, cols: this.state.cols, listenToWindowResize: !1, onLayoutChange: this.onLayoutChange, width: this.state.width }), this.props.children);
-				} });t.exports = c;
-		}, function (t, e, r) {
-			"use strict";
-			var n = r(2),
-			    o = t.exports = { getBreakpointFromWidth: function getBreakpointFromWidth(t, e) {
-					for (var r = o.sortBreakpoints(t), n = r[0], i = 1, s = r.length; s > i; i++) {
-						var a = r[i];e > t[a] && (n = a);
-					}return n;
-				}, getColsFromBreakpoint: function getColsFromBreakpoint(t, e) {
-					if (!e[t]) throw new Error("ResponsiveReactGridLayout: `cols` entry for breakpoint " + t + " is missing!");return e[t];
-				}, findOrGenerateResponsiveLayout: function findOrGenerateResponsiveLayout(t, e, r, i, s, a) {
-					if (t[r]) return t[r];for (var p = t[i], l = o.sortBreakpoints(e), u = l.slice(l.indexOf(r)), c = 0, h = u.length; h > c; c++) {
-						var f = u[c];if (t[f]) {
-							p = t[f];break;
-						}
-					}return p = JSON.parse(JSON.stringify(p || [])), n.compact(n.correctBounds(p, { cols: s }), a);
-				}, sortBreakpoints: function sortBreakpoints(t) {
-					var e = Object.keys(t);return e.sort(function (e, r) {
-						return t[e] - t[r];
-					});
-				} };
-		}, function (t, e, r) {
-			var n, o; /*!
-	            Copyright (c) 2015 Jed Watson.
-	            Licensed under the MIT License (MIT), see
-	            http://jedwatson.github.io/classnames
-	            */
-			!(function () {
-				"use strict";
-				function r() {
-					for (var t = "", e = 0; e < arguments.length; e++) {
-						var n = arguments[e];if (n) {
-							var o = typeof n === "undefined" ? "undefined" : _typeof(n);if ("string" === o || "number" === o) t += " " + n;else if (Array.isArray(n)) t += " " + r.apply(null, n);else if ("object" === o) for (var s in n) {
-								i.call(n, s) && n[s] && (t += " " + s);
-							}
-						}
-					}return t.substr(1);
-				}var i = ({}).hasOwnProperty;"undefined" != typeof t && t.exports ? t.exports = r : (n = [], o = (function () {
-					return r;
-				}).apply(e, n), !(void 0 !== o && (t.exports = o)));
-			})();
-		}, function (t, e, r) {
-			function n(t) {
-				return null === t || void 0 === t;
-			}function o(t) {
-				return t && "object" == (typeof t === "undefined" ? "undefined" : _typeof(t)) && "number" == typeof t.length ? "function" != typeof t.copy || "function" != typeof t.slice ? !1 : t.length > 0 && "number" != typeof t[0] ? !1 : !0 : !1;
-			}function i(t, e, r) {
-				var i, u;if (n(t) || n(e)) return !1;if (t.prototype !== e.prototype) return !1;if (p(t)) return p(e) ? (t = s.call(t), e = s.call(e), l(t, e, r)) : !1;if (o(t)) {
-					if (!o(e)) return !1;if (t.length !== e.length) return !1;for (i = 0; i < t.length; i++) {
-						if (t[i] !== e[i]) return !1;
-					}return !0;
-				}try {
-					var c = a(t),
-					    h = a(e);
-				} catch (f) {
-					return !1;
-				}if (c.length != h.length) return !1;for (c.sort(), h.sort(), i = c.length - 1; i >= 0; i--) {
-					if (c[i] != h[i]) return !1;
-				}for (i = c.length - 1; i >= 0; i--) {
-					if ((u = c[i], !l(t[u], e[u], r))) return !1;
-				}return (typeof t === "undefined" ? "undefined" : _typeof(t)) == (typeof e === "undefined" ? "undefined" : _typeof(e));
-			}var s = Array.prototype.slice,
-			    a = r(19),
-			    p = r(18),
-			    l = t.exports = function (t, e, r) {
-				return r || (r = {}), t === e ? !0 : t instanceof Date && e instanceof Date ? t.getTime() === e.getTime() : !t || !e || "object" != (typeof t === "undefined" ? "undefined" : _typeof(t)) && "object" != (typeof e === "undefined" ? "undefined" : _typeof(e)) ? r.strict ? t === e : t == e : i(t, e, r);
-			};
-		}, function (t, e) {
-			function r(t) {
-				return "[object Arguments]" == Object.prototype.toString.call(t);
-			}function n(t) {
-				return t && "object" == (typeof t === "undefined" ? "undefined" : _typeof(t)) && "number" == typeof t.length && Object.prototype.hasOwnProperty.call(t, "callee") && !Object.prototype.propertyIsEnumerable.call(t, "callee") || !1;
-			}var o = "[object Arguments]" == (function () {
-				return Object.prototype.toString.call(arguments);
-			})();e = t.exports = o ? r : n, e.supported = r, e.unsupported = n;
-		}, function (t, e) {
-			function r(t) {
-				var e = [];for (var r in t) {
-					e.push(r);
-				}return e;
-			}e = t.exports = "function" == typeof Object.keys ? Object.keys : r, e.shim = r;
-		}, 10, function (t, e, r) {
-			"use strict";
-			function n(t) {
-				var e = t._pendingState || t.state;return { node: t.getDOMNode(), position: { top: e.clientY, left: e.clientX } };
-			}function o(t) {
-				return "both" === t.props.axis || "x" === t.props.axis;
-			}function i(t) {
-				return "both" === t.props.axis || "y" === t.props.axis;
-			}function s(t) {
-				return "function" == typeof t || "[object Function]" === Object.prototype.toString.call(t);
-			}function a(t, e) {
-				for (var r = 0, n = t.length; n > r; r++) {
-					if (e.apply(e, [t[r], r, t])) return t[r];
-				}
-			}function p(t, e) {
-				return D || (D = a(["matches", "webkitMatchesSelector", "mozMatchesSelector", "msMatchesSelector", "oMatchesSelector"], function (e) {
-					return s(t[e]);
-				})), t[D].call(t, e);
-			}function l(t) {
-				var e = t.targetTouches && t.targetTouches[0] || t;return { clientX: e.clientX, clientY: e.clientY };
-			}function u(t, e, r) {
-				t && (t.attachEvent ? t.attachEvent("on" + e, r) : t.addEventListener ? t.addEventListener(e, r, !0) : t["on" + e] = r);
-			}function c(t, e, r) {
-				t && (t.detachEvent ? t.detachEvent("on" + e, r) : t.removeEventListener ? t.removeEventListener(e, r, !0) : t["on" + e] = null);
-			}function h(t) {
-				var e = t.clientHeight,
-				    r = window.getComputedStyle(t);return e += m(r.borderTopWidth), e += m(r.borderBottomWidth);
-			}function f(t) {
-				var e = t.clientWidth,
-				    r = window.getComputedStyle(t);return e += m(r.borderLeftWidth), e += m(r.borderRightWidth);
-			}function d(t) {
-				var e = t.clientHeight,
-				    r = window.getComputedStyle(t);return e -= m(r.paddingTop), e -= m(r.paddingBottom);
-			}function y(t) {
-				var e = t.clientWidth,
-				    r = window.getComputedStyle(t);return e -= m(r.paddingLeft), e -= m(r.paddingRight);
-			}function g(t) {
-				return "number" == typeof t && !isNaN(t);
-			}function m(t) {
-				return parseInt(t, 10);
-			}function v(t, e, r) {
-				var n = JSON.parse(JSON.stringify(t.props.bounds)),
-				    o = t.getDOMNode(),
-				    i = o.parentNode;if ("parent" === n) {
-					var s = window.getComputedStyle(o),
-					    a = window.getComputedStyle(i);n = { left: -o.offsetLeft + m(a.paddingLeft) + m(s.borderLeftWidth) + m(s.marginLeft), top: -o.offsetTop + m(a.paddingTop) + m(s.borderTopWidth) + m(s.marginTop), right: y(i) - f(o) - o.offsetLeft, bottom: d(i) - h(o) - o.offsetTop };
-				}return g(n.right) && (e = Math.min(e, n.right)), g(n.bottom) && (r = Math.min(r, n.bottom)), g(n.left) && (e = Math.max(e, n.left)), g(n.top) && (r = Math.max(r, n.top)), [e, r];
-			}function b(t, e, r) {
-				var n = Math.round(e / t[0]) * t[0],
-				    o = Math.round(r / t[1]) * t[1];return [n, o];
-			}function w(t) {
-				if (t.props.enableUserSelectHack) {
-					var e = document.body.getAttribute("style") || "";document.body.setAttribute("style", e + E);
-				}
-			}function S(t) {
-				if (t.props.enableUserSelectHack) {
-					var e = document.body.getAttribute("style") || "";document.body.setAttribute("style", e.replace(E, ""));
-				}
-			}function x(t) {
-				var e = t.x + "px",
-				    r = t.y + "px",
-				    n = { transform: "translate(" + e + "," + r + ")" };return O && (n[O + "Transform"] = n.transform), n;
-			}function T(t) {
-				return "translate(" + t.x + "," + t.y + ")";
-			}var P = r(1),
-			    R = function R() {},
-			    z = r(23),
-			    C = r(16),
-			    O = r(22)(),
-			    D = "",
-			    k = { touch: { start: "touchstart", move: "touchmove", end: "touchend" }, mouse: { start: "mousedown", move: "mousemove", end: "mouseup" } },
-			    W = k.mouse,
-			    E = ";user-select: none;";O && (E += "-" + O.toLowerCase() + "-user-select: none;"), t.exports = P.createClass({ displayName: "Draggable", propTypes: { axis: P.PropTypes.oneOf(["both", "x", "y"]), bounds: P.PropTypes.oneOfType([P.PropTypes.shape({ left: P.PropTypes.Number, right: P.PropTypes.Number, top: P.PropTypes.Number, bottom: P.PropTypes.Number }), P.PropTypes.oneOf(["parent", !1])]), enableUserSelectHack: P.PropTypes.bool, handle: P.PropTypes.string, cancel: P.PropTypes.string, grid: P.PropTypes.arrayOf(P.PropTypes.number), start: P.PropTypes.shape({ x: P.PropTypes.number, y: P.PropTypes.number }), moveOnStartChange: P.PropTypes.bool, zIndex: P.PropTypes.number, onStart: P.PropTypes.func, onDrag: P.PropTypes.func, onStop: P.PropTypes.func, onMouseDown: P.PropTypes.func }, componentWillReceiveProps: function componentWillReceiveProps(t) {
-					t.moveOnStartChange && t.start && this.setState(this.getInitialState(t));
-				}, componentDidMount: function componentDidMount() {
-					P.findDOMNode(this) instanceof SVGElement && this.setState({ isElementSVG: !0 });
-				}, componentWillUnmount: function componentWillUnmount() {
-					c(document, W.move, this.handleDrag), c(document, W.end, this.handleDragEnd), S(this);
-				}, getDefaultProps: function getDefaultProps() {
-					return { axis: "both", bounds: !1, handle: null, cancel: null, grid: null, moveOnStartChange: !1, start: { x: 0, y: 0 }, zIndex: NaN, enableUserSelectHack: !0, onStart: R, onDrag: R, onStop: R, onMouseDown: R };
-				}, getInitialState: function getInitialState(t) {
-					var e = this.state;return t = t || this.props, { dragging: !1, offsetX: 0, offsetY: 0, clientX: t.start.x, clientY: t.start.y, isElementSVG: e && void 0 !== e.isElementSVG ? e.isElementSVG : !1 };
-				}, handleDragStart: function handleDragStart(t) {
-					if ((t.targetTouches && this.setState({ touchIdentifier: t.targetTouches[0].identifier }), this.props.onMouseDown(t), !(this.props.handle && !p(t.target, this.props.handle) || this.props.cancel && p(t.target, this.props.cancel)))) {
-						var e = this.props.onStart(t, n(this));if (e !== !1) {
-							var r = l(t);w(this), this.setState({ dragging: !0, offsetX: r.clientX - this.state.clientX, offsetY: r.clientY - this.state.clientY, scrollX: document.body.scrollLeft, scrollY: document.body.scrollTop }), u(document, "scroll", this.handleScroll), u(document, W.move, this.handleDrag), u(document, W.end, this.handleDragEnd);
-						}
-					}
-				}, handleDragEnd: function handleDragEnd(t) {
-					this.state.dragging && (t.changedTouches && t.changedTouches[0].identifier != this.state.touchIdentifier || (S(this), this.setState({ dragging: !1 }), this.props.onStop(t, n(this)), c(document, "scroll", this.handleScroll), c(document, W.move, this.handleDrag), c(document, W.end, this.handleDragEnd)));
-				}, handleDrag: function handleDrag(t) {
-					if (!t.targetTouches || t.targetTouches[0].identifier == this.state.touchIdentifier) {
-						var e = l(t),
-						    r = e.clientX - this.state.offsetX,
-						    o = e.clientY - this.state.offsetY;if (Array.isArray(this.props.grid)) {
-							var i = b(this.props.grid, r, o);r = i[0], o = i[1];
-						}if (this.props.bounds) {
-							var s = v(this, r, o);r = s[0], o = s[1];
-						}var a = this.props.onDrag(t, n(this));return a === !1 ? this.handleDragEnd({}) : void this.setState({ clientX: r, clientY: o });
-					}
-				}, handleScroll: function handleScroll(t) {
-					var e = this.state,
-					    r = document.body.scrollLeft,
-					    n = document.body.scrollTop,
-					    o = r - e.scrollX,
-					    i = n - e.scrollY;this.setState({ scrollX: r, scrollY: n, clientX: e.clientX + o, clientY: e.clientY + i, offsetX: e.offsetX - o, offsetY: e.offsetY - i });
-				}, onMouseDown: function onMouseDown(t) {
-					return W === k.touch ? t.preventDefault() : this.handleDragStart.apply(this, arguments);
-				}, onTouchStart: function onTouchStart(t) {
-					return W = k.touch, this.handleDragStart.apply(this, arguments);
-				}, resetState: function resetState() {
-					this.setState({ offsetX: 0, offsetY: 0, clientX: 0, clientY: 0 });
-				}, render: function render() {
-					var t = this.props.children.props.style || {},
-					    e = this.state.isElementSVG ? null : x({ x: o(this) ? this.state.clientX : this.props.start.x, y: i(this) ? this.state.clientY : this.props.start.y }),
-					    r = this.state.isElementSVG ? T({ x: o(this) ? this.state.clientX : this.props.start.x, y: i(this) ? this.state.clientY : this.props.start.y }) : null,
-					    n = { touchAction: "none" },
-					    s = z({}, t, e, n);this.state.dragging && !isNaN(this.props.zIndex) && (s.zIndex = this.props.zIndex);var a = C(this.props.children.props.className || "", "react-draggable", { "react-draggable-dragging": this.state.dragging, "react-draggable-dragged": this.state.dragged });return P.cloneElement(P.Children.only(this.props.children), { style: s, transform: r, className: a, onMouseDown: this.onMouseDown, onTouchStart: this.onTouchStart, onMouseUp: this.handleDragEnd, onTouchEnd: this.handleDragEnd });
-				} });
-		}, function (t, e) {
-			t.exports = function () {
-				if ("undefined" == typeof window) return "";var t = window.getComputedStyle(document.documentElement, ""),
-				    e = (Array.prototype.slice.call(t).join("").match(/-(moz|webkit|ms)-/) || "" === t.OLink && ["", "o"])[1];return void 0 === e || null === e ? "" : "ms" === e ? e : e.slice(0, 1).toUpperCase() + e.slice(1);
-			};
-		}, function (t, e) {
-			"use strict";
-			function r(t) {
-				if (null === t || void 0 === t) throw new TypeError("Object.assign cannot be called with null or undefined");return Object(t);
-			}var n = Object.prototype.hasOwnProperty,
-			    o = Object.prototype.propertyIsEnumerable;t.exports = Object.assign || function (t, e) {
-				for (var i, s, a = r(t), p = 1; p < arguments.length; p++) {
-					i = Object(arguments[p]);for (var l in i) {
-						n.call(i, l) && (a[l] = i[l]);
-					}if (Object.getOwnPropertySymbols) {
-						s = Object.getOwnPropertySymbols(i);for (var u = 0; u < s.length; u++) {
-							o.call(i, s[u]) && (a[s[u]] = i[s[u]]);
-						}
-					}
-				}return a;
-			};
-		}, function (t, e, r) {
-			"use strict";
-			var n = function n(t, e) {
-				var r = {};for (var n in t) {
-					e.indexOf(n) >= 0 || Object.prototype.hasOwnProperty.call(t, n) && (r[n] = t[n]);
-				}return r;
-			},
-			    o = function o(t, e) {
-				if (Array.isArray(t)) return t;if (Symbol.iterator in Object(t)) {
-					var r = [],
-					    n = !0,
-					    o = !1,
-					    i = void 0;try {
-						for (var s, a = t[Symbol.iterator](); !(n = (s = a.next()).done) && (r.push(s.value), !e || r.length !== e); n = !0) {}
-					} catch (p) {
-						o = !0, i = p;
-					} finally {
-						try {
-							!n && a["return"] && a["return"]();
-						} finally {
-							if (o) throw i;
-						}
-					}return r;
-				}throw new TypeError("Invalid attempt to destructure non-iterable instance");
-			},
-			    i = Object.assign || function (t) {
-				for (var e = 1; e < arguments.length; e++) {
-					var r = arguments[e];for (var n in r) {
-						Object.prototype.hasOwnProperty.call(r, n) && (t[n] = r[n]);
-					}
-				}return t;
-			},
-			    s = r(1),
-			    a = r(9),
-			    p = r(11);t.exports = s.createClass({ displayName: "ResizableBox", mixins: [p], propTypes: { lockAspectRatio: s.PropTypes.bool }, getDefaultProps: function getDefaultProps() {
-					return { lockAspectRatio: !1, handleSize: [20, 20] };
-				}, getInitialState: function getInitialState() {
-					return { width: this.props.width, height: this.props.height, aspectRatio: this.props.width / this.props.height };
-				}, onResize: function onResize(t, e) {
-					var r = this,
-					    n = e.element,
-					    i = e.size,
-					    s = i.width,
-					    a = i.height,
-					    p = s !== this.state.width,
-					    l = a !== this.state.height;if (p || l) {
-						if (this.props.lockAspectRatio) {
-							var u = this.preserveAspectRatio(s, a),
-							    c = o(u, 2);s = c[0], a = c[1];
-						}this.setState({ width: s, height: a }, function () {
-							r.props.onResize && r.props.onResize(t, { element: n, size: { width: s, height: a } });
-						});
-					}
-				}, preserveAspectRatio: function preserveAspectRatio(t, e) {
-					var r = this.props.minConstraints,
-					    n = this.props.maxConstraints;return e = t / this.state.aspectRatio, t = e * this.state.aspectRatio, r && (t = Math.max(r[0], t), e = Math.max(r[1], e)), n && (t = Math.min(n[0], t), e = Math.min(n[1], e)), [t, e];
-				}, render: function render() {
-					var t = this.props,
-					    e = t.handleSize,
-					    r = t.minConstraints,
-					    o = t.maxConstraints,
-					    p = n(t, ["handleSize", "minConstraints", "maxConstraints"]);return s.createElement(a, { minConstraints: r, maxConstraints: o, handleSize: e, width: this.state.width, height: this.state.height, onResizeStart: this.props.onResizeStart, onResize: this.onResize, onResizeStop: this.props.onResizeStop, draggableOpts: this.props.draggableOpts }, s.createElement("div", i({ style: { width: this.state.width + "px", height: this.state.height + "px" } }, p), this.props.children));
-				} });
-		}, function (t, e, r) {
-			"use strict";
-			var n = r(10),
-			    o = r(1);t.exports = function (t, e) {
-				return e.style && t.props.style && (e.style = n({}, t.props.style, e.style)), e.className && t.props.className && (e.className = t.props.className + " " + e.className), o.cloneElement(t, e);
-			};
-		}, function (t, e, r) {
-			"use strict";
-			t.exports = function () {
-				throw new Error("Don't instantiate Resizable directly! Use require('react-resizable').Resizable");
-			}, t.exports.Resizable = r(9), t.exports.ResizableBox = r(24);
-		}, function (t, e, r) {
-			"use strict";
-			var n = r(4),
-			    o = r(32),
-			    i = (r(5), { current: o, withContext: function withContext(t, e) {
-					var r,
-					    o = i.current;i.current = n({}, o, t);try {
-						r = e();
-					} finally {
-						i.current = o;
-					}return r;
-				} });t.exports = i;
-		}, function (t, e) {
-			"use strict";
-			var r = { current: null };t.exports = r;
-		}, function (t, e, r) {
-			"use strict";
-			var n = r(27),
-			    o = r(28),
-			    i = r(4),
-			    s = (r(5), { key: !0, ref: !0 }),
-			    a = function a(t, e, r, n, o, i) {
-				this.type = t, this.key = e, this.ref = r, this._owner = n, this._context = o, this.props = i;
-			};a.prototype = { _isReactElement: !0 }, a.createElement = function (t, e, r) {
-				var i,
-				    p = {},
-				    l = null,
-				    u = null;if (null != e) {
-					u = void 0 === e.ref ? null : e.ref, l = void 0 === e.key ? null : "" + e.key;for (i in e) {
-						e.hasOwnProperty(i) && !s.hasOwnProperty(i) && (p[i] = e[i]);
-					}
-				}var c = arguments.length - 2;if (1 === c) p.children = r;else if (c > 1) {
-					for (var h = Array(c), f = 0; c > f; f++) {
-						h[f] = arguments[f + 2];
-					}p.children = h;
-				}if (t && t.defaultProps) {
-					var d = t.defaultProps;for (i in d) {
-						"undefined" == typeof p[i] && (p[i] = d[i]);
-					}
-				}return new a(t, l, u, o.current, n.current, p);
-			}, a.createFactory = function (t) {
-				var e = a.createElement.bind(null, t);return e.type = t, e;
-			}, a.cloneAndReplaceProps = function (t, e) {
-				var r = new a(t.type, t.key, t.ref, t._owner, t._context, e);return r;
-			}, a.cloneElement = function (t, e, r) {
-				var n,
-				    p = i({}, t.props),
-				    l = t.key,
-				    u = t.ref,
-				    c = t._owner;if (null != e) {
-					void 0 !== e.ref && (u = e.ref, c = o.current), void 0 !== e.key && (l = "" + e.key);for (n in e) {
-						e.hasOwnProperty(n) && !s.hasOwnProperty(n) && (p[n] = e[n]);
-					}
-				}var h = arguments.length - 2;if (1 === h) p.children = r;else if (h > 1) {
-					for (var f = Array(h), d = 0; h > d; d++) {
-						f[d] = arguments[d + 2];
-					}p.children = f;
-				}return new a(t.type, l, u, c, t._context, p);
-			}, a.isValidElement = function (t) {
-				var e = !(!t || !t._isReactElement);return e;
-			}, t.exports = a;
-		}, function (t, e, r) {
-			"use strict";
-			function n(t) {
-				return function (e, r, n) {
-					e.hasOwnProperty(r) ? e[r] = t(e[r], n) : e[r] = n;
-				};
-			}function o(t, e) {
-				for (var r in e) {
-					if (e.hasOwnProperty(r)) {
-						var n = l[r];n && l.hasOwnProperty(r) ? n(t, r, e[r]) : t.hasOwnProperty(r) || (t[r] = e[r]);
-					}
-				}return t;
-			}var i = r(4),
-			    s = r(12),
-			    a = r(33),
-			    p = n(function (t, e) {
-				return i({}, e, t);
-			}),
-			    l = { children: s, className: n(a), style: p },
-			    u = { mergeProps: function mergeProps(t, e) {
-					return o(i({}, t), e);
-				} };t.exports = u;
-		}, function (t, e, r) {
-			"use strict";
-			function n(t, e) {
-				var r = i.mergeProps(e, t.props);return !r.hasOwnProperty(a) && t.props.hasOwnProperty(a) && (r.children = t.props.children), o.createElement(t.type, r);
-			}var o = r(29),
-			    i = r(30),
-			    s = r(34),
-			    a = (r(5), s({ children: null }));t.exports = n;
-		}, function (t, e, r) {
-			"use strict";
-			var n = {};t.exports = n;
-		}, function (t, e) {
-			"use strict";
-			function r(t) {
-				t || (t = "");var e,
-				    r = arguments.length;if (r > 1) for (var n = 1; r > n; n++) {
-					e = arguments[n], e && (t = (t ? t + " " : "") + e);
-				}return t;
-			}t.exports = r;
-		}, function (t, e) {
-			var r = function r(t) {
-				var e;for (e in t) {
-					if (t.hasOwnProperty(e)) return e;
-				}return null;
-			};t.exports = r;
-		}, function (t, e) {
-			"use strict";
-			function r(t, e) {
-				if (t === e) return !0;var r;for (r in t) {
-					if (t.hasOwnProperty(r) && (!e.hasOwnProperty(r) || t[r] !== e[r])) return !1;
-				}for (r in e) {
-					if (e.hasOwnProperty(r) && !t.hasOwnProperty(r)) return !1;
-				}return !0;
-			}t.exports = r;
-		}]));
-	});
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(171)(module)))
+	var shallowEqual = __webpack_require__(118);
+
+	/**
+	 * Does a shallow comparison for props and state.
+	 * See ReactComponentWithPureRenderMixin
+	 */
+	function shallowCompare(instance, nextProps, nextState) {
+	  return !shallowEqual(instance.props, nextProps) || !shallowEqual(instance.state, nextState);
+	}
+
+	module.exports = shallowCompare;
 
 /***/ },
 /* 171 */
-/***/ function(module, exports) {
-
-	module.exports = function(module) {
-		if(!module.webpackPolyfill) {
-			module.deprecate = function() {};
-			module.paths = [];
-			// module.parent = undefined by default
-			module.children = [];
-			module.webpackPolyfill = 1;
-		}
-		return module;
-	}
-
-
-/***/ },
-/* 172 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21146,23 +20423,23 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _createStore = __webpack_require__(173);
+	var _createStore = __webpack_require__(172);
 
 	var _createStore2 = _interopRequireDefault(_createStore);
 
-	var _utilsCombineReducers = __webpack_require__(175);
+	var _utilsCombineReducers = __webpack_require__(174);
 
 	var _utilsCombineReducers2 = _interopRequireDefault(_utilsCombineReducers);
 
-	var _utilsBindActionCreators = __webpack_require__(178);
+	var _utilsBindActionCreators = __webpack_require__(177);
 
 	var _utilsBindActionCreators2 = _interopRequireDefault(_utilsBindActionCreators);
 
-	var _utilsApplyMiddleware = __webpack_require__(179);
+	var _utilsApplyMiddleware = __webpack_require__(178);
 
 	var _utilsApplyMiddleware2 = _interopRequireDefault(_utilsApplyMiddleware);
 
-	var _utilsCompose = __webpack_require__(180);
+	var _utilsCompose = __webpack_require__(179);
 
 	var _utilsCompose2 = _interopRequireDefault(_utilsCompose);
 
@@ -21173,7 +20450,7 @@
 	exports.compose = _utilsCompose2['default'];
 
 /***/ },
-/* 173 */
+/* 172 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21183,7 +20460,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _utilsIsPlainObject = __webpack_require__(174);
+	var _utilsIsPlainObject = __webpack_require__(173);
 
 	var _utilsIsPlainObject2 = _interopRequireDefault(_utilsIsPlainObject);
 
@@ -21341,7 +20618,7 @@
 	}
 
 /***/ },
-/* 174 */
+/* 173 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21377,7 +20654,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 175 */
+/* 174 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -21387,17 +20664,17 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _createStore = __webpack_require__(173);
+	var _createStore = __webpack_require__(172);
 
-	var _isPlainObject = __webpack_require__(174);
+	var _isPlainObject = __webpack_require__(173);
 
 	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 
-	var _mapValues = __webpack_require__(176);
+	var _mapValues = __webpack_require__(175);
 
 	var _mapValues2 = _interopRequireDefault(_mapValues);
 
-	var _pick = __webpack_require__(177);
+	var _pick = __webpack_require__(176);
 
 	var _pick2 = _interopRequireDefault(_pick);
 
@@ -21514,7 +20791,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 176 */
+/* 175 */
 /***/ function(module, exports) {
 
 	/**
@@ -21539,7 +20816,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 177 */
+/* 176 */
 /***/ function(module, exports) {
 
 	/**
@@ -21566,7 +20843,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 178 */
+/* 177 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21576,7 +20853,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _mapValues = __webpack_require__(176);
+	var _mapValues = __webpack_require__(175);
 
 	var _mapValues2 = _interopRequireDefault(_mapValues);
 
@@ -21625,7 +20902,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 179 */
+/* 178 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21638,7 +20915,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _compose = __webpack_require__(180);
+	var _compose = __webpack_require__(179);
 
 	var _compose2 = _interopRequireDefault(_compose);
 
@@ -21691,7 +20968,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 180 */
+/* 179 */
 /***/ function(module, exports) {
 
 	/**
@@ -21721,18 +20998,18 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 181 */
+/* 180 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var Provider = __webpack_require__(182);
-	var connect = __webpack_require__(184);
+	var Provider = __webpack_require__(181);
+	var connect = __webpack_require__(183);
 
 	module.exports = { Provider: Provider, connect: connect };
 
 /***/ },
-/* 182 */
+/* 181 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21749,7 +21026,7 @@
 	var PropTypes = _require.PropTypes;
 	var Children = _require.Children;
 
-	var storeShape = __webpack_require__(183);
+	var storeShape = __webpack_require__(182);
 
 	var didWarnAboutReceivingStore = false;
 	function warnAboutReceivingStore() {
@@ -21807,7 +21084,7 @@
 	module.exports = Provider;
 
 /***/ },
-/* 183 */
+/* 182 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21825,7 +21102,7 @@
 	module.exports = storeShape;
 
 /***/ },
-/* 184 */
+/* 183 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -21843,12 +21120,12 @@
 	var Component = _require.Component;
 	var createElement = _require.createElement;
 
-	var storeShape = __webpack_require__(183);
-	var shallowEqual = __webpack_require__(185);
-	var isPlainObject = __webpack_require__(186);
-	var wrapActionCreators = __webpack_require__(187);
-	var hoistStatics = __webpack_require__(188);
-	var invariant = __webpack_require__(189);
+	var storeShape = __webpack_require__(182);
+	var shallowEqual = __webpack_require__(184);
+	var isPlainObject = __webpack_require__(185);
+	var wrapActionCreators = __webpack_require__(186);
+	var hoistStatics = __webpack_require__(187);
+	var invariant = __webpack_require__(188);
 
 	var defaultMapStateToProps = function defaultMapStateToProps(state) {
 	  return {};
@@ -22097,7 +21374,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 185 */
+/* 184 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -22128,7 +21405,7 @@
 	module.exports = shallowEqual;
 
 /***/ },
-/* 186 */
+/* 185 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -22162,12 +21439,12 @@
 	module.exports = isPlainObject;
 
 /***/ },
-/* 187 */
+/* 186 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var _redux = __webpack_require__(172);
+	var _redux = __webpack_require__(171);
 
 	function wrapActionCreators(actionCreators) {
 	  return function (dispatch) {
@@ -22178,7 +21455,7 @@
 	module.exports = wrapActionCreators;
 
 /***/ },
-/* 188 */
+/* 187 */
 /***/ function(module, exports) {
 
 	/**
@@ -22220,7 +21497,7 @@
 
 
 /***/ },
-/* 189 */
+/* 188 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -22278,7 +21555,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 190 */
+/* 189 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22287,15 +21564,15 @@
 	    value: true
 	});
 
-	var _immutable = __webpack_require__(191);
+	var _immutable = __webpack_require__(190);
 
 	var _immutable2 = _interopRequireDefault(_immutable);
 
-	var _protocol = __webpack_require__(165);
+	var _protocol = __webpack_require__(162);
 
 	var _protocol2 = _interopRequireDefault(_protocol);
 
-	var _redux = __webpack_require__(172);
+	var _redux = __webpack_require__(171);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -22314,7 +21591,7 @@
 	    },
 	    banner: {
 	        currentBannerIndex: 0,
-	        possibilities: []
+	        possibilities: ['//localhost:7070/img/banners/5MeXvVv.jpg', '//localhost:7070/img/banners/9Nj8uNd.png', '//localhost:7070/img/banners/EhtdkPS.jpg', '//localhost:7070/img/banners/iwg4m.png', '//localhost:7070/img/banners/jeNmV9k.png', '//localhost:7070/img/banners/QmSNAyU.jpg', '//localhost:7070/img/banners/xBYdAMC.png', '//localhost:7070/img/banners/z1wLRl1.png']
 	    },
 	    room: {
 	        name: null,
@@ -22350,7 +21627,7 @@
 	exports.default = rootReducer;
 
 /***/ },
-/* 191 */
+/* 190 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -27337,7 +26614,7 @@
 	}));
 
 /***/ },
-/* 192 */
+/* 191 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
