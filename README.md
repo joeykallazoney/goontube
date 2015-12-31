@@ -6,6 +6,16 @@ Video synchronization and chat lounge.
 
 Much needed overhaul + rewrite as an ES6 webapp with React + Redux.  
 
+###Dev Notes###
+####**nine**####
+Having trouble building. Current error:
+```
+ERROR in ./reducers.js
+Module not found: Error: Cannot resolve module 'immutable' in /Users/aria/Projects/goontube
+ @ ./reducers.js 7:17-37
+```
+
+
 ### Roadmap
 
 ####**Project Management**####
