@@ -30,8 +30,8 @@ class VimeoPlayer extends React.Component {
             .getState()
             .get('media').id
         const options = {
-            height:    550,
-            width:     320,
+            width:     550,
+            height:    320,
             playerVars: {
                 autoplay: 1
             }
