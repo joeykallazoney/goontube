@@ -45,6 +45,12 @@ const defaultApplicationState = I.Map({
 
 function rootReducer(state = defaultApplicationState, action) {
     switch(action.type) {
+        case p.SET_PLAYBACK_POSITION:
+            state = state.set('media', {
+                ...state.get('media'),
+                position: action.data)
+            return state
+
         case p.BANNER_LIST_UPDATE:
             state = state.deleteIn(['banner', 'possibilities'])
 
