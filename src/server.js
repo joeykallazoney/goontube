@@ -16,6 +16,7 @@ import hash from './hash'
 import p from './protocol'
 
 const MAX_CONCURRENT_CONNECTIONS = 2
+const DEFAULT_SERVER_PORT        = 7070
 
 let server          = http.createServer()
 let staticFiles     = new koaStatic(__dirname + '/../static', {})
@@ -59,7 +60,7 @@ wss.on('connection', (ws) => {
     }
 
     clients.push(client)
-    
+
     ws.on('close', () => {
         let index
 
@@ -80,4 +81,4 @@ app.use(function *(next) {
 })
 
 server.on('request', app.callback())
-server.listen(7070, () => console.log('Goontube listening on port 7070.'))
+server.listen(DEFAULT_SERVER_PORT, () => console.log(`Goontube listening on port ${DEFAULT_SERVER_PORT}.`))
