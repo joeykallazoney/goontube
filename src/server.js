@@ -47,7 +47,6 @@ const HTML =
 </html>`
 
 wss.on('connection', (ws) => {
-    // check for too many concurrent connections
     if(clients.filter((c) => c.ip === this.ip).length > 2) {
 
     }
@@ -66,8 +65,6 @@ wss.on('connection', (ws) => {
 app.use(function *(next) {
     this.status = 200
     this.body   = HTML
-
-    console.log(this.req.connection.remoteAddress)
 })
 
 server.on('request', app.callback())

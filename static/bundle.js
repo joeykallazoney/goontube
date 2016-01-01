@@ -36554,7 +36554,7 @@
 
 	var defaultApplicationState = _immutable2.default.Map({
 	    media: {
-	        id: '4hyALGKwluA',
+	        id: '_5joTyy3CCo',
 	        provider: 'youtube',
 	        position: 0
 	    },
