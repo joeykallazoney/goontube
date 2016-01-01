@@ -28673,9 +28673,23 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	exports.default = function (inputString, salt) {
-	    var message = (0, _cryptoJs.SHA512)('{' + inputString + salt + '}');
-	    return message.toString(_cryptoJs2.default.enc.Hex);
+	exports.default = function (salt, inputString) {
+	    return function () {
+	        for (var _len = arguments.length, salt = Array(_len), _key = 0; _key < _len; _key++) {
+	            salt[_key] = arguments[_key];
+	        }
+
+	        return function () {
+	            for (var _len2 = arguments.length, inputString = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+	                inputString[_key2] = arguments[_key2];
+	            }
+
+	            console.log(salt);
+	            console.log(inputString);
+
+	            (0, _cryptoJs.SHA512)('{' + inputString + salt + '}').toString(_cryptoJs2.default.enc.Hex);
+	        };
+	    };
 	};
 
 /***/ },
