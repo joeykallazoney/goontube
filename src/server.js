@@ -10,12 +10,17 @@ import { Server as WebSocketServer } from 'ws'
 import { createStore } from 'redux'
 import { renderToString as render } from 'react-dom/server'
 
+import Client from './models/client'
+import rootReducer from './reducers'
 import hash from './hash'
+import p from './protocol'
 
 let server          = http.createServer()
 let staticFiles     = new koaStatic(__dirname + '/../static', {})
 let app             = koa()
 let wss             = new WebSocketServer({ server: server })
+let clients         = []
+let serverStore     = createStore(rootReducer)
 
 app.use(staticFiles)
 
@@ -42,16 +47,15 @@ const HTML =
 </html>`
 
 wss.on('connection', (ws) => {
-    console.log('New WebSocket connection.')
-
     // check for too many concurrent connections
+    if(clients.filter((c) => c.ip === this.ip).length > 2) {
 
-    // append to client list, set defaults, drop in lobby, announce
+    }
+
+    let client = new Client(ws)
+    clients.push(client)
 
     ws.on('close', () => {
-        console.log('Lost client connection...')
-
-        // remove from clients list
     })
 
     ws.on('message', (message) => {
@@ -62,6 +66,8 @@ wss.on('connection', (ws) => {
 app.use(function *(next) {
     this.status = 200
     this.body   = HTML
+
+    console.log(this.req.connection.remoteAddress)
 })
 
 server.on('request', app.callback())
