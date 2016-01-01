@@ -50,7 +50,7 @@ const HTML =
 </html>`
 
 wss.on('connection', (ws) => {
-    let client = new Client(ws)
+    let client = new Client(ws, serverStore)
 
     if(clients
         .filter((c) => c.address.address === client.address.address)
@@ -65,6 +65,7 @@ wss.on('connection', (ws) => {
         let index
 
         if(-1 !== (index = clients.indexOf(client))) {
+            client.teardown()
             clients.splice(index, 1)
             return
         }
