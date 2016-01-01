@@ -6,6 +6,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Goontube from './components/app'
 
+import hash from './hash'
+
 import { createStore } from 'redux'
 import { connect, Provider } from 'react-redux'
 import rootReducer from './reducers'
