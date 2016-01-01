@@ -36552,6 +36552,12 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } } /**
+	                                                                                                                                                                                                     * @file Provides a series of pure functions for altering the application as
+	                                                                                                                                                                                                     * an immutable state tree.
+	                                                                                                                                                                                                     * @since 1.0.0
+	                                                                                                                                                                                                     */
+
 	var defaultApplicationState = _immutable2.default.Map({
 	    media: {
 	        id: 'FTaWrcmhAgw',
@@ -36577,17 +36583,19 @@
 	        users: [],
 	        history: []
 	    }
-	}); /**
-	     * @file Provides a series of pure functions for altering the application as
-	     * an immutable state tree.
-	     * @since 1.0.0
-	     */
+	});
 
 	function rootReducer() {
+	    var _Object;
+
 	    var state = arguments.length <= 0 || arguments[0] === undefined ? defaultApplicationState : arguments[0];
 	    var action = arguments[1];
 
 	    switch (action.type) {
+	        case _protocol2.default.SET_PLAYBACK_POSITION:
+	            state = state.set('media', (_Object = Object).assign.apply(_Object, [{}].concat(_toConsumableArray(state.get('media')), [{ position: action.data }])));
+	            return state;
+
 	        case _protocol2.default.BANNER_LIST_UPDATE:
 	            state = state.deleteIn(['banner', 'possibilities']);
 

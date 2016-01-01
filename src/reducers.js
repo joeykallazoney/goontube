@@ -46,16 +46,18 @@ const defaultApplicationState = I.Map({
 function rootReducer(state = defaultApplicationState, action) {
     switch(action.type) {
         case p.SET_PLAYBACK_POSITION:
-            state = state.set('media', {
-                ...state.get('media'),
-                position: action.data)
+            state = state.set('media',
+                Object.assign({},
+                    ...state.get('media'),
+                    { position: action.data }))
             return state
 
         case p.BANNER_LIST_UPDATE:
-            state = state.deleteIn(['banner', 'possibilities'])
-
+            state = state.set('banner',
+                Object.assign({},
+                    ...state.get('banner'),
+                    { possibilities: action.data }))
             return state
-                .mergeIn(['banner', 'possibilities'], action.data)
 
         case p.BANNER_NEW_BANNER:
             const possibilities = state.get('banner').possibilities
