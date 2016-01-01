@@ -9,7 +9,7 @@ import { applyMiddleware, compose } from 'redux'
 
 const defaultApplicationState = I.Map({
     media: {
-        id:         'wP4aCZQic4s',
+        id:         '4hyALGKwluA',
         provider:   'youtube',
         position:   0
     },
