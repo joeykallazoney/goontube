@@ -15,6 +15,8 @@ import rootReducer from './reducers'
 import hash from './hash'
 import p from './protocol'
 
+const MAX_CONCURRENT_CONNECTIONS = 2
+
 let server          = http.createServer()
 let staticFiles     = new koaStatic(__dirname + '/../static', {})
 let app             = koa()
@@ -47,14 +49,24 @@ const HTML =
 </html>`
 
 wss.on('connection', (ws) => {
-    if(clients.filter((c) => c.ip === this.ip).length > 2) {
+    let client = new Client(ws)
 
+    if(clients
+        .filter((c) => c.address.address === client.address.address)
+        .length > MAX_CONCURRENT_CONNECTIONS) {
+        wss.close(ws)
+        return
     }
 
-    let client = new Client(ws)
     clients.push(client)
-
+    
     ws.on('close', () => {
+        let index
+
+        if(-1 !== (index = clients.indexOf(client))) {
+            clients.splice(index, 1)
+            return
+        }
     })
 
     ws.on('message', (message) => {
