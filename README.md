@@ -50,6 +50,7 @@ Ok. :) Will use issue tracker from now on; never used it.
 - [ ] allow users to queue videos, taking priority in a turn based/round-robin order? possibly a mod toggleable mode.
 - [ ] make timestamping work and work easily.
 - [ ] Minimize code for deployment.
+- [ ] Add a video flipping button for backwards vids. (via POOPSOCKBOLLAS)
 - [ ] possibly link <3ing a video to liking the video for a user’s youtube account?
 - [ ] possibly add more video adding modes, toggleable by mods, like a relevance mode somehow where people can more easily do a “this video is like the last one!” thing, maybe by limiting to one add per person, stuff like that. default mode should be applicable for most of the time still though. if no mods present should revert automatically in case of problems.
 - [ ] Responsive half screen mode.
