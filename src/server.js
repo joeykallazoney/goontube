@@ -4,6 +4,7 @@
  */
 import http from 'http'
 import koa from 'koa'
+import koaLogger from 'koa-logger'
 import koaStatic from 'koa-static'
 import React from 'react'
 import { Server as WebSocketServer } from 'ws'
@@ -25,6 +26,7 @@ let wss             = new WebSocketServer({ server: server })
 let clients         = []
 let serverStore     = createStore(rootReducer)
 
+app.use(koaLogger())
 app.use(staticFiles)
 
 const HTML =

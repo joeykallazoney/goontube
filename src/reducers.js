@@ -43,6 +43,10 @@ const defaultApplicationState = I.Map({
     }
 })
 
+// signature: (state, []:reducers) -> (state, action)
+//let transducer = (state = defaultApplicationState, [reducers]) =>
+//    (reducers.map(r => (...r)(state)()))
+
 function rootReducer(state = defaultApplicationState, action) {
     switch(action.type) {
         case p.SET_PLAYBACK_POSITION:
