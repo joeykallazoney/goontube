@@ -91,6 +91,7 @@ Much needed overhaul + rewrite as an ES6 webapp with React + Redux.
   - Outlook not so good
   - Very doubtful
 - [ ] Unnamed users could be auto-purged if they don’t login for after ‘X’ minutes instead of depending on rednames/deputies to manually purge.
+- [ ] Failure to login after 'X' minutes forces black-out overlay and cessation of media streaming, prompting 'unnamed' user to register/login.
 - [ ] Add-in ‘milkdrop.js’ so users can have something interesting to look at during ‘still-image’ videos. (suggested by Jynn).
 
 ### Streaming provider spec
