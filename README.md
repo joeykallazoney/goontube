@@ -42,6 +42,7 @@ Much needed overhaul + rewrite as an ES6 webapp with React + Redux.
 
 
 ####**Features:**####
+- [ ] $stealthskip, for mods, skips the current video for everyone except the person who added it, they think it's still playing...
 - [ ] make commands ($ and /) not enter chat.
 - [ ] allow users to queue videos, taking priority in a turn based/round-robin order? possibly a mod toggleable mode.
 - [ ] make timestamping work and work easily.
