@@ -24,14 +24,14 @@ const defaultApplicationState = I.Map({
     banner: {
         currentBannerIndex:  0,
         possibilities:       [
-            '//localhost:7070/img/banners/5MeXvVv.jpg',
-            '//localhost:7070/img/banners/9Nj8uNd.png',
-            '//localhost:7070/img/banners/EhtdkPS.jpg',
-            '//localhost:7070/img/banners/iwg4m.png',
-            '//localhost:7070/img/banners/jeNmV9k.jpg',
-            '//localhost:7070/img/banners/QShC1ri.png',
-            '//localhost:7070/img/banners/xBYdAMC.png',
-            '//localhost:7070/img/banners/z1wLRl1.png'
+            '/img/banners/5MeXvVv.jpg',
+            '/img/banners/9Nj8uNd.png',
+            '/img/banners/EhtdkPS.jpg',
+            '/img/banners/iwg4m.png',
+            '/img/banners/jeNmV9k.jpg',
+            '/img/banners/QShC1ri.png',
+            '/img/banners/xBYdAMC.png',
+            '/img/banners/z1wLRl1.png'
         ]
     },
     room: {
