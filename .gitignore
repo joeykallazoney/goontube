@@ -11,3 +11,5 @@ node_modules
 *.so
 .DS_Store
 build
+
+static/bundle.js
