@@ -43,6 +43,7 @@ Much needed overhaul + rewrite as an ES6 webapp with React + Redux.
 
 ####**Features:**####
 - [ ] Add 3-second cool-down to $skip so mods/deputies can't over-moderation (possible '-f' option for override?)
+- [ ] Possible $unskip feature to undo a $skip action?
 - [ ] $stealthskip, for mods, skips the current video for everyone except the person who added it, they think it's still playing... (i'm only half joking...)
 - [ ] make commands ($ and /) not enter chat.
 - [ ] allow users to queue videos, taking priority in a turn based/round-robin order? possibly a mod toggleable mode.
