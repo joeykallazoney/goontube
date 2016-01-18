@@ -15,6 +15,8 @@ Much needed overhaul + rewrite as an ES6 webapp with React + Redux.
 - [ ] Discuss deployment/build process.
 - [ ] Discuss project structure/file organization.
 
+- [ ] Use pure stateless components in favour of React, pass redux store via usual required proptypes
+
 ####**Bug Fixes:**####
 - [ ] Repair fullscreen mode.
 - [ ] $permissions definitely needs to have an alias, $privilege
