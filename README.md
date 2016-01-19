@@ -14,6 +14,8 @@ Much needed overhaul + rewrite as an ES6 webapp with React + Redux.
 - [ ] Set up dev server.
 - [ ] Discuss deployment/build process.
 - [ ] Discuss project structure/file organization.
+
+####**Architecture Scratchpad**####
 - [ ] Use pure stateless components in favour of class components, remove proptypes in favour of redux connect middleware
 - [ ] Place websocket dispatch/connect in async middleware - web worker?
 
