@@ -14,6 +14,14 @@ Much needed overhaul + rewrite as an ES6 webapp with React + Redux.
 - [ ] Set up dev server.
 - [ ] Discuss deployment/build process.
 - [ ] Discuss project structure/file organization.
+- [ ] We should establish regular weekly/bi-weekly meetings over mumble to discuss development status and task delegation.
+   - Timetable provided for coordination
+
+| UTC TIME | 0:00 | 1:00 | 2:00 | 3:00 | 4:00 | 5:00 | 6:00 | 7:00 | 8:00 | 9:00 | 10:00 | 11:00 | 12:00 | 13:00 | 14:00 | 15:00 | 16:00 | 17:00 | 18:00 | 19:00 | 20:00 | 21:00 | 22:00 | 23:00
+|  ------------------------------ | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- |
+|  Tokyo, Japan | 9:00 | 10:00 | 11:00 | 12:00 | 13:00 | 14:00 | 15:00 | 16:00 | 17:00 | 18:00 | 19:00 | 20:00 | 21:00 | 22:00 | 23:00 | 0:00 | 1:00 | 2:00 | 3:00 | 4:00 | 5:00 | 6:00 | 7:00 | 8:00
+|  Sault Ste. Marie, ON, CA | 19:00 | 20:00 | 21:00 | 22:00 | 23:00 | 0:00 | 1:00 | 2:00 | 3:00 | 4:00 | 5:00 | 6:00 | 7:00 | 8:00 | 9:00 | 10:00 | 11:00 | 12:00 | 13:00 | 14:00 | 15:00 | 16:00 | 17:00 | 18:00
+|  St Louis, MO, USA | 18:00 | 19:00 | 20:00 | 21:00 | 22:00 | 23:00 | 0:00 | 1:00 | 2:00 | 3:00 | 4:00 | 5:00 | 6:00 | 7:00 | 8:00 | 9:00 | 10:00 | 11:00 | 12:00 | 13:00 | 14:00 | 15:00 | 16:00 | 17:00
 
 ####**Architecture Scratchpad**####
 - [ ] Use pure stateless components in favour of class components, remove proptypes in favour of redux connect middleware
@@ -46,6 +54,7 @@ Much needed overhaul + rewrite as an ES6 webapp with React + Redux.
 
 
 ####**Features:**####
+- [ ] Possibly disable youtube annotations by default (suggested by Megaspel) append '```&iv_load_policy=3```' to youtube "```movie```" param/value element (Reference: http://stackoverflow.com/questions/8166846/removing-annotations-on-embedded-youtube-videos)
 - [ ] Add 3-second cool-down to $skip so mods/deputies can't over-moderation (possible '-f' option for override?)
   - Possible $unskip feature to undo a $skip action?
 - [ ] $stealthskip, for mods, skips the current video for everyone except the person who added it, they think it's still playing... (i'm only half joking...)
