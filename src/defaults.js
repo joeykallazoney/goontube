@@ -1,4 +1,4 @@
-const defaultApplicationState {
+const defaultApplicationState = {
     media: {
         id:         'FTaWrcmhAgw',
         provider:   'youtube',
