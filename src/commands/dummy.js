@@ -13,6 +13,7 @@ export default {
     opts: {
         visibleInChat:  true /* Can other users see $command being entered? */
     },
+    
     events: {
         /* Prior to calling the command handler, this optional callback can
          * return false to prevent executing the command.
@@ -25,7 +26,7 @@ export default {
 
         /*
          * Command handler which receives handles to the server, client, and the
-         * message being parsed.
+         * message which is considered to have passed and is being parsed.
          */
         commandHandler: (server, client, message) {
 

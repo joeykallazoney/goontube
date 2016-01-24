@@ -15,7 +15,7 @@ class Chat extends React.Component {
         return (
             <div className="chat">
                 <ul className="chat-list">
-                {this.state.buffer.map((message) =>
+                {this.context.store.getState().buffer.map((message) =>
                     (
                         <li key={message.id} className="message">
                             <span className="from">{message.from}</span>

@@ -7,9 +7,8 @@ export default {
     events: {
         checkForPermissions: (server, client) =>
             (false === client.user.userHasPermission('kick')),
-            
-        commandHandler: (server, client, message) {
 
+        commandHandler: (server, client, message) {
         },
     }
 }

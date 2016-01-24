@@ -8,9 +8,14 @@ class Banner extends React.Component {
     }
 
     componentDidMount() {
-        let lastBannerIndex = this.context.store
-            .getState()
-            .get('banner').currentBannerIndex
+        let possibilities = this.context.store.getState().get('banner').possibilities
+        let newBannerChoice = Math.floor(Math.random() * possibilities.length)
+        let lastBannerIndex = newBannerChoice
+
+        this.context.store.dispatch({
+            type: p.BANNER_NEW_BANNER,
+            data: newBannerChoice
+        })
 
         this.context.store.subscribe(() => {
             if(lastBannerIndex !== this.context.store

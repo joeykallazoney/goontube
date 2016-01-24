@@ -13,6 +13,6 @@ module.exports = {
     },
 
     SEND_CHAT_MESSAGE: (server, client, msg) => {
-
+        if(null === msg) return
     }
 }

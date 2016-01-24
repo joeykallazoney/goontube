@@ -54,6 +54,10 @@ const HTML =
     </body>
 </html>`
 
+let serverContext = {
+    wss: wss
+}
+
 wss.on('connection', (ws) => {
     let client = new Client(ws)
 
@@ -80,9 +84,11 @@ wss.on('connection', (ws) => {
         let decoded = JSON.parse(message.data)
 
         try {
-            protocolHandlers[decoded.type]
+            console.log(protocolHandlers)
+            protocolHandlers[decoded.type](serverContext, ws, decoded.data)
         } catch(e) {
-            
+            console.log('Failed to handle bad message')
+            throw e
         }
     })
 })
