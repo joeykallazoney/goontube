@@ -17,13 +17,13 @@ function rootReducer(state = fromJS(defaultApplicationState), action) {
         case p.SET_PLAYBACK_POSITION:
             state = state.set('media',
                     ...state.get('media'),
-                    { position: action.data }))
+                    { position: action.data })
             return state
 
         case p.BANNER_LIST_UPDATE:
             state = state.set('banner',
                     ...state.get('banner'),
-                    { possibilities: action.data }))
+                    { possibilities: action.data })
             return state
 
         case p.BANNER_NEW_BANNER:
