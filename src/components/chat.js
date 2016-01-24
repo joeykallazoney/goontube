@@ -22,28 +22,28 @@ class Chat extends React.Component {
             .history
 
         this.context.store.subscribe(() => {
-            if(lastRoomHistory !== this.context.store
+            let currentHistory = this.context.store
                 .getState()
-                .get('room').history) {
+                .get('room')
+                .history
+            if(lastRoomHistory !== currentHistory) {
+                lastRoomHistory = currentHistory
 
-                console.log(lastRoomHistory)
-                console.log(this.context.store
-                    .getState()
-                    .get('room').history)
+                console.log(currentHistory)
                 this.forceUpdate()
             }
         })
     }
 
     render() {
-        let currentRoomChatHistory = this.context.store.getState().get('room').history
+        let history = this.context.store.getState().getIn(['room', 'history'])
 
         return (
             <div className="chat">
                 <ul className="chat-list">
-                    {currentRoomChatHistory.map((message) =>
-                        <ChatMessage key={message.id} from={message.from} body={message.body} />
-                    )}
+                {history.map((message) =>
+                    <ChatMessage key={message.id} from={message.from} body={message.body} />
+                )}
                 </ul>
 
                 <Users />

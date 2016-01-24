@@ -24,7 +24,7 @@ class YouTubePlayer extends React.Component {
     render() {
         const videoID = this.context.store
             .getState()
-            .get('media').id
+            .getIn(['media', 'id'])
         const options = {
             width:          550,
             height:         320,

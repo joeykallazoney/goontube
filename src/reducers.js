@@ -3,7 +3,7 @@
  * an immutable state tree.
  * @since 1.0.0
  */
-import I from 'immutable'
+import I, { fromJS } from 'immutable'
 import p from './protocol'
 import { applyMiddleware, compose } from 'redux'
 import defaults from './defaults'
@@ -12,7 +12,7 @@ import defaults from './defaults'
 //let transducer = (state = defaultApplicationState, [reducers]) =>
 //    (reducers.map(r => (...r)(state)()))
 
-function rootReducer(state = I.Map(defaults), action) {
+function rootReducer(state = fromJS(defaults), action) {
     switch(action.type) {
         case p.ROOM_CLEAR_MESSAGES:
             state = state.set('room',
@@ -23,13 +23,8 @@ function rootReducer(state = I.Map(defaults), action) {
             return state
 
         case p.ROOM_USER_MESSAGE:
-            const lastRoomHistory = state.get('room').history
-
-            state = state.set('room',
-                {
-                    ...state.get('room'),
-                    history: lastRoomHistory.push(action.data)
-                })
+            state = state.updateIn(['room', 'history'],
+                history => history.push(action.data))
             return state
 
         case p.SET_PLAYBACK_POSITION:

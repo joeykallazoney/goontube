@@ -11,7 +11,7 @@ module.exports = {
             data: `Hello there!`
         })
 
-        client.send(encoded)
+        //client.send(encoded)
         return true
     },
 

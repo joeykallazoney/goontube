@@ -30,8 +30,7 @@ const defaultApplicationState = {
         motd:           null,
         playlist:       [],
         users:          [],
-        history:        [],
-        lastMessageKey: null
+        history:        []
     }
 }
 
