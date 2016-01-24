@@ -16,5 +16,7 @@ export default {
         time_spent:     Sequelize.INTEGER,
         json_data:      Sequelize.STRING
     }),
-    video: (db) => db.define('video', {})
+    
+    video: (db) => db.define('video', {
+    })
 }

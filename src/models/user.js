@@ -2,7 +2,6 @@
  * @module Exports a User class which describes the model of user account information.
  * @since 1.0.0
  */
-import Sequelize from 'sequelize'
 import hash from '../hash'
 import config from '../../config'
 import { user, video } from './'
