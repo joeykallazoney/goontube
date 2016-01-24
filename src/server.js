@@ -103,9 +103,9 @@ wss.on('connection', (ws) => {
      */
     ws.send(makePacket(p.ROOM_USER_MESSAGE,
         {
-            id: uuid.v4(),
-            from: 'Tester',
-            body: 'This is a test hello message from the server.'
+            id:     uuid.v4(),
+            from:   'Tester',
+            body:   'This is a test hello message from the server.'
         }
     ))
 })
