@@ -12,10 +12,12 @@ class Chat extends React.Component {
     }
 
     render() {
+        const currentRoomChatHistory = this.context.store.getState().get('room').history
+
         return (
             <div className="chat">
                 <ul className="chat-list">
-                {this.context.store.getState().buffer.map((message) =>
+                {currentRoomChatHistory.map((message) =>
                     (
                         <li key={message.id} className="message">
                             <span className="from">{message.from}</span>
