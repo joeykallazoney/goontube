@@ -9,6 +9,11 @@ let ChatMessage = (props) =>
         <div className="body">{props.body}</div>
     </li>
 
+let Input = (props) =>
+    <div className="chat-input">
+        <input htmlType="text" />
+    </div>
+
 class Chat extends React.Component {
     constructor(props, context) {
         super(props, context)
@@ -38,19 +43,20 @@ class Chat extends React.Component {
                 <ul className="chat-list">
                 {
                     history.map((message) =>
-                        <ChatMessage key={message.id} from={message.from} body={message.body} />
+                    <ChatMessage key={message.id} from={message.from} body={message.body} />
                     )
-                }
+                    }
                 </ul>
 
                 <Users />
+                <Input />
             </div>
         )
     }
 }
 
 Chat.contextTypes = {
-    store: React.PropTypes.object.isRequired
+    store:  React.PropTypes.object.isRequired
 }
 
 export default Chat

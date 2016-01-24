@@ -57,7 +57,7 @@ window.addEventListener('load', function load(event) {
 
     ReactDOM.render(
         <Provider store={store}>
-            <Goontube />
+            <Goontube socket={socket} />
         </Provider>,
         origin)
     window.removeEventListener('load', load, false)

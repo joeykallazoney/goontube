@@ -34,7 +34,8 @@ class Goontube extends React.Component {
 }
 
 Goontube.contextTypes = {
-    store: React.PropTypes.object.isRequired
+    store:  React.PropTypes.object.isRequired,
+    socket: React.PropTypes.object.isRequired
 }
 
 export default Goontube
