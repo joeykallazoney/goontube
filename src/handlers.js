@@ -6,13 +6,16 @@ import p from './protocol'
 
 module.exports = {
     CLIENT_HELLO: (server, client, msg) => {
-        client.send({
+        let encoded = JSON.stringify({
             type: p.CLIENT_HELLO,
-            data: `Hello, ${msg}!`
+            data: `Hello there!`
         })
+
+        client.send(encoded)
+        return true
     },
 
     SEND_CHAT_MESSAGE: (server, client, msg) => {
-        if(null === msg) return
+        if(null === msg) return false
     }
 }

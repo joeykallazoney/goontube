@@ -54,12 +54,9 @@ const HTML =
     </body>
 </html>`
 
-let serverContext = {
-    wss: wss
-}
-
 wss.on('connection', (ws) => {
-    let client = new Client(ws)
+    let client = new Client(ws),
+        serverContext = {}
 
     if(clients
         .filter((c) => c.address.address === client.address.address)
@@ -81,14 +78,21 @@ wss.on('connection', (ws) => {
     })
 
     ws.on('message', (message) => {
-        let decoded = JSON.parse(message.data)
-
         try {
-            console.log(protocolHandlers)
-            protocolHandlers[decoded.type](serverContext, ws, decoded.data)
+            let decoded = JSON.parse(message)
+
+            try {
+                if(false === protocolHandlers[decoded.type](serverContext, ws, decoded.data)) {
+                    console.log('Handler returned bad data.')
+                    return // don't drop client for mere unhandled packets
+                }
+            } catch(e) {
+                console.log('Failed to handle bad client message.')
+                throw e
+            }
         } catch(e) {
-            console.log('Failed to handle bad message')
-            throw e
+            console.log('Received malformed JSON or other bad data from client.')
+            ws.close()
         }
     })
 })

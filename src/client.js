@@ -5,11 +5,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Goontube from './components/app'
-
-import hash from './hash'
-
 import { createStore } from 'redux'
 import { connect, Provider } from 'react-redux'
+
+import hash from './hash'
+import p from './protocol'
 import rootReducer from './reducers'
 
 function initWebSocket(store) {
@@ -17,6 +17,13 @@ function initWebSocket(store) {
 
     socket.onopen = () => {
         console.log('Connection established to WebSocket server.')
+
+        let dummyPacket = {
+            type: p.CLIENT_HELLO,
+            data: `test string`
+        }
+
+        socket.send(JSON.stringify(dummyPacket))
     }
 
     socket.onmessage = (message) => {
