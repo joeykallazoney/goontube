@@ -8,6 +8,7 @@ import koaLogger from 'koa-logger'
 import koaStatic from 'koa-static'
 import React from 'react'
 import Sequelize from 'sequelize'
+import uuid from 'node-uuid'
 import { Server as WebSocketServer } from 'ws'
 import { createStore } from 'redux'
 import { renderToString as render } from 'react-dom/server'
@@ -102,6 +103,7 @@ wss.on('connection', (ws) => {
      */
     ws.send(makePacket(p.ROOM_USER_MESSAGE,
         {
+            id: uuid.v4(),
             from: 'Tester',
             body: 'This is a test hello message from the server.'
         }
