@@ -15,16 +15,17 @@ import Client from './models/client'
 import rootReducer from './reducers'
 import hash from './hash'
 import p from './protocol'
+import config from '../config'
 
 const MAX_CONCURRENT_CONNECTIONS = 2
 const DEFAULT_SERVER_PORT        = 7070
 
 let server          = http.createServer()
-let staticFiles     = new koaStatic(__dirname + '/../static', {})
+let staticFiles     = new koaStatic(config.staticPath, {})
 let app             = koa()
 let wss             = new WebSocketServer({ server: server })
 let clients         = []
-let serverStore     = createStore(rootReducer)
+let sequelize       = new Sequelize(config.databasePath)
 
 app.use(koaLogger())
 app.use(staticFiles)

@@ -23,7 +23,6 @@ function initWebSocket(store) {
         let decoded = JSON.parse(message.data)
 
         console.log(`${decoded.type} -> ${decoded.data} dispatched to Redux store.`)
-
         store.dispatch(decoded)
     }
 
