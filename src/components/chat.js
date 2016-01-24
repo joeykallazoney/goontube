@@ -11,7 +11,7 @@ let ChatMessage = (props) =>
 
 let Input = (props) =>
     <div className="chat-input">
-        <input htmlType="text" />
+        <input type="text" />
     </div>
 
 class Chat extends React.Component {
@@ -43,13 +43,13 @@ class Chat extends React.Component {
                 <ul className="chat-list">
                 {
                     history.map((message) =>
-                    <ChatMessage key={message.id} from={message.from} body={message.body} />
+                        <ChatMessage key={message.id} from={message.from} body={message.body} />
                     )
-                    }
+                }
                 </ul>
 
                 <Users />
-                <Input />
+                <Input socket={this.props.socket} />
             </div>
         )
     }
