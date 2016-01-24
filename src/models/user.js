@@ -11,7 +11,12 @@ import config from '../../config'
  * @since 1.0.0
  */
 class User {
-    static schema(db) {
+    /**
+     * @function Given a valid database handle, return an object mapping of
+     * its schema definition for Sequelize.
+     * @param db {Sequelize} Valid Sequelize database handle.
+     */
+    static createSchema(db) {
         return db.define('user', {
             username:       Sequelize.STRING,
             password:       Sequelize.STRING,
@@ -31,8 +36,13 @@ class User {
         }
     }
 
+    /**
+     * @function Class constructor for a User instance.  Given a valid database
+     * handle and a username, the server will attempt to populate this object
+     * with the latest information from the database.
+     */
     constructor(db, username) {
-        this._schema = User.schema(db)
+        this._schema = User.createSchema(db)
         this._user   = this._schema.findAll({
             where: {
                 username: username
@@ -40,6 +50,10 @@ class User {
         })
     }
 
+    /**
+     * @function Ensures that changes to this User instance are reflected back
+     * to the Sequelize model and synchronized to the server database.
+     */
     serialize() {
         try {
             this._user.save()
@@ -47,11 +61,19 @@ class User {
         }
     }
 
+    /**
+     * @function Checks whether or not the given password matches the stored password
+     * hash.
+     * @param {String} pwdHash is a salted SHA-512 hash of the user's password.
+     */
     authenticate(pwdHash) {
         if(null === this._user) {
             return false
         }
 
+        if(pwdHash === this._user.password) {
+
+        }
         return false
     }
 }

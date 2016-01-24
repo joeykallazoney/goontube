@@ -16,6 +16,7 @@ import Client from './models/client'
 import rootReducer from './reducers'
 import hash from './hash'
 import p from './protocol'
+import protocolHandlers from './handlers'
 import config from '../config'
 
 const MAX_CONCURRENT_CONNECTIONS = 2
@@ -77,6 +78,8 @@ wss.on('connection', (ws) => {
 
     ws.on('message', (message) => {
         let decoded = JSON.parse(message.data)
+
+        console.log(protocolHandlers)
     })
 })
 
