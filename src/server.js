@@ -12,6 +12,7 @@ import { Server as WebSocketServer } from 'ws'
 import { createStore } from 'redux'
 import { renderToString as render } from 'react-dom/server'
 
+import { makePacket } from './util'
 import Client from './models/client'
 import rootReducer from './reducers'
 import hash from './hash'
@@ -95,6 +96,11 @@ wss.on('connection', (ws) => {
             ws.close()
         }
     })
+
+    /*
+     * send greeting+acknowledgement to user
+     */
+
 })
 
 app.use(function *(next) {

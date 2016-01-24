@@ -9,6 +9,20 @@ class Client {
 
     }
 
+    closeWithReason(message) {
+        this.socket.send(JSON.stringify({
+            type: p.DISCONNECTED_WITH_REASON,
+            data: message
+        }))
+
+        this.close()
+    }
+
+    close() {
+        if(null !== this.socket)
+            this.socket.close()
+    }
+
     constructor(socket, serverStore) {
         this.socket      = socket
         this.address     = socket._socket.address()

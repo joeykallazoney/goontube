@@ -9,6 +9,7 @@ export default {
             (false === client.user.userHasPermission('kick')),
 
         commandHandler: (server, client, message) {
+            
         },
     }
 }
