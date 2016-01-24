@@ -54,7 +54,7 @@ const HTML =
 </html>`
 
 wss.on('connection', (ws) => {
-    let client = new Client(ws, serverStore)
+    let client = new Client(ws)
 
     if(clients
         .filter((c) => c.address.address === client.address.address)

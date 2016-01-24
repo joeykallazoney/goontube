@@ -3,7 +3,7 @@
  * an immutable state tree.
  * @since 1.0.0
  */
-import I, { fromJS }  from 'immutable'
+import I from 'immutable'
 import p from './protocol'
 import { applyMiddleware, compose } from 'redux'
 import defaults from './defaults'
@@ -12,7 +12,7 @@ import defaults from './defaults'
 //let transducer = (state = defaultApplicationState, [reducers]) =>
 //    (reducers.map(r => (...r)(state)()))
 
-function rootReducer(state = fromJS(defaultApplicationState), action) {
+function rootReducer(state = I.Map(defaults), action) {
     switch(action.type) {
         case p.SET_PLAYBACK_POSITION:
             state = state.set('media',
