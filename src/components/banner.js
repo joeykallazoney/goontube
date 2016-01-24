@@ -9,7 +9,7 @@ class Banner extends React.Component {
 
     componentDidMount() {
         let possibilities   = this.context.store.getState().getIn(['banner', 'possibilities'])
-        let newBannerChoice = Math.floor(Math.random() * possibilities.length)
+        let newBannerChoice = Math.floor(Math.random() * possibilities.size)
         let lastBannerIndex = newBannerChoice
 
         this.context.store.dispatch({
@@ -37,7 +37,7 @@ class Banner extends React.Component {
     }
 
     render() {
-        let bannerImgSrc = this.context.store.getState().getIn(['banner', 'possibilities'])
+        let bannerImgSrc = this.context.store.getState().getIn(['banner', 'possibilities']).toArray()
             [this.context.store.getState().getIn(['banner', 'currentBannerIndex'])]
 
         return (
