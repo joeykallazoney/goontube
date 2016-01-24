@@ -14,6 +14,16 @@ import defaults from './defaults'
 
 function rootReducer(state = I.Map(defaults), action) {
     switch(action.type) {
+        case p.ROOM_CLEAR_MESSAGES:
+            state = state.setIn(['room', 'history'], [])
+            return state
+
+        case p.ROOM_USER_MESSAGE:
+            state = state.updateIn(['room', 'history'],
+                log => log.push(action.data)
+            )
+            return state
+
         case p.SET_PLAYBACK_POSITION:
             state = state.set('media',
                     ...state.get('media'),

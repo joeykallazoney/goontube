@@ -33,6 +33,7 @@ export default {
     ROOM_USER_ENTERS:           'ROOM_USER_ENTERS',
     ROOM_USER_LEAVES:           'ROOM_USER_LEAVES',
     ROOM_USER_MESSAGE:          'ROOM_USER_MESSAGE',
+    ROOM_CLEAR_MESSAGES:        'ROOM_CLEAR_MESSAGES',
     ROOM_BROADCAST:             'ROOM_BROADCAST',
     ROOM_CREATED:               'ROOM_CREATED',
     ROOM_DESTROYED:             'ROOM_DESTROYED',
