@@ -3,6 +3,13 @@ import ReactDOM from 'react-dom'
 
 import Users from './users'
 
+let ChatMessage = (props) => (
+    <li className="message">
+        <span className="from">{props.from}</span>
+        <div className="body">{props.body}</div>
+    </li>
+)
+
 class Chat extends React.Component {
     constructor(props, context) {
         super(props, context)
@@ -18,12 +25,7 @@ class Chat extends React.Component {
             <div className="chat">
                 <ul className="chat-list">
                 {currentRoomChatHistory.map((message) =>
-                    (
-                        <li key={message.id} className="message">
-                            <span className="from">{message.from}</span>
-                            <div className="body">{message.body}</div>
-                        </li>
-                    )
+                    <ChatMessage key={message.id} from={message.from} body={message.body} />
                 )}
                 </ul>
 
