@@ -4,12 +4,12 @@
  */
 import config from '../../config'
 
-let videoSchema = sequelize.define('video', {
-})
-
 class Video {
     constructor(sequelize, id) {
     }
 }
+
+let videoSchema = sequelize.define('video', {
+})
 
 export default Video
