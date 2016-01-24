@@ -26,11 +26,12 @@ const defaultApplicationState = {
         ]
     },
     room: {
-        name:       null,
-        motd:       null,
-        playlist:   [],
-        users:      [],
-        history:    []
+        name:           null,
+        motd:           null,
+        playlist:       [],
+        users:          [],
+        history:        [],
+        lastMessageKey: null
     }
 }
 

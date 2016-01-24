@@ -5,11 +5,14 @@
 import config from '../../config'
 
 class Video {
-    constructor(sequelize, id) {
+    static createSchema(db) {
+       return db.define('video', {
+
+       }
+    }
+
+    constructor(id) {
     }
 }
-
-let videoSchema = sequelize.define('video', {
-})
 
 export default Video

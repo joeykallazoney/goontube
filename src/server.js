@@ -100,7 +100,7 @@ wss.on('connection', (ws) => {
     /*
      * send greeting+acknowledgement to user
      */
-
+    ws.send(makePacket(p.ROOM_USER_MESSAGE, {from: 'Test', body: 'This is a test message'}))
 })
 
 app.use(function *(next) {
