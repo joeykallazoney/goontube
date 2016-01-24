@@ -51,6 +51,14 @@ class User {
     }
 
     /**
+     * @function Returns whether or not a User has a given permission.
+     * @param permission {String} Permission to check the user's privileges for.
+     */
+    userHasPermission(permission) {
+        return false
+    }
+
+    /**
      * @function Ensures that changes to this User instance are reflected back
      * to the Sequelize model and synchronized to the server database.
      */
