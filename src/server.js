@@ -79,7 +79,11 @@ wss.on('connection', (ws) => {
     ws.on('message', (message) => {
         let decoded = JSON.parse(message.data)
 
-        console.log(protocolHandlers)
+        try {
+            protocolHandlers[decoded.type]
+        } catch(e) {
+            
+        }
     })
 })
 
