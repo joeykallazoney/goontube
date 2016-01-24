@@ -3,12 +3,11 @@ import ReactDOM from 'react-dom'
 
 import Users from './users'
 
-let ChatMessage = (props) => (
+let ChatMessage = (props) =>
     <li className="message">
         <span className="from">{props.from}</span>
         <div className="body">{props.body}</div>
     </li>
-)
 
 class Chat extends React.Component {
     constructor(props, context) {
@@ -18,25 +17,21 @@ class Chat extends React.Component {
     componentDidMount() {
         let lastRoomHistory = this.context.store
             .getState()
-            .get('room')
-            .history
-
+            .getIn(['room', 'history'])
         this.context.store.subscribe(() => {
             let currentHistory = this.context.store
                 .getState()
-                .get('room')
-                .history
+                .getIn(['room', 'history'])
             if(lastRoomHistory !== currentHistory) {
                 lastRoomHistory = currentHistory
 
-                console.log(currentHistory)
                 this.forceUpdate()
             }
         })
     }
 
     render() {
-        let history = this.context.store.getState().getIn(['room', 'history'])
+        let history = this.context.store.getState().getIn(['room', 'history']).toArray()
 
         return (
             <div className="chat">
