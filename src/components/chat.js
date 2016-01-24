@@ -36,9 +36,11 @@ class Chat extends React.Component {
         return (
             <div className="chat">
                 <ul className="chat-list">
-                {history.map((message) =>
-                    <ChatMessage key={message.id} from={message.from} body={message.body} />
-                )}
+                {
+                    history.map((message) =>
+                        <ChatMessage key={message.id} from={message.from} body={message.body} />
+                    )
+                }
                 </ul>
 
                 <Users />
