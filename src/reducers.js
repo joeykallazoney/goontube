@@ -28,26 +28,17 @@ function rootReducer(state = fromJS(defaults), action) {
             return state
 
         case p.SET_PLAYBACK_POSITION:
-            state = state.set('media',
-                    ...state.get('media'),
-                    { position: action.data })
             return state
 
         case p.BANNER_LIST_UPDATE:
-            state = state.set('banner',
-                    ...state.get('banner'),
-                    { possibilities: action.data })
+            state = state.setIn(['banner', 'possibilities'], action.data)
             return state
 
         case p.BANNER_NEW_BANNER:
-            const possibilities = state.get('banner').possibilities
             const currentBannerIndex = parseInt(action.data)
 
             return state
-                .set('banner', {
-                    possibilities:      possibilities,
-                    currentBannerIndex: currentBannerIndex
-                })
+                .setIn(['banner', 'currentBannerIndex'], currentBannerIndex)
 
         default:
             return state
