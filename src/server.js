@@ -34,8 +34,10 @@ let app             = koa()
 let wss             = new WebSocketServer({ server: server })
 let clients         = []
 let sequelize       = new Sequelize(config.databasePath)
-let schemas         = {
 
+let schemas         = {
+    User:   User.createSchema(sequelize),
+    Video:  Video.createSchema(sequelize)
 }
 
 app.use(koaLogger())
@@ -66,7 +68,8 @@ const HTML =
 wss.on('connection', (ws) => {
     let client = new Client(ws),
         serverContext = {
-            parser: commandParser
+            data:       schemas,
+            parser:     commandParser
         }
 
     if(clients
