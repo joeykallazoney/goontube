@@ -23,11 +23,11 @@ module.exports = {
         ]
     },
     node: {
-      console: 'empty',
-      fs: 'empty',
-      net: 'empty',
-      tls: 'empty',
-      console: true
+        console: 'empty',
+        fs: 'empty',
+        net: 'empty',
+        tls: 'empty',
+        console: true
     },
     output: {
         filename: 'bundle.js',

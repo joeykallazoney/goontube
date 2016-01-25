@@ -1,8 +1,15 @@
 import * as commands from './commands'
 
+/**
+ * @function Parses client chat strings and passes to a command handler if appropriate.
+ * @param {Object} server - The server application context object.
+ * @param {Client} client - The session/client for whom input is being parsed.
+ * @param {string} inputString - The full input string sent as a chat message.
+ * @returns Whether or not the command was parsed by any handler.
+ */
 export default function commandParser(server, client, inputString) {
-    if(!inputString || ( ('$' != inputString[0]) && ('/' != inputString[0]) )) {
-        return
+    if(!inputString || (('$' !== inputString[0]) && ('/' !== inputString[0]))) {
+        return false
     }
 
     try {
@@ -19,13 +26,20 @@ export default function commandParser(server, client, inputString) {
         Object.keys(commands)
             .filter((cmd) => commands[cmd].name === command)
             .map((cmd) => {
-                commands[cmd].commandHandler(
-                    server,
-                    client,
-                    remainingArguments)
+                try {
+                    commands[cmd].commandHandler(
+                        server,
+                        client,
+                        remainingArguments)
+                    return true
+                } catch(e) {
+
+                }
             })
         if(true === /^[0-9]+d[0-9]+$/.test(command)) {
         }
     } catch(e) {
     }
+
+    return false
 }
