@@ -4,9 +4,13 @@ import { connect } from 'react-redux'
 import p from '../protocol'
 
 function mapStateToProps(state) {
+    let possibilities = state.getIn(['banner', 'possibilities']),
+        index = state.getIn(['banner', 'currentBannerIndex'])
+
     return {
-        possibilities:  state.getIn(['banner', 'possibilities']),
-        index:          state.getIn(['banner', 'currentBannerIndex'])
+        possibilities:  possibilities,
+        index:          index,
+        src:            possibilities.get(index)
     }
 }
 
@@ -32,9 +36,7 @@ class Banner extends React.Component {
     render() {
         return (
             <div className="banner">
-                <img {...this.props}
-                    src={this.props.possibilities.get(this.props.index)}
-                    className="banner-image" />
+                <img {...this.props} className="banner-image" />
             </div>
         )
     }
