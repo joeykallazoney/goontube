@@ -26,7 +26,8 @@ module.exports = {
       console: 'empty',
       fs: 'empty',
       net: 'empty',
-      tls: 'empty'
+      tls: 'empty',
+      console: true
     },
     output: {
         filename: 'bundle.js',
