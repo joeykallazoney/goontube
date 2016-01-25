@@ -8,7 +8,6 @@ module.exports = {
     entry: ['./src/client.js', './sass/style.sass'],
     module: {
         loaders: [
-            { test: /\.js$/, exclude: /node_modules/, loader: 'babel' },
             { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel' },
             // If you're wondering why the line below is here, so am I!
             // npm-module youtube-node's subdependencies were
