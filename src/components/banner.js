@@ -8,9 +8,7 @@ function mapStateToProps(state) {
         index = state.getIn(['banner', 'currentBannerIndex'])
 
     return {
-        possibilities:  possibilities,
-        index:          index,
-        src:            possibilities.get(index)
+        src: possibilities.get(index)
     }
 }
 
