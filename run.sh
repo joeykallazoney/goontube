@@ -2,7 +2,7 @@
 
 # Script for consolidating the process of building and running the local goontube instance.
 
-while getopts ahs opts; do
+while getopts abh opts; do
    case ${opts} in
       a)
         sudo npm install
