@@ -7,6 +7,7 @@ import Users from './users'
 import Player from './player'
 import Playlist from './playlist'
 import ContentPane from './content-pane'
+import Search from './search'
 import Layout from './layout'
 
 class Goontube extends React.Component {
@@ -27,6 +28,7 @@ class Goontube extends React.Component {
                     <Chat socket={this.props.socket} />
                     <Playlist />
                     <ContentPane />
+                    <Search />
                 </Layout>
             </div>
         )

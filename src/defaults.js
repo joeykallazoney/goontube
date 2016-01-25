@@ -10,6 +10,7 @@ const defaultApplicationState = {
         player:   { x: 0,   y: 2,   w: 5,   h: 4 },
         chat:     { x: 6,   y: 2,   w: 6,   h: 4 },
         playlist: { x: 0,   y: 6,   w: 5,   h: 4 },
+        search: { x: 0,   y: 9,   w: 5,   h: 4 },
         content:  { x: 6,   y: 6,   w: 5,   h: 4 }
     },
     banner: {
