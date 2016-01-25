@@ -57,7 +57,7 @@ export default function commandParser(server, client, inputString) {
             if(null !== commands.diceCommand) {
                 commands
                     .diceCommand
-                    .commandHandler(server, client, remainingArguments.split('d'))
+                    .commandHandler(server, client, remainingArguments)
                 return true
             }
         }
