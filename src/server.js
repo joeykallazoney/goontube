@@ -96,7 +96,7 @@ wss.on('connection', (ws) => {
             let decoded = JSON.parse(message)
 
             try {
-                if(false === protocolHandlers[decoded.type](serverContext, ws, decoded.data)) {
+                if(false === protocolHandlers[decoded.type](serverContext, client, decoded.data)) {
                     console.log('Handler returned bad data.')
                     return // don't drop client for mere unhandled packets
                 }

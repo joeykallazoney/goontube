@@ -31,12 +31,12 @@ export default {
      * message which is considered to have passed and is being parsed.
      */
     commandHandler: (server, client, message) => {
-        client.send(makePacket(p.ROOM_USER_MESSAGE,
+        client.sendPacket(p.ROOM_USER_MESSAGE,
             {
                 id:     uuid.v4(),
                 from:   'Dummy',
                 body:   message
             }
-        ))
+        )
     }
 }

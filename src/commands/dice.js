@@ -13,7 +13,7 @@ export default {
     name:               'dice',
 
     /* A description to feed into some sort of $help command */
-    description:        'Dice command for making dice rolls.',
+    description:        'Utility command for making dice rolls, special syntax: e.g.: $4d20',
 
     /* Options to specify this command's general behaviour. */
     opts: {
