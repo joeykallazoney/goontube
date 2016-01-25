@@ -1,7 +1,7 @@
 import * as commands from './commands'
 
 export default function commandParser(server, client, inputString) {
-    if(!inputString || inputString[0] != '$') {
+    if(!inputString || '$' != inputString[0]) {
         return
     }
 
