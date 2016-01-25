@@ -42,7 +42,7 @@ class User {
      * with the latest information from the database.
      */
     constructor(db, username) {
-        this._schema = User.createSchema(db)
+        this._auth   = false
         this._user   = this._schema.findAll({
             where: {
                 username: username
@@ -80,7 +80,7 @@ class User {
         }
 
         if(pwdHash === this._user.password) {
-
+            return (this._auth = true)
         }
         return false
     }

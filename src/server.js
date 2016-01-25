@@ -14,13 +14,16 @@ import { createStore } from 'redux'
 import { renderToString as render } from 'react-dom/server'
 
 import { makePacket } from './util'
-import Client from './models/client'
 import rootReducer from './reducers'
 import hash from './hash'
 import commandParser from './parser'
 import p from './protocol'
 import protocolHandlers from './handlers'
 import config from '../config'
+
+import Client from './models/client'
+import User from './models/user'
+import Video from './models/video'
 
 const MAX_CONCURRENT_CONNECTIONS = 2
 const DEFAULT_SERVER_PORT        = 7070
@@ -31,6 +34,9 @@ let app             = koa()
 let wss             = new WebSocketServer({ server: server })
 let clients         = []
 let sequelize       = new Sequelize(config.databasePath)
+let schemas         = {
+
+}
 
 app.use(koaLogger())
 app.use(staticFiles)

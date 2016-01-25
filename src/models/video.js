@@ -7,8 +7,7 @@ import config from '../../config'
 class Video {
     static createSchema(db) {
        return db.define('video', {
-
-       }
+       })
     }
 
     constructor(id) {
