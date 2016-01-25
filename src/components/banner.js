@@ -26,6 +26,9 @@ class Banner extends React.Component {
     }
 
     componentDidMount() {
+        this.context.store.dispatch({
+            type: p.BANNER_NEW_RANDOM_BANNER
+        })
     }
 
     render() {
@@ -37,6 +40,10 @@ class Banner extends React.Component {
             </div>
         )
     }
+}
+
+Banner.contextTypes = {
+    store:  React.PropTypes.object.isRequired
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Banner)
