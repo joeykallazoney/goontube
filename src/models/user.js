@@ -14,7 +14,7 @@ class User {
     /**
      * @function Given a valid database handle, return an object mapping of
      * its schema definition for Sequelize.
-     * @param db {Sequelize} Valid Sequelize database handle.
+     * @param {Sequelize} db - Valid Sequelize database handle.
      */
     static createSchema(db) {
         return db.define('user', {
