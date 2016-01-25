@@ -52,9 +52,6 @@ done
 
 r=$(( $RANDOM % 10 ))
 
-RED='\033[0;31m'
-NC='\033[0m'
-
 case $r in
   0)
     tput setaf 1; echo "Aww. It's so cute that you thought this build wouldn't fail."
