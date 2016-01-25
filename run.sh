@@ -17,8 +17,8 @@ while getopts abh opts; do
         echo __________________________________________________________________________________________
         echo 
         echo -a \(all\): runs all processes required to build goontube. \(Incomplete\)
-        echo -h \(help\): displays this, but you knew that already, didn\'t you?
         echo -b \(browser\): runs the normal build and also switches to chrome. Requires OSX.
+        echo -h \(help\): displays this, but you knew that already, didn\'t you?
         echo __________________________________________________________________________________________
         echo
         echo \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#
