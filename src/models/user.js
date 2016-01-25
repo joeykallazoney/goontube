@@ -33,7 +33,7 @@ class User {
             last_seen_at:   Sequelize.DATE,
             time_spent:     Sequelize.INTEGER,
             json_data:      Sequelize.STRING
-        }
+        })
     }
 
     /**

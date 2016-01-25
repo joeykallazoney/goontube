@@ -27,7 +27,7 @@ class Banner extends React.Component {
     }
 
     onClick() {
-        let possibilities = this.context.store.getState().get('banner').possibilities
+        let possibilities   = this.context.store.getState().getIn(['banner', 'possibilities'])
         let newBannerChoice = Math.floor(Math.random() * possibilities.size)
 
         this.context.store.dispatch({

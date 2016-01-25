@@ -1,7 +1,7 @@
 import * as commands from './commands'
 
 export default function commandParser(server, client, inputString) {
-    if(!inputString || (inputString[0] != '$' && inputString[0] != '/')) {
+    if(!inputString || ( ('$' != inputString[0]) && ('/' != inputString[0]) )) {
         return
     }
 
@@ -19,20 +19,13 @@ export default function commandParser(server, client, inputString) {
         Object.keys(commands)
             .filter((cmd) => commands[cmd].name === command)
             .map((cmd) => {
-                console.log(command)
-                console.log(commands[cmd])
                 commands[cmd].commandHandler(
                     server,
                     client,
                     remainingArguments)
             })
         if(true === /^[0-9]+d[0-9]+$/.test(command)) {
-            console.log('User sent a dice command!')
         }
     } catch(e) {
-
     }
-
-    console.log('Checking string: ' + inputString)
-
 }
