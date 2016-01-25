@@ -95,7 +95,7 @@ case $r in
     ;;
   9)
     tput setaf 1; echo 'The Bad News: This build will fail.'
-    tput setaf 2; echo "The Good News: As a side effect it will accidently create the first truely sentient AI, which will ascend to fill God's empty throne and bring everlasting peace to humanity."
+    tput setaf 2; echo "The Good News: As a side effect it will accidently create the first truly sentient AI, which will ascend to fill God's empty throne and bring everlasting peace to humanity."
     tput setaf 1; echo 'The Bad News: Anime is mandatory.'
     ;;
 esac
