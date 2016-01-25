@@ -1,3 +1,7 @@
+/**
+ * @module Exports a command parser for goontube commands.
+ * @since 1.0.0
+ */
 import * as commands from './commands'
 
 /**
@@ -23,6 +27,16 @@ export default function commandParser(server, client, inputString) {
             command = inputString.slice(1, nextSpace).toLowerCase()
         }
 
+        /*
+         * Iterate over all keys in the 'commands' object, which contains only valid
+         * commands as per the common interface defined in 'commands/dummy.js',
+         * and applies a filter returning only those matching commands and executing
+         * the first match before returning true - we have parsed the command!
+         *
+         * This current parser is a straight port of the old Python 2.7 tubes parser,
+         * I will probably rewrite it before all is said and done, I have some cool
+         * ideas to cleanly allow multiple handlers for a single command, etc.
+         */
         Object.keys(commands)
             .filter((cmd) => commands[cmd].name === command)
             .map((cmd) => {
@@ -33,10 +47,19 @@ export default function commandParser(server, client, inputString) {
                         remainingArguments)
                     return true
                 } catch(e) {
-
                 }
             })
+
+        /*
+         * Test against regexp /^[0-9]+d[0-9+$/ - is this a dice command?
+         */
         if(true === /^[0-9]+d[0-9]+$/.test(command)) {
+            if(null !== commands.diceCommand) {
+                commands
+                    .diceCommand
+                    .commandHandler(server, client, remainingArguments.split('d'))
+                return true
+            }
         }
     } catch(e) {
     }
