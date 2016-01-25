@@ -24,7 +24,7 @@ class Goontube extends React.Component {
                 <Layout>
                     <Banner />
                     <Player />
-                    <Chat />
+                    <Chat socket={this.props.socket} />
                     <Playlist />
                     <ContentPane />
                 </Layout>
@@ -33,8 +33,11 @@ class Goontube extends React.Component {
     }
 }
 
+Goontube.propTypes = {
+    socket: React.PropTypes.object.isRequired
+}
 Goontube.contextTypes = {
-    store: React.PropTypes.object.isRequired
+    store:  React.PropTypes.object.isRequired
 }
 
 export default Goontube

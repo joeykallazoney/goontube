@@ -7,24 +7,28 @@ import koa from 'koa'
 import koaLogger from 'koa-logger'
 import koaStatic from 'koa-static'
 import React from 'react'
+import Sequelize from 'sequelize'
 import { Server as WebSocketServer } from 'ws'
 import { createStore } from 'redux'
 import { renderToString as render } from 'react-dom/server'
 
+import { makePacket } from './util'
 import Client from './models/client'
 import rootReducer from './reducers'
 import hash from './hash'
 import p from './protocol'
+import protocolHandlers from './handlers'
+import config from '../config'
 
 const MAX_CONCURRENT_CONNECTIONS = 2
 const DEFAULT_SERVER_PORT        = 7070
 
 let server          = http.createServer()
-let staticFiles     = new koaStatic(__dirname + '/../static', {})
+let staticFiles     = new koaStatic(config.staticPath, {})
 let app             = koa()
 let wss             = new WebSocketServer({ server: server })
 let clients         = []
-let serverStore     = createStore(rootReducer)
+let sequelize       = new Sequelize(config.databasePath)
 
 app.use(koaLogger())
 app.use(staticFiles)
@@ -52,7 +56,8 @@ const HTML =
 </html>`
 
 wss.on('connection', (ws) => {
-    let client = new Client(ws, serverStore)
+    let client = new Client(ws),
+        serverContext = {}
 
     if(clients
         .filter((c) => c.address.address === client.address.address)
@@ -74,8 +79,33 @@ wss.on('connection', (ws) => {
     })
 
     ws.on('message', (message) => {
-        let decoded = JSON.parse(message.data)
+        try {
+            let decoded = JSON.parse(message)
+
+            try {
+                if(false === protocolHandlers[decoded.type](serverContext, ws, decoded.data)) {
+                    console.log('Handler returned bad data.')
+                    return // don't drop client for mere unhandled packets
+                }
+            } catch(e) {
+                console.log('Failed to handle bad client message.')
+                throw e
+            }
+        } catch(e) {
+            console.log('Received malformed JSON or other bad data from client.')
+            ws.close()
+        }
     })
+
+    /*
+     * send greeting+acknowledgement to user
+     */
+    ws.send(makePacket(p.ROOM_USER_MESSAGE,
+        {
+            from: 'Tester',
+            body: 'This is a test hello message from the server.'
+        }
+    ))
 })
 
 app.use(function *(next) {

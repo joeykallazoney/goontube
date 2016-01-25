@@ -8,10 +8,6 @@ import PureRenderMixin from 'react/lib/ReactComponentWithPureRenderMixin'
 class Layout extends React.Component {
     constructor(props, context) {
         super(props, context)
-
-        this.state = {
-            layout: {}
-        }
     }
 
     render() {
