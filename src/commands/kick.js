@@ -4,12 +4,10 @@ export default {
     options: {
         visibleInChat:  true
     },
-    events: {
-        checkForPermissions: (server, client) =>
-            (false === client.user.userHasPermission('kick')),
+    checkForPermissions: (server, client) =>
+        (false === client.user.userHasPermission('kick')),
 
-        commandHandler: (server, client, message) {
-            
-        },
+    commandHandler: (server, client, message) => {
+
     }
 }

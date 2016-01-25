@@ -1,4 +1,5 @@
 import p from '../protocol'
+import { makePacket } from '../util'
 
 /**
  * @class Models instances of individual client sessions.
@@ -6,14 +7,17 @@ import p from '../protocol'
  */
 class Client {
     teardown() {
+    }
 
+    sendPacket(type, data) {
+        this.socket.send(makePacket(type, data))
     }
 
     closeWithReason(message) {
-        this.socket.send(JSON.stringify({
-            type: p.DISCONNECTED_WITH_REASON,
-            data: message
-        }))
+        this.sendPacket(
+            p.DISCONNECTED_WITH_REASON,
+            message
+        )
 
         this.close()
     }

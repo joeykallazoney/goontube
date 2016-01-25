@@ -17,6 +17,7 @@ import { makePacket } from './util'
 import Client from './models/client'
 import rootReducer from './reducers'
 import hash from './hash'
+import commandParser from './parser'
 import p from './protocol'
 import protocolHandlers from './handlers'
 import config from '../config'
@@ -58,7 +59,9 @@ const HTML =
 
 wss.on('connection', (ws) => {
     let client = new Client(ws),
-        serverContext = {}
+        serverContext = {
+            parser: commandParser
+        }
 
     if(clients
         .filter((c) => c.address.address === client.address.address)

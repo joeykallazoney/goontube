@@ -1,7 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-
 import Users from './users'
+
+import { makePacket } from '../util'
+import p from '../protocol'
 
 const KEYCODE_ENTER = 13
 
@@ -31,7 +33,15 @@ class ChatInput extends React.Component {
         if(KEYCODE_ENTER === nativeEvent.keyCode) {
             let chatInputValue = this.refs.chatInput.value
 
-            console.log(chatInputValue)
+            try {
+                this.props.socket.send(makePacket(
+                    p.SEND_CHAT_MESSAGE,
+                    chatInputValue
+                ))
+            } catch(e) {
+                console.log('Failed to send chat message to the server.')
+            }
+
             this.refs.chatInput.value = ''
         }
     }
