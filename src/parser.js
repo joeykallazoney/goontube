@@ -51,13 +51,13 @@ export default function commandParser(server, client, inputString) {
             })
 
         /*
-         * Test against regexp /^[0-9]+d[0-9+$/ - is this a dice command?
+         * Test against regexp /^[0-9]+d[0-9+$/ - is this a tubes dice command?
          */
-        if(true === /^[0-9]+d[0-9]+$/.test(command)) {
+        if(null !== (command.match(/^[0-9]+d[0-9]+$/gi))) {
             if(null !== commands.diceCommand) {
                 commands
                     .diceCommand
-                    .commandHandler(server, client, remainingArguments)
+                    .commandHandler(server, client, command.split('d').join(' '))
                 return true
             }
         }
