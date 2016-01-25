@@ -1,7 +1,8 @@
 'use strict'
 
 var webpack = require('webpack'),
-    ExtractTextPlugin = require('extract-text-webpack-plugin')
+    ExtractTextPlugin = require('extract-text-webpack-plugin'),
+    autoprefixer = require('autoprefixer')
 
 module.exports = {
     entry: ['./src/client.js', './sass/style.sass'],
@@ -19,7 +20,7 @@ module.exports = {
             // I don't care.
             // Thing works.
             { test: /\.json$/, loader: 'json-loader' },
-            { test: /\.sass$/, loader: ExtractTextPlugin.extract('style', 'css!sass?indentedSyntax') }
+            { test: /\.sass$/, loader: ExtractTextPlugin.extract('style', 'css!postcss-loader!sass?indentedSyntax') }
         ]
     },
     node: {
@@ -33,6 +34,11 @@ module.exports = {
         filename: 'bundle.js',
         path: __dirname + '/static'
     },
+    postcss: [
+        autoprefixer({
+            browsers: ['last 2 versions']
+        })
+    ],
     plugins: [
         new ExtractTextPlugin('style.css'),
         //to minify for production: new webpack.optimize.UglifyJsPlugin({compress: true})
