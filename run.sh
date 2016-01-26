@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Script for consolidating the process of building and running the local goontube instance.
-
+# new fixes/additions
 case $(uname -s) in
 	Darwin)
 		binPath="/usr/local/bin"
