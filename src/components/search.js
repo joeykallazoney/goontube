@@ -4,15 +4,41 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 import { makePacket } from '../util'
-import p from '../protocol'
+import youtubeDataApi from 'youtube-node'
 
-/*
-let ChatMessage = (props) =>
-    <li className="message">
-        <span className="from">{props.from}</span>
-        <div className="body">{props.body}</div>
-    </li>
-    */
+//this.context.store.getState().getIn(['banner', 'possibilities'])
+
+const KEYCODE_ENTER = 13
+
+class SearchInput extends React.Component {
+    constructor(props, context) {
+        super(props, context)
+    }
+
+    onKeyDown(event) {
+        let nativeEvent = event.nativeEvent
+
+        if (KEYCODE_ENTER === nativeEvent.keyCode) {
+            let searchInputValue = this.refs.searchInput.value
+
+            try {
+              console.log(youtubeDataApi)
+              console.log('Hit search input try.')
+              return null;
+            } catch(e) {
+                console.log('Video search has failed to execute.')
+            }
+        }
+    }
+
+    render() {
+        return (
+            <div className="search-input">
+                <input ref="searchInput" type="text" onKeyDown={(e) => this.onKeyDown(e)} />
+            </div>
+        )
+    }
+}
 
 class Search extends React.Component {
     constructor(props, context) {
@@ -23,27 +49,10 @@ class Search extends React.Component {
     
     }
 
-    /*
-    componentDidMount() {
-        let lastRoomHistory = this.context.store
-            .getState()
-            .getIn(['room', 'history'])
-        this.context.store.subscribe(() => {
-            let currentHistory = this.context.store
-                .getState()
-                .getIn(['room', 'history'])
-            if(lastRoomHistory !== currentHistory) {
-                lastRoomHistory = currentHistory
-
-                this.forceUpdate()
-            }
-        })
-    }
-    */
-
     render() {
         return (
             <div className="search">
+                <SearchInput />
             </div>
         )
     }
