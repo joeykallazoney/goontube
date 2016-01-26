@@ -5,9 +5,11 @@
 case $(uname -s) in
 	Darwin)
 		binPath="/usr/local/bin"
+		sbinPath="/usr/sbin"
 	;;
 	Linux)
 		binPath="/usr/bin"
+		sbinPath="/sbin"
   ;;
 esac
 
@@ -122,6 +124,6 @@ esac
 
 else
 	echo "TCP 7070 is in use! Kill the following PIDs to continue:"
-	/sbin/lsof -i:7070 | tail -n+2 | awk '{print $2}' | xargs
+	${sbinPath}/lsof -i:7070 | tail -n+2 | awk '{print $2}' | xargs
 fi
 
