@@ -1,6 +1,26 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { connect } from 'react-redux'
 import p from '../protocol'
+
+function mapStateToProps(state) {
+    let possibilities = state.getIn(['banner', 'possibilities']),
+        index = state.getIn(['banner', 'currentBannerIndex'])
+
+    return {
+        src: possibilities.get(index)
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        onClick: () => {
+            dispatch({
+                type: p.BANNER_NEW_RANDOM_BANNER
+            })
+        }
+    }
+}
 
 class Banner extends React.Component {
     constructor(props, context) {
@@ -8,48 +28,16 @@ class Banner extends React.Component {
     }
 
     componentDidMount() {
-        let possibilities   = this.context.store.getState().getIn(['banner', 'possibilities'])
-        let newBannerChoice = Math.floor(Math.random() * possibilities.size)
-        let lastBannerIndex = newBannerChoice
-
-        this.context.store.dispatch({
-            type: p.BANNER_NEW_BANNER,
-            data: newBannerChoice
-        })
-
-        this.context.store.subscribe(() => {
-            if(lastBannerIndex !== this.context.store
-                .getState()
-                .get('banner').currentBannerIndex) {
-                    this.forceUpdate()
-            }
-        })
-    }
-
-    onClick() {
-        let possibilities   = this.context.store.getState().getIn(['banner', 'possibilities'])
-        let newBannerChoice = Math.floor(Math.random() * possibilities.size)
-
-        this.context.store.dispatch({
-            type: p.BANNER_NEW_BANNER,
-            data: newBannerChoice
-        })
+        this.props.onClick()
     }
 
     render() {
-        let bannerImgSrc = this.context.store.getState().getIn(['banner', 'possibilities']).toArray()
-            [this.context.store.getState().getIn(['banner', 'currentBannerIndex'])]
-
         return (
             <div className="banner">
-                <img onClick={() => this.onClick()} src={bannerImgSrc} className="banner-image" />
+                <img {...this.props} className="banner-image" />
             </div>
         )
     }
 }
 
-Banner.contextTypes = {
-    store: React.PropTypes.object.isRequired
-}
-
-export default Banner
+export default connect(mapStateToProps, mapDispatchToProps)(Banner)

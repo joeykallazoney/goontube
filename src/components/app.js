@@ -10,6 +10,18 @@ import ContentPane from './content-pane'
 import Search from './search'
 import Layout from './layout'
 
+import { connect } from 'react-redux'
+
+function mapStateToProps(state) {
+    return {
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+    }
+}
+
 class Goontube extends React.Component {
     constructor(props, context) {
         super(props, context)
@@ -38,8 +50,5 @@ class Goontube extends React.Component {
 Goontube.propTypes = {
     socket: React.PropTypes.object.isRequired
 }
-Goontube.contextTypes = {
-    store:  React.PropTypes.object.isRequired
-}
 
-export default Goontube
+export default connect(mapStateToProps)(Goontube)

@@ -1,5 +1,7 @@
 /**
- * @file Describes the interface for a dummy command module.
+ * @module Exports a $dice command.
+ * @description Allows users to use $dice in chat ($dice 4d2, $dice 8d3, etc.)
+ * in order to trigger output of appropriate random die rolls by the server.
  * @since 1.0.0
  */
 import { makePacket } from '../util'
@@ -8,10 +10,10 @@ import p from '../protocol'
 
 export default {
     /* The command name which will be typed in chat to trigger it. $command */
-    name:               'dummy',
+    name:               'dice',
 
     /* A description to feed into some sort of $help command */
-    description:        'Dummy command which does nothing.',
+    description:        'Utility command for making dice rolls, special syntax: e.g.: $4d20',
 
     /* Options to specify this command's general behaviour. */
     opts: {
@@ -31,12 +33,6 @@ export default {
      * message which is considered to have passed and is being parsed.
      */
     commandHandler: (server, client, message) => {
-        client.sendPacket(p.ROOM_USER_MESSAGE,
-            {
-                id:     uuid.v4(),
-                from:   'Dummy',
-                body:   message
-            }
-        )
+        console.log(message)
     }
 }

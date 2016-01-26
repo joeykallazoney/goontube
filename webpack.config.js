@@ -1,13 +1,13 @@
 'use strict'
 
 var webpack = require('webpack'),
-    ExtractTextPlugin = require('extract-text-webpack-plugin')
+    ExtractTextPlugin = require('extract-text-webpack-plugin'),
+    autoprefixer = require('autoprefixer')
 
 module.exports = {
     entry: ['./src/client.js', './sass/style.sass'],
     module: {
         loaders: [
-            { test: /\.js$/, exclude: /node_modules/, loader: 'babel' },
             { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel' },
             // If you're wondering why the line below is here, so am I!
             // npm-module youtube-node's subdependencies were
@@ -19,20 +19,25 @@ module.exports = {
             // I don't care.
             // Thing works.
             { test: /\.json$/, loader: 'json-loader' },
-            { test: /\.sass$/, loader: ExtractTextPlugin.extract('style', 'css!sass?indentedSyntax') }
+            { test: /\.sass$/, loader: ExtractTextPlugin.extract('style', 'css!postcss-loader!sass?indentedSyntax') }
         ]
     },
     node: {
-      console: 'empty',
-      fs: 'empty',
-      net: 'empty',
-      tls: 'empty',
-      console: true
+        console: 'empty',
+        fs: 'empty',
+        net: 'empty',
+        tls: 'empty',
+        console: true
     },
     output: {
         filename: 'bundle.js',
         path: __dirname + '/static'
     },
+    postcss: [
+        autoprefixer({
+            browsers: ['last 2 versions']
+        })
+    ],
     plugins: [
         new ExtractTextPlugin('style.css'),
         //to minify for production: new webpack.optimize.UglifyJsPlugin({compress: true})
