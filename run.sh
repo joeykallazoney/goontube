@@ -2,44 +2,62 @@
 
 # Script for consolidating the process of building and running the local goontube instance.
 
-while getopts abh opts; do
-   case ${opts} in
-      a)
-        sudo npm install
-        ;;
-      h)
-        echo
-        echo \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#
-        echo Script for consolidating the process of building and running the local goontube instance.
-        echo
-        echo
-        echo Flags:
-        echo __________________________________________________________________________________________
-        echo 
-        echo -a \(all\): runs all processes required to build goontube. \(Incomplete\)
-        echo -b \(browser\): runs the normal build and also switches to chrome. Requires OSX.
-        echo -h \(help\): displays this, but you knew that already, didn\'t you?
-        echo __________________________________________________________________________________________
-        echo
-        echo \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#
-        echo \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 
-        echo \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(:V\)
-        echo                                                                                         
-        exit
-        ;;
-      b)
-        screen -dm osascript -e '
-          tell application "Google Chrome"
-            delay 10
-            open location "http://localhost:7070/"
-            activate
-          end tell
-        '; 
-        ;;
-   esac
+case $(uname -s) in
+	Darwin)
+		binPath="/usr/local/bin"
+	;;
+	Linux)
+		binPath="/usr/bin"
+  ;;
+esac
+
+# Check to see if TCP:7070 is currently in use.
+if [ -z "$(/sbin/lsof -i:7070)" ] ; then 
+
+	while getopts abh opts; do
+		case ${opts} in
+		a)
+			if [ "$(whoami)" != "root" ]  ; then
+				sudo npm install
+			else
+				npm install
+			fi
+		;;
+		h|*)
+			echo
+			echo \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#
+			echo Script for consolidating the process of building and running the local goontube instance.
+			echo
+			echo
+			echo Flags:
+			echo __________________________________________________________________________________________
+			echo 
+			echo -a \(all\): runs all processes required to build goontube. \(Incomplete\)
+			echo -b \(browser\): runs the normal build and also switches to chrome. Requires OSX.
+			echo -h \(help\): displays this, but you knew that already, didn\'t you?
+			echo __________________________________________________________________________________________
+			echo
+			echo \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#
+			echo \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 
+			echo \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(:V\)
+			echo                                                                                         
+			exit
+			;;
+		b)
+			case $(uname -s) in
+				Darwin)
+					screen -dm osascript -e '
+						tell application "Google Chrome"
+						delay 10
+						open location "http://localhost:7070/"
+						activate
+						end tell
+						'; 
+				;;
+			esac
+		;;
+	esac
 done
-
-
 
 # Recieve a fortune. 
 # Will your build succeed? 
@@ -96,9 +114,14 @@ case $r in
     tput setaf 1; echo 'The Bad News: Anime is mandatory.'
     ;;
 esac
-tput sgr0; 
 
+	tput sgr0; 
+	webpack
+	npm start
+	exit
 
-webpack
-npm start
-exit
+else
+	echo "TCP 7070 is in use! Kill the following PIDs to continue:"
+	/sbin/lsof -i:7070 | tail -n+2 | awk '{print $2}' | xargs
+fi
+
