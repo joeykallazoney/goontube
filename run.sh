@@ -2,76 +2,8 @@
 
 # Script for consolidating the process of building and running the local goontube instance.
 # new fixes/additions
-case $(uname -s) in
-	Darwin)
-		binPath="/usr/local/bin"
-		sbinPath="/usr/sbin"
-	;;
-	Linux)
-		binPath="/usr/bin"
-		sbinPath="/sbin"
-  ;;
-esac
 
-# Check to see if TCP:7070 is currently in use. If so kill it.
-# idk this is all weird and broken
-if [ -d "/sbin/lsof" ]; then
-  if ![ -z "$(/sbin/lsof -i:7070)" ] ; then 
-    echo "TCP 7070 is in use! Kill the following PIDs to continue:"
-    ${sbinPath}/lsof -i:7070 | tail -n+2 | awk '{print $2}' | xargs
-    exit
-  #elif ![ -z "$(lsof -i:7070)" ] ; then 
-   # echo "TCP 7070 is in use! Kill the following PIDs to continue:"
-   # ${sbinPath}/lsof -i:7070 | tail -n+2 | awk '{print $2}' | xargs
-    #exit
-  fi
-fi
-
-while getopts abh opts; do
-  case ${opts} in
-  a)
-    if [ "$(whoami)" != "root" ]  ; then
-      sudo npm install
-    else
-      npm install
-    fi
-  ;;
-  h)
-    echo
-    echo \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#
-    echo Script for consolidating the process of building and running the local goontube instance.
-    echo
-    echo
-    echo Flags:
-    echo __________________________________________________________________________________________
-    echo 
-    echo -a \(all\): runs all processes required to build goontube. \(Incomplete\)
-    echo -b \(browser\): runs the normal build and also switches to chrome. Requires OSX.
-    echo -h \(help\): displays this, but you knew that already, didn\'t you?
-    echo __________________________________________________________________________________________
-    echo
-    echo \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#
-    echo \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 
-    echo \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(:V\)
-    echo                                                                                         
-    exit
-    ;;
-  b)
-    case $(uname -s) in
-      Darwin)
-        screen -dm osascript -e '
-          tell application "Google Chrome"
-          delay 10
-          open location "http://localhost:7070/"
-          activate
-          end tell
-          '; 
-      ;;
-    esac
-  ;;
-  esac
-done
-
+getFortune() {
 # Recieve a fortune. 
 # Will your build succeed? 
 # Will it fail? 
@@ -127,8 +59,81 @@ case $r in
   tput setaf 1; echo 'The Bad News: Anime is mandatory.'
   ;;
 esac
+tput sgr0;
+}
 
-tput sgr0; 
+case $(uname -s) in
+	Darwin)
+		binPath="/usr/local/bin"
+		sbinPath="/usr/sbin"
+		osType="macOS"
+	;;
+	Linux)
+		binPath="/usr/bin"
+		sbinPath="/sbin"
+		osType="Linux"
+	;;
+esac
+
+showHelp() {
+    hashSep() { awk 'BEGIN{for(c=0;c<91;c++) printf "#"; printf "\n"; exit 0}' ; }
+    lineSep() { awk 'BEGIN{for(c=0;c<91;c++) printf "_"; printf "\n"; exit 0}' ; }
+    printf "\n%s\n" "$(hashSep)"
+    echo Script for consolidating the process of building and running the local goontube instance.
+    printf "\n\n%s\n%s\n\n" "Flags:" "$(lineSep)"
+    printf "%s%s\n" "$(print '\033[1;32m') -a" "$(print '\033[0;32m') (all)     $(print '\033[0m'): runs all processes required to build goontube. (Incomplete)"
+    printf "%s%s\n" "$(print '\033[1;32m') -b" "$(print '\033[0;32m') (browser) $(print '\033[0m'): runs the normal build and also switches to chrome. Requires OSX."
+    printf "%s%s\n" "$(print '\033[1;32m') -h" "$(print '\033[0;32m') (help)    $(print '\033[0m'): displays this, but you knew that already, didn't you?"
+    printf "%s\n\n%s\n\n%91s\n\n" "$(lineSep)" "$(hashSep)" \(:V\)
+}
+
+# Check TCP/7070 for active processes on port.
+checkPort() {
+	if [ "$(whoami)" ! = "root" ]  ; then 
+	  sudo ${sbinPath}/lsof -i:7070
+	else
+	  ${sbinPath}/lsof -i:7070
+	fi
+	}
+
+# Only check TCP:7070 if 'lsof' is installed.
+if [ -f "${sbinPath}/lsof" ] ; then
+   if [ ! -n "$(checkPort)" ] || [ "$(checkPort)" != "" ] ; then
+     echo "TCP 7070 is in use! Kill the following PIDs to continue:"
+     $(checkPort) | tail -n+2 | awk '{print $2}' | xargs
+     # no need for 'exit' w/o a status code.
+   fi
+fi
+
+
+while getopts abh opts; do
+  case ${opts} in
+  a)
+    if [ "$(whoami)" != "root" ]  ; then
+      sudo npm install
+    else
+      npm install
+    fi
+  ;;
+  h)
+    showHelp
+    ;;
+  b)
+    if [ "${osType}" = "macOS" ] ; then
+        screen -dm osascript -e '
+          tell application "Google Chrome"
+          delay 10
+          open location "http://localhost:7070/"
+          activate
+          end tell
+          '; 
+    fi
+    ;;
+  esac
+done
+
+getFortune
 webpack
 npm start
-exit
+# exit <-- why 'exit?'
+# EOF
