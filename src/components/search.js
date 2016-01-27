@@ -4,10 +4,13 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 import { makePacket } from '../util'
-import youtubeDataApi from 'youtube-node'
+import YoutubeDataApi from 'youtube-node'
+let youtubeDataApi = new YoutubeDataApi
+youtubeDataApi.setKey('AIzaSyBQW8bHDt7RHZa5uVVRP4r0jNIUZD_39o4');
 
 
 const KEYCODE_ENTER = 13
+const NUMBER_OF_RESULTS = 10
 
 /*
  * James/jskz: thinking about how we might build generic search interface with React+Redux:
@@ -46,22 +49,31 @@ class SearchInput extends React.Component {
         let nativeEvent = event.nativeEvent
 
         if (KEYCODE_ENTER === nativeEvent.keyCode) {
-            let searchInputValue = this.refs.searchInput.value
+            let searchInputValue = this.state.value
 
             try {
-              console.log(youtubeDataApi)
-              console.log('Hit search input try.')
-              return null;
+              youtubeDataApi.search(searchInputValue, NUMBER_OF_RESULTS, function(error, result) {
+                if (error) {
+                  console.log(error);
+                }
+                else {
+                  console.log(result);
+                }
+              });
             } catch(e) {
                 console.log('Video search has failed to execute.')
             }
         }
     }
 
+    handleChange(event) {
+        this.setState({value: event.target.value})
+    }
+
     render() {
         return (
             <div className="search-input">
-                <input ref="searchInput" type="text" onKeyDown={(e) => this.onKeyDown(e)} />
+                <input ref="searchInput" type="text" onKeyDown={(e) => this.onKeyDown(e)} onChange={e => this.handleChange(e)} />
             </div>
         )
     }
