@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom'
 
 import { makePacket } from '../util'
 import YoutubeDataApi from 'youtube-node'
+import _ from 'underscore'
 let youtubeDataApi = new YoutubeDataApi
 youtubeDataApi.setKey('AIzaSyBQW8bHDt7RHZa5uVVRP4r0jNIUZD_39o4');
 
@@ -57,7 +58,13 @@ class SearchInput extends React.Component {
                   console.log(error);
                 }
                 else {
-                  console.log(result);
+                  window.tResult = result
+                  console.log(result)
+                  _.each(result.items, function(item){
+                    let thumbnailUrl = item.snippet.thumbnails.default.url
+                      console.log(thumbnailUrl)
+
+                  })
                 }
               });
             } catch(e) {
