@@ -14,11 +14,16 @@ case $(uname -s) in
 esac
 
 # Check to see if TCP:7070 is currently in use. If so kill it.
+# idk this is all weird and broken
 if [ -d "/sbin/lsof" ]; then
   if ![ -z "$(/sbin/lsof -i:7070)" ] ; then 
     echo "TCP 7070 is in use! Kill the following PIDs to continue:"
     ${sbinPath}/lsof -i:7070 | tail -n+2 | awk '{print $2}' | xargs
     exit
+  #elif ![ -z "$(lsof -i:7070)" ] ; then 
+   # echo "TCP 7070 is in use! Kill the following PIDs to continue:"
+   # ${sbinPath}/lsof -i:7070 | tail -n+2 | awk '{print $2}' | xargs
+    #exit
   fi
 fi
 
