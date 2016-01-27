@@ -60,7 +60,7 @@ class SearchInput extends React.Component {
                   // update state here?
                   window.tResult = result
                   console.log(result)
-                  _.each(result.items, function(item){
+                  result.items.forEach(function(item){
                     let thumbnailUrl = item.snippet.thumbnails.default.url
                       console.log(thumbnailUrl)
 
