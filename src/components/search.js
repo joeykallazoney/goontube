@@ -2,6 +2,8 @@
 
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { connect } from 'react-redux'
+import p from '../protocol'
 
 import { makePacket } from '../util'
 import YoutubeDataApi from 'youtube-node'
@@ -38,57 +40,50 @@ const NUMBER_OF_RESULTS = 10
  * Take a look at the syntax in the banner.js component, which I have now revised
  * to take a bit more advantage of the react-redux binding library.  We can make
  * very clean components like this!
+
  */
 
-class SearchInput extends React.Component {
-    constructor(props, context) {
-        super(props, context)
+
+function mapStateToProps(state) {
+    let searchQuery = state.getIn(['search', 'query'])
+
+    return {
+        value: searchQuery
     }
+}
 
-    onKeyDown(event) {
-        let nativeEvent = event.nativeEvent
-
-        if (KEYCODE_ENTER === nativeEvent.keyCode) {
-            let searchInputValue = this.state.value
-
-            try {
-              youtubeDataApi.search(searchInputValue, NUMBER_OF_RESULTS, function(error, result) {
-                if (error) {
-                  console.log(error);
-                }
-                else {
-                  // update state here?
-                  window.tResult = result
-                  console.log(result)
-                  result.items.forEach(function(item){
-                    let thumbnailUrl = item.snippet.thumbnails.default.url
-                      console.log(thumbnailUrl)
-
-                  })
-                }
-              });
-            } catch(e) {
-                console.log('Video search has failed to execute.')
-            }
+function mapDispatchToProps(dispatch, props) {
+    return {
+        onChange: (event) => {
+            dispatch(searchInputChanged(event.target.value))
         }
     }
+}
 
-    handleChange(event) {
-        this.setState({value: event.target.value})
+function searchInputChanged(value) {
+    return {
+        type: p.UPDATE_SEARCH_QUERY,
+        value: value
     }
+}
 
+class SearchInput extends React.Component {
+    constructor(props) {
+        super(props)
+    }
+    
     render() {
         return (
-            <div className="search-input">
-                <input ref="searchInput" type="text" onKeyDown={(e) => this.onKeyDown(e)} onChange={e => this.handleChange(e)} />
+            <div className="search-input"> 
+                <input {...this.props} ref="searchInput" type="text" />
             </div>
         )
     }
 }
 
 class Search extends React.Component {
-    constructor(props, context) {
-        super(props, context)
+    constructor(props) {
+        super(props)
     }
 
     componentDidMount() {
@@ -104,4 +99,4 @@ class Search extends React.Component {
     }
 }
 
-export default Search
+export default connect(mapStateToProps, mapDispatchToProps)(SearchInput)

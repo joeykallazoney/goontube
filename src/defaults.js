@@ -37,6 +37,9 @@ const defaultApplicationState = {
         playlist:       [],
         users:          [],
         history:        []
+    },
+    search:  {
+        query: ''
     }
 }
 

@@ -44,6 +44,11 @@ function rootReducer(state = fromJS(defaults), action) {
 
             return state
                 .setIn(['banner', 'currentBannerIndex'], currentBannerIndex)
+        // Begin Search
+        case p.UPDATE_SEARCH_QUERY:
+            state = state.setIn(['search', 'query'], action.value)
+            return state
+        // End Search
 
         default:
             return state
