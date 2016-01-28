@@ -6,6 +6,16 @@ import Sequelize from 'sequelize'
 import hash from '../hash'
 import config from '../../config'
 
+const legacyPermissionBitMasks = {
+    LEAD:       {bitmask: (1      ), legend: 'O'},
+    BUMP:       {bitmask: (1  << 1), legend: 'B'},
+    DELETE:     {bitmask: (1  << 2), legend: 'D'},
+    KICK:       {bitmask: (1  << 3), legend: 'K'},
+    BAN:        {bitmask: (1  << 4), legend: 'Q'},
+    RESTART:    {bitmask: (1  << 5), legend: 'R'},
+    CLEAN:      {bitmask: (1  << 6), legend: 'C'}
+}
+
 /**
  * @class Abstracts data and interaction with User accounts.
  * @since 1.0.0
@@ -18,7 +28,10 @@ class User {
      */
     static createSchema(db) {
         return db.define('user', {
-            username:       Sequelize.STRING,
+            username: {
+                type:       Sequelize.STRING,
+                primaryKey: true
+            },
             password:       Sequelize.STRING,
             email:          Sequelize.STRING,
             permissions:    Sequelize.INTEGER,
