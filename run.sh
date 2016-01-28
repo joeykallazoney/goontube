@@ -3,6 +3,11 @@
 # Script for consolidating the process of building and running the local goontube instance.
 # new fixes/additions
 
+# Use this (MacOS) to determine execution times for the 'find' operation
+# tFlags="-mtime -7s" ; time find ../goontube -type f \( ! -name "*.swp" \) ${tFlags}
+# Use this (Linux) to determine execution times for the 'find' operation
+# tFlags="-mmin -0.1" ; time find ../goontube -type f \( ! -name "*.swp" \) ${tFlags}
+
 case $(uname -s) in
 	Darwin)
 		binPath="/usr/local/bin"
