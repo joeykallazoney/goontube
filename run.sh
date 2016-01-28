@@ -39,6 +39,7 @@ fileMonitor() {
 
   webpack
   npm start &
+  echo
   echo Waiting for npm to complete before activating refresh daemon.
   sleep 7
   echo Starting live code refresh daemon.
