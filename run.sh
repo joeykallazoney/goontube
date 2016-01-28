@@ -8,11 +8,13 @@ case $(uname -s) in
 		binPath="/usr/local/bin"
 		sbinPath="/usr/sbin"
 		osType="macOS"
+		tFlags="-mtime -7s"
 	;;
 	Linux)
 		binPath="/usr/bin"
 		sbinPath="/sbin"
 		osType="Linux"
+		tFlags="-mmin -0.1"
 	;;
 esac
 
@@ -39,33 +41,31 @@ fileMonitor() {
 
   webpack
   npm start &
-  echo
-  echo Waiting for npm to complete before activating refresh daemon.
+  printf "\n%s\n" "Waiting for npm to complete before activating refresh daemon."
   sleep 7
-  echo Starting live code refresh daemon.
-  while [[ true ]]
-  do
-    chsum2=`find ../goontube -type f -mtime -5s;`
-    if [[ $chsum1 != $chsum2 ]] ; then           
+  printf "Starting live code refresh daemon."
+  while true ; do
+       chsum2=$(find ../goontube -type f \( ! -name "*.swp" \) ${tFlags})
+    if [ "${chsum1}" != "${chsum2}" ] ; then           
       # exclude files go here, ie stuff you don't want to trigger refresh
-      case $chsum2 in
+      case ${chsum2} in
         '')
-          chsum1=$chsum2
+          chsum1=${chsum2}
         ;;
         *.swp)
-          chsum1=$chsum2
+          chsum1=${chsum2}
         ;;
         *)
-          echo File\(s\) changed: \>$chsum2\< Refreshing...
-          chsum1=$chsum2
-          lsof -i:7070 | tail -n+2 | awk '$1 ~ /^node$/ {print $2}' | uniq | while read pid ; do kill -9 $pid ; done
+          printf "File(s) changed: [${chsum2}] Refreshing..."
+          chsum1=${chsum2}
+          checkPort | tail -n+2 | awk '$1 ~ /^node$/ {print $2}' | uniq | while read pid ; do kill -9 $pid ; done
           webpack
           npm start &
         ;;
       esac
     fi
     sleep 7
-    if [[ $bFlag = "1" ]] ; then
+    if [ "${bFlag}" = "1" ] ; then
       osascript -e '
         tell application "Google Chrome"
           tell the active tab of its first window
@@ -85,6 +85,7 @@ buildStuff() {
 aFlag="0"
 hFlag="0"
 bFlag="0"
+
 while getopts abh opts; do
   case ${opts} in
   a)
@@ -95,8 +96,8 @@ while getopts abh opts; do
   ;;
   b)
     if [ "${osType}" = "macOS" ] ; then
-      echo A chrome browser tab will open to http://localhost:7070/ once npm begins running.
-      echo Make sure this tab is in the first slot of the chrome browser so that it can hot refresh.
+      printf "%s\n" "A chrome browser tab will open to http://localhost:7070/ once npm begins running."
+      printf "%s\n" "Make sure this tab is in the first slot of the chrome browser so that it can hot refresh."
       bFlag="1"
       screen -dm osascript -e '
         tell application "Google Chrome"
@@ -112,3 +113,4 @@ done
 
 buildStuff
 # EOF
+
