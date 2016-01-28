@@ -61,19 +61,20 @@ fileMonitor() {
           checkPort | tail -n+2 | awk '$1 ~ /^node$/ {print $2}' | uniq | while read pid ; do kill -9 $pid ; done
           webpack
           npm start &
+          sleep 7
+          if [ "${bFlag}" = "1" ] ; then
+            osascript -e '
+              tell application "Google Chrome"
+                tell the active tab of its first window
+                  reload
+                end tell
+              end tell
+            '; 
+          fi
         ;;
       esac
     fi
     sleep 7
-    if [ "${bFlag}" = "1" ] ; then
-      osascript -e '
-        tell application "Google Chrome"
-          tell the active tab of its first window
-            reload
-          end tell
-        end tell
-      '; 
-    fi
   done
 }
 
