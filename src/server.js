@@ -62,11 +62,11 @@ const HTML =
 </html>`
 
 wss.on('connection', (ws) => {
-    let client = new Client(ws),
-        serverContext = {
+    let serverContext = {
             data:       schemas,
             parser:     commandParser
-        }
+    }
+    let client = new Client(ws, serverContext)
 
     if(clients
         .filter((c) => c.address.address === client.address.address)

@@ -29,8 +29,8 @@ class User {
     static createSchema(db) {
         return db.define('user', {
             username: {
-                type:       Sequelize.STRING,
-                primaryKey: true
+                type:           Sequelize.STRING,
+                primaryKey:     true
             },
             password:       Sequelize.STRING,
             email:          Sequelize.STRING,

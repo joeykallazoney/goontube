@@ -1,5 +1,7 @@
 import p from '../protocol'
 import { makePacket } from '../util'
+import { MD5, enc } from 'crypto-js'
+import hash from '../hash'
 
 /**
  * @class Models instances of individual client sessions.
@@ -27,10 +29,16 @@ class Client {
             this.socket.close()
     }
 
-    constructor(socket, serverStore) {
-        this.socket      = socket
-        this.address     = socket._socket.address()
-        this.user        = null
+    login(username, password) {
+        console.log(username)
+        console.log(password)
+    }
+
+    constructor(socket, ctx) {
+        this.serverContext  = ctx
+        this.socket         = socket
+        this.address        = socket._socket.address()
+        this.user           = null
     }
 }
 
