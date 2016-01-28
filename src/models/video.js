@@ -25,7 +25,13 @@ class Video {
        })
     }
 
-    constructor(id) {
+    constructor(serverContext, id) {
+        this._schema =
+        this._video = serverContext.data.Video.findOne({
+            where: {
+                id: id
+            }
+        })
     }
 }
 

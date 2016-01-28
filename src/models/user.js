@@ -54,9 +54,9 @@ class User {
      * handle and a username, the server will attempt to populate this object
      * with the latest information from the database.
      */
-    constructor(db, username) {
+    constructor(serverContext, username) {
         this._auth   = false
-        this._user   = this._schema.findAll({
+        this._user   = serverContext.data.User.findOne({
             where: {
                 username: username
             }
