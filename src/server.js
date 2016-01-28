@@ -29,11 +29,25 @@ let staticFiles     = new koaStatic(config.staticPath, {})
 let app             = koa()
 let wss             = new WebSocketServer({ server: server })
 let clients         = []
-let sequelize       = new Sequelize(config.databasePath)
+let sequelize, schemas
 
-let schemas         = {
-    User:   User.createSchema(sequelize),
-    Video:  Video.createSchema(sequelize)
+try {
+    sequelize       = new Sequelize(
+        `sqlite://${config.databasePath}`,
+        {
+            dialect:    'sqlite',
+            storage:    config.databasePath
+        })
+    schemas         = {
+        User:   User.createSchema(sequelize),
+        Video:  Video.createSchema(sequelize)
+    }
+
+    //schemas.User.findOne({ where: { username: 'jskz' } }).then((user) => {
+    //    console.log({...user.dataValues})
+    //})
+} catch(e) {
+    console.log(`Failed to initialize database and schemas: ${e.toString()}`)
 }
 
 app.use(koaLogger())

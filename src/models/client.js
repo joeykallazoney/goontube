@@ -2,6 +2,7 @@ import p from '../protocol'
 import { makePacket } from '../util'
 import { MD5, enc } from 'crypto-js'
 import hash from '../hash'
+import User from './user'
 
 /**
  * @class Models instances of individual client sessions.
@@ -30,8 +31,9 @@ class Client {
     }
 
     login(username, password) {
-        console.log(username)
-        console.log(password)
+        let user = new User(this.serverContext, username)
+        
+        return true
     }
 
     constructor(socket, ctx) {

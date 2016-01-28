@@ -22,6 +22,9 @@ class Video {
            video_karma:     Sequelize.INTEGER,
            views:           Sequelize.INTEGER,
            last_adding_by:  Sequelize.STRING
+       }, {
+           tableName:       'videos',
+           timestamps:     false
        })
     }
 

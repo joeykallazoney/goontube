@@ -6,16 +6,6 @@ import Sequelize from 'sequelize'
 import hash from '../hash'
 import config from '../../config'
 
-const legacyPermissionBitMasks = {
-    LEAD:       {bitmask: (1      ), legend: 'O'},
-    BUMP:       {bitmask: (1  << 1), legend: 'B'},
-    DELETE:     {bitmask: (1  << 2), legend: 'D'},
-    KICK:       {bitmask: (1  << 3), legend: 'K'},
-    BAN:        {bitmask: (1  << 4), legend: 'Q'},
-    RESTART:    {bitmask: (1  << 5), legend: 'R'},
-    CLEAN:      {bitmask: (1  << 6), legend: 'C'}
-}
-
 /**
  * @class Abstracts data and interaction with User accounts.
  * @since 1.0.0
@@ -46,6 +36,9 @@ class User {
             last_seen_at:   Sequelize.DATE,
             time_spent:     Sequelize.INTEGER,
             json_data:      Sequelize.STRING
+        }, {
+            tableName:      'valid_users',
+            timestamps:     false
         })
     }
 
@@ -60,6 +53,8 @@ class User {
             where: {
                 username: username
             }
+        }).then((user) => {
+            this.user = user
         })
     }
 
@@ -77,7 +72,7 @@ class User {
      */
     serialize() {
         try {
-            this._user.save()
+            this.user.save()
         } catch (e) {
         }
     }
@@ -88,11 +83,11 @@ class User {
      * @param {String} pwdHash is a salted SHA-512 hash of the user's password.
      */
     authenticate(pwdHash) {
-        if(null === this._user) {
+        if(null === this.user) {
             return false
         }
 
-        if(pwdHash === this._user.password) {
+        if(pwdHash === this.user.password) {
             return (this._auth = true)
         }
         return false
