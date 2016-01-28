@@ -3,65 +3,6 @@
 # Script for consolidating the process of building and running the local goontube instance.
 # new fixes/additions
 
-getFortune() {
-  # Recieve a fortune. 
-  # Will your build succeed? 
-  # Will it fail? 
-  # Only one thing is certain.
-  # .
-  # .
-  # .
-  # Bob Saget raped and killed a girl in 1990.
-
-  r=$(( $RANDOM % 10 ))
-
-  case $r in
-  0)
-    tput setaf 1; echo "Aww. It's so cute that you thought this build wouldn't fail."
-    ;;
-  1)
-    tput setaf 2; echo "Is that code in your pants or are you just happy to build me?"
-    ;;
-  2)
-    tput setaf 4; echo "Who cares if this build fails or not, it's not like it will give your life meaning."
-    ;;
-  3)
-    tput setaf 1; echo "MORE BUILDS FOR THE BUILD GOD"
-    ;;
-  4)
-    tput setaf 5; echo "Hey, don't worry about it. You're a wonderful person and I love you, even though your code is terrible."
-    ;;
-  5)
-    tput setaf 3; echo "Your code is like a ray of sunshine on a sunny day."
-    tput setaf 1; echo "REDUNDANT"
-    ;;
-  6)
-    tput setaf 6; echo "Your code is so good that it's literally going to give someone an orgasm. That someone is you. Weirdo."
-    ;;
-  7)
-    tput setaf 2; echo "wow."
-    echo ""
-    tput setaf 2; echo "such code."
-    echo ""
-    tput setaf 2; echo "much intelligence."
-    echo ""
-    echo ""
-    echo ""
-    echo ""
-    tput setaf 2; echo "wow."
-    ;;
-  8)
-    tput setaf 7; echo "BooOoOoOOooOo!!! The spooky code ghost is haunting your code!"
-    ;;
-  9)
-    tput setaf 1; echo 'The Bad News: This build will fail.'
-    tput setaf 2; echo "The Good News: As a side effect it will accidently create the first truly sentient AI, which will ascend to fill God's empty throne and bring everlasting peace to humanity."
-    tput setaf 1; echo 'The Bad News: Anime is mandatory.'
-    ;;
-  esac
-  tput sgr0;
-}
-
 case $(uname -s) in
 	Darwin)
 		binPath="/usr/local/bin"
@@ -114,7 +55,7 @@ fileMonitor() {
           chsum1=$chsum2
         ;;
         *)
-          echo File changed: \>$chsum2\< Refreshing...
+          echo File\(s\) changed: \>$chsum2\< Refreshing...
           chsum1=$chsum2
           lsof -i:7070 | tail -n+2 | awk '$1 ~ /^node$/ {print $2}' | uniq | while read pid ; do kill -9 $pid ; done
           webpack
@@ -123,23 +64,26 @@ fileMonitor() {
       esac
     fi
     sleep 7
+    if [[ $bFlag = "1" ]] ; then
+      osascript -e '
+        tell application "Google Chrome"
+          tell the active tab of its first window
+            reload
+          end tell
+        end tell
+      '; 
+    fi
   done
 }
 
-# Only check TCP:7070 if 'lsof' is installed.
 buildStuff() {
-  if [ -f "${sbinPath}/lsof" ] ; then
-    if [ -n "$(checkPort)" ] || [ "$(checkPort)" != "" ] ; then
-      printf "\n%s\n" "TCP 7070 is in use! Kill the following PIDs and re-run $(printf '\033[0;32m') $(basename $0)$(printf '\033[0m') to continue:"
-      checkPort | tail -n+2 | awk '$1 ~ /node/ {print $2}' | uniq | xargs
-      exit
-    else  
-      fileMonitor
-      getFortune
-    fi
-  fi
+  lsof -i:7070 | tail -n+2 | awk '$1 ~ /^node$/ {print $2}' | uniq | while read pid ; do kill -9 $pid ; done
+  fileMonitor
 }
 
+aFlag="0"
+hFlag="0"
+bFlag="0"
 while getopts abh opts; do
   case ${opts} in
   a)
@@ -150,9 +94,12 @@ while getopts abh opts; do
   ;;
   b)
     if [ "${osType}" = "macOS" ] ; then
+      echo A chrome browser tab will open to http://localhost:7070/ once npm begins running.
+      echo Make sure this tab is in the first slot of the chrome browser so that it can hot refresh.
+      bFlag="1"
       screen -dm osascript -e '
         tell application "Google Chrome"
-        delay 10
+        delay 8
         open location "http://localhost:7070/"
         activate
         end tell
