@@ -8,7 +8,6 @@ import { connect } from 'react-redux'
 
 function mapStateToProps(state) {
     return {
-        state.getIn(['layout'])
     }
 }
 
@@ -16,6 +15,15 @@ function mapDispatchToProps(dispatch, props) {
     return {
     }
 }
+
+const LayoutWrapper = (layoutProps) =>
+    (Component) => {
+        return class {
+            render() {
+                return <Component {...layoutProps} />
+            }
+        }
+    }
 
 class Layout extends React.Component {
     constructor(props, context) {
@@ -25,12 +33,10 @@ class Layout extends React.Component {
     render() {
         return (
             <div className="layout">
-                {this.props.children}
+                {this.props.children.map(c => c)}
             </div>
         )
     }
 }
-
-Layout.mixins = [PureRenderMixin]
 
 export default connect(mapStateToProps, mapDispatchToProps)(Layout)

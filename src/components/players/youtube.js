@@ -18,12 +18,6 @@ class YouTubePlayer extends React.Component {
         super(props, context)
     }
 
-    onReady(event) {
-    }
-
-    onStateChange(event) {
-    }
-
     render() {
         const options = {
             width:          '100%',

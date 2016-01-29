@@ -30,7 +30,6 @@ class Room {
 
     addUser(user) {
         this.members.push(user)
-
         this.updateRoomUsersList()
     }
 
@@ -87,7 +86,9 @@ class Room {
         let nextVideo = this.playlist.shift()
 
         this.playing = {
+            active:                 true,
             timeSpentPlaying:       0,
+            duration:               -1,
             currentStreamSources:   [
                 {
                     playUntilCompletion:    true,
@@ -122,6 +123,10 @@ class Room {
                 } else {
                     if(true === this.playing.active) {
                         this.playing.timeSpentPlaying += 1000
+
+                        if(this.playing.timeSpentPlaying > this.playing.duration) {
+                            this.startNextVideo()
+                        }
                     } else {
                     }
                 }

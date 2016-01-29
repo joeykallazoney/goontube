@@ -44,10 +44,6 @@ try {
         User:   User.createSchema(sequelize),
         Video:  Video.createSchema(sequelize)
     }
-
-    //schemas.User.findOne({ where: { username: 'jskz' } }).then((user) => {
-    //    console.log({...user.dataValues})
-    //})
 } catch(e) {
     console.log(`Failed to initialize database and schemas: ${e.toString()}`)
 }
@@ -126,6 +122,9 @@ wss.on('connection', (ws) => {
             ws.close()
         }
     })
+
+    let currentPlaylistPacket = client.room.makePlaylistUpdatePacket()
+    client.sendPacket(currentPlaylistPacket.type, currentPlaylistPacket.data)
 })
 
 app.use(function *(next) {

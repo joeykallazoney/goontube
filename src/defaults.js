@@ -42,7 +42,7 @@ const defaultApplicationState = {
         query: '',
         results: [],
         apiKeys: {
-          youtube: 'AIzaSyBQW8bHDt7RHZa5uVVRP4r0jNIUZD_39o4'
+            youtube: 'AIzaSyBQW8bHDt7RHZa5uVVRP4r0jNIUZD_39o4'
         }
     }
 }

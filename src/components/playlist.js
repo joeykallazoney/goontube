@@ -24,11 +24,13 @@ class Playlist extends React.Component {
     }
 
     render() {
+        let playlistIndex = 0;
+
         return (
             <div className="playlist">
-                {this.props.items.map(i => (
-                    <PlaylistEntry {...i} {...this.props.entries} />
-                ))}
+                {this.props.items.map(i =>
+                    <PlaylistEntry key={playlistIndex++} {...i} {...this.props.entries} />
+                )}
             </div>
         )
     }
