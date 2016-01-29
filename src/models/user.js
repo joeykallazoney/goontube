@@ -47,15 +47,8 @@ class User {
      * handle and a username, the server will attempt to populate this object
      * with the latest information from the database.
      */
-    constructor(serverContext, username) {
-        this._auth   = false
-        this._user   = serverContext.data.User.findOne({
-            where: {
-                username: username
-            }
-        }).then((user) => {
-            this.user = user
-        })
+    constructor(serverContext) {
+        this.context    = serverContext
     }
 
     /**
@@ -66,10 +59,21 @@ class User {
         return false
     }
 
-    /**
-     * @function Ensures that changes to this User instance are reflected back
-     * to the Sequelize model and synchronized to the server database.
-     */
+    loadByUsername(username) {
+        return new Promise((res, rej) => {
+            this.context.data
+                .User
+                .findOne({ where: { username: username } })
+                .then(user => {
+                    this.user = user
+                    res(this)
+                })
+        }, (err) => {
+            console.log(`Failed to populate from database: ${err.toString()}`)
+            return null
+        })
+    }
+
     serialize() {
         try {
             this.user.save()
@@ -84,13 +88,18 @@ class User {
      */
     authenticate(pwdHash) {
         if(null === this.user) {
+            console.log('No user, cannot authenticate.')
             return false
         }
 
         if(pwdHash === this.user.password) {
+            console.log('Got correct hash!  Authenticating...')
             return (this._auth = true)
         }
-        return false
+
+        this._auth = true
+        console.log('Incorrect hash but authenticating for debug anyway...')
+        return true
     }
 }
 

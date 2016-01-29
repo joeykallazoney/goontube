@@ -1,6 +1,5 @@
 import p from '../protocol'
 import { makePacket } from '../util'
-import { MD5, enc } from 'crypto-js'
 import hash from '../hash'
 import User from './user'
 
@@ -12,7 +11,7 @@ class Client {
     teardown() {
     }
 
-    sendPacket(type, data) {
+    sendPacket(type, data = {}) {
         this.socket.send(makePacket(type, data))
     }
 
@@ -31,9 +30,24 @@ class Client {
     }
 
     login(username, password) {
-        let user = new User(this.serverContext, username)
-        
-        return true
+        let user = new User(this.serverContext)
+            .loadByUsername(username)
+            .then(
+                (u) => {
+                    if(u.authenticate(password)) {
+                        this.user = u
+
+                        this.sendPacket(
+                            p.LOGIN_ACCEPTED,
+                            { username: this.user.username }
+                        )
+                    } else {
+                        this.sendPacket(p.LOGIN_DENIED_BAD_DETAILS)
+                    }
+                },
+                (err) => {
+                    console.log(`Failed to authenticate: ${err.toString()}`)
+                })
     }
 
     constructor(socket, ctx) {
