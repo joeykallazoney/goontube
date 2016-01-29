@@ -70,6 +70,22 @@ class Room {
         })
     }
 
+    startNextVideo() {
+        let nextVideo = this.playlist.shift()
+
+        this.playing = {
+            timeSpentPlaying:       0,
+            currentStreamSources:   [
+                {
+                    playUntilCompletion:    true,
+                    data:                   nextVideo
+                }
+            ]
+        }
+
+        console.log(`Now playing: ${this.playing.currentStreamSources[0].data.title}`)
+    }
+
     heartbeat(context) {
         if(!this.playlist.length && !this.fetchingEntries) {
             this.fetchingEntries = true
@@ -87,9 +103,14 @@ class Room {
                 })
         } else {
             try {
-                this.playing = this.playlist.shift()
-
-                console.log(`Instaplaying: ${this.playing.title}`)
+                if(null === this.playing) {
+                    this.startNextVideo()
+                } else {
+                    if(true === this.playing.active) {
+                        this.playing.timeSpentPlaying += 1000
+                    } else {
+                    }
+                }
             } catch(err) {
                 console.log(`Failed to advance playlist: ${err.toString()}`)
             }
@@ -103,6 +124,12 @@ class Room {
         this.members            = []
         this.playlist           = []
         this.playing            = null
+
+        /*this.playing = {
+            active:             false,
+            mediaStreams:       [],
+            timeSpentPlaying:   0
+        }*/
 
         setInterval(() => this.heartbeat(serverContext), 1000)
     }

@@ -8,9 +8,9 @@ import p from '../protocol'
 import { makePacket } from '../util'
 import YoutubeDataApi from 'youtube-node'
 
-let youtubeDataApi = new YoutubeDataApi
+let youtubeDataApi      = new YoutubeDataApi
 
-const KEYCODE_ENTER = 13
+const KEYCODE_ENTER     = 13
 const NUMBER_OF_RESULTS = 10
 
 /*
@@ -43,17 +43,60 @@ const NUMBER_OF_RESULTS = 10
  */
 
 function mapStateToProps(state) {
-    let searchQuery = state.getIn(['search', 'query'])
+    let searchQuery = state.getIn(['search', 'query']),
+        youtubeApiKey = state.getIn(['search', 'apiKeys', 'youtube'])
 
     return {
+        youtubeApiKey: youtubeApiKey,
         value: searchQuery
     }
 }
 
 function mapDispatchToProps(dispatch, props) {
     return {
-        onChange: (event) => dispatch(searchInputChanged(event.target.value))
+        onChange: (event) => dispatch(asyncSearchAction(event.target.value))
     }
+}
+
+function asyncSearchAction(value) {
+    /*
+     * Some kind of throttle/debounce?
+     * ...
+     */
+
+    youtubeDataApi.search(value, NUMBER_OF_RESULTS, (err, res) => {
+        if(err) {
+            console.log(`Failed to fetch YouTube results.`)
+
+            return {
+                type: p.SEARCH_FAILED_YOUTUBE_SEARCH,
+                data: err
+            }
+        } else {
+            console.log(res)
+
+            try {
+                let receivedYoutubeResults = {
+                    type: p.SEARCH_RECEIVED_YOUTUBE_RESULTS,
+                    data: res.items.map(item => {
+                        return {
+                            id:             item.id.videoId,
+                            title:          item.snippet.title,
+                            description:    item.snippet.description,
+                            thumbnail:      item.snippet.thumbnails.default.url
+                        }
+                    })
+                }
+
+                return receivedYoutubeResults
+            } catch(e) {
+                return {
+                    type: p.SEARCH_FAILED_YOUTUBE_SEARCH,
+                    data: e.toString()
+                }
+            }
+        }
+    })
 }
 
 function searchInputChanged(value) {
@@ -68,6 +111,10 @@ class SearchInput extends React.Component {
         super(props)
     }
 
+    componentDidMount() {
+        youtubeDataApi.setKey(this.props.youtubeApiKey)
+    }
+
     render() {
         return (
             <div className="search-input">
@@ -80,10 +127,6 @@ class SearchInput extends React.Component {
 class Search extends React.Component {
     constructor(props) {
         super(props)
-    }
-
-    componentDidMount() {
-
     }
 
     render() {

@@ -35,6 +35,10 @@ function rootReducer(state = fromJS(defaults), action) {
             state = state.setIn(['auth', 'user'], null)
             return state
 
+        case p.ROOM_PLAYLIST_UPDATE:
+            state = state.setIn(['room', 'playlist'], action.data)
+            return state
+
         case p.ROOM_LIST_UPDATE:
             state = state.setIn(['room', 'users'], action.data)
             return state

@@ -87,7 +87,7 @@ wss.on('connection', (ws) => {
     let client = new Client(ws, serverContext)
 
     defaultRoom.addUser(client)
-    client.room = defaultRoom
+    client.room = defaultRoom  // <-- unstable, room field will be gone
 
     if(clients
         .filter((c) => c.address.address === client.address.address)
