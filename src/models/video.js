@@ -39,7 +39,7 @@ class Video {
                 })
         }, (err) => {
             console.log(`Failed to populate from database: ${err.toString()}`)
-            return null
+            rej(err)
         })
     }
 
