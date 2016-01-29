@@ -22,6 +22,10 @@ function rootReducer(state = fromJS(defaults), action) {
                 })
             return state
 
+        case p.CURRENT_MEDIA_ITEM_INFO:
+            state = state
+            return state
+
         case p.LOGIN_ACCEPTED:
             state = state.setIn(['auth', 'user'], action.data.username)
             return state
