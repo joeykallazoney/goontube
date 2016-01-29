@@ -1,5 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { makePacket } from '../util'
+import p from '../protocol'
 
 function mapStateToProps(state) {
     return {
@@ -7,8 +9,12 @@ function mapStateToProps(state) {
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    return {}
+function mapDispatchToProps(dispatch, props) {
+    return {
+        logout: {
+            onClick: () => props.socket.send(makePacket(p.LOGOUT_USER))
+        }
+    }
 }
 
 class SiteBar extends React.Component {
@@ -21,7 +27,11 @@ class SiteBar extends React.Component {
             <div className="sitebar">
                 {null !== this.props.user ? (
                     <div className="logged-in">
-                        Currently logged in as {this.props.user}
+                        Currently logged in as {this.props.user},
+
+                        <div className="logout" {...this.props.logout}>
+                            [ click here to log-out ]
+                        </div>
                     </div>
                 ) : null}
             </div>

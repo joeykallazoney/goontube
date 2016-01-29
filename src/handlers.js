@@ -23,12 +23,18 @@ module.exports = {
         }
     },
 
+    LOGOUT_USER: (server, client, msg) => {
+        client._auth = false
+        client.user = null
+        client.sendPacket(p.LOGOUT_USER)
+    },
+
     SEND_CHAT_MESSAGE: (server, client, msg) => {
         if(null === msg) return false
 
         server.parser(server, client, msg)
     }
-    
+
     // Search
 
     // End Search

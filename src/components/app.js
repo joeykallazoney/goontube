@@ -35,7 +35,7 @@ class Goontube extends React.Component {
     render() {
         return (
             <div id="app">
-                <SiteBar />
+                <SiteBar socket={this.props.socket} />
                 <div id="goontube">
                     <Layout>
                         <Banner />

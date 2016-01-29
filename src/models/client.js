@@ -36,7 +36,6 @@ class Client {
                 (u) => {
                     if(u.authenticate(password)) {
                         this.user = u
-                        console.log(u)
                         this.sendPacket(
                             p.LOGIN_ACCEPTED,
                             { username: username }
