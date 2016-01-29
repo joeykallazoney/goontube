@@ -1,25 +1,31 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { connect } from 'react-redux'
+
+function mapStateToProps(state) {
+    return {
+        users:  state.getIn(['rooms', 'users'])
+    }
+}
+
+function mapDispatchToProps(dispatch, props) {
+    return {
+    }
+}
 
 class Users extends React.Component {
     constructor(props, context) {
         super(props, context)
     }
 
-    componentDidMount() {
-
-    }
-
     render() {
         return (
             <div className="user-list">
+                {this.props.users.map(user => (
+                    <li key={user.username} className="user">{user.username}</li>
+                ))}
             </div>
         )
     }
 }
 
-Users.contextTypes = {
-    store: React.PropTypes.object.isRequired
-}
-
-export default Users
+export default connect(mapStateToProps, mapDispatchToProps)(Users)
