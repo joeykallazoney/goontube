@@ -10,9 +10,17 @@ module.exports = {
             type: p.CLIENT_HELLO,
             data: `Hello there!`
         })
-
-        //client.send(encoded)
         return true
+    },
+
+    AUTHENTICATION_ATTEMPT: (server, client, msg) => {
+        try {
+            if(null === msg) return false
+
+            client.login(msg.username, msg.password)
+        } catch(e) {
+            console.log('Bad AUTHENTICATION_ATTEMPT packet sent.')
+        }
     },
 
     SEND_CHAT_MESSAGE: (server, client, msg) => {
@@ -20,7 +28,8 @@ module.exports = {
 
         server.parser(server, client, msg)
     }
-    // Search
     
+    // Search
+
     // End Search
 }

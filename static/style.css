@@ -7,11 +7,15 @@ body {
   font-family: "Open Sans", sans-serif;
   font-size: 17px; }
 
-#origin {
+.sitebar {
+  width: 100%;
+  background: #ffa800; }
+
+#goontube {
   width: 960px;
   margin: 0 auto; }
   @media screen and (max-width: 959px) {
-    #origin {
+    #goontube {
       width: 100% !important; } }
 
 .chat {

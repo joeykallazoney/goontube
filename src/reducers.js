@@ -39,6 +39,11 @@ function rootReducer(state = fromJS(defaults), action) {
                     parseInt(Math.random() * state.getIn(['banner', 'possibilities']).size))
             return state
 
+        case p.LOGIN_ACCEPTED:
+            console.log(action.data)
+            state = state.setIn(['auth', 'user'], action.data.username)
+            return state
+
         case p.BANNER_NEW_BANNER:
             const currentBannerIndex = parseInt(action.data)
 

@@ -108,7 +108,7 @@ wss.on('connection', (ws) => {
             try {
                 if(false === protocolHandlers[decoded.type](serverContext, client, decoded.data)) {
                     console.log('Handler returned bad data.')
-                    return // don't drop client for mere unhandled packets
+                    return
                 }
             } catch(e) {
                 console.log('Failed to handle bad client message.')
@@ -123,13 +123,13 @@ wss.on('connection', (ws) => {
     /*
      * send greeting+acknowledgement to user
      */
-    ws.send(makePacket(p.ROOM_USER_MESSAGE,
+    client.sendPacket(p.ROOM_USER_MESSAGE,
         {
             id:     uuid.v4(),
             from:   'Tester',
             body:   'This is a test hello message from the server.'
         }
-    ))
+    )
 })
 
 app.use(function *(next) {
