@@ -24,7 +24,7 @@ class Video {
            last_added_by:   Sequelize.STRING
        }, {
            tableName:       'videos',
-           timestamps:     false
+           timestamps:      false
        })
     }
 

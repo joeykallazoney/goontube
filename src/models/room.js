@@ -56,9 +56,9 @@ class Room {
         }
     }
 
-    static loadAll(ctx) {
+    static loadAll(context) {
         return new Promise((res, rej) => {
-            ctx.data
+            context.data
                 .Video
                 .findAll()
                 .then(rooms => {
@@ -87,9 +87,9 @@ class Room {
                 })
         } else {
             try {
-                let playing = this.playlist.pop()
+                this.playing = this.playlist.shift()
 
-                console.log(playing.title)
+                console.log(`Instaplaying: ${this.playing.title}`)
             } catch(err) {
                 console.log(`Failed to advance playlist: ${err.toString()}`)
             }
@@ -97,6 +97,7 @@ class Room {
     }
 
     constructor(serverContext) {
+        this.name               = ``
         this.fetchingEntries    = false
         this.context            = serverContext
         this.members            = []
