@@ -1,11 +1,23 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Users from './users'
+import { connect } from 'react-redux'
 
+import Users from './users'
 import { makePacket } from '../util'
 import p from '../protocol'
 
 const KEYCODE_ENTER = 13
+
+function mapStateToProps(state) {
+    return {
+        history: state.getIn(['room', 'history']).toArray()
+    }
+}
+
+function mapDispatchToProps(dispatch, props) {
+    return {
+    }
+}
 
 let ChatMessage = (props) =>
     <li className="message">
@@ -60,28 +72,10 @@ class Chat extends React.Component {
         super(props, context)
     }
 
-    componentDidMount() {
-        let lastRoomHistory = this.context.store
-            .getState()
-            .getIn(['room', 'history'])
-        this.context.store.subscribe(() => {
-            let currentHistory = this.context.store
-                .getState()
-                .getIn(['room', 'history'])
-            if(lastRoomHistory !== currentHistory) {
-                lastRoomHistory = currentHistory
-
-                this.forceUpdate()
-            }
-        })
-    }
-
     render() {
-        let history = this.context.store.getState().getIn(['room', 'history']).toArray()
-
         return (
             <div className="chat">
-                <ChatHistory history={history} />
+                <ChatHistory history={this.props.history} />
                 <ChatInput socket={this.props.socket} />
                 <Users />
             </div>
@@ -89,8 +83,4 @@ class Chat extends React.Component {
     }
 }
 
-Chat.contextTypes = {
-    store:  React.PropTypes.object.isRequired
-}
-
-export default Chat
+export default connect(mapStateToProps, mapDispatchToProps)(Chat)
