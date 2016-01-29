@@ -68,13 +68,8 @@ const HTML =
         <meta name="keywords" content="goontube goontu.be hamburgers video lounge chat existential despair">
 
         <link rel="stylesheet" href="/style.css">
-    </head>
-
-    <body>
-        <div id="origin"></div>
-
         <script src="/bundle.js" type="text/javascript"></script>
-    </body>
+    </head>
 </html>`
 
 wss.on('connection', (ws) => {
@@ -110,16 +105,15 @@ wss.on('connection', (ws) => {
 
             try {
                 if(false === protocolHandlers[decoded.type](serverContext, client, decoded.data)) {
-                    console.log('Handler returned bad data.')
+                    console.log(`Handler returned bad data.`)
                     return
                 }
             } catch(e) {
-                console.log(e)
-                console.log('Failed to handle bad client message.')
+                console.log(`Failed to handle bad client message: ${e.toString()}`)
                 throw e
             }
         } catch(e) {
-            console.log('Received malformed JSON or other bad data from client.')
+            console.log(`Received malformed JSON or other bad data from client.`)
             ws.close()
         }
     })
