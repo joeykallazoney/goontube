@@ -18,10 +18,12 @@ class Users extends React.Component {
     }
 
     render() {
+        let c = 0
+
         return (
             <div className="user-list">
                 {this.props.users.map(user => (
-                    <li key={user.username} className="user">{user.username}</li>
+                    <div key={c++} className="user">{user.username}</div>
                 ))}
             </div>
         )

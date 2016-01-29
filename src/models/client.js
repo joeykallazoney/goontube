@@ -9,6 +9,9 @@ import User from './user'
  */
 class Client {
     teardown() {
+        if(this.room) {
+            this.room.removeUser(this)
+        }
     }
 
     sendPacket(type, data = {}) {
@@ -40,6 +43,7 @@ class Client {
                             p.LOGIN_ACCEPTED,
                             { username: username }
                         )
+                        this.room.updateRoomUsersList()
                     } else {
                         this.sendPacket(p.LOGIN_DENIED_BAD_DETAILS)
                     }

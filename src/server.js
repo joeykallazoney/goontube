@@ -29,7 +29,9 @@ let server          = http.createServer()
 let staticFiles     = new koaStatic(config.staticPath, {})
 let app             = koa()
 let wss             = new WebSocketServer({ server: server })
+let defaultRoom     = new Room()
 let clients         = []
+let rooms           = [defaultRoom]
 let sequelize, schemas
 
 try {
@@ -52,6 +54,14 @@ try {
     console.log(`Failed to initialize database and schemas: ${e.toString()}`)
 }
 
+let serverContext = {
+    data:           schemas,
+    parser:         commandParser,
+    clients:        clients,
+    rooms:          rooms,
+    defaultRoom:    defaultRoom
+}
+
 app.use(koaLogger())
 app.use(staticFiles)
 
@@ -72,13 +82,12 @@ const HTML =
     </head>
 </html>`
 
+
 wss.on('connection', (ws) => {
-    let serverContext = {
-        data:       schemas,
-        parser:     commandParser,
-        clients:    clients
-    }
     let client = new Client(ws, serverContext)
+
+    defaultRoom.addUser(client)
+    client.room = defaultRoom
 
     if(clients
         .filter((c) => c.address.address === client.address.address)

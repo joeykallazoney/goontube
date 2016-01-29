@@ -22,11 +22,15 @@ function rootReducer(state = fromJS(defaults), action) {
                 })
             return state
 
+        case p.LOGIN_ACCEPTED:
+            state = state.setIn(['auth', 'user'], action.data.username)
+            return state
+
         case p.LOGOUT_USER:
             state = state.setIn(['auth', 'user'], null)
             return state
 
-        case p.ROOM_USER_LIST_UPDATE:
+        case p.ROOM_LIST_UPDATE:
             state = state.setIn(['room', 'users'], action.data)
             return state
 
@@ -45,11 +49,6 @@ function rootReducer(state = fromJS(defaults), action) {
         case p.BANNER_NEW_RANDOM_BANNER:
             state = state.setIn(['banner', 'currentBannerIndex'],
                     parseInt(Math.random() * state.getIn(['banner', 'possibilities']).size))
-            return state
-
-        case p.LOGIN_ACCEPTED:
-            console.log(action.data)
-            state = state.setIn(['auth', 'user'], action.data.username)
             return state
 
         case p.BANNER_NEW_BANNER:

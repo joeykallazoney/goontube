@@ -28,6 +28,7 @@ module.exports = {
         client._auth = false
         client.user = null
         client.sendPacket(p.LOGOUT_USER)
+        client.room.updateRoomUsersList()
     },
 
     SEND_CHAT_MESSAGE: (server, client, msg) => {
@@ -36,15 +37,17 @@ module.exports = {
         server.parser(server, client, msg)
 
         if(client.user) {
-            server.clients.map((c) => {
-                c.sendPacket(
-                    p.ROOM_USER_MESSAGE,
-                    {
-                        id: uuid.v4(),
-                        from: client.user.username,
-                        body: msg
-                    })
-            })
+            server.clients
+                .filter(c => (c.room === client.room))
+                .map(c => {
+                    c.sendPacket(
+                        p.ROOM_USER_MESSAGE,
+                        {
+                            id: uuid.v4(),
+                            from: client.user.username,
+                            body: msg
+                        })
+                })
         } else {
             console.log(`Ignored anonymous chat message: ${msg}`)
         }
