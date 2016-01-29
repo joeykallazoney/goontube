@@ -7,6 +7,7 @@ import p from '../protocol'
 
 import { makePacket } from '../util'
 import YoutubeDataApi from 'youtube-node'
+
 let youtubeDataApi = new YoutubeDataApi
 
 const KEYCODE_ENTER = 13
@@ -51,9 +52,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch, props) {
     return {
-        onChange: (event) => {
-            dispatch(searchInputChanged(event.target.value))
-        }
+        onChange: (event) => dispatch(searchInputChanged(event.target.value))
     }
 }
 
@@ -68,10 +67,10 @@ class SearchInput extends React.Component {
     constructor(props) {
         super(props)
     }
-    
+
     render() {
         return (
-            <div className="search-input"> 
+            <div className="search-input">
                 <input {...this.props} ref="searchInput" type="text" />
             </div>
         )
@@ -84,7 +83,7 @@ class Search extends React.Component {
     }
 
     componentDidMount() {
-    
+
     }
 
     render() {
