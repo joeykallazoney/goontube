@@ -29,9 +29,7 @@ let server          = http.createServer()
 let staticFiles     = new koaStatic(config.staticPath, {})
 let app             = koa()
 let wss             = new WebSocketServer({ server: server })
-let defaultRoom     = new Room()
 let clients         = []
-let rooms           = [defaultRoom]
 let sequelize, schemas
 
 try {
@@ -58,9 +56,11 @@ let serverContext = {
     data:           schemas,
     parser:         commandParser,
     clients:        clients,
-    rooms:          rooms,
-    defaultRoom:    defaultRoom
+    rooms:          []
 }
+
+let defaultRoom     = new Room(serverContext)
+serverContext.rooms = [defaultRoom]
 
 app.use(koaLogger())
 app.use(staticFiles)

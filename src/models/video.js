@@ -21,11 +21,31 @@ class Video {
            video_negs:      Sequelize.INTEGER,
            video_karma:     Sequelize.INTEGER,
            views:           Sequelize.INTEGER,
-           last_adding_by:  Sequelize.STRING
+           last_added_by:   Sequelize.STRING
        }, {
            tableName:       'videos',
            timestamps:     false
        })
+    }
+
+    static getSomeRandomVideos(numberVideos, ctx) {
+        return new Promise((res, rej) => {
+            ctx.data
+                .Video
+                .findAll(
+                    {
+                        limit: numberVideos,
+                        order: [
+                            Sequelize.fn('RANDOM'),
+                        ]
+                    })
+                .then(videos => {
+                    res(videos)
+                })
+        }, (err) => {
+            console.log(`Failed to populate from database: ${err.toString()}`)
+            rej(err)
+        })
     }
 
     loadById(providerType, id) {
