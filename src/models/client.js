@@ -49,8 +49,8 @@ class Client {
                 })
     }
 
-    constructor(socket, ctx) {
-        this.serverContext  = ctx
+    constructor(socket, serverContext) {
+        this.serverContext  = serverContext
         this.socket         = socket
         this.address        = socket._socket.address()
         this.user           = null
