@@ -21,7 +21,7 @@ const finalCreateStore = compose(
 )(createStore)
 
 function initWebSocket(store) {
-    let socket = new WebSocket('ws://localhost:7070')
+    let socket = new WebSocket(`ws://${window.location.hostname}:7070`)
 
     socket.onopen = () => {
     }

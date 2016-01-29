@@ -18,6 +18,7 @@ import protocolHandlers from './handlers'
 import config from '../config'
 
 import Client from './models/client'
+import Room from './models/room'
 import User from './models/user'
 import Video from './models/video'
 
@@ -39,6 +40,7 @@ try {
             storage:    config.databasePath
         })
     schemas         = {
+        Room:   Room.createSchema(sequelize),
         User:   User.createSchema(sequelize),
         Video:  Video.createSchema(sequelize)
     }
@@ -77,9 +79,9 @@ const HTML =
 
 wss.on('connection', (ws) => {
     let serverContext = {
-            data:       schemas,
-            parser:     commandParser,
-            clients:    clients
+        data:       schemas,
+        parser:     commandParser,
+        clients:    clients
     }
     let client = new Client(ws, serverContext)
 
