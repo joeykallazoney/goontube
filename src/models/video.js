@@ -28,12 +28,23 @@ class Video {
        })
     }
 
-    constructor(serverContext, id) {
-        this._video = serverContext.data.Video.findOne({
-            where: {
-                id: id
-            }
+    loadById(providerType, id) {
+        return new Promise((res, rej) => {
+            this.context.data
+                .Video
+                .findOne({ where: { type: providerType, id: id } })
+                .then(video => {
+                    this.video = video
+                    res(this)
+                })
+        }, (err) => {
+            console.log(`Failed to populate from database: ${err.toString()}`)
+            return null
         })
+    }
+
+    constructor(serverContext) {
+        this.context = serverContext
     }
 }
 

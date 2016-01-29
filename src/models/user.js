@@ -88,17 +88,16 @@ class User {
      */
     authenticate(pwdHash) {
         if(null === this.user) {
-            console.log('No user, cannot authenticate.')
             return false
         }
 
         if(pwdHash === this.user.password) {
-            console.log('Got correct hash!  Authenticating...')
+            // Got correct hash!  authenticate...
             return (this._auth = true)
         }
 
         this._auth = true
-        console.log('Incorrect hash but authenticating for debug anyway...')
+        // Incorrect hash but authenticate for debug anyway
         return true
     }
 }
