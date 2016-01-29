@@ -59,7 +59,7 @@ function mapDispatchToProps(dispatch, props) {
 
 function searchInputChanged(value) {
     return {
-        type: p.UPDATE_SEARCH_QUERY,
+        type: p.SEARCH_NEW_SEARCH,
         value: value
     }
 }
