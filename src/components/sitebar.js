@@ -29,9 +29,9 @@ class SiteBar extends React.Component {
                     <div className="logged-in">
                         Currently logged in as {this.props.user},
 
-                        <div className="logout" {...this.props.logout}>
+                        <span className="logout" {...this.props.logout}>
                             [ click here to log-out ]
-                        </div>
+                        </span>
                     </div>
                 ) : null}
             </div>

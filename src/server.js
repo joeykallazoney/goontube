@@ -78,7 +78,8 @@ const HTML =
 wss.on('connection', (ws) => {
     let serverContext = {
             data:       schemas,
-            parser:     commandParser
+            parser:     commandParser,
+            clients:    clients
     }
     let client = new Client(ws, serverContext)
 
@@ -111,6 +112,7 @@ wss.on('connection', (ws) => {
                     return
                 }
             } catch(e) {
+                console.log(e)
                 console.log('Failed to handle bad client message.')
                 throw e
             }

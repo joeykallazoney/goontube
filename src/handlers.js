@@ -33,6 +33,19 @@ module.exports = {
         if(null === msg) return false
 
         server.parser(server, client, msg)
+
+        if(client.user) {
+            server.clients.map((c) => {
+                c.sendPacket(
+                    p.ROOM_USER_MESSAGE,
+                    {
+                        from: client.user.user.dataValues.username,
+                        body: msg
+                    })
+            })
+        } else {
+            console.log(`Ignored anonymous chat message: ${msg}`)
+        }
     }
 
     // Search
