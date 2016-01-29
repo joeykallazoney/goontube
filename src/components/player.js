@@ -1,6 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import PureRenderMixin from 'react/lib/ReactComponentWithPureRenderMixin'
 import { connect } from 'react-redux'
 
 import DailyMotion from './players/dailymotion'
@@ -9,6 +8,9 @@ import Vimeo from './players/vimeo'
 
 function mapStateToProps(state) {
     return {
+        position:   state.getIn(['media', 'position']),
+        provider:   state.getIn(['media', 'provider']),
+        videoId:    state.getIn(['media', 'id'])
     }
 }
 
@@ -22,9 +24,6 @@ class Player extends React.Component {
         super(props)
     }
 
-    componentDidMount() {
-    }
-
     render() {
         return (
             <div className="player">
@@ -33,7 +32,5 @@ class Player extends React.Component {
         )
     }
 }
-
-Player.mixins = [PureRenderMixin]
 
 export default connect(mapStateToProps, mapDispatchToProps)(Player)
