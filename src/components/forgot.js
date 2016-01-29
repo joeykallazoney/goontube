@@ -6,10 +6,6 @@ class ForgotPassword extends React.Component {
         super(props)
     }
 
-    componentDidMount() {
-
-    }
-
     render() {
         return (
             <div className="forgot-password">

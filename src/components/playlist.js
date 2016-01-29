@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 function mapStateToProps(state) {
     return {
-        items: state.getIn(['room', 'playlist']).toArray()
+        items: state.getIn(['room', 'playlist'])
     }
 }
 
@@ -14,7 +14,7 @@ function mapDispatchToProps(dispatch, props) {
 }
 
 let PlaylistEntry = (props) =>
-    <div className="item">
+    <div className="playlist-item">
         {props.title}
     </div>
 
@@ -27,7 +27,7 @@ class Playlist extends React.Component {
         return (
             <div className="playlist">
                 {this.props.items.map(i => (
-                    <PlaylistEntry {...i} />
+                    <PlaylistEntry {...i} {...this.props.entries} />
                 ))}
             </div>
         )

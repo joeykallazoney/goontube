@@ -10,7 +10,6 @@ import defaults from './defaults'
 
 // signature: (state, []:reducers) -> (state, action)
 //let transducer = (state = defaultApplicationState, [reducers]) =>
-//
 //    (reducers.map(r => (...r)(state)()))
 
 function rootReducer(state = fromJS(defaults), action) {
@@ -36,7 +35,7 @@ function rootReducer(state = fromJS(defaults), action) {
             return state
 
         case p.ROOM_PLAYLIST_UPDATE:
-            state = state.setIn(['room', 'playlist'], action.data)
+            state = state.setIn(['room', 'playlist'], action.data.items)
             return state
 
         case p.ROOM_LIST_UPDATE:

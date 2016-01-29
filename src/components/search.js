@@ -44,11 +44,13 @@ const NUMBER_OF_RESULTS = 10
 
 function mapStateToProps(state) {
     let searchQuery = state.getIn(['search', 'query']),
+        searchResults = state.getIn(['search', 'results']),
         youtubeApiKey = state.getIn(['search', 'apiKeys', 'youtube'])
 
     return {
-        youtubeApiKey: youtubeApiKey,
-        value: searchQuery
+        youtubeApiKey:  youtubeApiKey,
+        value:          searchQuery,
+        searchResults:  searchResults
     }
 }
 
@@ -63,7 +65,6 @@ function asyncSearchAction(value) {
      * Some kind of throttle/debounce?
      * ...
      */
-
     youtubeDataApi.search(value, NUMBER_OF_RESULTS, (err, res) => {
         if(err) {
             console.log(`Failed to fetch YouTube results.`)
@@ -73,8 +74,6 @@ function asyncSearchAction(value) {
                 data: err
             }
         } else {
-            console.log(res)
-
             try {
                 let receivedYoutubeResults = {
                     type: p.SEARCH_RECEIVED_YOUTUBE_RESULTS,
@@ -90,6 +89,8 @@ function asyncSearchAction(value) {
 
                 return receivedYoutubeResults
             } catch(e) {
+                console.log(`Failed to organize YouTube results.`)
+
                 return {
                     type: p.SEARCH_FAILED_YOUTUBE_SEARCH,
                     data: e.toString()
@@ -100,9 +101,11 @@ function asyncSearchAction(value) {
 }
 
 function searchInputChanged(value) {
+    // local state for input effects, then return asyncSearchAction of
+    // debounced/desired inputs?
     return {
-        type: p.SEARCH_NEW_SEARCH,
-        value: value
+        type:   p.SEARCH_NEW_SEARCH,
+        value:  value
     }
 }
 

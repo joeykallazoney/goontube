@@ -1,7 +1,7 @@
 const defaultApplicationState = {
     auth: {
-        user:   null,
-        token:  null
+        user:       null,
+        token:      null
     },
     banner: {
         currentBannerIndex:  0,
@@ -25,6 +25,8 @@ const defaultApplicationState = {
         content:  { x: 6,   y: 6,   w: 5,   h: 4 }
     },
     media: {
+        active:     false,
+        streams:    [],
         id:         'FTaWrcmhAgw',
         provider:   'youtube',
         position:   0
@@ -40,7 +42,7 @@ const defaultApplicationState = {
         query: '',
         results: [],
         apiKeys: {
-          youtube: 'AIzaSyBQW8bHDt7RHZa5uVVRP4r0jNIUZD_39o4' 
+          youtube: 'AIzaSyBQW8bHDt7RHZa5uVVRP4r0jNIUZD_39o4'
         }
     }
 }

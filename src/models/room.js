@@ -42,7 +42,20 @@ class Room {
 
     makePlaylistUpdatePacket() {
         return {
+            type: p.ROOM_PLAYLIST_UPDATE,
+            data: {
+                room: 'defaultRoom',
+                items: this.playlist.map(item => {
+                    return {...item}
+                })
+            }
         }
+    }
+
+    broadcastRoomPlaylist() {
+        let playlist = this.makePlaylistUpdatePacket()
+
+        this.members.map(client => client.sendPacket(playlist.type, playlist.data))
     }
 
     makeUserListPacket() {
@@ -84,6 +97,7 @@ class Room {
         }
 
         console.log(`Now playing: ${this.playing.currentStreamSources[0].data.title}`)
+        this.broadcastRoomPlaylist()
     }
 
     heartbeat(context) {
