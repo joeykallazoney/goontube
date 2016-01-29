@@ -37,7 +37,7 @@ class User {
             time_spent:     Sequelize.INTEGER,
             json_data:      Sequelize.STRING
         }, {
-            tableName:      'valid_users',
+            tableName:      'users',
             timestamps:     false
         })
     }
