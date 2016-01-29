@@ -4,6 +4,17 @@
  */
 import React from 'react'
 import PureRenderMixin from 'react/lib/ReactComponentWithPureRenderMixin'
+import { connect } from 'react-redux'
+
+function mapStateToProps(state) {
+    return {
+    }
+}
+
+function mapDispatchToProps(dispatch, props) {
+    return {
+    }
+}
 
 class Layout extends React.Component {
     constructor(props, context) {
@@ -12,12 +23,6 @@ class Layout extends React.Component {
 
     render() {
         return (
-            /*
-             * RGL needs some updating and its author its aware.
-             <ReactGridLayout className="layout" layout={this.state.layout}>
-            </ReactGridLayout>
-            * RGL will probably be merged into react-draggable.
-            */
             <div className="layout">
                 {this.props.children}
             </div>
@@ -25,10 +30,6 @@ class Layout extends React.Component {
     }
 }
 
-Layout.contextTypes = {
-    store: React.PropTypes.object.isRequired
-}
-
 Layout.mixins = [PureRenderMixin]
 
-export default Layout
+export default connect(mapStateToProps, mapDispatchToProps)(Layout)

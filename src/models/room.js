@@ -56,9 +56,17 @@ class Room {
         }
     }
 
-    static loadAll() {
+    static loadAll(ctx) {
         return new Promise((res, rej) => {
-            res(null)
+            ctx.data
+                .Video
+                .findAll()
+                .then(rooms => {
+                    res(rooms)
+                })
+        }, (err) => {
+            console.log(`Failed to populate from database: ${err.toString()}`)
+            rej(err)
         })
     }
 
@@ -78,10 +86,13 @@ class Room {
                     console.log(`Failed to add random videos: ${error}`)
                 })
         } else {
-            let playing = this.playlist.pop()
+            try {
+                let playing = this.playlist.pop()
 
-            console.log(playing.title)
-            console.log(this.playlist.length)
+                console.log(playing.title)
+            } catch(err) {
+                console.log(`Failed to advance playlist: ${err.toString()}`)
+            }
         }
     }
 
