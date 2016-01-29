@@ -26,11 +26,6 @@ const defaultApplicationState = {
         provider:   'youtube',
         position:   0
     },
-    players: {
-        youtube: {
-            apiKey: 'AIzaSyBQW8bHDt7RHZa5uVVRP4r0jNIUZD_39o4'
-        }
-    },
     room: {
         name:           null,
         motd:           null,
@@ -39,7 +34,11 @@ const defaultApplicationState = {
         history:        []
     },
     search:  {
-        query: ''
+        query: '',
+        results: [],
+        apiKeys: {
+          youtube: 'AIzaSyBQW8bHDt7RHZa5uVVRP4r0jNIUZD_39o4' 
+        }
     }
 }
 

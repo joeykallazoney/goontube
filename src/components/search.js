@@ -8,8 +8,6 @@ import p from '../protocol'
 import { makePacket } from '../util'
 import YoutubeDataApi from 'youtube-node'
 let youtubeDataApi = new YoutubeDataApi
-youtubeDataApi.setKey('AIzaSyBQW8bHDt7RHZa5uVVRP4r0jNIUZD_39o4');
-
 
 const KEYCODE_ENTER = 13
 const NUMBER_OF_RESULTS = 10
@@ -42,7 +40,6 @@ const NUMBER_OF_RESULTS = 10
  * very clean components like this!
 
  */
-
 
 function mapStateToProps(state) {
     let searchQuery = state.getIn(['search', 'query'])

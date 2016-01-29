@@ -63,7 +63,8 @@ fileMonitor() {
         *)
           printf "File(s) changed: [${chsum2}] Refreshing..."
           chsum1=${chsum2}
-          checkPort | tail -n+2 | awk '$1 ~ /^node$/ {print $2}' | uniq | while read pid ; do kill -9 $pid ; done
+
+          checkPort | tail -n+2 | awk '$1 ~ /^node$/ {print $2}' | uniq | while read pid ; do kill -9 $pid ; done;
           webpack
           npm start &
           sleep 7
@@ -84,7 +85,7 @@ fileMonitor() {
 }
 
 buildStuff() {
-  lsof -i:7070 | tail -n+2 | awk '$1 ~ /^node$/ {print $2}' | uniq | while read pid ; do kill -9 $pid ; done
+  lsof -i:7070 | tail -n+2 | awk '$1 ~ /^node$/ {print $2}' | uniq | while read pid ; do kill -9 $pid ; done;
   fileMonitor
 }
 

@@ -10,6 +10,7 @@ import defaults from './defaults'
 
 // signature: (state, []:reducers) -> (state, action)
 //let transducer = (state = defaultApplicationState, [reducers]) =>
+//
 //    (reducers.map(r => (...r)(state)()))
 
 function rootReducer(state = fromJS(defaults), action) {
@@ -46,7 +47,10 @@ function rootReducer(state = fromJS(defaults), action) {
                 .setIn(['banner', 'currentBannerIndex'], currentBannerIndex)
         // Begin Search
         case p.UPDATE_SEARCH_QUERY:
-            state = state.setIn(['search', 'query'], action.value)
+            state = state.set('search', {
+                ...state.get('search'),
+                query: action.value
+            })
             return state
         // End Search
 
