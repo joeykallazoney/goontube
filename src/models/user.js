@@ -66,6 +66,8 @@ class User {
                 .findOne({ where: { username: username } })
                 .then(user => {
                     this.user = user
+                    
+                    this.username = user.dataValues.username
                     res(this)
                 })
         }, (err) => {

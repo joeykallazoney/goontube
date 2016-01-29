@@ -3,6 +3,7 @@
  * @since 1.0.0
  */
 import p from './protocol'
+import uuid from 'node-uuid'
 
 module.exports = {
     CLIENT_HELLO: (server, client, msg) => {
@@ -39,7 +40,8 @@ module.exports = {
                 c.sendPacket(
                     p.ROOM_USER_MESSAGE,
                     {
-                        from: client.user.user.dataValues.username,
+                        id: uuid.v4(),
+                        from: client.user.username,
                         body: msg
                     })
             })
