@@ -26,6 +26,10 @@ function rootReducer(state = fromJS(defaults), action) {
             state = state.setIn(['auth', 'user'], null)
             return state
 
+        case p.ROOM_USER_LIST_UPDATE:
+            state = state.setIn(['room', 'users'], action.data)
+            return state
+
         case p.ROOM_USER_MESSAGE:
             state = state.updateIn(['room', 'history'],
                 history => history.push(action.data))

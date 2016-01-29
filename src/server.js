@@ -121,17 +121,6 @@ wss.on('connection', (ws) => {
             ws.close()
         }
     })
-
-    /*
-     * send greeting+acknowledgement to user
-     */
-    client.sendPacket(p.ROOM_USER_MESSAGE,
-        {
-            id:     uuid.v4(),
-            from:   'Tester',
-            body:   'This is a test hello message from the server.'
-        }
-    )
 })
 
 app.use(function *(next) {

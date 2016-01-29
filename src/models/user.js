@@ -65,10 +65,13 @@ class User {
                 .User
                 .findOne({ where: { username: username } })
                 .then(user => {
-                    this.user = user
-                    
-                    this.username = user.dataValues.username
-                    res(this)
+                    if(user) {
+                        this.user = user
+                        this.username = user.dataValues.username
+                        res(this)
+                    } else {
+                        rej(null)
+                    }
                 })
         }, (err) => {
             console.log(`Failed to populate from database: ${err.toString()}`)
