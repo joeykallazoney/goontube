@@ -1,4 +1,8 @@
 const defaultApplicationState = {
+    auth: {
+        user:   null,
+        token:  null
+    },
     banner: {
         currentBannerIndex:  0,
         possibilities:       [
@@ -13,7 +17,6 @@ const defaultApplicationState = {
         ]
     },
     layout: {
-    // this will be relevant when react-grid-layout is up to date with react+usable again
         banner:   { x: 0,   y: 0,   w: 12,  h: 2 },
         player:   { x: 0,   y: 2,   w: 5,   h: 4 },
         chat:     { x: 6,   y: 2,   w: 6,   h: 4 },

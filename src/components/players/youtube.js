@@ -1,30 +1,30 @@
 import React from 'react'
 import YouTube from 'react-youtube'
+import { connect } from 'react-redux'
+
+function mapStateToProps(state) {
+    return {
+        videoId: state.getIn(['media', 'id'])
+    }
+}
+
+function mapDispatchToProps(dispatch, props) {
+    return {
+    }
+}
 
 class YouTubePlayer extends React.Component {
     constructor(props, context) {
         super(props, context)
-
-        this.state = {
-        }
-    }
-
-    componentWillUnmount() {
-
     }
 
     onReady(event) {
-
     }
 
     onStateChange(event) {
-
     }
 
     render() {
-        const videoID = this.context.store
-            .getState()
-            .getIn(['media', 'id'])
         const options = {
             width:          '100%',
             height:         '100%',
@@ -35,7 +35,7 @@ class YouTubePlayer extends React.Component {
 
         return (
             <div id="player">
-                <YouTube videoId={videoID}
+                <YouTube videoId={this.props.videoId}
                     opts={options}
                     onReady={this.onReady}
                     onStateChange={this.onStateChange} />
@@ -44,8 +44,4 @@ class YouTubePlayer extends React.Component {
     }
 }
 
-YouTubePlayer.contextTypes = {
-    store: React.PropTypes.object.isRequired
-}
-
-export default YouTubePlayer
+export default connect(mapStateToProps, mapDispatchToProps)(YouTubePlayer)

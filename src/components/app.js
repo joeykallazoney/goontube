@@ -8,6 +8,7 @@ import Player from './player'
 import Playlist from './playlist'
 import ContentPane from './content-pane'
 import Search from './search'
+import SiteBar from './sitebar'
 import Layout from './layout'
 
 import { connect } from 'react-redux'
@@ -33,15 +34,18 @@ class Goontube extends React.Component {
 
     render() {
         return (
-            <div id="goontube">
-                <Layout>
-                    <Banner />
-                    <Player />
-                    <Chat socket={this.props.socket} />
-                    <Playlist />
-                    <ContentPane />
-                    <Search />
-                </Layout>
+            <div id="app">
+                <SiteBar socket={this.props.socket} />
+                <div id="goontube">
+                    <Layout>
+                        <Banner />
+                        <Player />
+                        <Chat socket={this.props.socket} />
+                        <Playlist />
+                        <ContentPane />
+                        <Search />
+                    </Layout>
+                </div>
             </div>
         )
     }

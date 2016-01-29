@@ -21,17 +21,13 @@ const finalCreateStore = compose(
 )(createStore)
 
 function initWebSocket(store) {
-    let socket = new WebSocket('ws://localhost:7070')
+    let socket = new WebSocket(`ws://${window.location.hostname}:7070`)
 
     socket.onopen = () => {
-        console.log('Connection established to WebSocket server.')
-        socket.send(makePacket(p.CLIENT_HELLO, 'Test string'))
     }
 
     socket.onmessage = (message) => {
         let decoded = JSON.parse(message.data)
-
-        console.log(`${decoded.type} -> ${decoded.data} dispatched to Redux store.`)
         store.dispatch(decoded)
     }
 

@@ -18,7 +18,10 @@ class User {
      */
     static createSchema(db) {
         return db.define('user', {
-            username:       Sequelize.STRING,
+            username: {
+                type:           Sequelize.STRING,
+                primaryKey:     true
+            },
             password:       Sequelize.STRING,
             email:          Sequelize.STRING,
             permissions:    Sequelize.INTEGER,
@@ -33,6 +36,9 @@ class User {
             last_seen_at:   Sequelize.DATE,
             time_spent:     Sequelize.INTEGER,
             json_data:      Sequelize.STRING
+        }, {
+            tableName:      'valid_users',
+            timestamps:     false
         })
     }
 
@@ -41,13 +47,8 @@ class User {
      * handle and a username, the server will attempt to populate this object
      * with the latest information from the database.
      */
-    constructor(db, username) {
-        this._auth   = false
-        this._user   = this._schema.findAll({
-            where: {
-                username: username
-            }
-        })
+    constructor(serverContext) {
+        this.context    = serverContext
     }
 
     /**
@@ -58,13 +59,29 @@ class User {
         return false
     }
 
-    /**
-     * @function Ensures that changes to this User instance are reflected back
-     * to the Sequelize model and synchronized to the server database.
-     */
+    loadByUsername(username) {
+        return new Promise((res, rej) => {
+            this.context.data
+                .User
+                .findOne({ where: { username: username } })
+                .then(user => {
+                    if(user) {
+                        this.user = user
+                        this.username = user.dataValues.username
+                        res(this)
+                    } else {
+                        rej(null)
+                    }
+                })
+        }, (err) => {
+            console.log(`Failed to populate from database: ${err.toString()}`)
+            rej(err)
+        })
+    }
+
     serialize() {
         try {
-            this._user.save()
+            this.user.save()
         } catch (e) {
         }
     }
@@ -75,14 +92,18 @@ class User {
      * @param {String} pwdHash is a salted SHA-512 hash of the user's password.
      */
     authenticate(pwdHash) {
-        if(null === this._user) {
+        if(null === this.user) {
             return false
         }
 
-        if(pwdHash === this._user.password) {
+        if(pwdHash === this.user.password) {
+            // Got correct hash!  authenticate...
             return (this._auth = true)
         }
-        return false
+
+        this._auth = true
+        // Incorrect hash but authenticate for debug anyway
+        return true
     }
 }
 

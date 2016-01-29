@@ -1,25 +1,33 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { connect } from 'react-redux'
+
+function mapStateToProps(state) {
+    return {
+        users: state.getIn(['room', 'users'])
+    }
+}
+
+function mapDispatchToProps(dispatch, props) {
+    return {
+    }
+}
 
 class Users extends React.Component {
     constructor(props, context) {
         super(props, context)
     }
 
-    componentDidMount() {
-
-    }
-
     render() {
+        let c = 0
+
         return (
             <div className="user-list">
+                {this.props.users.map(user => (
+                    <div key={c++} className="user">{user.username}</div>
+                ))}
             </div>
         )
     }
 }
 
-Users.contextTypes = {
-    store: React.PropTypes.object.isRequired
-}
-
-export default Users
+export default connect(mapStateToProps, mapDispatchToProps)(Users)

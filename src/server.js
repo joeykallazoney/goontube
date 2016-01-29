@@ -6,15 +6,11 @@ import http from 'http'
 import koa from 'koa'
 import koaLogger from 'koa-logger'
 import koaStatic from 'koa-static'
-import React from 'react'
 import Sequelize from 'sequelize'
 import uuid from 'node-uuid'
 import { Server as WebSocketServer } from 'ws'
-import { createStore } from 'redux'
-import { renderToString as render } from 'react-dom/server'
 
 import { makePacket } from './util'
-import rootReducer from './reducers'
 import hash from './hash'
 import commandParser from './parser'
 import p from './protocol'
@@ -22,6 +18,7 @@ import protocolHandlers from './handlers'
 import config from '../config'
 
 import Client from './models/client'
+import Room from './models/room'
 import User from './models/user'
 import Video from './models/video'
 
@@ -33,12 +30,37 @@ let staticFiles     = new koaStatic(config.staticPath, {})
 let app             = koa()
 let wss             = new WebSocketServer({ server: server })
 let clients         = []
-let sequelize       = new Sequelize(config.databasePath)
+let sequelize, schemas
 
-let schemas         = {
-    User:   User.createSchema(sequelize),
-    Video:  Video.createSchema(sequelize)
+try {
+    sequelize       = new Sequelize(
+        `sqlite://${config.databasePath}`,
+        {
+            dialect:    'sqlite',
+            storage:    config.databasePath
+        })
+    schemas         = {
+        Room:   Room.createSchema(sequelize),
+        User:   User.createSchema(sequelize),
+        Video:  Video.createSchema(sequelize)
+    }
+
+    //schemas.User.findOne({ where: { username: 'jskz' } }).then((user) => {
+    //    console.log({...user.dataValues})
+    //})
+} catch(e) {
+    console.log(`Failed to initialize database and schemas: ${e.toString()}`)
 }
+
+let serverContext = {
+    data:           schemas,
+    parser:         commandParser,
+    clients:        clients,
+    rooms:          []
+}
+
+let defaultRoom     = new Room(serverContext)
+serverContext.rooms = [defaultRoom]
 
 app.use(koaLogger())
 app.use(staticFiles)
@@ -56,21 +78,16 @@ const HTML =
         <meta name="keywords" content="goontube goontu.be hamburgers video lounge chat existential despair">
 
         <link rel="stylesheet" href="/style.css">
-    </head>
-
-    <body>
-        <div id="origin"></div>
-
         <script src="/bundle.js" type="text/javascript"></script>
-    </body>
+    </head>
 </html>`
 
+
 wss.on('connection', (ws) => {
-    let client = new Client(ws),
-        serverContext = {
-            data:       schemas,
-            parser:     commandParser
-        }
+    let client = new Client(ws, serverContext)
+
+    defaultRoom.addUser(client)
+    client.room = defaultRoom
 
     if(clients
         .filter((c) => c.address.address === client.address.address)
@@ -97,29 +114,18 @@ wss.on('connection', (ws) => {
 
             try {
                 if(false === protocolHandlers[decoded.type](serverContext, client, decoded.data)) {
-                    console.log('Handler returned bad data.')
-                    return // don't drop client for mere unhandled packets
+                    console.log(`Handler returned bad data.`)
+                    return
                 }
             } catch(e) {
-                console.log('Failed to handle bad client message.')
+                console.log(`Failed to handle bad client message: ${e.toString()}`)
                 throw e
             }
         } catch(e) {
-            console.log('Received malformed JSON or other bad data from client.')
+            console.log(`Received malformed JSON or other bad data from client.`)
             ws.close()
         }
     })
-
-    /*
-     * send greeting+acknowledgement to user
-     */
-    ws.send(makePacket(p.ROOM_USER_MESSAGE,
-        {
-            id:     uuid.v4(),
-            from:   'Tester',
-            body:   'This is a test hello message from the server.'
-        }
-    ))
 })
 
 app.use(function *(next) {
