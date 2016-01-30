@@ -4,7 +4,8 @@ import { connect } from 'react-redux'
 
 function mapStateToProps(state) {
     return {
-        videoId: state.getIn(['media', 'id'])
+        videoId:  state.getIn(['room', 'media']).id,
+        position: state.getIn(['room', 'media']).position
     }
 }
 
@@ -16,6 +17,13 @@ function mapDispatchToProps(dispatch, props) {
 class YouTubePlayer extends React.Component {
     constructor(props, context) {
         super(props, context)
+    }
+
+    onReady() {
+
+    }
+
+    onStateChange() {
     }
 
     render() {

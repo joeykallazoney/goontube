@@ -24,19 +24,19 @@ const defaultApplicationState = {
         search:   { x: 0,   y: 9,   w: 5,   h: 4 },
         content:  { x: 6,   y: 6,   w: 5,   h: 4 }
     },
-    media: {
-        active:     false,
-        streams:    [],
-        id:         'FTaWrcmhAgw',
-        provider:   'youtube',
-        position:   0
-    },
     room: {
         name:           null,
         motd:           null,
         playlist:       [],
         users:          [],
-        history:        []
+        history:        [],
+        media: {
+            active:     false,
+            streams:    [],
+            id:         'FTaWrcmhAgw',
+            provider:   'youtube',
+            position:   0
+        }
     },
     search:  {
         query: '',

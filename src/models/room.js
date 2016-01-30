@@ -39,6 +39,19 @@ class Room {
         this.members.map(u => u.sendPacket(packet.type, packet.data))
     }
 
+    makeCurrentMediaPacket() {
+        return {
+            type: p.ROOM_MEDIA_UPDATE,
+            data: {
+                active:     true,
+                streams:    [],
+                id:         this.playing.id,
+                provider:   'youtube',
+                position:   this.playing.position
+            }
+        }
+    }
+
     makePlaylistUpdatePacket() {
         return {
             type: p.ROOM_PLAYLIST_UPDATE,
@@ -51,10 +64,20 @@ class Room {
         }
     }
 
-    broadcastRoomPlaylist() {
-        let playlist = this.makePlaylistUpdatePacket()
+    broadcast(type, data) {
+        this.members.map(client => client.sendPacket(type, data))
+    }
 
-        this.members.map(client => client.sendPacket(playlist.type, playlist.data))
+    broadcastCurrentMedia() {
+        let playingPacket = this.makeCurrentMediaPacket()
+
+        this.broadcast(playingPacket.type, playingPacket.data)
+    }
+
+    broadcastRoomPlaylist() {
+        let playlistPacket = this.makePlaylistUpdatePacket()
+
+        this.broadcast(playlistPacket.type, playlistPacket.data)
     }
 
     makeUserListPacket() {
@@ -85,19 +108,19 @@ class Room {
     startNextVideo() {
         let nextVideo = this.playlist.shift()
 
+        console.log(nextVideo)
+
         this.playing = {
             active:                 true,
+            id:                     nextVideo.id,
+            title:                  nextVideo.title,
             timeSpentPlaying:       0,
-            duration:               -1,
-            currentStreamSources:   [
-                {
-                    playUntilCompletion:    true,
-                    data:                   nextVideo
-                }
-            ]
+            duration:               -1
         }
 
-        console.log(`Now playing: ${this.playing.currentStreamSources[0].data.title}`)
+        console.log(`Now playing: ${this.playing.title}`)
+
+        this.broadcastCurrentMedia()
         this.broadcastRoomPlaylist()
     }
 

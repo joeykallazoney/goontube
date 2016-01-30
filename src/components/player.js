@@ -8,9 +8,9 @@ import Vimeo from './players/vimeo'
 
 function mapStateToProps(state) {
     return {
-        position:   state.getIn(['media', 'position']),
-        provider:   state.getIn(['media', 'provider']),
-        videoId:    state.getIn(['media', 'id'])
+        position:   state.getIn(['room', 'media', 'position']),
+        provider:   state.getIn(['room', 'media', 'provider']),
+        videoId:    state.getIn(['room', 'media', 'id'])
     }
 }
 
