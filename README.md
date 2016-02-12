@@ -28,6 +28,7 @@ Much needed overhaul + rewrite as an ES6 webapp with React + Redux.
 - [ ] Place websocket dispatch/connect in async middleware - web worker?
 
 ####**Bug Fixes:**####
+- [x] 2016FEB11 - Admin Panel chat log timestamps are crazy wrong.
 - [ ] Repair fullscreen mode.
 - [ ] $permissions definitely needs to have an alias, $privilege, $priv (?)
 - [ ] “fix video” button skips screen to top, making it hard to click in a row multiple times, change this if non-breaking.
