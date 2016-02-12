@@ -38,7 +38,8 @@ Much needed overhaul + rewrite as an ES6 webapp with React + Redux.
   - Things look good initially but frame-rates tend to decline over time.
   - Cam images persist when another user deactivates their camera.
 - [ ] Restructure video-containing frame/divs to be a div with the child-content sized to 100% for easier resizing. (do this before restructuring full screen mode/implementing half screen mode.)
-## Resolved ##
+
+##### Resolved #####
 - [x] 2016FEB11 - Admin Panel chat log timestamps are crazy wrong.
 - [x] preloading goontube, from typing in go- in like chrome for example, triggers multiple logins and kicks a user. considering how common typing go- into a nav bar is this is non trivial. possible solution is to remove restriction on simultaneous logins.
    - 2016FEB12 - This is a Chrome configuration issue. ```Settings``` --> ```Advanced Settings``` --> ```Privacy``` --> deselect ```Prefetch resources to load pages more quickly```.
@@ -54,8 +55,7 @@ Much needed overhaul + rewrite as an ES6 webapp with React + Redux.
 ####**Features:**####
 - [ ] Add parsing feature for drive.google.com to docs.google.com, strip '```view?usp=sharing```' from end of line.
 - [ ] Possibly disable youtube annotations by default (suggested by Megaspel) append '```&iv_load_policy=3```' to youtube "```movie```" param/value element (Reference: http://stackoverflow.com/questions/8166846/removing-annotations-on-embedded-youtube-videos)
-- [x] Add 3-second cool-down to $skip so mods/deputies can't over-moderation (possible '-f' option for override?)
-  - [ ] Possible $unskip feature to undo a $skip action?
+- [ ] Possible $unskip feature to undo a $skip action?
 - [ ] $stealthskip, for mods, skips the current video for everyone except the person who added it, they think it's still playing... (i'm only half joking...)
 - [ ] make commands ($ and /) not enter chat.
 - [ ] allow users to queue videos, taking priority in a turn based/round-robin order? possibly a mod toggleable mode.
@@ -107,8 +107,11 @@ Much needed overhaul + rewrite as an ES6 webapp with React + Redux.
 - [ ] Unnamed users could be auto-purged if they don’t login for after ‘X’ minutes instead of depending on rednames/deputies to manually purge.
 - [ ] Failure to login after 'X' minutes forces black-out overlay and cessation of media streaming, prompting 'unnamed' user to register/login.
 - [ ] Add-in ‘milkdrop.js’ so users can have something interesting to look at during ‘still-image’ videos. (suggested by Jynn).
-## Complete
+
+##### Complete #####
+- [x] Add 3-second cool-down to $skip so mods/deputies can't over-moderation (possible '-f' option for override?)
 - [x] Allow $ commands to be accessed with / as well.
+
 ### Streaming provider spec
 
 #### Installation + Setup
