@@ -27,8 +27,6 @@ class Player extends React.Component {
             'youtube' : <YouTube />
         }
         let reactProvider = providerMapper[this.props.media.provider] || 'Loading...'
-        console.log('why...')
-        console.log(this)
 
         return (
             <div className="player">
