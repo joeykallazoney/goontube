@@ -41,6 +41,9 @@ checkPort() {
   ${sbinPath}/lsof -i:7070
 }
 
+# display usage details and exit if no flags passed.
+if [ $# -eq 0 ] ; then showHelp ; exit 0 ; fi
+
 fileMonitor() {
   chsum1=""
 
