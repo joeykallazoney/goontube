@@ -44,9 +44,9 @@ class Room {
             type: p.ROOM_MEDIA_UPDATE,
             data: {
                 active:     true,
-                streams:    [],
+                streams:    [], // what is this?
                 id:         this.playing.id,
-                provider:   'youtube',
+                provider:   'youtube', //change to read from this, change player name entries on this to be coherent to the system
                 position:   this.playing.position
             }
         }
@@ -108,17 +108,18 @@ class Room {
     startNextVideo() {
         let nextVideo = this.playlist.shift()
 
-        console.log(nextVideo)
+        //console.log(nextVideo)
 
         this.playing = {
             active:                 true,
             id:                     nextVideo.id,
             title:                  nextVideo.title,
             timeSpentPlaying:       0,
-            duration:               -1
+            duration:               nextVideo.duration_ms
         }
+        console.log(this)
 
-        console.log(`Now playing: ${this.playing.title}`)
+        //console.log(`Now playing: ${this.playing.title}`)
 
         this.broadcastCurrentMedia()
         this.broadcastRoomPlaylist()
