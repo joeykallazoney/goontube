@@ -31,6 +31,7 @@ showHelp() {
     printf "\n\n%s\n%s\n\n" "Flags:" "$(lineSep)"
     printf "%s%s\n" "$(printf '\033[1;32m') -a" "$(printf '\033[0;32m') (all)     $(printf '\033[0m'): runs all processes required to build goontube. (Incomplete)"
     printf "%s%s\n" "$(printf '\033[1;32m') -b" "$(printf '\033[0;32m') (browser) $(printf '\033[0m'): runs the normal build and also switches to chrome. Requires OSX."
+    printf "%s%s\n" "$(printf '\033[1;32m') -r" "$(printf '\033[0;32m') (run)     $(printf '\033[0m'): runs build with no browser silliness."
     printf "%s%s\n" "$(printf '\033[1;32m') -h" "$(printf '\033[0;32m') (help)    $(printf '\033[0m'): displays this, but you knew that already, didn't you?"
     printf "%s\n\n%s\n\n%91s\n\n" "$(lineSep)" "$(hashSep)" \(:V\)
     exit
@@ -95,6 +96,7 @@ buildStuff() {
 aFlag="0"
 hFlag="0"
 bFlag="0"
+rFlag="0"
 
 while getopts abh opts; do
   case ${opts} in
@@ -118,9 +120,11 @@ while getopts abh opts; do
       '; 
     fi
   ;;
+  r)
+    # Basic build and File Monitor - no browser tricks coz Linux and MacOS like to do stuff differently.
+    buildStuff
+   ;;
   esac
 done
-
-buildStuff
 # EOF
 
