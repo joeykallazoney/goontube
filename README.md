@@ -29,7 +29,7 @@ Much needed overhaul + rewrite as an ES6 webapp with React + Redux.
 
 ####**Bug Fixes:**####
 - [ ] Repair fullscreen mode.
-- [ ] $permissions definitely needs to have an alias, $privilege
+- [ ] $permissions definitely needs to have an alias, $privilege, $priv (?)
 - [ ] “fix video” button skips screen to top, making it hard to click in a row multiple times, change this if non-breaking.
 - [ ] “power button” gets real buggy after “turning it back on”, ie video players wont properly reinsert, retoggling power might not work, etc.
 - [ ] preloading goontube, from typing in go- in like chrome for example, triggers multiple logins and kicks a user. considering how common typing go- into a nav bar is this is non trivial. possible solution is to remove restriction on simultaneous logins.
@@ -50,8 +50,9 @@ Much needed overhaul + rewrite as an ES6 webapp with React + Redux.
   - Things look good initially but frame-rates tend to decline over time.
   - Cam images persist when another user deactivates their camera.
 - [ ] Restructure video-containing frame/divs to be a div with the child-content sized to 100% for easier resizing. (do this before restructuring full screen mode/implementing half screen mode.)
-- [ ] Emotes: ‘yay’ and ‘2beery’ are broken.
+- [x] Emotes: ‘yay’ and ‘2beery’ are broken.
   - these are located in: //forums.goontu.be/Smileys/default/
+  - FIXED 2016FEB08
 
 
 ####**Features:**####
@@ -81,7 +82,7 @@ Much needed overhaul + rewrite as an ES6 webapp with React + Redux.
 - [ ] Two MOTD lines, One for system alerts and maintenance notices, the other for customary MOTD functions.
 - [ ] Banners are kind of a PITA. Requires redesign to fix.
 - [ ] Regularly updated ‘Top 100 videos’ stats list.
-- [ ] Allow $ commands to be accessed with / as well.
+- [x] Allow $ commands to be accessed with / as well.
 - [ ] Improve control buttons to have more description. If nothing else a hover over could display what the button does.
 - [ ] Fix $import
 - [ ] Implement goontube arena as a built in feature. A user may $duel a user, which the other must accept, then the room is polled for if the duel should take place. If it does then once each user uploads a video their videos are moved to the top. After the second video plays a poll is created to poll who won.
