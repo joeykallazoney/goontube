@@ -68,7 +68,8 @@ Much needed overhaul + rewrite as an ES6 webapp with React + Redux.
 - [ ] possibly add more video adding modes, toggleable by mods, like a relevance mode somehow where people can more easily do a “this video is like the last one!” thing, maybe by limiting to one add per person, stuff like that. default mode should be applicable for most of the time still though. if no mods present should revert automatically in case of problems.
 - [ ] Responsive half screen mode.
 - [ ] allow banner toggle and persist for accounts.
-
+- [ ] Investigate adding BT magnet-links to stream vids.
+   - May require heavy discussion/review. We have concerns.
 
 **Commands:**
 - [ ] Possible ```$unskip``` feature to undo a ```$skip``` action?
