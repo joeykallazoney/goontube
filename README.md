@@ -109,6 +109,8 @@ Much needed overhaul + rewrite as an ES6 webapp with React + Redux.
 
 **UI**
 - [ ] Two MOTD lines, One for system alerts and maintenance notices, the other for customary MOTD functions.
+  - ```$motd``` - Rednames/Deputies
+  - ```$issue``` - Admins/Rednames only
 - [ ] Banners are kind of a PITA. Requires redesign to fix.
 - [ ] Improve control buttons to have more description. If nothing else a hover over could display what the button does.
 - [ ] Add trashcan gadget to drag and drop unplayable (deleted) video urls and remove them from the index. Only Rednames will see this gadget. Perhaps index bad urls to separate table for review.
