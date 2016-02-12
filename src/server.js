@@ -83,6 +83,7 @@ wss.on('connection', (ws) => {
     let client = new Client(ws, serverContext)
 
     defaultRoom.addUser(client)
+    defaultRoom.initConnection()
     client.room = defaultRoom  // <-- unstable, room field will be gone
 
     if(clients

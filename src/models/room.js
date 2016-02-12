@@ -33,6 +33,11 @@ class Room {
         this.updateRoomUsersList()
     }
 
+    initConnection() {
+        this.broadcastCurrentMedia()
+        this.broadcastRoomPlaylist()
+    }
+
     updateRoomUsersList() {
         let packet = this.makeUserListPacket()
 
