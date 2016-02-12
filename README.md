@@ -33,7 +33,8 @@ Much needed overhaul + rewrite as an ES6 webapp with React + Redux.
 - [ ] $permissions definitely needs to have an alias, $privilege, $priv (?)
 - [ ] “fix video” button skips screen to top, making it hard to click in a row multiple times, change this if non-breaking.
 - [ ] “power button” gets real buggy after “turning it back on”, ie video players wont properly reinsert, retoggling power might not work, etc.
-- [ ] preloading goontube, from typing in go- in like chrome for example, triggers multiple logins and kicks a user. considering how common typing go- into a nav bar is this is non trivial. possible solution is to remove restriction on simultaneous logins.
+- [x] preloading goontube, from typing in go- in like chrome for example, triggers multiple logins and kicks a user. considering how common typing go- into a nav bar is this is non trivial. possible solution is to remove restriction on simultaneous logins.
+   - This is a Chrome configuration issue. ```Settings``` --> ```Advanced Settings``` --> ```Privacy``` --> deselect ```Prefetch resources to load pages more quickly```.
 - [x] Fix non-autoplaying videos
   - 2015DEC06 - Vimeo switched to HTML5 player.
     - Users must click video timeline to sync-up with other viewers joining after video has started.
