@@ -3,7 +3,6 @@
  * an immutable state tree.
  * @since 1.0.0
  */
-import I, { fromJS } from 'immutable'
 import p from './protocol'
 import { applyMiddleware, compose } from 'redux'
 import defaults from './defaults'
