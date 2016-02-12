@@ -23,7 +23,7 @@ Much needed overhaul + rewrite as an ES6 webapp with React + Redux.
 
 ####**Bug Fixes:**####
 - [ ] Repair fullscreen mode.
-- [ ] $permissions definitely needs to have an alias, $privilege, $priv (?)
+- [ ] ```$permissions``` definitely needs to have an alias, ```$privilege```, ```$priv``` (?)
 - [ ] “fix video” button skips screen to top, making it hard to click in a row multiple times, change this if non-breaking.
 - [ ] “power button” gets real buggy after “turning it back on”, ie video players wont properly reinsert, retoggling power might not work, etc.
 - [ ] Account/Password recovery
@@ -38,6 +38,8 @@ Much needed overhaul + rewrite as an ES6 webapp with React + Redux.
   - Things look good initially but frame-rates tend to decline over time.
   - Cam images persist when another user deactivates their camera.
 - [ ] Restructure video-containing frame/divs to be a div with the child-content sized to 100% for easier resizing. (do this before restructuring full screen mode/implementing half screen mode.)
+- [ ] Fix $import
+- [ ] Addition of gDrive/gDocs support has broken vimeo syncronization. 2016FEB11
 
 ##### Resolved #####
 - [x] 2016FEB11 - Admin Panel chat log timestamps are crazy wrong.
@@ -52,37 +54,23 @@ Much needed overhaul + rewrite as an ES6 webapp with React + Redux.
   - these are located in: //forums.goontu.be/Smileys/default/
   - FIXED 2016FEB08
 
-####**Features:**####
-- [ ] Add parsing feature for drive.google.com to docs.google.com, strip '```view?usp=sharing```' from end of line.
+####**New Features:**####
+- [ ] Minimize code for deployment.
+- [x] 2016FEB11 - Google Drive/Docs support. (**woot!**)
+    - [ ] Add parsing feature for drive.google.com to docs.google.com, strip '```view?usp=sharing```' from end of line.
 - [ ] Possibly disable youtube annotations by default (suggested by Megaspel) append '```&iv_load_policy=3```' to youtube "```movie```" param/value element (Reference: http://stackoverflow.com/questions/8166846/removing-annotations-on-embedded-youtube-videos)
-- [ ] Possible $unskip feature to undo a $skip action?
-- [ ] $stealthskip, for mods, skips the current video for everyone except the person who added it, they think it's still playing... (i'm only half joking...)
-- [ ] make commands ($ and /) not enter chat.
 - [ ] allow users to queue videos, taking priority in a turn based/round-robin order? possibly a mod toggleable mode.
 - [ ] make timestamping work and work easily.
-- [ ] Minimize code for deployment.
 - [ ] Add a video flipping button for backwards vids. (via POOPSOCKBOLLAS)
 - [ ] possibly link <3ing a video to liking the video for a user’s youtube account?
 - [ ] possibly add more video adding modes, toggleable by mods, like a relevance mode somehow where people can more easily do a “this video is like the last one!” thing, maybe by limiting to one add per person, stuff like that. default mode should be applicable for most of the time still though. if no mods present should revert automatically in case of problems.
 - [ ] Responsive half screen mode.
 - [ ] allow banner toggle and persist for accounts.
-- Chat-stuff:
-  - [ ] Make whisper-mode more apparent (separate (floating?) chat window? Inverse-color-scheme?) to users.
-  - [ ] Allow entering whisper mode through name clicking rather than chat commands
-- [ ] Re-institute Karma/Fame system.
-  - Incentivize good content
-  - Shouldn’t be public however, (admin panel only?) as there’s too much dick-waving on the internet already.
-  - could think of alternative "good adding incentives". listing peoples video history, most added videos, give people higher video posting numbers for continued good videos (how to determine if posting is good though? likes are obvious but as of the current system it's hard to predict who will bother clicking a like button.)
-- Etc:
-- [ ] I’m curious what zoom level most users use for tubes. I personally never use the default 100% as it’s way too small, and zoom in until the video and chat hit the screen edges. if someone actually uses the small player this might be irrelevant but maybe we should default to a larger player/chat.
-  - We could ask users to take a screenshot of what zoom they normally use goontube at.
-- [ ] Two MOTD lines, One for system alerts and maintenance notices, the other for customary MOTD functions.
-- [ ] Banners are kind of a PITA. Requires redesign to fix.
-- [ ] Regularly updated ‘Top 100 videos’ stats list.
-- [ ] Improve control buttons to have more description. If nothing else a hover over could display what the button does.
-- [ ] Fix $import
-- [ ] Implement goontube arena as a built in feature. A user may $duel a user, which the other must accept, then the room is polled for if the duel should take place. If it does then once each user uploads a video their videos are moved to the top. After the second video plays a poll is created to poll who won.
-- [ ] A more elaborate goontube arena that sorts everyone in the room into one of 4 teams Ala Harry potter. Each team has a leader, and each leader posts a video. Once all the videos play each team votes on a video besides their own. Possibly limit chat between teams while this is taking place.
+
+**Commands:**
+- [ ] Possible $unskip feature to undo a $skip action?
+- [ ] $stealthskip, for mods, skips the current video for everyone except the person who added it, they think it's still playing... (i'm only half joking...)
+- [ ] make commands ($ and /) not enter chat.
 - [ ] $8ball could give ‘Magic 8-ball’ answers.
   - It is certain
   - It is decidedly so
@@ -104,13 +92,34 @@ Much needed overhaul + rewrite as an ES6 webapp with React + Redux.
   - My sources say no
   - Outlook not so good
   - Very doubtful
-- [ ] Unnamed users could be auto-purged if they don’t login for after ‘X’ minutes instead of depending on rednames/deputies to manually purge.
-- [ ] Failure to login after 'X' minutes forces black-out overlay and cessation of media streaming, prompting 'unnamed' user to register/login.
-- [ ] Add-in ‘milkdrop.js’ so users can have something interesting to look at during ‘still-image’ videos. (suggested by Jynn).
-
 ##### Complete #####
 - [x] Add 3-second cool-down to $skip so mods/deputies can't over-moderation (possible '-f' option for override?)
 - [x] Allow $ commands to be accessed with / as well.
+
+**Chat-stuff:**
+  - [ ] Make whisper-mode more apparent (separate (floating?) chat window? Inverse-color-scheme?) to users.
+  - [ ] Allow entering whisper mode through name clicking rather than chat commands
+- [ ] Re-institute Karma/Fame system.
+  - Incentivize good content
+  - Shouldn’t be public however, (admin panel only?) as there’s too much dick-waving on the internet already.
+  - could think of alternative "good adding incentives". listing peoples video history, most added videos, give people higher video posting numbers for continued good videos (how to determine if posting is good though? likes are obvious but as of the current system it's hard to predict who will bother clicking a like button.)
+
+**UI**
+- [ ] Two MOTD lines, One for system alerts and maintenance notices, the other for customary MOTD functions.
+- [ ] Banners are kind of a PITA. Requires redesign to fix.
+- [ ] Improve control buttons to have more description. If nothing else a hover over could display what the button does.
+- [ ] Add trashcan gadget to drag and drop unplayable (deleted) video urls and remove them from the index. Only Rednames will see this gadget. Perhaps index bad urls to separate table for review.
+
+**Etc:**
+- [ ] I’m curious what zoom level most users use for tubes. I personally never use the default 100% as it’s way too small, and zoom in until the video and chat hit the screen edges. if someone actually uses the small player this might be irrelevant but maybe we should default to a larger player/chat.
+  - We could ask users to take a screenshot of what zoom they normally use goontube at.
+- [ ] Regularly updated ‘Top 100 videos’ stats list.
+- [ ] A more elaborate goontube arena that sorts everyone in the room into one of 4 teams Ala Harry potter. Each team has a leader, and each leader posts a video. Once all the videos play each team votes on a video besides their own. Possibly limit chat between teams while this is taking place.
+- [ ] Unnamed users could be auto-purged if they don’t login for after ‘X’ minutes instead of depending on rednames/deputies to manually purge.
+- [ ] Failure to login after 'X' minutes forces black-out overlay and cessation of media streaming, prompting 'unnamed' user to register/login.
+- [ ] Add-in ‘milkdrop.js’ so users can have something interesting to look at during ‘still-image’ videos. (suggested by Jynn).
+- [ ] Implement goontube arena as a built in feature. A user may $duel a user, which the other must accept, then the room is polled for if the duel should take place. If it does then once each user uploads a video their videos are moved to the top. After the second video plays a poll is created to poll who won.
+
 
 ### Streaming provider spec
 
