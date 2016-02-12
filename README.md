@@ -53,6 +53,7 @@ Much needed overhaul + rewrite as an ES6 webapp with React + Redux.
 - [x] Emotes: ‘yay’ and ‘2beery’ are broken.
   - these are located in: //forums.goontu.be/Smileys/default/
   - FIXED 2016FEB08
+- [x] 2016FEB08 - Streamlined auto-add random videos to empty queue.
 
 ####**New Features:**####
 - [ ] Minimize code for deployment.
@@ -62,10 +63,12 @@ Much needed overhaul + rewrite as an ES6 webapp with React + Redux.
 - [ ] allow users to queue videos, taking priority in a turn based/round-robin order? possibly a mod toggleable mode.
 - [ ] make timestamping work and work easily.
 - [ ] Add a video flipping button for backwards vids. (via POOPSOCKBOLLAS)
+- [ ] Add-in ‘milkdrop.js’ so users can have something interesting to look at during ‘still-image’ videos. (suggested by Jynn).
 - [ ] possibly link <3ing a video to liking the video for a user’s youtube account?
 - [ ] possibly add more video adding modes, toggleable by mods, like a relevance mode somehow where people can more easily do a “this video is like the last one!” thing, maybe by limiting to one add per person, stuff like that. default mode should be applicable for most of the time still though. if no mods present should revert automatically in case of problems.
 - [ ] Responsive half screen mode.
 - [ ] allow banner toggle and persist for accounts.
+
 
 **Commands:**
 - [ ] Possible ```$unskip``` feature to undo a ```$skip``` action?
@@ -117,7 +120,6 @@ Much needed overhaul + rewrite as an ES6 webapp with React + Redux.
 - [ ] A more elaborate goontube arena that sorts everyone in the room into one of 4 teams Ala Harry potter. Each team has a leader, and each leader posts a video. Once all the videos play each team votes on a video besides their own. Possibly limit chat between teams while this is taking place.
 - [ ] Unnamed users could be auto-purged if they don’t login for after ‘X’ minutes instead of depending on rednames/deputies to manually purge.
 - [ ] Failure to login after 'X' minutes forces black-out overlay and cessation of media streaming, prompting 'unnamed' user to register/login.
-- [ ] Add-in ‘milkdrop.js’ so users can have something interesting to look at during ‘still-image’ videos. (suggested by Jynn).
 - [ ] Implement goontube arena as a built in feature. A user may $duel a user, which the other must accept, then the room is polled for if the duel should take place. If it does then once each user uploads a video their videos are moved to the top. After the second video plays a poll is created to poll who won.
 
 
