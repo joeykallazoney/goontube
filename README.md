@@ -122,7 +122,7 @@ Much needed overhaul + rewrite as an ES6 webapp with React + Redux.
 - [ ] A more elaborate goontube arena that sorts everyone in the room into one of 4 teams Ala Harry potter. Each team has a leader, and each leader posts a video. Once all the videos play each team votes on a video besides their own. Possibly limit chat between teams while this is taking place.
 - [ ] Unnamed users could be auto-purged if they don’t login for after ‘X’ minutes instead of depending on rednames/deputies to manually purge.
 - [ ] Failure to login after 'X' minutes forces black-out overlay and cessation of media streaming, prompting 'unnamed' user to register/login.
-- [ ] Implement goontube arena as a built in feature. A user may $duel a user, which the other must accept, then the room is polled for if the duel should take place. If it does then once each user uploads a video their videos are moved to the top. After the second video plays a poll is created to poll who won.
+- [ ] Implement goontube arena as a built in feature. A user may ```$duel``` a user, which the other must accept, then the room is polled for if the duel should take place. If it does then once each user uploads a video their videos are moved to the top. After the second video plays a poll is created to poll who won.
 
 
 ### Streaming provider spec
