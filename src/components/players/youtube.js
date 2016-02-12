@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 function mapStateToProps(state) {
     return {
         videoId:  state.room.media.id,
-        position: state.room.media.position
+        startTime: state.room.media.startTime
     }
 }
 
@@ -14,13 +14,27 @@ function mapDispatchToProps(dispatch, props) {
     }
 }
 
+function syncTime(player, startTime) {
+    let secondsPassed = (Math.ceil( (Date.now() - startTime) / 1000))
+    let offsetMargin = 5
+    if (Math.abs(player.getCurrentTime() - secondsPassed) > offsetMargin) {
+        player.seekTo(secondsPassed)
+    }
+}
+
+
 class YouTubePlayer extends React.Component {
     constructor(props, context) {
         super(props, context)
     }
 
     onReady() {
+    }
 
+    onPlay(event, props) {
+        window.tp = event.target
+
+        syncTime(event.target, props.startTime)
     }
 
     onStateChange() {
@@ -40,6 +54,7 @@ class YouTubePlayer extends React.Component {
                 <YouTube videoId={this.props.videoId}
                     opts={options}
                     onReady={this.onReady}
+                    onPlay={(event) => this.onPlay(event, this.props)}
                     onStateChange={this.onStateChange} />
             </div>
         )

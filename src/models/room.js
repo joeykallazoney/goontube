@@ -52,7 +52,8 @@ class Room {
                 streams:    [], // what is this?
                 id:         this.playing.id,
                 provider:   'youtube', //change to read from this, change player name entries on this to be coherent to the system
-                position:   this.playing.position
+                startTime:  this.playing.startTime
+                //position:   this.playing.position
             }
         }
     }
@@ -120,7 +121,8 @@ class Room {
             id:                     nextVideo.id,
             title:                  nextVideo.title,
             timeSpentPlaying:       0,
-            duration:               nextVideo.duration_ms
+            duration:               nextVideo.duration_ms,
+            startTime:              Date.now()
         }
         console.log(this)
 

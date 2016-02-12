@@ -35,7 +35,8 @@ const defaultApplicationState = {
             streams:    [],
             id:         'FTaWrcmhAgw',
             provider:   'youtube',
-            position:   0
+            position:   0,
+            startTime:  Date.now()
         }
     },
     search:  {
