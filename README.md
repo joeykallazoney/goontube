@@ -15,31 +15,17 @@ Much needed overhaul + rewrite as an ES6 webapp with React + Redux.
 - [ ] Discuss deployment/build process.
 - [ ] Discuss project structure/file organization.
 - [ ] We should establish regular weekly/bi-weekly meetings over mumble to discuss development status and task delegation.
-   - Timetable provided for coordination
-
-| UTC TIME | 0:00 | 1:00 | 2:00 | 3:00 | 4:00 | 5:00 | 6:00 | 7:00 | 8:00 | 9:00 | 10:00 | 11:00 | 12:00 | 13:00 | 14:00 | 15:00 | 16:00 | 17:00 | 18:00 | 19:00 | 20:00 | 21:00 | 22:00 | 23:00
-|  ------------------------------ | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- |
-|  Tokyo, Japan | 9:00 | 10:00 | 11:00 | 12:00 | 13:00 | 14:00 | 15:00 | 16:00 | 17:00 | 18:00 | 19:00 | 20:00 | 21:00 | 22:00 | 23:00 | 0:00 | 1:00 | 2:00 | 3:00 | 4:00 | 5:00 | 6:00 | 7:00 | 8:00
-|  Sault Ste. Marie, ON, CA | 19:00 | 20:00 | 21:00 | 22:00 | 23:00 | 0:00 | 1:00 | 2:00 | 3:00 | 4:00 | 5:00 | 6:00 | 7:00 | 8:00 | 9:00 | 10:00 | 11:00 | 12:00 | 13:00 | 14:00 | 15:00 | 16:00 | 17:00 | 18:00
-|  St Louis, MO, USA | 18:00 | 19:00 | 20:00 | 21:00 | 22:00 | 23:00 | 0:00 | 1:00 | 2:00 | 3:00 | 4:00 | 5:00 | 6:00 | 7:00 | 8:00 | 9:00 | 10:00 | 11:00 | 12:00 | 13:00 | 14:00 | 15:00 | 16:00 | 17:00
+   - Scheduling timetable moved to wiki
 
 ####**Architecture Scratchpad**####
 - [ ] Use pure stateless components in favour of class components, remove proptypes in favour of redux connect middleware
 - [ ] Place websocket dispatch/connect in async middleware - web worker?
 
 ####**Bug Fixes:**####
-- [x] 2016FEB11 - Admin Panel chat log timestamps are crazy wrong.
 - [ ] Repair fullscreen mode.
 - [ ] $permissions definitely needs to have an alias, $privilege, $priv (?)
 - [ ] “fix video” button skips screen to top, making it hard to click in a row multiple times, change this if non-breaking.
 - [ ] “power button” gets real buggy after “turning it back on”, ie video players wont properly reinsert, retoggling power might not work, etc.
-- [x] preloading goontube, from typing in go- in like chrome for example, triggers multiple logins and kicks a user. considering how common typing go- into a nav bar is this is non trivial. possible solution is to remove restriction on simultaneous logins.
-   - This is a Chrome configuration issue. ```Settings``` --> ```Advanced Settings``` --> ```Privacy``` --> deselect ```Prefetch resources to load pages more quickly```.
-- [x] Fix non-autoplaying videos
-  - 2015DEC06 - Vimeo switched to HTML5 player.
-    - Users must click video timeline to sync-up with other viewers joining after video has started.
-  - [x] Dailymotion still needs attention. (does not auto-play, does not sync).
-  - 2016FEB08 - Dailymotion fixed! switched to HTML5 player.
 - [ ] Account/Password recovery
   - Users have forgotten email addresses.
     - Idiodance (lost password, no email received, using alt “Idio”)
@@ -52,16 +38,24 @@ Much needed overhaul + rewrite as an ES6 webapp with React + Redux.
   - Things look good initially but frame-rates tend to decline over time.
   - Cam images persist when another user deactivates their camera.
 - [ ] Restructure video-containing frame/divs to be a div with the child-content sized to 100% for easier resizing. (do this before restructuring full screen mode/implementing half screen mode.)
+## Resolved ##
+- [x] 2016FEB11 - Admin Panel chat log timestamps are crazy wrong.
+- [x] preloading goontube, from typing in go- in like chrome for example, triggers multiple logins and kicks a user. considering how common typing go- into a nav bar is this is non trivial. possible solution is to remove restriction on simultaneous logins.
+   - 2016FEB12 - This is a Chrome configuration issue. ```Settings``` --> ```Advanced Settings``` --> ```Privacy``` --> deselect ```Prefetch resources to load pages more quickly```.
+- [x] Fix non-autoplaying videos
+  - 2015DEC06 - Vimeo switched to HTML5 player.
+    - Users must click video timeline to sync-up with other viewers joining after video has started.
+  - [x] Dailymotion still needs attention. (does not auto-play, does not sync).
+  - 2016FEB08 - Dailymotion fixed! switched to HTML5 player.
 - [x] Emotes: ‘yay’ and ‘2beery’ are broken.
   - these are located in: //forums.goontu.be/Smileys/default/
   - FIXED 2016FEB08
-
 
 ####**Features:**####
 - [ ] Add parsing feature for drive.google.com to docs.google.com, strip '```view?usp=sharing```' from end of line.
 - [ ] Possibly disable youtube annotations by default (suggested by Megaspel) append '```&iv_load_policy=3```' to youtube "```movie```" param/value element (Reference: http://stackoverflow.com/questions/8166846/removing-annotations-on-embedded-youtube-videos)
 - [x] Add 3-second cool-down to $skip so mods/deputies can't over-moderation (possible '-f' option for override?)
-  - Possible $unskip feature to undo a $skip action?
+  - [ ] Possible $unskip feature to undo a $skip action?
 - [ ] $stealthskip, for mods, skips the current video for everyone except the person who added it, they think it's still playing... (i'm only half joking...)
 - [ ] make commands ($ and /) not enter chat.
 - [ ] allow users to queue videos, taking priority in a turn based/round-robin order? possibly a mod toggleable mode.
@@ -85,7 +79,6 @@ Much needed overhaul + rewrite as an ES6 webapp with React + Redux.
 - [ ] Two MOTD lines, One for system alerts and maintenance notices, the other for customary MOTD functions.
 - [ ] Banners are kind of a PITA. Requires redesign to fix.
 - [ ] Regularly updated ‘Top 100 videos’ stats list.
-- [x] Allow $ commands to be accessed with / as well.
 - [ ] Improve control buttons to have more description. If nothing else a hover over could display what the button does.
 - [ ] Fix $import
 - [ ] Implement goontube arena as a built in feature. A user may $duel a user, which the other must accept, then the room is polled for if the duel should take place. If it does then once each user uploads a video their videos are moved to the top. After the second video plays a poll is created to poll who won.
@@ -114,7 +107,8 @@ Much needed overhaul + rewrite as an ES6 webapp with React + Redux.
 - [ ] Unnamed users could be auto-purged if they don’t login for after ‘X’ minutes instead of depending on rednames/deputies to manually purge.
 - [ ] Failure to login after 'X' minutes forces black-out overlay and cessation of media streaming, prompting 'unnamed' user to register/login.
 - [ ] Add-in ‘milkdrop.js’ so users can have something interesting to look at during ‘still-image’ videos. (suggested by Jynn).
-
+## Complete
+- [x] Allow $ commands to be accessed with / as well.
 ### Streaming provider spec
 
 #### Installation + Setup
