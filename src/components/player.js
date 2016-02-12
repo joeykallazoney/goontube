@@ -8,9 +8,7 @@ import Vimeo from './players/vimeo'
 
 function mapStateToProps(state) {
     return {
-        position:   state.getIn(['room', 'media', 'position']),
-        provider:   state.getIn(['room', 'media', 'provider']),
-        videoId:    state.getIn(['room', 'media', 'id'])
+        media:    state.getIn(['room', 'media'])
     }
 }
 
@@ -25,12 +23,20 @@ class Player extends React.Component {
     }
 
     render() {
+        let providerMapper = {
+            'youtube' : <YouTube />
+        }
+        let reactProvider = providerMapper[this.props.media.provider] || 'Loading...'
+        console.log('why...')
+        console.log(this)
+
         return (
             <div className="player">
-                <YouTube />
+                {reactProvider}
             </div>
         )
     }
 }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(Player)

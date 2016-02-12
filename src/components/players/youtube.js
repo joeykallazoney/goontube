@@ -31,7 +31,7 @@ class YouTubePlayer extends React.Component {
             width:          '100%',
             height:         '100%',
             playerVars: {
-                autoplay:   0
+                autoplay:   1
             }
         }
 
