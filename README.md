@@ -38,7 +38,7 @@ Much needed overhaul + rewrite as an ES6 webapp with React + Redux.
   - Things look good initially but frame-rates tend to decline over time.
   - Cam images persist when another user deactivates their camera.
 - [ ] Restructure video-containing frame/divs to be a div with the child-content sized to 100% for easier resizing. (do this before restructuring full screen mode/implementing half screen mode.)
-- [ ] Fix $import
+- [ ] Fix ```$import```
 - [ ] Addition of gDrive/gDocs support has broken vimeo syncronization. 2016FEB11
 
 ##### Resolved #####
@@ -68,10 +68,10 @@ Much needed overhaul + rewrite as an ES6 webapp with React + Redux.
 - [ ] allow banner toggle and persist for accounts.
 
 **Commands:**
-- [ ] Possible $unskip feature to undo a $skip action?
-- [ ] $stealthskip, for mods, skips the current video for everyone except the person who added it, they think it's still playing... (i'm only half joking...)
+- [ ] Possible ```$unskip``` feature to undo a ```$skip``` action?
+- [ ] ```$stealthskip```, for mods, skips the current video for everyone except the person who added it, they think it's still playing... (i'm only half joking...)
 - [ ] make commands ($ and /) not enter chat.
-- [ ] $8ball could give ‘Magic 8-ball’ answers.
+- [ ] ```$8ball``` could give ‘Magic 8-ball’ answers.
   - It is certain
   - It is decidedly so
   - Without a doubt
