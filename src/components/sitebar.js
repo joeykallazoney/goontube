@@ -5,7 +5,7 @@ import p from '../protocol'
 
 function mapStateToProps(state) {
     return {
-        user: state.getIn(['auth', 'user'])
+        user: state.auth.user
     }
 }
 

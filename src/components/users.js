@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 function mapStateToProps(state) {
     return {
-        users: state.getIn(['room', 'users'])
+        users: state.room.users
     }
 }
 

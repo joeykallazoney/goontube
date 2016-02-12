@@ -8,18 +8,20 @@ import p from './protocol'
 import { applyMiddleware, compose } from 'redux'
 import defaults from './defaults'
 
-// signature: (state, []:reducers) -> (state, action)
-//let transducer = (state = defaultApplicationState, [reducers]) =>
-//    (reducers.map(r => (...r)(state)()))
-
-function rootReducer(state = fromJS(defaults), action) {
+/**
+ * @function Applies a single action to the application state.
+ * @returns A new application state.
+ */
+function rootReducer(state = defaults, action) {
     switch(action.type) {
         case p.ROOM_CLEAR_MESSAGES:
-            state = state.set('room',
-                {
-                    ...state.get('room'),
+            state = {
+                ...state,
+                room: {
+                    ...state.room,
                     history: []
-                })
+                }
+            }
             return state
 
         case p.CURRENT_MEDIA_ITEM_INFO:
@@ -27,55 +29,108 @@ function rootReducer(state = fromJS(defaults), action) {
             return state
 
         case p.LOGIN_ACCEPTED:
-            state = state.setIn(['auth', 'user'], action.data.username)
+            state = {
+                ...state,
+                auth: {
+                    ...state.auth,
+                    user: action.data.username
+                }
+            }
+
             return state
 
         case p.LOGOUT_USER:
-            state = state.setIn(['auth', 'user'], null)
+            state = {
+                ...state,
+                auth: {
+                    ...state.auth,
+                    user: null
+                }
+            }
             return state
 
         case p.ROOM_MEDIA_UPDATE:
-            state = state.setIn(['room', 'media'], action.data)
+            state = {
+                ...state,
+                room: {
+                    ...state.room,
+                    media: action.data
+                }
+            }
             return state
 
         case p.ROOM_PLAYLIST_UPDATE:
-            state = state.setIn(['room', 'playlist'], action.data.items)
+            state = {
+                ...state,
+                room: {
+                    ...state.room,
+                    playlist: action.data.items
+                }
+            }
             return state
 
         case p.ROOM_LIST_UPDATE:
-            state = state.setIn(['room', 'users'], action.data)
+            state = {
+                ...state,
+                room: {
+                    ...state.room,
+                    users: action.data
+                }
+            }
             return state
 
         case p.ROOM_USER_MESSAGE:
-            state = state.updateIn(['room', 'history'],
-                history => history.push(action.data))
+            state = {
+                ...state,
+                room: {
+                    ...state.room,
+                    history: [...state.room.history, action.data]
+                }
+            }
             return state
 
         case p.SET_PLAYBACK_POSITION:
             return state
 
         case p.BANNER_LIST_UPDATE:
-            state = state.setIn(['banner', 'possibilities'], action.data)
+            state = {
+                ...state,
+                room: {
+                    ...state.room,
+                    users: action.data
+                }
+            }
             return state
 
         case p.BANNER_NEW_RANDOM_BANNER:
-            state = state.setIn(['banner', 'currentBannerIndex'],
-                    parseInt(Math.random() * state.getIn(['banner', 'possibilities']).size))
+            console.log(state)
+            state = {
+                ...state,
+                banner: {
+                    ...state.banner,
+                    currentBannerIndex: parseInt(Math.random() * state.banner.possibilities.length)
+                }
+            }
             return state
 
         case p.BANNER_NEW_BANNER:
-            const currentBannerIndex = parseInt(action.data)
+            state = {
+                ...state,
+                banner: {
+                    ...state.banner,
+                    currentBannerIndex: parseInt(action.data)
+                }
+            }
 
             return state
-                .setIn(['banner', 'currentBannerIndex'], currentBannerIndex)
-        // Begin Search
+
         case p.SEARCH_NEW_SEARCH:
-            state = state.set('search', {
-                ...state.get('search'),
+            state = {
+                ...state.search,
                 query: action.value
-            })
+            }
+
             return state
-        // End Search
 
         default:
             return state

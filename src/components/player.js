@@ -8,7 +8,7 @@ import Vimeo from './players/vimeo'
 
 function mapStateToProps(state) {
     return {
-        media:    state.getIn(['room', 'media'])
+        media:   state.room.media 
     }
 }
 

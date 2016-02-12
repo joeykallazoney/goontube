@@ -4,11 +4,11 @@ import { connect } from 'react-redux'
 import p from '../protocol'
 
 function mapStateToProps(state) {
-    let possibilities = state.getIn(['banner', 'possibilities']),
-        index = state.getIn(['banner', 'currentBannerIndex'])
+    let possibilities = state.banner.possibilities,
+        index = state.banner.currentBannerIndex
 
     return {
-        src: possibilities.get(index)
+        src: possibilities[index]
     }
 }
 

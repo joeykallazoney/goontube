@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 
 function mapStateToProps(state) {
     return {
-        videoId:  state.getIn(['room', 'media']).id,
-        position: state.getIn(['room', 'media']).position
+        videoId:  state.room.media.id,
+        position: state.room.media.position
     }
 }
 

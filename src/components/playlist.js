@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 function mapStateToProps(state) {
     return {
-        items: state.getIn(['room', 'playlist'])
+        items: state.room.playlist
     }
 }
 
@@ -24,7 +24,7 @@ class Playlist extends React.Component {
     }
 
     render() {
-        let playlistIndex = 0;
+        let playlistIndex = 0
 
         return (
             <div className="playlist">

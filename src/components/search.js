@@ -43,9 +43,9 @@ const NUMBER_OF_RESULTS = 10
  */
 
 function mapStateToProps(state) {
-    let searchQuery = state.getIn(['search', 'query']),
-        searchResults = state.getIn(['search', 'results']),
-        youtubeApiKey = state.getIn(['search', 'apiKeys', 'youtube'])
+    let searchQuery = state.search.query,
+        searchResults = state.search.results,
+        youtubeApiKey = state.search.apiKeys.youtube
 
     return {
         youtubeApiKey:  youtubeApiKey,

@@ -10,7 +10,7 @@ const KEYCODE_ENTER = 13
 
 function mapStateToProps(state) {
     return {
-        history: state.getIn(['room', 'history']).toArray()
+        history: state.room.history 
     }
 }
 
