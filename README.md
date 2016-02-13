@@ -72,6 +72,32 @@ Much needed overhaul + rewrite as an ES6 webapp with React + Redux.
    - May require heavy discussion/review. We have concerns.
 
 **Commands:**
+- [ ] ```$afk``` < _reason_ >
+- [ ] ```$banlist```
+- [ ] ```$blacklist``` [ _yt_ | _vm_ | _dm_ ] < _linkid_ >
+- [ ] ```$bump``` < _username_ >
+- [ ] ```$dice``` < _quantity_ > < _# of sides_ > < _quantity of dice_ >  or $N__d__Nnn
+- [ ] ```$delete``` [ ```-all``` | ```-dur _minutes_``` | ```-num _#_``` < _username_ >
+- [ ] ```$endpoll```
+- [ ] ```$emotes```
+- [ ] ```$ignore``` [ < _username_ > ]
+- [ ] ```$import``` < _playList-Link_ >
+- [ ] ```$kick``` [ < _username_ > | ```-all``` | ```-unregistered``` | < _message_ >
+- [ ] ```$me``` ```/me```
+- [ ] ```$motd``` < _message_ >
+- [ ] ```$permissions``` [```+```| ```-``` ] [ < _username_ > ]
+- [ ] ```$poll``` _title_ *_option_ *_option_ [*_option...]
+- [ ] ```$purge``` [ < _username_ > ]
+- [ ] ```$reboot```
+- [ ] ```$seen``` < _username_ >
+- [ ] ```$seppuku```
+- [ ] ```$setskip``` [ < _1-100_ > ]
+- [ ] ```$skip```
+- [ ] ```$tban``` < _username_ > < _hours_ > < _reason_ >
+- [ ] ```$unban``` < _username_ >
+- [ ] ```$whisper``` ```$w```
+- [ ] ```$help``` - show list of commands available to user@priv-level, ```$help``` < ```command``` > shows description/usage.
+- [ ] ```$fban``` - Works like ```$ban``` (shows message) doesn't actually ban user.
 - [ ] Possible ```$unskip``` feature to undo a ```$skip``` action?
 - [ ] ```$stealthskip```, for mods, skips the current video for everyone except the person who added it, they think it's still playing... (i'm only half joking...)
 - [ ] make commands ($ and /) not enter chat.
