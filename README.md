@@ -76,7 +76,7 @@ Much needed overhaul + rewrite as an ES6 webapp with React + Redux.
 - [ ] ```$banlist```
 - [ ] ```$blacklist``` [ _yt_ | _vm_ | _dm_ ] < _linkid_ >
 - [ ] ```$bump``` < _username_ >
-- [ ] ```$dice``` < _quantity_ > < _# of sides_ > < _quantity of dice_ >  or $N__d__Nnn
+- [ ] ```$dice``` < _quantity_ > < _# of sides_ > < _quantity of dice_ >  or ```$<n>d<Nnn>```
 - [ ] ```$delete``` [ ```-all``` | ```-dur _minutes_``` | ```-num _#_``` < _username_ >
 - [ ] ```$endpoll```
 - [ ] ```$emotes```
