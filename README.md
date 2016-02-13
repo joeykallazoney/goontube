@@ -86,7 +86,7 @@ Much needed overhaul + rewrite as an ES6 webapp with React + Redux.
 - [ ] ```$me``` ```/me```
 - [ ] ```$motd``` < _message_ >
 - [ ] ```$permissions``` [```+```| ```-``` ] [ < _username_ > ]
-- [ ] ```$poll``` _title_ *_option_ *_option_ [*_option...]
+- [ ] ```$poll``` _title_ *_option_ *_option_ [*_option..._]
 - [ ] ```$purge``` [ < _username_ > ]
 - [ ] ```$reboot```
 - [ ] ```$seen``` < _username_ >
