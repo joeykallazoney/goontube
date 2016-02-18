@@ -13,7 +13,7 @@ import { connect, Provider } from 'react-redux'
 import { makePacket } from './util'
 import hash from './hash'
 import p from './protocol'
-import rootReducer from './reducers'
+import reducer from './reducers'
 
 const finalCreateStore = compose(
     applyMiddleware(invariant(), thunk),
@@ -48,7 +48,7 @@ window.addEventListener('load', function load(event) {
         document.body.appendChild(origin)
     }
 
-    let store = finalCreateStore(rootReducer)
+    let store = finalCreateStore(reducer)
     let socket = initWebSocket(store)
 
     ReactDOM.render(

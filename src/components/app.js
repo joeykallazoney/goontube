@@ -13,16 +13,6 @@ import Layout from './layout'
 
 import { connect } from 'react-redux'
 
-function mapStateToProps(state) {
-    return {
-    }
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-    }
-}
-
 class Goontube extends React.Component {
     constructor(props, context) {
         super(props, context)
@@ -55,4 +45,4 @@ Goontube.propTypes = {
     socket: React.PropTypes.object.isRequired
 }
 
-export default connect(mapStateToProps)(Goontube)
+export default connect()(Goontube)
