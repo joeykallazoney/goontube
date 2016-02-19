@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { makePacket } from '../util'
-import p from '../protocol'
+import { makePacket } from '../../shared/util'
+import p from '../../shared/protocol'
 
 import { Button } from 'react-bootstrap'
 

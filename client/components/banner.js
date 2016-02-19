@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
-import p from '../protocol'
+import p from '../../shared/protocol'
 
 function mapStateToProps(state) {
     let possibilities = state.banner.possibilities,

@@ -1,6 +1,6 @@
-import p from '../protocol'
-import { makePacket } from '../util'
-import hash from '../hash'
+import p from '../../shared/protocol'
+import { makePacket } from '../../shared/util'
+import hash from '../../shared/hash'
 import User from './user'
 
 /**

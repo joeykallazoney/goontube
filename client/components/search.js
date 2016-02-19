@@ -4,9 +4,9 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Panel, PanelGroup, Button, ButtonToolbar } from 'react-bootstrap'
 import { connect } from 'react-redux'
-import p from '../protocol'
+import p from '../../shared/protocol'
 
-import { makePacket } from '../util'
+import { makePacket } from '../../shared/util'
 import YoutubeDataApi from 'youtube-node'
 
 let youtubeDataApi      = new YoutubeDataApi

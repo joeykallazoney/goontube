@@ -4,9 +4,9 @@
  * in order to trigger output of appropriate random die rolls by the server.
  * @since 1.0.0
  */
-import { makePacket } from '../util'
+import { makePacket } from '../../shared/util'
 import uuid from 'node-uuid'
-import p from '../protocol'
+import p from '../../shared/protocol'
 
 export default {
     /* The command name which will be typed in chat to trigger it. $command */

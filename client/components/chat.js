@@ -3,14 +3,14 @@ import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
 
 import Users from './users'
-import { makePacket } from '../util'
-import p from '../protocol'
+import { makePacket } from '../../shared/util'
+import p from '../../shared/protocol'
 
 const KEYCODE_ENTER = 13
 
 function mapStateToProps(state) {
     return {
-        history: state.room.history 
+        history: state.room.history
     }
 }
 

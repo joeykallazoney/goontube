@@ -2,7 +2,7 @@
  * @file Provides a series of handlers for messages received by the server.
  * @since 1.0.0
  */
-import p from './protocol'
+import p from '../shared/protocol'
 import uuid from 'node-uuid'
 
 module.exports = {

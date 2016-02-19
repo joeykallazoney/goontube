@@ -1,21 +1,21 @@
 /**
- * @file Skip current video.
+ * @file Describes the interface for a dummy command module.
  * @since 1.0.0
  */
-import { makePacket } from '../util'
+import { makePacket } from '../../shared/util'
 import uuid from 'node-uuid'
-import p from '../protocol'
+import p from '../../shared/protocol'
 
 export default {
     /* The command name which will be typed in chat to trigger it. $command */
-    name:               'skip',
+    name:               'dummy',
 
     /* A description to feed into some sort of $help command */
-    description:        'Skips the currently playing video.',
+    description:        'Dummy command which does nothing.',
 
     /* Options to specify this command's general behaviour. */
     opts: {
-        visibleInChat:  false /* Can other users see $command being entered? */
+        visibleInChat:  true /* Can other users see $command being entered? */
     },
 
     /* Prior to calling the command handler, this optional callback can
@@ -31,6 +31,5 @@ export default {
      * message which is considered to have passed and is being parsed.
      */
     commandHandler: (server, client, message) => {
-        client.room.startNextVideo()
     }
 }

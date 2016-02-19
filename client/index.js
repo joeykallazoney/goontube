@@ -8,9 +8,9 @@ import Goontube from './components/app'
 import { createStore, applyMiddleware, compose } from 'redux'
 import { connect, Provider } from 'react-redux'
 
-import { makePacket } from './util'
-import hash from './hash'
-import p from './protocol'
+import { makePacket } from '../shared/util'
+import hash from '../shared/hash'
+import p from '../shared/protocol'
 import reducer from './reducers'
 import middleware from './middleware'
 

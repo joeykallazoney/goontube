@@ -10,10 +10,10 @@ import Sequelize from 'sequelize'
 import uuid from 'node-uuid'
 import { Server as WebSocketServer } from 'ws'
 
-import { makePacket } from './util'
-import hash from './hash'
+import { makePacket } from '../shared/util'
+import hash from '../shared/hash'
 import commandParser from './parser'
-import p from './protocol'
+import p from '../shared/protocol'
 import protocolHandlers from './handlers'
 import config from '../config'
 

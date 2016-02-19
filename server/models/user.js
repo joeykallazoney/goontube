@@ -3,7 +3,7 @@
  * @since 1.0.0
  */
 import Sequelize from 'sequelize'
-import hash from '../hash'
+import hash from '../../shared/hash'
 import config from '../../config'
 
 /**

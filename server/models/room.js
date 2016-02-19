@@ -1,6 +1,6 @@
 import Sequelize from 'sequelize'
-import p from '../protocol'
-import { makePacket } from '../util'
+import p from '../../shared/protocol'
+import { makePacket } from '../../shared/util'
 
 import Video from './video'
 

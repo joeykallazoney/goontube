@@ -1,4 +1,4 @@
-import p from '../protocol'
+import p from '../../shared/protocol'
 
 const initialState = {
     currentBannerIndex:  0,

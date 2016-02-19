@@ -1,4 +1,4 @@
-import p from '../protocol'
+import p from '../../shared/protocol'
 
 const initialState = {
     usernameInput:      '',
@@ -31,7 +31,9 @@ export default function reducer(state = initialState, action) {
         case p.LOGIN_MODAL_CLOSED:
             return {
                 ...state,
-                loginModal: false
+                loginModal: false,
+                usernameInput: '',
+                passwordInput: ''
             }
 
         case p.LOGIN_ACCEPTED:

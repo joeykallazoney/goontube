@@ -1,10 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
-import { makePacket } from '../util'
+import { makePacket } from '../../shared/util'
 import { Modal, Button, ButtonInput, ButtonGroup, ButtonToolbar, Input, Alert } from 'react-bootstrap'
-import p from '../protocol'
-import hash from '../hash'
+import p from '../../shared/protocol'
+import hash from '../../shared/hash'
 
 function mapStateToProps(state) {
     return {
