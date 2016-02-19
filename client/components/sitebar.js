@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { makePacket } from '../../shared/util'
 import p from '../../shared/protocol'
 
-import { Button } from 'react-bootstrap'
+import { ButtonToolbar, Button, Glyphicon } from 'react-bootstrap'
 
 function mapStateToProps(state) {
     return {
@@ -24,7 +24,7 @@ function mapDispatchToProps(dispatch, props) {
             }
         },
         logout: {
-            onClick: () => props.socket.send(makePacket(p.LOGOUT_USER))
+            onClick: () => dispatch({ type: p.LOGOUT_USER })
         }
     }
 }
@@ -37,23 +37,25 @@ class SiteBar extends React.Component {
     render() {
         return (
             <div className="sitebar">
-                {null !== this.props.user ? (
-                    <div className="logged-in">
-                        <Button {...this.props.account}>
-                            My Account
-                        </Button>
+                <ButtonToolbar>
+                    {null !== this.props.user ? (
+                        <div className="logged-in">
+                            <Button {...this.props.account}>
+                                My Account
+                            </Button>
 
-                        <Button className="logout" {...this.props.logout}>
-                            Logout
-                        </Button>
-                    </div>
-                ) : (
-                    <div className="logged-in">
-                        <Button className="logout" {...this.props.login}>
-                            Login
-                        </Button>
-                    </div>
-                )}
+                            <Button className="logout" {...this.props.logout}>
+                                <Glyphicon glyph="log-out" /> Logout
+                            </Button>
+                        </div>
+                    ) : (
+                        <div className="logged-in">
+                            <Button className="logout" {...this.props.login}>
+                                <Glyphicon glyph="log-in" /> Login
+                            </Button>
+                        </div>
+                    )}
+                </ButtonToolbar>
             </div>
         )
     }

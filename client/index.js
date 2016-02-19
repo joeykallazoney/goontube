@@ -13,33 +13,15 @@ import hash from '../shared/hash'
 import p from '../shared/protocol'
 import reducer from './reducers'
 import middleware from './middleware'
+import webSocketMiddleware from './middleware/websocket'
 
 const finalCreateStore = compose(
     middleware,
     window.devToolsExtension ? window.devToolsExtension() : f => f
 )(createStore)
 
-function initWebSocket(store) {
-    let socket = new WebSocket(`ws://${window.location.hostname}:7070`)
-
-    socket.onopen = () => {
-    }
-
-    socket.onmessage = (message) => {
-        let decoded = JSON.parse(message.data)
-        store.dispatch(decoded)
-    }
-
-    socket.onclose = () => {
-        console.error('Lost connection to WebSocket server!')
-    }
-
-    return socket
-}
-
 window.addEventListener('load', function load(event) {
     let origin = document.getElementById('origin')
-
     if(origin === null) {
         origin = document.createElement('div')
         origin.id = 'origin'
@@ -47,12 +29,13 @@ window.addEventListener('load', function load(event) {
         document.body.appendChild(origin)
     }
 
-    let store = finalCreateStore(reducer)
-    let socket = initWebSocket(store)
+    let socket = new WebSocket(`ws://${window.location.hostname}:7070`)
+    let createConnectedStore = compose(applyMiddleware(webSocketMiddleware(socket)))(finalCreateStore)
+    let store = createConnectedStore(reducer)
 
     ReactDOM.render(
         <Provider store={store}>
-            <Goontube socket={socket} />
+            <Goontube />
         </Provider>,
         origin)
     window.removeEventListener('load', load, false)

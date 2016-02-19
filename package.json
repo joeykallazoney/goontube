@@ -74,6 +74,7 @@
     "redux": "^3.0.5",
     "redux-actions": "^0.9.0",
     "redux-immutable-state-invariant": "^1.2.0",
+    "redux-multi": "^0.1.12",
     "redux-thunk": "^1.0.3",
     "sass-loader": "^3.1.2",
     "sequelize": "^3.18.0",

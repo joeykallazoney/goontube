@@ -134,7 +134,7 @@ class Room {
             this.fetchingEntries = true
 
             Video
-                .getSomeRandomVideos(5, context)
+                .getSomeRandomVideos(15, context)
                 .then(videos => {
                     this.fetchingEntries = false
 

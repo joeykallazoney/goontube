@@ -122,6 +122,7 @@ wss.on('connection', (ws) => {
             }
         } catch(e) {
             console.log(`Received malformed JSON or other bad data from client.`)
+            console.log(e)
         }
     })
 

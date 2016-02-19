@@ -19,34 +19,26 @@ class Goontube extends React.Component {
         super(props, context)
     }
 
-    componentDidMount() {
-
-    }
-
     render() {
         return (
             <div id="app">
-                <SiteBar socket={this.props.socket} />
+                <SiteBar />
                 <div id="goontube">
                     <Layout>
                         <Banner />
                         <Player />
-                        <Chat socket={this.props.socket} />
+                        <Chat />
                         <Playlist />
                         <ContentPane />
-                        <Search socket={this.props.socket} />
+                        <Search />
                     </Layout>
                 </div>
                 <div id="modals">
-                    <LoginModal socket={this.props.socket} />
+                    <LoginModal />
                 </div>
             </div>
         )
     }
-}
-
-Goontube.propTypes = {
-    socket: React.PropTypes.object.isRequired
 }
 
 export default connect()(Goontube)

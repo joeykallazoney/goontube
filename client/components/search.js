@@ -26,7 +26,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch, props) {
     return {
         result: {
-            addSearchResult: (ev, url) => props.socket.send(makePacket(p.REQUEST_ADD_MEDIA_BY_URL, url))
+            addSearchResult: (ev, url) => dispatch({ type: p.REQUEST_ADD_MEDIA_BY_URL, data: url })
         },
 
         input: {

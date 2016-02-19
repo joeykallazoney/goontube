@@ -10,12 +10,21 @@ const KEYCODE_ENTER = 13
 
 function mapStateToProps(state) {
     return {
+        chatInput: state.chat.input,
         history: state.room.history
     }
 }
 
 function mapDispatchToProps(dispatch, props) {
     return {
+        sendChat: (ev, msg) => {
+            ev.preventDefault()
+            dispatch({ type: p.SEND_CHAT_MESSAGE, data: msg })
+            setTimeout(() => dispatch({ type: p.SET_CHAT_INPUT, data: ''}), 50)
+        },
+        chatInputChanged: (ev, value) => {
+            dispatch({ type: p.SET_CHAT_INPUT, data: value })
+        }
     }
 }
 
@@ -39,29 +48,14 @@ class ChatInput extends React.Component {
         super(props, context)
     }
 
-    onKeyDown(event) {
-        let nativeEvent = event.nativeEvent
-
-        if(KEYCODE_ENTER === nativeEvent.keyCode) {
-            let chatInputValue = this.refs.chatInput.value
-
-            try {
-                this.props.socket.send(makePacket(
-                    p.SEND_CHAT_MESSAGE,
-                    chatInputValue
-                ))
-            } catch(e) {
-                console.log('Failed to send chat message to the server.')
-            }
-
-            this.refs.chatInput.value = ''
-        }
-    }
-
     render() {
         return (
             <div className="chat-input">
-                <input ref="chatInput" type="text" onKeyDown={(e) => this.onKeyDown(e)} />
+                <form onSubmit={(ev, msg) => this.props.sendChat(ev, this.props.chatInput)}>
+                    <input type="text"
+                        value={this.props.chatInput}
+                        onChange={(e) => this.props.chatInputChanged(e, e.target.value)} />
+                </form>
             </div>
         )
     }
@@ -76,7 +70,7 @@ class Chat extends React.Component {
         return (
             <div className="chat">
                 <ChatHistory history={this.props.history} />
-                <ChatInput socket={this.props.socket} />
+                <ChatInput {...this.props} />
                 <Users />
             </div>
         )

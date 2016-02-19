@@ -1,4 +1,27 @@
 @import variables
 
+ul.playlist
+    list-style-type: none
+    padding: 0 0
+
+    .entry
+        margin:     0.25em 0.5em
+        padding:    1em 1em
+        border:     none
+
+        .title
+            font-size:          1.2em
+            font-weight:        bold
+
+        .meta
+            font-size:          0.75em
+            color:              rgb(145, 145, 145)
+            letter-spacing:     1.25px
+            font-weight:        300
+
+            .duration
+                font-weight:    bold
+
 .playlist
-    background: $playlist-background
+    background:     $playlist-background
+    overflow:       hidden

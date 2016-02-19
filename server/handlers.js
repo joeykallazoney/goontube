@@ -14,6 +14,11 @@ module.exports = {
         return true
     },
 
+    REQUEST_DELETE_PLAYLIST_ENTRY: (server, client, msg) => {
+        console.log('Client requested playlist delete ' + msg)
+        return true
+    },
+
     REQUEST_ADD_MEDIA_BY_URL: (server, client, msg) => {
         console.log('Client requested add media: ' + msg)
         return true

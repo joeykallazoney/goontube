@@ -30,23 +30,19 @@ function mapDispatchToProps(dispatch, props) {
             onSubmitRegister: function(ev, user, pass) {
                 ev.preventDefault()
 
-                const packet = makePacket(p.REGISTRATION_ATTEMPT, {
+                dispatch({ type: p.REGISTRATION_ATTEMPT, data: {
                     username: user,
                     password: pass
-                })
-
-                props.socket.send(packet)
+                }})
             },
 
             onSubmit: function(ev, user, pass) {
                 ev.preventDefault()
 
-                const packet = makePacket(p.AUTHENTICATION_ATTEMPT, {
+                dispatch({ type: p.AUTHENTICATION_ATTEMPT, data: {
                     username: user,
                     password: hash(user)(pass)
-                })
-
-                props.socket.send(packet)
+                }})
             }
         },
 
