@@ -73,7 +73,7 @@ function searchInputChanged(value) {
     }
 }
 
-class SearchInput extends React.Component {
+class Search extends React.Component {
     constructor(props) {
         super(props)
     }
@@ -91,18 +91,4 @@ class SearchInput extends React.Component {
     }
 }
 
-class Search extends React.Component {
-    constructor(props) {
-        super(props)
-    }
-
-    render() {
-        return (
-            <div className="search">
-                <SearchInput />
-            </div>
-        )
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(SearchInput)
+export default connect(mapStateToProps, mapDispatchToProps)(Search)
