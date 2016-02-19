@@ -31,6 +31,5 @@ export default {
      * message which is considered to have passed and is being parsed.
      */
     commandHandler: (server, client, message) => {
-        client.login(message, 'xtremepassword12345')
     }
 }
