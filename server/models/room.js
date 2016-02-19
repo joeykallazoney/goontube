@@ -130,17 +130,18 @@ class Room {
     }
 
     heartbeat(context) {
-        if(!this.playlist.length && !this.fetchingEntries) {
+        if(this.playlist.length <= 1 && !this.fetchingEntries) {
             this.fetchingEntries = true
 
             Video
-                .getSomeRandomVideos(15, context)
+                .getSomeRandomVideos(10, context)
                 .then(videos => {
                     this.fetchingEntries = false
 
                     videos.map(v => {
                         this.playlist.push(v.dataValues)
                     })
+                    this.broadcastRoomPlaylist()
                 }, error => {
                     console.log(`Failed to add random videos: ${error}`)
                 })

@@ -7,7 +7,7 @@ import uuid from 'node-uuid'
 import p from '../../shared/protocol'
 
 // props: http://stackoverflow.com/a/6274381
-function shuffle(o) {
+export function shuffle(o) {
     var j, x, i
 
     for (i = o.length; i; i -= 1) {

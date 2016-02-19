@@ -15,6 +15,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch, props) {
     return {
+        onSkip: (ev) => dispatch({ type: p.PLAYLIST_SKIP_REQUEST }),
+        onShuffle: (ev) => dispatch({ type: p.PLAYLIST_SHUFFLE_REQUEST }),
         onDeleteEntry: (ev, id) => dispatch({ type: p.REQUEST_DELETE_PLAYLIST_ENTRY, data: id })
     }
 }
@@ -75,11 +77,19 @@ class Playlist extends React.Component {
 
     render() {
         return (
-            <ul className="playlist" style={{ height: 300, overflowY: 'scroll' }}>
-                <FlipMove easing="cubic-bezier(0.39,0,0.45,1.4)">
-                    { this.renderPlaylist(this.props) }
-                </FlipMove>
-            </ul>
+            <div className="playlist-container">
+                <div className="controls" style={{ backgroundColor: 'rgb(43, 43, 43)' }}>
+                    <ButtonToolbar>
+                        <Button onClick={(e) => this.props.onSkip(e)}>Skip</Button>
+                        <Button onClick={(e) => this.props.onShuffle(e)}>Shuffle</Button>
+                    </ButtonToolbar>
+                </div>
+                <ul className="playlist" style={{ height: 300, overflowY: 'scroll' }}>
+                    <FlipMove easing="cubic-bezier(0.39,0,0.45,1.4)">
+                        { this.renderPlaylist(this.props) }
+                    </FlipMove>
+                </ul>
+            </div>
         )
     }
 }

@@ -27,12 +27,15 @@ ul.playlist {
   ul.playlist .entry {
     font-size: 0.75em;
     margin: 0.25em 0.5em;
-    padding: 1em 1em;
+    padding: 0.5em 1em;
     border: none; }
+    ul.playlist .entry:hover {
+      cursor: pointer;
+      background: #606060; }
     ul.playlist .entry .title {
       color: #1b1b1b;
       font-size: 1.2em;
-      font-weight: bold; }
+      font-weight: bolder; }
     ul.playlist .entry .meta {
       font-size: 0.75em;
       color: #919191;

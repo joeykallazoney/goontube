@@ -4,6 +4,7 @@
  */
 import p from '../shared/protocol'
 import uuid from 'node-uuid'
+import { shuffle } from './commands/shuffle'
 
 module.exports = {
     CLIENT_HELLO: (server, client, msg) => {
@@ -11,6 +12,17 @@ module.exports = {
             type: p.CLIENT_HELLO,
             data: `Hello there!`
         })
+        return true
+    },
+
+    PLAYLIST_SKIP_REQUEST: (server, client, msg) => {
+        client.room.startNextVideo()
+        return true
+    },
+
+    PLAYLIST_SHUFFLE_REQUEST: (server, client, msg) => {
+        shuffle(client.room.playlist)
+        client.room.broadcastRoomPlaylist()
         return true
     },
 
