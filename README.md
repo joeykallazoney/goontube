@@ -4,8 +4,6 @@
 
 Video synchronization and chat lounge.  
 
-Much needed overhaul + rewrite as an ES6 webapp with React + Redux.  
-
 ###Dev Notes###
 
 ### Roadmap
@@ -16,10 +14,6 @@ Much needed overhaul + rewrite as an ES6 webapp with React + Redux.
 - [ ] Discuss project structure/file organization.
 - [ ] We should establish regular weekly/bi-weekly meetings over mumble to discuss development status and task delegation.
    - Scheduling timetable moved to wiki
-
-####**Architecture Scratchpad**####
-- [ ] Use pure stateless components in favour of class components, remove proptypes in favour of redux connect middleware
-- [ ] Place websocket dispatch/connect in async middleware - web worker?
 
 ####**Bug Fixes:**####
 - [ ] Repair fullscreen mode.
@@ -151,9 +145,6 @@ Much needed overhaul + rewrite as an ES6 webapp with React + Redux.
 - [ ] Failure to login after 'X' minutes forces black-out overlay and cessation of media streaming, prompting 'unnamed' user to register/login.
 - [ ] Implement goontube arena as a built in feature. A user may ```$duel``` a user, which the other must accept, then the room is polled for if the duel should take place. If it does then once each user uploads a video their videos are moved to the top. After the second video plays a poll is created to poll who won.
 
-
-### Streaming provider spec
-
 #### Installation + Setup
 
 ```
@@ -171,8 +162,6 @@ webpack-dev-server ./src/client.js
 ```
 
 Then visit [http://localhost:8080/bundle](http://localhost:8080/bundle)
-
-(http://localhost:7070/bundle ??  @nine: 7070 is hosting the webserver w/ static files and WebSocket as expected - 8080 in this instance is providing a separate bundling server for webpack-dev-server ... the significance is that using the webpack-dev-server gives you easy hot module reload/live reload while working on frontend - kind of handy to sidestep any extra messes with with gulp/grunt/the usual suspects) to access a webpack-dev-server for the frontend. -jskz
 
 `npm install -g pm2` and then use `pm2-dev ./index.js` to work on the backend with reload on change.
 

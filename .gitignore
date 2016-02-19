@@ -12,4 +12,5 @@ node_modules
 .DS_Store
 build
 
+config.js
 static/bundle.js

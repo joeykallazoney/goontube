@@ -1,10 +1,11 @@
 import p from '../../shared/protocol'
+import { youtubeBrowserApiKey } from '../../config'
 
 const initialState = {
-    query: '',
-    results: [],
-    desired: false,
-    youtubeApiKey: 'AIzaSyBQW8bHDt7RHZa5uVVRP4r0jNIUZD_39o4'
+    query:          '',
+    results:        [],
+    desired:        false,
+    youtubeApiKey:  youtubeBrowserApiKey
 }
 
 export default function reducer(state = initialState, action) {

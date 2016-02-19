@@ -67,7 +67,4 @@ module.exports = {
             console.log(`Ignored anonymous chat message: ${msg}`)
         }
     }
-
-    // Search
-    // End Search
 }
