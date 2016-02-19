@@ -1,7 +1,10 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React, { PropTypes } from 'react'
+import ReactDOM, { findDOMNode } from 'react-dom'
 import { connect } from 'react-redux'
 import { ButtonToolbar, Button, Glyphicon, Row, Col } from 'react-bootstrap'
+import { DragSource, DragDropContext, DropTarget } from 'react-dnd'
+import HTML5Backend from 'react-dnd-html5-backend'
+import { compose } from 'redux'
 import p from '../../shared/protocol'
 import { makePacket } from '../../shared/util'
 import moment from 'moment'
@@ -10,6 +13,62 @@ import FlipMove from 'react-flip-move'
 function mapStateToProps(state) {
     return {
         items: state.room.playlist
+    }
+}
+
+const entryTarget = {
+    canDrop: function (props, monitor) {
+        return true
+    },
+
+    hover: function (props, monitor, component) {
+        var clientOffset = monitor.getClientOffset()
+        var componentRect = findDOMNode(component).getBoundingClientRect()
+        var isJustOverThisOne = monitor.isOver({ shallow: true })
+    },
+
+    drop(props, monitor) {
+        let item = monitor.getItem()
+
+        return {
+            exchange: true,
+            a: item.id,
+            b: props.id
+        }
+    }
+}
+
+var entrySource = {
+    beginDrag: function (props) {
+        return {
+            id: props.id
+        }
+    },
+
+    endDrag: function (props, monitor, component) {
+        var item = monitor.getItem()
+        var result = monitor.getDropResult()
+
+        if(null !== result && true === result.exchange) {
+            console.log(`swap playlist entries [${result.a}]->[${result.b}]`)
+        }
+    }
+}
+
+function collectTarget(connect, monitor) {
+    return {
+        connectDropTarget:  connect.dropTarget(),
+        isOver:             monitor.isOver(),
+        isOverCurrent:      monitor.isOver({ shallow: true }),
+        canDrop:            monitor.canDrop(),
+        itemType:           monitor.getItemType()
+    }
+}
+
+function collect(connect, monitor) {
+    return {
+        connectDragSource:  connect.dragSource(),
+        isDragging:         monitor.isDragging()
     }
 }
 
@@ -27,10 +86,11 @@ class PlaylistEntry extends React.Component {
     }
 
     render() {
+        const { accepts, isOver, connectDragSource, isDragging, canDrop, connectDropTarget, lastDroppedItem } = this.props
         const duration = moment({ milliseconds: this.props.duration_ms }).toObject()
 
-        return (
-            <div className="entry">
+        return connectDragSource(connectDropTarget(
+            <div className="entry" style={{ opacity: isDragging ? 0.5 : 1 }}>
                 <Row>
                     <Col xs={8}>
                         <div className="title">{this.props.title}</div>
@@ -62,9 +122,12 @@ class PlaylistEntry extends React.Component {
                     </Col>
                 </Row>
             </div>
-        )
+        ))
     }
 }
+
+const DraggableEntry = DragSource('PLAYLIST_ENTRY', entrySource, collect)(PlaylistEntry)
+const DroppableTarget = DropTarget('PLAYLIST_ENTRY', entryTarget, collectTarget)(DraggableEntry)
 
 class Playlist extends React.Component {
     constructor(props) {
@@ -72,7 +135,8 @@ class Playlist extends React.Component {
     }
 
     renderPlaylist(props) {
-        return this.props.items.map(i => <PlaylistEntry onDeleteEntry={props.onDeleteEntry} {...i} key={i.id} />)
+        return this.props.items.map(i => <DroppableTarget onDeleteEntry={props.onDeleteEntry} {...i} key={i.id} />
+        )
     }
 
     render() {
@@ -94,4 +158,6 @@ class Playlist extends React.Component {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Playlist)
+const DragDropPlaylist = DragDropContext(HTML5Backend)(Playlist)
+
+export default connect(mapStateToProps, mapDispatchToProps)(DragDropPlaylist)
