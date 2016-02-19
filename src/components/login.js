@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { makePacket } from '../util'
 import { Modal, Button, ButtonInput, ButtonGroup, ButtonToolbar, Input, Alert } from 'react-bootstrap'
 import p from '../protocol'
+import hash from '../hash'
 
 function mapStateToProps(state) {
     return {
@@ -42,7 +43,7 @@ function mapDispatchToProps(dispatch, props) {
 
                 const packet = makePacket(p.AUTHENTICATION_ATTEMPT, {
                     username: user,
-                    password: pass
+                    password: hash(user)(pass)
                 })
 
                 props.socket.send(packet)

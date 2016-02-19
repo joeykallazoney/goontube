@@ -14,8 +14,8 @@ module.exports = {
         return true
     },
 
-    REQUEST_ADD_YOUTUBE_VIDEO: (server, client, msg) => {
-        console.log('Client requested add youtube video: ' + msg)
+    REQUEST_ADD_MEDIA_BY_URL: (server, client, msg) => {
+        console.log('Client requested add media: ' + msg)
         return true
     },
 

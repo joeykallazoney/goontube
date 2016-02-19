@@ -114,7 +114,7 @@ class Room {
     startNextVideo() {
         let nextVideo = this.playlist.shift()
 
-        //console.log(nextVideo)
+        console.log(nextVideo)
 
         this.playing = {
             active:                 true,
@@ -124,9 +124,6 @@ class Room {
             duration:               nextVideo.duration_ms,
             startTime:              Date.now()
         }
-        console.log(this)
-
-        //console.log(`Now playing: ${this.playing.title}`)
 
         this.broadcastCurrentMedia()
         this.broadcastRoomPlaylist()
@@ -174,7 +171,7 @@ class Room {
         this.members            = []
         this.playlist           = []
         this.playing = {
-            
+
         }
 
         setInterval(() => this.heartbeat(serverContext), 1000)

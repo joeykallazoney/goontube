@@ -13,6 +13,11 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch, props) {
     return {
+        account: {
+            onClick: () => {
+                dispatch({ type: p.ACCOUNT_BUTTON_CLICKED })
+            }
+        },
         login: {
             onClick: () => {
                 dispatch({ type: p.LOGIN_CLICKED })
@@ -34,6 +39,10 @@ class SiteBar extends React.Component {
             <div className="sitebar">
                 {null !== this.props.user ? (
                     <div className="logged-in">
+                        <Button {...this.props.account}>
+                            My Account
+                        </Button>
+
                         <Button className="logout" {...this.props.logout}>
                             Logout
                         </Button>

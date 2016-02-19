@@ -26,7 +26,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch, props) {
     return {
         result: {
-            addSearchResult: (ev, id) => props.socket.send(makePacket(p.REQUEST_ADD_YOUTUBE_VIDEO, id))
+            addSearchResult: (ev, url) => props.socket.send(makePacket(p.REQUEST_ADD_MEDIA_BY_URL, url))
         },
 
         input: {
@@ -101,7 +101,7 @@ class Search extends React.Component {
                             {this.props.searchResults.map(result =>
                                 <div key={result.id}>
                                 <ButtonToolbar className="result">
-                                    <Button onClick={(ev) => this.props.result.addSearchResult(ev, result.id)}>
+                                    <Button onClick={(ev) => this.props.result.addSearchResult(ev, `https://youtu.be/${result.id}`)}>
                                         Add {result.title} to playlist
                                     </Button>
 

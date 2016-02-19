@@ -48,9 +48,9 @@ class Video {
         })
     }
 
-    loadById(providerType, id) {
+    loadById(providerType, id, ctx) {
         return new Promise((res, rej) => {
-            this.context.data
+            ctx.data
                 .Video
                 .findOne({ where: { type: providerType, id: id } })
                 .then(video => {
