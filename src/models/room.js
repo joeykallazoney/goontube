@@ -173,13 +173,9 @@ class Room {
         this.context            = serverContext
         this.members            = []
         this.playlist           = []
-        this.playing            = null
-
-        /*this.playing = {
-            active:             false,
-            mediaStreams:       [],
-            timeSpentPlaying:   0
-        }*/
+        this.playing = {
+            
+        }
 
         setInterval(() => this.heartbeat(serverContext), 1000)
     }

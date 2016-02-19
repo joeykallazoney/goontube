@@ -14,10 +14,20 @@ module.exports = {
         return true
     },
 
-    AUTHENTICATION_ATTEMPT: (server, client, msg) => {
+    REGISTRATION_ATTEMPT: (server, client, msg) => {
         try {
             if(null === msg) return false
 
+            console.log('Registration request received.')
+        } catch(e) {
+            console.log('Bad REGISTRATION_ATTEMPT packet sent.')
+        }
+    },
+
+    AUTHENTICATION_ATTEMPT: (server, client, msg) => {
+        try {
+            if(null === msg) return false
+            console.log(msg)
             client.login(msg.username, msg.password)
         } catch(e) {
             console.log('Bad AUTHENTICATION_ATTEMPT packet sent.')

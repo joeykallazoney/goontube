@@ -10,6 +10,7 @@ import ContentPane from './content-pane'
 import Search from './search'
 import SiteBar from './sitebar'
 import Layout from './layout'
+import LoginModal from './login'
 
 import { connect } from 'react-redux'
 
@@ -35,6 +36,9 @@ class Goontube extends React.Component {
                         <ContentPane />
                         <Search />
                     </Layout>
+                </div>
+                <div id="modals">
+                    <LoginModal socket={this.props.socket} />
                 </div>
             </div>
         )

@@ -73,7 +73,9 @@ const HTML =
         <meta name="description" content="Humour and video lounge: add your favourite videos from streaming sites to share them in a public playlist synchronized with other users from all over.">
         <meta name="keywords" content="goontube goontu.be hamburgers video lounge chat existential despair">
 
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
         <link rel="stylesheet" href="/style.css">
+
         <script src="/bundle.js" type="text/javascript"></script>
     </head>
 </html>`
@@ -120,7 +122,6 @@ wss.on('connection', (ws) => {
             }
         } catch(e) {
             console.log(`Received malformed JSON or other bad data from client.`)
-            ws.close()
         }
     })
 

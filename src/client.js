@@ -6,17 +6,16 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Goontube from './components/app'
 import { createStore, applyMiddleware, compose } from 'redux'
-import thunk from 'redux-thunk'
-import invariant from 'redux-immutable-state-invariant'
 import { connect, Provider } from 'react-redux'
 
 import { makePacket } from './util'
 import hash from './hash'
 import p from './protocol'
 import reducer from './reducers'
+import middleware from './middleware'
 
 const finalCreateStore = compose(
-    applyMiddleware(invariant(), thunk),
+    middleware,
     window.devToolsExtension ? window.devToolsExtension() : f => f
 )(createStore)
 

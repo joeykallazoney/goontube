@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { makePacket } from '../util'
 import p from '../protocol'
 
+import { Button } from 'react-bootstrap'
+
 function mapStateToProps(state) {
     return {
         user: state.auth.user
@@ -11,6 +13,11 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch, props) {
     return {
+        login: {
+            onClick: () => {
+                dispatch({ type: p.LOGIN_CLICKED })
+            }
+        },
         logout: {
             onClick: () => props.socket.send(makePacket(p.LOGOUT_USER))
         }
@@ -27,13 +34,17 @@ class SiteBar extends React.Component {
             <div className="sitebar">
                 {null !== this.props.user ? (
                     <div className="logged-in">
-                        Currently logged in as {this.props.user},
-
-                        <span className="logout" {...this.props.logout}>
-                            [ click here to log-out ]
-                        </span>
+                        <Button className="logout" {...this.props.logout}>
+                            Logout
+                        </Button>
                     </div>
-                ) : null}
+                ) : (
+                    <div className="logged-in">
+                        <Button className="logout" {...this.props.login}>
+                            Login
+                        </Button>
+                    </div>
+                )}
             </div>
         )
     }
