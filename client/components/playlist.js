@@ -87,7 +87,7 @@ class PlaylistEntry extends React.Component {
         const duration = moment({ milliseconds: this.props.duration_ms }).toObject()
 
         return connectDragSource(connectDropTarget(
-            <div className="entry" style={{ opacity: isDragging ? 0.5 : 1 }}>
+            <div className="entry" style={{ backgroundColor: isOver ? '#383838' : 'transparent', opacity: isDragging ? 0.5 : 1 }}>
                 <Row>
                     <Col xs={8}>
                         <div className="title">{this.props.title}</div>
