@@ -105,7 +105,7 @@ class Search extends React.Component {
                                         Add {result.title} to playlist
                                     </Button>
 
-                                    <a href={`https://youtu.be/${result.id}`}>
+                                    <a target="_blank" href={`https://youtu.be/${result.id}`}>
                                         <Button>
                                             Visit on YouTube
                                         </Button>
