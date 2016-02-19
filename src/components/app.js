@@ -34,7 +34,7 @@ class Goontube extends React.Component {
                         <Chat socket={this.props.socket} />
                         <Playlist />
                         <ContentPane />
-                        <Search />
+                        <Search socket={this.props.socket} />
                     </Layout>
                 </div>
                 <div id="modals">

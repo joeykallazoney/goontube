@@ -2,6 +2,7 @@
 
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { Panel, PanelGroup, Button, ButtonToolbar } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import p from '../protocol'
 
@@ -14,19 +15,20 @@ const KEYCODE_ENTER     = 13
 const NUMBER_OF_RESULTS = 10
 
 function mapStateToProps(state) {
-    let searchQuery = state.search.query,
-        searchResults = state.search.results,
-        youtubeApiKey = state.search.youtubeApiKey
-
     return {
-        youtubeApiKey:  youtubeApiKey,
-        value:          searchQuery,
-        searchResults:  searchResults
+        desired:        state.search.desired,
+        youtubeApiKey:  state.search.youtubeApiKey,
+        value:          state.search.query,
+        searchResults:  state.search.results
     }
 }
 
 function mapDispatchToProps(dispatch, props) {
     return {
+        result: {
+            addSearchResult: (ev, id) => props.socket.send(makePacket(p.REQUEST_ADD_YOUTUBE_VIDEO, id))
+        },
+
         input: {
             onChange: (ev) => dispatch(searchInputChanged(ev.target.value))
         }
@@ -35,12 +37,15 @@ function mapDispatchToProps(dispatch, props) {
 
 function searchInputChanged(value) {
     return dispatch => {
+        if('' === value) {
+            dispatch({ type: p.SEARCH_RESET })
+            return
+        }
+
         dispatch({ type: p.SEARCH_NEW_SEARCH, value: value })
 
         youtubeDataApi.search(value, NUMBER_OF_RESULTS, (err, res) => {
             if(err) {
-                console.log(`Failed to fetch YouTube results.`)
-
                 return {
                     type: p.SEARCH_FAILED_YOUTUBE_SEARCH,
                     data: err
@@ -84,8 +89,33 @@ class Search extends React.Component {
 
     render() {
         return (
-            <div className="search-input">
-                <input onChange={(ev) => this.props.input.onChange(ev)} ref="searchInput" type="text" />
+            <div className="search">
+                <div className="search-input">
+                    <input onChange={(ev) => this.props.input.onChange(ev)} ref="searchInput" type="text" />
+                </div>
+
+                <div>
+                    {this.props.desired === false ? (
+                            <div className="search-none"></div>
+                        ) : <PanelGroup accordion>
+                            {this.props.searchResults.map(result =>
+
+                            <Panel header={result.title} eventKey={result.id} key={result.id} className="result">
+                                <ButtonToolbar>
+                                    <Button onClick={(ev) => this.props.result.addSearchResult(ev, result.id)}>
+                                        Add {result.title} to playlist
+                                    </Button>
+
+                                    <a href={`https://youtu.be/${result.id}`}>
+                                        <Button>
+                                            Visit on YouTube
+                                        </Button>
+                                    </a>
+                                </ButtonToolbar>
+                            </Panel>
+                        )}
+                        </PanelGroup>}
+                </div>
             </div>
         )
     }

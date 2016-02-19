@@ -14,6 +14,11 @@ module.exports = {
         return true
     },
 
+    REQUEST_ADD_YOUTUBE_VIDEO: (server, client, msg) => {
+        console.log('Client requested add youtube video: ' + msg)
+        return true
+    },
+
     REGISTRATION_ATTEMPT: (server, client, msg) => {
         try {
             if(null === msg) return false
