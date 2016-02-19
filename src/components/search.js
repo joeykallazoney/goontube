@@ -97,11 +97,10 @@ class Search extends React.Component {
                 <div>
                     {this.props.desired === false ? (
                             <div className="search-none"></div>
-                        ) : <PanelGroup accordion>
+                        ) : <div className="search-results">
                             {this.props.searchResults.map(result =>
-
-                            <Panel header={result.title} eventKey={result.id} key={result.id} className="result">
-                                <ButtonToolbar>
+                                <div key={result.id}>
+                                <ButtonToolbar className="result">
                                     <Button onClick={(ev) => this.props.result.addSearchResult(ev, result.id)}>
                                         Add {result.title} to playlist
                                     </Button>
@@ -112,9 +111,9 @@ class Search extends React.Component {
                                         </Button>
                                     </a>
                                 </ButtonToolbar>
-                            </Panel>
+                                </div>
                         )}
-                        </PanelGroup>}
+                        </div>}
                 </div>
             </div>
         )
