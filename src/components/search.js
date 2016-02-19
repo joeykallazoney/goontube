@@ -27,50 +27,49 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch, props) {
     return {
-        onChange: (event) => dispatch => dispatch(asyncSearchAction(event.target.value))
+        input: {
+            onChange: (ev) => dispatch(searchInputChanged(ev.target.value))
+        }
     }
 }
 
-function asyncSearchAction(value) {
-    youtubeDataApi.search(value, NUMBER_OF_RESULTS, (err, res) => {
-        if(err) {
-            console.log(`Failed to fetch YouTube results.`)
+function searchInputChanged(value) {
+    return dispatch => {
+        dispatch({ type: p.SEARCH_NEW_SEARCH, value: value })
 
-            return {
-                type: p.SEARCH_FAILED_YOUTUBE_SEARCH,
-                data: err
-            }
-        } else {
-            try {
-                let receivedYoutubeResults = {
-                    type: p.SEARCH_RECEIVED_YOUTUBE_RESULTS,
-                    data: res.items.map(item => {
-                        return {
-                            id:             item.id.videoId,
-                            title:          item.snippet.title,
-                            description:    item.snippet.description,
-                            thumbnail:      item.snippet.thumbnails.default.url
-                        }
-                    })
-                }
-
-                return receivedYoutubeResults
-            } catch(e) {
-                console.log(`Failed to organize YouTube results.`)
+        youtubeDataApi.search(value, NUMBER_OF_RESULTS, (err, res) => {
+            if(err) {
+                console.log(`Failed to fetch YouTube results.`)
 
                 return {
                     type: p.SEARCH_FAILED_YOUTUBE_SEARCH,
-                    data: e.toString()
+                    data: err
+                }
+            } else {
+                try {
+                    let receivedYoutubeResults = {
+                        type: p.SEARCH_RECEIVED_YOUTUBE_RESULTS,
+                        data: res.items.map(item => {
+                            return {
+                                id:             item.id.videoId,
+                                title:          item.snippet.title,
+                                description:    item.snippet.description,
+                                thumbnail:      item.snippet.thumbnails.default.url
+                            }
+                        })
+                    }
+
+                    dispatch(receivedYoutubeResults)
+                } catch(e) {
+                    console.log(`Failed to organize YouTube results.`)
+
+                    dispatch({
+                        type: p.SEARCH_FAILED_YOUTUBE_SEARCH,
+                        data: e.toString()
+                    })
                 }
             }
-        }
-    })
-}
-
-function searchInputChanged(value) {
-    return {
-        type:   p.SEARCH_NEW_SEARCH,
-        value:  value
+        })
     }
 }
 
@@ -86,7 +85,7 @@ class SearchInput extends React.Component {
     render() {
         return (
             <div className="search-input">
-                <input {...this.props} ref="searchInput" type="text" />
+                <input onChange={(ev) => this.props.input.onChange(ev)} ref="searchInput" type="text" />
             </div>
         )
     }
