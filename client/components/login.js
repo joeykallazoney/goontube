@@ -17,12 +17,12 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch, props) {
     return {
         username: {
-            onInput: function(ev) {
+            onChange: function(ev) {
                 dispatch({ type: p.LOGIN_FORM_UPDATE_USERNAME, data: ev.target.value })
             }
         },
         password: {
-            onInput: function(ev) {
+            onChange: function(ev) {
                 dispatch({ type: p.LOGIN_FORM_UPDATE_PASSWORD, data: ev.target.value })
             }
         },

@@ -40,7 +40,9 @@ export default function reducer(state = initialState, action) {
             return {
                 ...state,
                 user:       action.data.username,
-                loginModal: false
+                loginModal: false,
+                usernameInput: '',
+                passwordInput: ''
             }
 
         case p.LOGOUT_USER:
