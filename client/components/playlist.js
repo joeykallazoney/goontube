@@ -22,9 +22,6 @@ const entryTarget = {
     },
 
     hover: function (props, monitor, component) {
-        var clientOffset = monitor.getClientOffset()
-        var componentRect = findDOMNode(component).getBoundingClientRect()
-        var isJustOverThisOne = monitor.isOver({ shallow: true })
     },
 
     drop(props, monitor) {
@@ -46,8 +43,8 @@ var entrySource = {
     },
 
     endDrag: function (props, monitor, component) {
-        var item = monitor.getItem()
-        var result = monitor.getDropResult()
+        let item = monitor.getItem()
+        let result = monitor.getDropResult()
 
         if(null !== result && true === result.exchange) {
             console.log(`swap playlist entries [${result.a}]->[${result.b}]`)
