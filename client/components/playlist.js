@@ -29,30 +29,36 @@ class PlaylistEntry extends React.Component {
 
         return (
             <div className="entry">
-                <div className="title">{this.props.title}</div>
+                <Row>
+                    <Col xs={8}>
+                        <div className="title">{this.props.title}</div>
 
-                <div className="meta">
-                    <div className="added-by">added by [name]</div>
-                    <div className="duration">
-                    {duration.minutes} : {duration.seconds<10 ? '0':''} {duration.seconds}
-                    </div>
-                </div>
+                        <div className="meta">
+                            <div className="added-by">added by [name]</div>
+                            <div className="duration">
+                            {duration.minutes} : {duration.seconds<10 ? '0':''} {duration.seconds}
+                            </div>
+                        </div>
+                    </Col>
 
-                <div className="actions">
-                    <ButtonToolbar>
-                        <Button onClick={(ev) => {
-                            console.log('Delete!')
-                            this.props.onDeleteEntry(ev, this.props.id)
-                        }}>
-                            <Glyphicon glyph="trash" />
-                            Delete
-                        </Button>
-                        <Button href={`https://youtu.be/${this.props.id}`} target="_blank">
-                            <Glyphicon glyph="link" />
-                            Link
-                        </Button>
-                    </ButtonToolbar>
-                </div>
+                    <Col xs={4}>
+                        <div className="pull-right actions">
+                            <ButtonToolbar>
+                                <Button onClick={(ev) => {
+                                    console.log('Delete!')
+                                    this.props.onDeleteEntry(ev, this.props.id)
+                                }}>
+                                    <Glyphicon glyph="trash" />
+                                    Delete
+                                </Button>
+                                <Button href={`https://youtu.be/${this.props.id}`} target="_blank">
+                                    <Glyphicon glyph="link" />
+                                    Link
+                                </Button>
+                            </ButtonToolbar>
+                        </div>
+                    </Col>
+                </Row>
             </div>
         )
     }
