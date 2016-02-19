@@ -1,12 +1,13 @@
-import diceCommand from './dice'
-import dummyCommand from './dummy'
-import kickCommand from './kick'
-import skip from './skip'
+import diceCmd from './dice'
+import dummyCmd from './dummy'
+import kickCmd from './kick'
+import shuffleCmd from './shuffle'
+import skipCmd from './skip'
 
 export {
-    diceCommand,
-    dummyCommand,
-    kickCommand,
-    skip
+    diceCmd,
+    dummyCmd,
+    kickCmd,
+    shuffleCmd,
+    skipCmd
 }
-

@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
+import FlipMove from 'react-flip-move'
 
 function mapStateToProps(state) {
     return {
@@ -13,25 +14,36 @@ function mapDispatchToProps(dispatch, props) {
     }
 }
 
-let PlaylistEntry = (props) =>
-    <div className="playlist-item">
-        {props.title}
-    </div>
+class PlaylistEntry extends React.Component {
+    constructor(props) {
+        super(props)
+    }
+
+    render() {
+        return (
+            <div>
+                {this.props.title}
+            </div>
+        )
+    }
+}
 
 class Playlist extends React.Component {
     constructor(props) {
         super(props)
     }
 
-    render() {
-        let playlistIndex = 0
+    renderPlaylist() {
+        return this.props.items.map(i => <PlaylistEntry {...i} key={i.id} />)
+    }
 
+    render() {
         return (
-            <div className="playlist">
-                {this.props.items.map(i =>
-                    <PlaylistEntry key={playlistIndex++} {...i} {...this.props.entries} />
-                )}
-            </div>
+            <ul className="playlist" height={400}>
+                <FlipMove easing="cubic-bezier(0.39,0,0.45,1.4)">
+                    { this.renderPlaylist() }
+                </FlipMove>
+            </ul>
         )
     }
 }
