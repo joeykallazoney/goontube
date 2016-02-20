@@ -15,6 +15,11 @@ module.exports = {
         return true
     },
 
+    PLAYLIST_EXCHANGE_REQUEST: (server, client, msg) => {
+        client.room.swapVideosById(msg.a, msg.b)
+        return true
+    },
+
     PLAYLIST_SKIP_REQUEST: (server, client, msg) => {
         client.room.startNextVideo()
         return true

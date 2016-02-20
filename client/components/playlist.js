@@ -28,9 +28,9 @@ const entryTarget = {
         let item = monitor.getItem()
 
         return {
-            exchange: true,
-            a: item.id,
-            b: props.id
+            exchange:   true,
+            a:          item.id,
+            b:          props.id
         }
     }
 }
@@ -47,7 +47,7 @@ var entrySource = {
         let result = monitor.getDropResult()
 
         if(null !== result && true === result.exchange) {
-            console.log(`swap playlist entries [${result.a}]->[${result.b}]`)
+            component.props.dndRequest(result.a, result.b)
         }
     }
 }
@@ -73,6 +73,7 @@ function mapDispatchToProps(dispatch, props) {
     return {
         onSkip: (ev) => dispatch({ type: p.PLAYLIST_SKIP_REQUEST }),
         onShuffle: (ev) => dispatch({ type: p.PLAYLIST_SHUFFLE_REQUEST }),
+        onExchange: (a, b) => dispatch({ type: p.PLAYLIST_EXCHANGE_REQUEST, data: { a, b }}),
         onDeleteEntry: (ev, id) => dispatch({ type: p.REQUEST_DELETE_PLAYLIST_ENTRY, data: id })
     }
 }
@@ -132,7 +133,7 @@ class Playlist extends React.Component {
     }
 
     renderPlaylist(props) {
-        return this.props.items.map(i => <DroppableTarget onDeleteEntry={props.onDeleteEntry} {...i} key={i.id} />
+        return this.props.items.map(i => <DroppableTarget dndRequest={props.onExchange} onDeleteEntry={props.onDeleteEntry} {...i} key={i.id} />
         )
     }
 

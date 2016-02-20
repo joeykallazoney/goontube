@@ -38,6 +38,23 @@ class Room {
         this.broadcastRoomPlaylist()
     }
 
+    swapVideosById(a, b) {
+        let indexA = null, indexB = null, c = 0
+
+        for(let c = 0; c < this.playlist.length; c++) {
+            if(this.playlist[c].id === a) indexA = c
+            if(this.playlist[c].id === b) indexB = c
+        }
+
+        if(null !== indexA && null !== indexB) {
+            let temp = this.playlist[indexA]
+            this.playlist[indexA] = this.playlist[indexB]
+            this.playlist[indexB] = temp
+
+            this.broadcastRoomPlaylist()
+        }
+    }
+
     updateRoomUsersList() {
         let packet = this.makeUserListPacket()
 
