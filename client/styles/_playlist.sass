@@ -1,24 +1,40 @@
 @import variables
 
 .controls
+    padding-top: 0.3em
+    padding-bottom: 0.3em
+
     .btn
         text-transform: uppercase
         background: transparent
         border-radius: 0
         padding: 0.25em 0.25em
         color: rgb(201, 201, 201)
+
         &:hover
             background: rgb(201, 201, 201)
             color: rgb(9, 9, 9)
 
 ul.playlist
-    padding-left: 0.3em
+    padding-left: 0.15em
     .entry
-        font-size:  0.75em
+        font-size:  0.675em
         margin:     0.25em 0.5em
-        border:     none
+        border:     4px solid rgb(47, 47, 47)
+
+        .btn
+            background: transparent
+            color: rgb(143, 143, 143) !important
+            border: rgb(62, 62, 62)
+            text-shadow: 1px 1px 2px black
+            transition: color 0.1s ease-in
+
+            &:hover
+                color: rgb(110, 110, 110) !important
+
         .row
-            padding:    0.5em 1em
+            margin:         0 0
+            padding:        0.5em 1em
             &:hover
                 cursor: pointer
                 background: rgb(96, 96, 96)

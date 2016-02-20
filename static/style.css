@@ -7,9 +7,8 @@ body {
   font-family: "Open Sans", sans-serif;
   font-size: 17px; }
 
-.btn {
-  background: transparent;
-  padding: 0.25em 0.5em; }
+.content-pane {
+  padding: 0.5em 0.5em; }
 
 .sitebar {
   width: 100%;
@@ -64,23 +63,35 @@ ul.chat-list {
     ul.chat-list .message .from, ul.chat-list .message .body {
       display: inline-block; }
 
-.controls .btn {
-  text-transform: uppercase;
-  background: transparent;
-  border-radius: 0;
-  padding: 0.25em 0.25em;
-  color: #c9c9c9; }
-  .controls .btn:hover {
-    background: #c9c9c9;
-    color: #090909; }
+.controls {
+  padding-top: 0.3em;
+  padding-bottom: 0.3em; }
+  .controls .btn {
+    text-transform: uppercase;
+    background: transparent;
+    border-radius: 0;
+    padding: 0.25em 0.25em;
+    color: #c9c9c9; }
+    .controls .btn:hover {
+      background: #c9c9c9;
+      color: #090909; }
 
 ul.playlist {
-  padding-left: 0.3em; }
+  padding-left: 0.15em; }
   ul.playlist .entry {
-    font-size: 0.75em;
+    font-size: 0.675em;
     margin: 0.25em 0.5em;
-    border: none; }
+    border: 4px solid #2f2f2f; }
+    ul.playlist .entry .btn {
+      background: transparent;
+      color: #8f8f8f !important;
+      border: #3e3e3e;
+      text-shadow: 1px 1px 2px black;
+      transition: color 0.1s ease-in; }
+      ul.playlist .entry .btn:hover {
+        color: #6e6e6e !important; }
     ul.playlist .entry .row {
+      margin: 0 0;
       padding: 0.5em 1em; }
       ul.playlist .entry .row:hover {
         cursor: pointer;

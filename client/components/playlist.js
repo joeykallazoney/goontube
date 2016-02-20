@@ -144,6 +144,7 @@ class Playlist extends React.Component {
                 <div style={{height: (this.props.playlistHeightUnits * this.props.heightBase) + 'px'}} className="playlist-container">
                     <div className="controls" style={{ backgroundColor: 'rgb(43, 43, 43)' }}>
                         <ButtonToolbar>
+                            <Button>Add Media</Button>
                             <Button onClick={(e) => this.props.onSkip(e)}>Skip</Button>
                             <Button onClick={(e) => this.props.onShuffle(e)}>Shuffle</Button>
                         </ButtonToolbar>

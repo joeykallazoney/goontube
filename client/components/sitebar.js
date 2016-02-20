@@ -40,10 +40,12 @@ class SiteBar extends React.Component {
                 <ButtonToolbar>
                     {null !== this.props.user ? (
                         <div className="logged-in">
-                            <Button {...this.props.account}>
-                                {this.props.user}
-                            </Button>
-
+                                <Button {...this.props.account}>
+                                    Goontu.be
+                                </Button>
+                                <Button>
+                                    <Glyphicon glyph="cog" /> Settings
+                                </Button>
                             <Button className="logout" {...this.props.logout}>
                                 <Glyphicon glyph="log-out" /> Logout
                             </Button>
