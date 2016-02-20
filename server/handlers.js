@@ -15,6 +15,12 @@ module.exports = {
         return true
     },
 
+    REQUEST_ROOM_LIST: (server, client, msg) => {
+        console.log(server)
+        client.sendPacket(p.SET_ROOM_LIST, [])
+        return true
+    },
+
     PLAYLIST_EXCHANGE_REQUEST: (server, client, msg) => {
         client.room.swapVideosById(msg.a, msg.b)
         return true

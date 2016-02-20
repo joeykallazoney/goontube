@@ -33,9 +33,16 @@ class Room {
         this.updateRoomUsersList()
     }
 
+    broadcastState() {
+        this.broadcastCurrentMedia()
+        this.broadcastRoomPlaylist()
+        this.broadcastRoomList()
+    }
+
     initConnection() {
         this.broadcastCurrentMedia()
         this.broadcastRoomPlaylist()
+
     }
 
     swapVideosById(a, b) {
@@ -59,6 +66,18 @@ class Room {
         let packet = this.makeUserListPacket()
 
         this.members.map(u => u.sendPacket(packet.type, packet.data))
+    }
+
+    makeRoomListPacket() {
+        return {
+            type: p.SET_ROOM_LIST,
+            data: this.rooms.map(room => {
+                return {
+                    name: room.name,
+                    users: room.members.length
+                }
+            })
+        }
     }
 
     makeCurrentMediaPacket() {
@@ -88,6 +107,7 @@ class Room {
         }
     }
 
+
     broadcast(type, data) {
         this.members.map(client => client.sendPacket(type, data))
     }
@@ -96,6 +116,12 @@ class Room {
         let playingPacket = this.makeCurrentMediaPacket()
 
         this.broadcast(playingPacket.type, playingPacket.data)
+    }
+
+    broadcastRoomList() {
+        let roomListPacket = this.makeRoomListPacket()
+
+        this.broadcast(roomListPacket.type, roomListPacket.data)
     }
 
     broadcastRoomPlaylist() {
@@ -183,15 +209,13 @@ class Room {
         }
     }
 
-    constructor(serverContext) {
-        this.name               = ``
+    constructor(serverContext, name = `lobby`) {
+        this.name               = name
         this.fetchingEntries    = false
         this.context            = serverContext
         this.members            = []
         this.playlist           = []
-        this.playing = {
-
-        }
+        this.playing            = {}
 
         setInterval(() => this.heartbeat(serverContext), 1000)
     }

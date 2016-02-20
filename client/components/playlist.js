@@ -74,6 +74,7 @@ function collect(connect, monitor) {
 
 function mapDispatchToProps(dispatch, props) {
     return {
+        onAddMediaClicked: (ev) => dispatch({ type: p.ADD_MEDIA_CLICK }),
         onSkip: (ev) => dispatch({ type: p.PLAYLIST_SKIP_REQUEST }),
         onShuffle: (ev) => dispatch({ type: p.PLAYLIST_SHUFFLE_REQUEST }),
         onExchange: (a, b) => dispatch({ type: p.PLAYLIST_EXCHANGE_REQUEST, data: { a, b }}),
@@ -144,7 +145,7 @@ class Playlist extends React.Component {
                 <div style={{height: (this.props.playlistHeightUnits * this.props.heightBase) + 'px'}} className="playlist-container">
                     <div className="controls" style={{ backgroundColor: 'rgb(43, 43, 43)' }}>
                         <ButtonToolbar>
-                            <Button>Add Media</Button>
+                            <Button onClick={(e) => this.props.onAddMediaClicked(e)}>Add Media</Button>
                             <Button onClick={(e) => this.props.onSkip(e)}>Skip</Button>
                             <Button onClick={(e) => this.props.onShuffle(e)}>Shuffle</Button>
                         </ButtonToolbar>

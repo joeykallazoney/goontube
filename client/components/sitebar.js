@@ -3,11 +3,12 @@ import { connect } from 'react-redux'
 import { makePacket } from '../../shared/util'
 import p from '../../shared/protocol'
 
-import { ButtonToolbar, Button, Glyphicon } from 'react-bootstrap'
+import { ButtonToolbar, MenuItem, DropdownButton, Button, Glyphicon } from 'react-bootstrap'
 
 function mapStateToProps(state) {
     return {
-        user: state.auth.user
+        user:   state.auth.user,
+        rooms:  state.app.rooms
     }
 }
 
@@ -29,9 +30,17 @@ function mapDispatchToProps(dispatch, props) {
     }
 }
 
+
 class SiteBar extends React.Component {
     constructor(props) {
         super(props)
+    }
+
+    renderRooms() {
+        const rooms = this.props.rooms.list
+        return rooms.map((room, i) => (
+            <MenuItem eventKey={i}>{room.name}</MenuItem>
+        ))
     }
 
     render() {
@@ -40,12 +49,12 @@ class SiteBar extends React.Component {
                 <ButtonToolbar>
                     {null !== this.props.user ? (
                         <div className="logged-in">
-                                <Button {...this.props.account}>
-                                    Goontu.be
-                                </Button>
-                                <Button>
-                                    <Glyphicon glyph="cog" /> Settings
-                                </Button>
+                            <DropdownButton title="Goontu.be" id="bg-nested-dropdown">
+                                {this.renderRooms()}
+                            </DropdownButton>
+                            <Button {...this.props.account}>
+                                <Glyphicon glyph="cog" /> Settings
+                            </Button>
                             <Button className="logout" {...this.props.logout}>
                                 <Glyphicon glyph="log-out" /> Logout
                             </Button>

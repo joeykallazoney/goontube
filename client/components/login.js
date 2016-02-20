@@ -63,7 +63,7 @@ class Login extends React.Component {
 
     render() {
         return (
-            <div className="login">
+            <div className="tube-modal login">
                 <Modal {...this.props}>
                     <Modal.Header closeButton>
                         <Modal.Title>Login</Modal.Title>

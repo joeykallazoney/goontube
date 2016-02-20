@@ -13,11 +13,22 @@ const initialState = {
         provider:   'youtube',
         position:   0,
         startTime:  Date.now()
-    }
+    },
+    addMediaModal: false
 }
 
 export default function reducer(state = initialState, action) {
     switch(action.type) {
+        case p.ADD_MEDIA_CLICK:
+            return {
+                ...state,
+                addMediaModal: true
+            }
+        case p.ADD_MEDIA_MODAL_CLOSED:
+            return {
+                ...state,
+                addMediaModal: false
+            }
         case p.ROOM_CLEAR_MESSAGES:
             return {
                 ...state,

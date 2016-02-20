@@ -55,8 +55,10 @@ let serverContext = {
     rooms:          []
 }
 
-let defaultRoom     = new Room(serverContext)
-serverContext.rooms = [defaultRoom]
+let defaultRoom         = new Room(serverContext, 'lobby')
+let anotherDefaultRoom  = new Room(serverContext, 'qpu')
+
+serverContext.rooms = [defaultRoom, anotherDefaultRoom]
 
 app.use(koaLogger())
 app.use(staticFiles)
@@ -79,7 +81,6 @@ const HTML =
         <script src="/bundle.js" type="text/javascript"></script>
     </head>
 </html>`
-
 
 wss.on('connection', (ws) => {
     let client = new Client(ws, serverContext)
@@ -126,6 +127,11 @@ wss.on('connection', (ws) => {
         }
     })
 
+    client.sendPacket(p.SET_ROOM_LIST, [
+        serverContext.rooms.map(room => { return {
+            name:   room.name,
+            users:  room.members.length
+        }})])
     let currentPlaylistPacket = client.room.makePlaylistUpdatePacket()
     client.sendPacket(currentPlaylistPacket.type, currentPlaylistPacket.data)
 })
