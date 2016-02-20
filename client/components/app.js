@@ -1,13 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import Chat from './chat'
-import Header from './header'
-import Users from './users'
-import Player from './player'
-import Playlist from './playlist'
-import ContentPane from './content-pane'
-import Search from './search'
 import SiteBar from './sitebar'
 import Layout from './layout'
 import LoginModal from './login'
@@ -24,13 +17,7 @@ class Goontube extends React.Component {
             <div id="app">
                 <SiteBar />
                 <div id="goontube">
-                    <Layout>
-                        <Header />
-                        <Player />
-                        <Chat />
-                        <Playlist />
-                        <ContentPane />
-                    </Layout>
+                    <Layout />
                 </div>
                 <div id="modals">
                     <LoginModal />

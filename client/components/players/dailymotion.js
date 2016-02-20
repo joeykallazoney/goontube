@@ -1,4 +1,15 @@
 import React from 'react'
+import { connect } from 'react-redux'
+
+function mapStateToProps(state) {
+    return {
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+    }
+}
 
 class DailyMotionPlayer extends React.Component {
     constructor(props, context) {
@@ -12,10 +23,6 @@ class DailyMotionPlayer extends React.Component {
     }
 
     render() {
-        const videoID = this.context.store
-            .getState()
-            .get('media').id
-
         return (
             <div id="player">
             </div>
@@ -23,8 +30,4 @@ class DailyMotionPlayer extends React.Component {
     }
 }
 
-DailyMotionPlayer.contextTypes = {
-    store: React.PropTypes.object.isRequired
-}
-
-export default DailyMotionPlayer
+export default connect(mapStateToProps, mapDispatchToProps)(DailyMotionPlayer)

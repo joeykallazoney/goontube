@@ -4,24 +4,22 @@ import { connect } from 'react-redux'
 
 function mapStateToProps(state) {
     return {
-        videoId:  state.room.media.id,
-        startTime: state.room.media.startTime
+        videoId:    state.room.media.id,
+        startTime:  state.room.media.startTime
     }
 }
 
 function mapDispatchToProps(dispatch, props) {
     return {
+        syncTime: (player, startTime) => {
+            let secondsPassed = (Math.ceil( (Date.now() - startTime) / 1000))
+            let offsetMargin = 5
+            if (Math.abs(player.getCurrentTime() - secondsPassed) > offsetMargin) {
+                player.seekTo(secondsPassed)
+            }
+        }
     }
 }
-
-function syncTime(player, startTime) {
-    let secondsPassed = (Math.ceil( (Date.now() - startTime) / 1000))
-    let offsetMargin = 5
-    if (Math.abs(player.getCurrentTime() - secondsPassed) > offsetMargin) {
-        player.seekTo(secondsPassed)
-    }
-}
-
 
 class YouTubePlayer extends React.Component {
     constructor(props, context) {
@@ -29,12 +27,6 @@ class YouTubePlayer extends React.Component {
     }
 
     onReady() {
-    }
-
-    onPlay(event, props) {
-        window.tp = event.target
-
-        syncTime(event.target, props.startTime)
     }
 
     onStateChange() {
@@ -51,10 +43,12 @@ class YouTubePlayer extends React.Component {
 
         return (
             <div id="player">
-                <YouTube videoId={this.props.videoId}
+                <YouTube
+                    ref="ytPlayer"
+                    videoId={this.props.videoId}
                     opts={options}
                     onReady={this.onReady}
-                    onPlay={(event) => this.onPlay(event, this.props)}
+                    onPlay={(ev) => this.props.syncTime(ev.target, this.props.startTime)}
                     onStateChange={this.onStateChange} />
             </div>
         )

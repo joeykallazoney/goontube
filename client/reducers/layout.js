@@ -1,8 +1,10 @@
 const initialState = {
-    stage:          { xs: 7 },
-    chat:           { xs: 5 },
-    playlist:       { xs: 7 },
-    contentPane:    { xs: 5 }
+    heightbase:     40,
+    banner:         { width: 12,    height: 2 },
+    player:         { width: 7,     height: 4 },
+    chat:           { width: 5,     height: 4 },
+    playlist:       { width: 7,     height: 4 },
+    contentPane:    { width: 7,     height: 4 }
 }
 
 export default function reducer(state = initialState, action) {

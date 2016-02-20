@@ -11,6 +11,9 @@ body {
   width: 100%;
   background: #ffa800; }
 
+.chat {
+  overflow-y: scroll; }
+
 #goontube {
   width: 960px;
   margin: 0 auto; }
