@@ -62,7 +62,7 @@ module.exports = {
         }
     },
 
-    LOGOUT_USER: (server, client, msg) => {
+    REQUEST_LOGOUT: (server, client, msg) => {
         client._auth = false
         client.user = null
         client.sendPacket(p.LOGOUT_USER)

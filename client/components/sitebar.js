@@ -24,7 +24,7 @@ function mapDispatchToProps(dispatch, props) {
             }
         },
         logout: {
-            onClick: () => dispatch({ type: p.LOGOUT_USER })
+            onClick: () => dispatch({ type: p.REQUEST_LOGOUT })
         }
     }
 }

@@ -16,6 +16,7 @@ const webSocketMiddleware = socket => {
                 case p.PLAYLIST_EXCHANGE_REQUEST:
                 case p.PLAYLIST_SHUFFLE_REQUEST:
                 case p.PLAYLIST_SKIP_REQUEST:
+                case p.REQUEST_LOGOUT:
                 case p.REQUEST_DELETE_PLAYLIST_ENTRY:
                     socket.send(makePacket(action.type, action.data))
 

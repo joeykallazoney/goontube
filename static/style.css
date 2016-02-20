@@ -7,6 +7,10 @@ body {
   font-family: "Open Sans", sans-serif;
   font-size: 17px; }
 
+.btn {
+  background: transparent;
+  padding: 0.25em 0.5em; }
+
 .sitebar {
   width: 100%;
   background: #ffa800; }
@@ -60,6 +64,16 @@ ul.chat-list {
     ul.chat-list .message .from, ul.chat-list .message .body {
       display: inline-block; }
 
+.controls .btn {
+  text-transform: uppercase;
+  background: transparent;
+  border-radius: 0;
+  padding: 0.25em 0.25em;
+  color: #c9c9c9; }
+  .controls .btn:hover {
+    background: #c9c9c9;
+    color: #090909; }
+
 ul.playlist {
   padding-left: 0.3em; }
   ul.playlist .entry {
@@ -82,6 +96,21 @@ ul.playlist {
       font-weight: 300; }
       ul.playlist .entry .meta .duration {
         font-weight: bold; }
+
+.sitebar {
+  padding: 0.3em 0.3em; }
+  .sitebar .btn {
+    text-transform: uppercase;
+    background: transparent;
+    border-radius: 0;
+    border-color: black;
+    padding: 0.25em 0.25em;
+    color: black;
+    margin-left: 0.5em;
+    margin-right: 0.5em; }
+    .sitebar .btn:hover {
+      background: #0a0a0a;
+      color: #ebebeb; }
 
 .playlist-container {
   overflow: hidden; }
