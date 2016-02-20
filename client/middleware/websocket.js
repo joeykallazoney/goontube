@@ -10,7 +10,6 @@ const webSocketMiddleware = socket => {
             switch(action.type) {
                 case p.AUTHENTICATION_ATTEMPT:
                 case p.REGISTRATION_ATTEMPT:
-                case p.LOGOUT_USER:
                 case p.SEND_CHAT_MESSAGE:
                 case p.REQUEST_ADD_MEDIA_BY_URL:
                 case p.REQUEST_DRAGNDROP_PLAYLIST_ENTRY:

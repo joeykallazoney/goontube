@@ -30,7 +30,6 @@ class Goontube extends React.Component {
                         <Chat />
                         <Playlist />
                         <ContentPane />
-                        <Search />
                     </Layout>
                 </div>
                 <div id="modals">

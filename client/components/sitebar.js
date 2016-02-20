@@ -41,7 +41,7 @@ class SiteBar extends React.Component {
                     {null !== this.props.user ? (
                         <div className="logged-in">
                             <Button {...this.props.account}>
-                                My Account
+                                {this.props.user}
                             </Button>
 
                             <Button className="logout" {...this.props.logout}>
