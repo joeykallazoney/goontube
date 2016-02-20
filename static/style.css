@@ -63,6 +63,20 @@ ul.chat-list {
     ul.chat-list .message .from, ul.chat-list .message .body {
       display: inline-block; }
 
+::-webkit-scrollbar {
+  width: 0.5em;
+  height: 0.5em; }
+
+::-webkit-scrollbar-thumb {
+  background: #1b1b1b; }
+
+::-webkit-scrollbar-track {
+  background: #8d8d8d; }
+
+body {
+  scrollbar-face-color: #1b1b1b;
+  scrollbar-track-color: #8d8d8d; }
+
 .controls {
   padding-top: 0.3em;
   padding-bottom: 0.3em; }
@@ -78,6 +92,16 @@ ul.chat-list {
 
 ul.playlist {
   padding-left: 0.15em; }
+  ul.playlist ::-webkit-scrollbar {
+    width: 0.5em;
+    height: 0.5em; }
+  ul.playlist ::-webkit-scrollbar-thumb {
+    background: #2f2f2f; }
+  ul.playlist ::-webkit-scrollbar-track {
+    background: #979797; }
+  ul.playlist body {
+    scrollbar-face-color: #2f2f2f;
+    scrollbar-track-color: #979797; }
   ul.playlist .entry {
     font-size: 0.675em;
     margin: 0.25em 0.5em;

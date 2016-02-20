@@ -1,5 +1,23 @@
 @import variables
 
+// props: http://codepen.io/HugoGiraudel/pen/KFDuB
+@mixin scrollbars($size, $foreground-color, $background-color: mix($foreground-color, white, 50%))
+    ::-webkit-scrollbar
+        width:  $size
+        height: $size
+
+    ::-webkit-scrollbar-thumb
+        background: $foreground-color
+
+    ::-webkit-scrollbar-track
+        background: $background-color
+
+    body
+        scrollbar-face-color: $foreground-color
+        scrollbar-track-color: $background-color
+
+@include scrollbars(.5em, rgb(27, 27, 27))
+
 .controls
     padding-top: 0.3em
     padding-bottom: 0.3em
@@ -17,6 +35,8 @@
 
 ul.playlist
     padding-left: 0.15em
+    @include scrollbars(.5em, rgb(47, 47, 47))
+
     .entry
         font-size:  0.675em
         margin:     0.25em 0.5em
