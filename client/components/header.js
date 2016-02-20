@@ -26,7 +26,7 @@ class Header extends Component {
         return (
             <header>
                 <Banner />
-                <Panel collapsible header={`Now playing: ${this.props.playingTitle}`}>
+                <Panel collapsible header={this.props.playingTitle}>
                     <div></div>
                 </Panel>
             </header>
