@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
+import { Col } from 'react-bootstrap'
 
 import DailyMotion from './players/dailymotion'
 import YouTube from './players/youtube'
@@ -8,7 +9,10 @@ import Vimeo from './players/vimeo'
 
 function mapStateToProps(state) {
     return {
-        media:   state.room.media 
+        heightBase:         state.layout.heightbase,
+        playerWidth:        state.layout.player.width,
+        playerHeightUnits:  state.layout.player.height,
+        media:   state.room.media
     }
 }
 
@@ -29,9 +33,11 @@ class Player extends React.Component {
         let reactProvider = providerMapper[this.props.media.provider] || 'Loading...'
 
         return (
-            <div className="player">
-                {reactProvider}
-            </div>
+            <Col xs={this.props.playerWidth}>
+                <div className="player">
+                    {reactProvider}
+                </div>
+            </Col>
         )
     }
 }

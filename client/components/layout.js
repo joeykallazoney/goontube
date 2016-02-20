@@ -5,7 +5,6 @@
 import React from 'react'
 import PureRenderMixin from 'react/lib/ReactComponentWithPureRenderMixin'
 import { connect } from 'react-redux'
-
 import { Grid, Col, Row } from 'react-bootstrap'
 
 import Header from './header'
@@ -39,18 +38,15 @@ class Layout extends React.Component {
     render() {
         return (
             <div className="layout">
-                <Row>
-                    <Col style={{height: (this.props.playerHeightUnits * this.props.heightBase) + 'px'}} xs={this.props.playerWidth}>
+                <Grid fluid>
+                    <Row>
+                        <Header />
                         <Player />
-                    </Col>
-                    <Col style={{height: (this.props.chatHeightUnits * this.props.heightBase) + 'px'}} xs={this.props.chatWidth}>
                         <Chat />
-                    </Col>
-                </Row>
-                <Row>
-                    <Playlist />
-                    <ContentPane />
-                </Row>
+                        <Playlist />
+                        <ContentPane />
+                    </Row>
+                </Grid>
             </div>
         )
     }

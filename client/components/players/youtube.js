@@ -4,8 +4,11 @@ import { connect } from 'react-redux'
 
 function mapStateToProps(state) {
     return {
-        videoId:    state.room.media.id,
-        startTime:  state.room.media.startTime
+        videoId:            state.room.media.id,
+        startTime:          state.room.media.startTime,
+        heightBase:         state.layout.heightbase,
+        playerWidth:        state.layout.player.width,
+        playerHeightUnits:  state.layout.player.height,
     }
 }
 
@@ -35,7 +38,7 @@ class YouTubePlayer extends React.Component {
     render() {
         const options = {
             width:          '100%',
-            height:         '100%',
+            height:         this.props.playerHeightUnits * this.props.heightBase,
             playerVars: {
                 autoplay:   1
             }

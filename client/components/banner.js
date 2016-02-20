@@ -1,14 +1,16 @@
 import React from 'react'
+import { Col } from 'react-bootstrap'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
 import p from '../../shared/protocol'
 
 function mapStateToProps(state) {
-    let possibilities = state.banner.possibilities,
-        index = state.banner.currentBannerIndex
-
     return {
-        src: possibilities[index]
+        src: state.banner.possibilities[state.banner.currentBannerIndex],
+        index: state.banner.currentBannerIndex,
+        heightBase:           state.layout.heightbase,
+        bannerWidth:        state.layout.banner.width,
+        bannerHeightUnits:  state.layout.banner.height
     }
 }
 
@@ -33,9 +35,11 @@ class Banner extends React.Component {
 
     render() {
         return (
-            <div className="banner">
-                <img {...this.props} className="banner-image" />
-            </div>
+            <Col xs={this.props.bannerWidth}>
+                <div className="banner">
+                    <img {...this.props} className="banner-image" />
+                </div>
+            </Col>
         )
     }
 }

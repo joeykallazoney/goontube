@@ -3,7 +3,9 @@ import { connect } from 'react-redux'
 
 function mapStateToProps(state) {
     return {
-        users: state.room.users
+        users: state.room.users,
+        heightBase:         state.layout.heightbase,
+        chatHeightUnits:    state.layout.chat.height
     }
 }
 
@@ -21,7 +23,7 @@ class Users extends React.Component {
         let c = 0
 
         return (
-            <div className="user-list">
+            <div style={{height: ((this.props.chatHeightUnits - 1) * this.props.heightBase) + 'px'}} className="user-list">
                 {this.props.users.map(user => (
                     <div key={c++} className="user">{user.username}</div>
                 ))}

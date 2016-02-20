@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
+import { Grid, Col, Row } from 'react-bootstrap'
 
 import Users from './users'
 import { makePacket } from '../../shared/util'
@@ -10,8 +11,13 @@ const KEYCODE_ENTER = 13
 
 function mapStateToProps(state) {
     return {
-        chatInput: state.chat.input,
-        history: state.room.history
+        heightBase:         state.layout.heightbase,
+        chatWidth:          state.layout.chat.width,
+        chatHeightUnits:    state.layout.chat.height,
+        chatUsersWidth:     state.layout.chatUsers.width,
+        chatListWidth:      state.layout.chatList.width,
+        chatInput:          state.chat.input,
+        history:            state.room.history
     }
 }
 
@@ -29,30 +35,54 @@ function mapDispatchToProps(dispatch, props) {
 }
 
 let ChatMessage = (props) =>
-    <li className="message">
+    <li {...props} className="message">
         <span className="from">{props.from}</span>
         <div className="body">{props.body}</div>
     </li>
 
-let ChatHistory = (props) =>
-    <div className="chat-list">
-    {
-        props.history.map((message) =>
-            <ChatMessage key={message.id} from={message.from} body={message.body} />
+class ChatHistory extends Component {
+    constructor(props) {
+        super(props)
+    }
+
+    componentWillUpdate() {
+        let el = this.refs.chatList
+
+        this.shouldScrollBottom = el.scrollTop + el.offsetHeight === el.scrollHeight
+    }
+
+    componentDidUpdate() {
+        if (this.shouldScrollBottom) {
+            let el = this.refs.chatList
+
+            el.scrollTop = el.scrollHeight
+        }
+    }
+
+    renderChat() {
+        return this.props.history.map((message) => <ChatMessage {...this.props} key={message.id} from={message.from} body={message.body} />)
+    }
+
+    render() {
+        return (
+            <ul ref="chatList" style={{height: ((this.props.chatHeightUnits - 1) * this.props.heightBase) + 'px'}} className="chat-list">
+            {this.renderChat()}
+            </ul>
         )
     }
-    </div>
+}
 
-class ChatInput extends React.Component {
+class ChatInput extends Component {
     constructor(props, context) {
         super(props, context)
     }
 
     render() {
         return (
-            <div className="chat-input">
+            <div {...this.props.style} className="chat-input">
                 <form onSubmit={(ev, msg) => this.props.sendChat(ev, this.props.chatInput)}>
-                    <input type="text"
+                    <input style={{width: '100%', height: (1 * this.props.heightBase) + 'px'}}
+                        type="text"
                         value={this.props.chatInput}
                         onChange={(e) => this.props.chatInputChanged(e, e.target.value)} />
                 </form>
@@ -61,18 +91,30 @@ class ChatInput extends React.Component {
     }
 }
 
-class Chat extends React.Component {
+class Chat extends Component {
     constructor(props, context) {
         super(props, context)
     }
 
     render() {
         return (
-            <div className="chat">
-                <ChatHistory history={this.props.history} />
-                <ChatInput {...this.props} />
-                <Users />
-            </div>
+            <Col xs={this.props.chatWidth}>
+                <div className="chat">
+                    <Grid fluid>
+                        <Row>
+                            <Col xs={this.props.chatListWidth}>
+                                <ChatHistory {...this.props} />
+                            </Col>
+                            <Col xs={this.props.chatUsersWidth}>
+                                <Users />
+                            </Col>
+                        </Row>
+                        <Row>
+                            <ChatInput {...this.props} />
+                        </Row>
+                    </Grid>
+                </div>
+            </Col>
         )
     }
 }

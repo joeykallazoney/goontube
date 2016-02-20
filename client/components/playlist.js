@@ -12,7 +12,10 @@ import FlipMove from 'react-flip-move'
 
 function mapStateToProps(state) {
     return {
-        items: state.room.playlist
+        items: state.room.playlist,
+        heightBase:           state.layout.heightbase,
+        playlistWidth:        state.layout.playlist.width,
+        playlistHeightUnits:  state.layout.playlist.height
     }
 }
 
@@ -139,19 +142,21 @@ class Playlist extends React.Component {
 
     render() {
         return (
-            <div className="playlist-container">
-                <div className="controls" style={{ backgroundColor: 'rgb(43, 43, 43)' }}>
-                    <ButtonToolbar>
-                        <Button onClick={(e) => this.props.onSkip(e)}>Skip</Button>
-                        <Button onClick={(e) => this.props.onShuffle(e)}>Shuffle</Button>
-                    </ButtonToolbar>
+            <Col xs={this.props.playlistWidth}>
+                <div style={{height: (this.props.playlistHeightUnits * this.props.heightBase) + 'px'}} className="playlist-container">
+                    <div className="controls" style={{ backgroundColor: 'rgb(43, 43, 43)' }}>
+                        <ButtonToolbar>
+                            <Button onClick={(e) => this.props.onSkip(e)}>Skip</Button>
+                            <Button onClick={(e) => this.props.onShuffle(e)}>Shuffle</Button>
+                        </ButtonToolbar>
+                    </div>
+                    <ul className="playlist" style={{ height: 300, overflowY: 'scroll' }}>
+                        <FlipMove easing="cubic-bezier(0.39,0,0.45,1.4)">
+                            { this.renderPlaylist(this.props) }
+                        </FlipMove>
+                    </ul>
                 </div>
-                <ul className="playlist" style={{ height: 300, overflowY: 'scroll' }}>
-                    <FlipMove easing="cubic-bezier(0.39,0,0.45,1.4)">
-                        { this.renderPlaylist(this.props) }
-                    </FlipMove>
-                </ul>
-            </div>
+            </Col>
         )
     }
 }

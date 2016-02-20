@@ -11,8 +11,30 @@ body {
   width: 100%;
   background: #ffa800; }
 
-.chat {
+.playlist {
+  background: #444444;
   overflow-y: scroll; }
+
+.content-pane {
+  overflow-y: hidden;
+  background: #373737;
+  color: #d1d1d1; }
+
+.user-list {
+  overflow-y: scroll; }
+
+img.banner-image {
+  width: 100%;
+  height: auto; }
+
+.chat .chat-list {
+  overflow-y: scroll; }
+  .chat .chat-list ul {
+    list-style-type: none;
+    padding: 0.5em 0.5em; }
+
+.chat .chat-input {
+  width: 100%; }
 
 #goontube {
   width: 960px;
@@ -24,29 +46,29 @@ body {
 .chat {
   background: #ffffff; }
 
-ul.playlist {
-  list-style-type: none;
-  padding: 0 0; }
-  ul.playlist .entry {
+ul.playlist .entry {
+  font-size: 0.75em;
+  margin: 0.25em 0.5em;
+  padding: 0.5em 1em;
+  border: none; }
+  ul.playlist .entry:hover {
+    cursor: pointer;
+    background: #606060; }
+  ul.playlist .entry .title {
+    color: #1b1b1b;
+    font-size: 1.2em;
+    font-weight: bolder; }
+  ul.playlist .entry .meta {
     font-size: 0.75em;
-    margin: 0.25em 0.5em;
-    padding: 0.5em 1em;
-    border: none; }
-    ul.playlist .entry:hover {
-      cursor: pointer;
-      background: #606060; }
-    ul.playlist .entry .title {
-      color: #1b1b1b;
-      font-size: 1.2em;
-      font-weight: bolder; }
-    ul.playlist .entry .meta {
-      font-size: 0.75em;
-      color: #919191;
-      letter-spacing: 1.25px;
-      font-weight: 300; }
-      ul.playlist .entry .meta .duration {
-        font-weight: bold; }
+    color: #919191;
+    letter-spacing: 1.25px;
+    font-weight: 300; }
+    ul.playlist .entry .meta .duration {
+      font-weight: bold; }
 
-.playlist {
-  background: #444444;
+.playlist-container {
   overflow: hidden; }
+
+#goontube [class*="col-"] {
+  padding-left: 0 !important;
+  padding-right: 0 !important; }
