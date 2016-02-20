@@ -46,25 +46,42 @@ img.banner-image {
 .chat {
   background: #ffffff; }
 
-ul.playlist .entry {
-  font-size: 0.75em;
-  margin: 0.25em 0.5em;
-  padding: 0.5em 1em;
-  border: none; }
-  ul.playlist .entry:hover {
-    cursor: pointer;
-    background: #606060; }
-  ul.playlist .entry .title {
-    color: #1b1b1b;
-    font-size: 1.2em;
-    font-weight: bolder; }
-  ul.playlist .entry .meta {
-    font-size: 0.75em;
-    color: #919191;
-    letter-spacing: 1.25px;
-    font-weight: 300; }
-    ul.playlist .entry .meta .duration {
+ul.chat-list {
+  list-style-type: none;
+  padding: 0.3em 0.3em;
+  overflow-x: hidden;
+  width: 100%; }
+  ul.chat-list .message {
+    padding: 0.2em 0.2em; }
+    ul.chat-list .message .from {
       font-weight: bold; }
+    ul.chat-list .message .body {
+      padding-left: 0.3em; }
+    ul.chat-list .message .from, ul.chat-list .message .body {
+      display: inline-block; }
+
+ul.playlist {
+  padding-left: 0.3em; }
+  ul.playlist .entry {
+    font-size: 0.75em;
+    margin: 0.25em 0.5em;
+    border: none; }
+    ul.playlist .entry .row {
+      padding: 0.5em 1em; }
+      ul.playlist .entry .row:hover {
+        cursor: pointer;
+        background: #606060; }
+    ul.playlist .entry .title {
+      color: #1b1b1b;
+      font-size: 1.2em;
+      font-weight: bolder; }
+    ul.playlist .entry .meta {
+      font-size: 0.75em;
+      color: #919191;
+      letter-spacing: 1.25px;
+      font-weight: 300; }
+      ul.playlist .entry .meta .duration {
+        font-weight: bold; }
 
 .playlist-container {
   overflow: hidden; }

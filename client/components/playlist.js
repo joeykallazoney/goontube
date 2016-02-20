@@ -112,11 +112,9 @@ class PlaylistEntry extends React.Component {
                                     this.props.onDeleteEntry(ev, this.props.id)
                                 }}>
                                     <Glyphicon glyph="trash" />
-                                    Delete
                                 </Button>
                                 <Button href={`https://youtu.be/${this.props.id}`} target="_blank">
                                     <Glyphicon glyph="link" />
-                                    Link
                                 </Button>
                             </ButtonToolbar>
                         </div>

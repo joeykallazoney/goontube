@@ -36,8 +36,7 @@ function mapDispatchToProps(dispatch, props) {
 
 let ChatMessage = (props) =>
     <li {...props} className="message">
-        <span className="from">{props.from}</span>
-        <div className="body">{props.body}</div>
+        <span className="from">{props.from}:</span> <div className="body">{props.body}</div>
     </li>
 
 class ChatHistory extends Component {

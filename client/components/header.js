@@ -29,12 +29,6 @@ class Header extends Component {
         return (
             <header>
                 <Banner />
-                <Panel collapsible header={this.props.playingTitle}>
-                    <div>
-                        <label for="position">Override Playback Position</label>
-                        <input name="position" id="position" type="range" min="0" value={this.props.playbackPos} max={this.props.duration} step="1000" />
-                    </div>
-                </Panel>
             </header>
         )
     }
