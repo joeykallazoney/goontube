@@ -67,6 +67,7 @@ class Room {
             data: {
                 active:     true,
                 streams:    [], // what is this?
+                title:      this.playing.title,
                 id:         this.playing.id,
                 provider:   'youtube', //change to read from this, change player name entries on this to be coherent to the system
                 startTime:  this.playing.startTime

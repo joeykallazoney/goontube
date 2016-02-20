@@ -32,7 +32,8 @@ module.exports = {
     },
 
     REQUEST_DELETE_PLAYLIST_ENTRY: (server, client, msg) => {
-        console.log('Client requested playlist delete ' + msg)
+        client.room.playlist = client.room.playlist.filter(v => v.id !== msg)
+        client.room.broadcastRoomPlaylist()
         return true
     },
 

@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import Banner from './banner'
 import Chat from './chat'
+import Header from './header'
 import Users from './users'
 import Player from './player'
 import Playlist from './playlist'
@@ -25,7 +25,7 @@ class Goontube extends React.Component {
                 <SiteBar />
                 <div id="goontube">
                     <Layout>
-                        <Banner />
+                        <Header />
                         <Player />
                         <Chat />
                         <Playlist />
