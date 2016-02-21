@@ -42,7 +42,6 @@ class Room {
     initConnection() {
         this.broadcastCurrentMedia()
         this.broadcastRoomPlaylist()
-
     }
 
     swapVideosById(a, b) {
@@ -64,14 +63,13 @@ class Room {
 
     updateRoomUsersList() {
         let packet = this.makeUserListPacket()
-
         this.members.map(u => u.sendPacket(packet.type, packet.data))
     }
 
     makeRoomListPacket() {
         return {
             type: p.SET_ROOM_LIST,
-            data: this.rooms.map(room => {
+            data: this.context.rooms.map(room => {
                 return {
                     name: room.name,
                     users: room.members.length
@@ -209,7 +207,7 @@ class Room {
         }
     }
 
-    constructor(serverContext, name = `lobby`) {
+    constructor(serverContext, name = 'lobby') {
         this.name               = name
         this.fetchingEntries    = false
         this.context            = serverContext

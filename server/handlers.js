@@ -12,12 +12,36 @@ module.exports = {
             type: p.CLIENT_HELLO,
             data: `Hello there!`
         })
+
+        return true
+    },
+
+    REQUEST_CHANGE_ROOM: (server, client, msg) => {
+        let toRoom = null, fromRoom = client.room
+
+        for(let i = 0; i < server.rooms.length; i++) {
+            if(msg === server.rooms[i].name) {
+                toRoom = server.rooms[i]
+            }
+        }
+
+        if(toRoom !== null && (toRoom !== fromRoom)) {
+            console.log(`Moving ${client.user.username} from [${fromRoom.name}] to [${toRoom.name}]`)
+
+            toRoom.addUser(client)
+            fromRoom.removeUser(client)
+            client.room = toRoom
+
+            client.room.broadcastCurrentMedia()
+            client.room.broadcastRoomPlaylist()
+            client.room.broadcastRoomList()
+        }
+
         return true
     },
 
     REQUEST_ROOM_LIST: (server, client, msg) => {
-        console.log(server)
-        client.sendPacket(p.SET_ROOM_LIST, [])
+        client.room.broadcastRoomList()
         return true
     },
 

@@ -127,11 +127,12 @@ wss.on('connection', (ws) => {
         }
     })
 
-    client.sendPacket(p.SET_ROOM_LIST, [
-        serverContext.rooms.map(room => { return {
+    client.sendPacket(p.SET_ROOM_LIST, serverContext.rooms.map(room => { return {
             name:   room.name,
             users:  room.members.length
-        }})])
+        }
+    }))
+
     let currentPlaylistPacket = client.room.makePlaylistUpdatePacket()
     client.sendPacket(currentPlaylistPacket.type, currentPlaylistPacket.data)
 })

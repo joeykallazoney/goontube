@@ -13,7 +13,7 @@ body {
 .modal-content {
   border-radius: 0 !important; }
   .modal-content .modal-header {
-    background: #f0f58c;
+    background: #f1f1f1;
     color: #242424; }
     .modal-content .modal-header.seq-error {
       background: #dd5f49;

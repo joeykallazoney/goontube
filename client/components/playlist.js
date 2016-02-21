@@ -75,10 +75,10 @@ function collect(connect, monitor) {
 function mapDispatchToProps(dispatch, props) {
     return {
         onAddMediaClicked: (ev) => dispatch({ type: p.ADD_MEDIA_CLICK }),
-        onSkip: (ev) => dispatch({ type: p.PLAYLIST_SKIP_REQUEST }),
-        onShuffle: (ev) => dispatch({ type: p.PLAYLIST_SHUFFLE_REQUEST }),
-        onExchange: (a, b) => dispatch({ type: p.PLAYLIST_EXCHANGE_REQUEST, data: { a, b }}),
-        onDeleteEntry: (ev, id) => dispatch({ type: p.REQUEST_DELETE_PLAYLIST_ENTRY, data: id })
+        onSkip: (ev) => dispatch({ type: p.PLAYLIST_SKIP_REQUEST, send: true }),
+        onShuffle: (ev) => dispatch({ type: p.PLAYLIST_SHUFFLE_REQUEST, send: true }),
+        onExchange: (a, b) => dispatch({ type: p.PLAYLIST_EXCHANGE_REQUEST, send: true, data: { a, b }}),
+        onDeleteEntry: (ev, id) => dispatch({ type: p.REQUEST_DELETE_PLAYLIST_ENTRY, send: true, data: id })
     }
 }
 

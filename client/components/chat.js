@@ -25,7 +25,7 @@ function mapDispatchToProps(dispatch, props) {
     return {
         sendChat: (ev, msg) => {
             ev.preventDefault()
-            dispatch({ type: p.SEND_CHAT_MESSAGE, data: msg })
+            dispatch({ type: p.SEND_CHAT_MESSAGE, send: true, data: msg })
             setTimeout(() => dispatch({ type: p.SET_CHAT_INPUT, data: ''}), 50)
         },
         chatInputChanged: (ev, value) => {

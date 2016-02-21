@@ -12,6 +12,7 @@ const initialState = {
 export default function reducer(state = initialState, action) {
     switch(action.type) {
         case p.SET_ROOM_LIST:
+            console.dir(action.data[0])
             return {
                 ...state,
                 rooms: {
@@ -19,7 +20,7 @@ export default function reducer(state = initialState, action) {
                     list: action.data
                 }
             }
-            
+
         default:
             return state
     }

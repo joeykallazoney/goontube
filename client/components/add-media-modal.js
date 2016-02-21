@@ -50,7 +50,7 @@ class AddMediaModal extends Component {
 
                     <Modal.Footer>
                         <Button onClick={(e) => this.props.closeButton()}>Close</Button>
-                        <Button bsStyle="primary">Submit</Button>
+                        <Button disabled>Submit</Button>
                     </Modal.Footer>
                 </Modal>
             </div>

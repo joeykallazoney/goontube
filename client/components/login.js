@@ -30,7 +30,10 @@ function mapDispatchToProps(dispatch, props) {
             onSubmitRegister: function(ev, user, pass) {
                 ev.preventDefault()
 
-                dispatch({ type: p.REGISTRATION_ATTEMPT, data: {
+                dispatch({
+                    type: p.REGISTRATION_ATTEMPT,
+                    send: true,
+                    data: {
                     username: user,
                     password: pass
                 }})
@@ -39,7 +42,10 @@ function mapDispatchToProps(dispatch, props) {
             onSubmit: function(ev, user, pass) {
                 ev.preventDefault()
 
-                dispatch({ type: p.AUTHENTICATION_ATTEMPT, data: {
+                dispatch({
+                    type: p.AUTHENTICATION_ATTEMPT,
+                    send: true, 
+                    data: {
                     username: user,
                     password: hash(user)(pass)
                 }})

@@ -8,7 +8,7 @@ import { ButtonToolbar, MenuItem, DropdownButton, Button, Glyphicon } from 'reac
 function mapStateToProps(state) {
     return {
         user:   state.auth.user,
-        rooms:  state.app.rooms
+        rooms:  state.app.rooms.list
     }
 }
 
@@ -25,7 +25,12 @@ function mapDispatchToProps(dispatch, props) {
             }
         },
         logout: {
-            onClick: () => dispatch({ type: p.REQUEST_LOGOUT })
+            onClick: () => dispatch({ type: p.REQUEST_LOGOUT, send: true })
+        },
+        roomItem: {
+            onClick: (ev, desiredRoomName) => {
+                dispatch({ type: p.REQUEST_CHANGE_ROOM, send: true, data: desiredRoomName })
+            }
         }
     }
 }
@@ -37,10 +42,14 @@ class SiteBar extends React.Component {
     }
 
     renderRooms() {
-        const rooms = this.props.rooms.list
-        return rooms.map((room, i) => (
-            <MenuItem eventKey={i}>{room.name}</MenuItem>
-        ))
+        return this.props.rooms.map(
+            (room, i) => <MenuItem
+                onClick={(ev) => this.props.roomItem.onClick(ev, room.name)}
+                key={i}
+                eventKey={i}>
+                <div><strong>Name:</strong> {room.name}</div>
+                <div><strong>Users:</strong> {room.users}</div>
+            </MenuItem>)
     }
 
     render() {
