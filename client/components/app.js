@@ -5,8 +5,20 @@ import SiteBar from './sitebar'
 import Layout from './layout'
 import AddMediaModal from './add-media-modal'
 import LoginModal from './login'
+import SettingsModal from './settings'
 
 import { connect } from 'react-redux'
+
+function mapStateToProps(state) {
+    return {
+        bodyStyles: state.settings.bodyStyles
+    }
+}
+
+function mapDispatchToProps(dispatch, props) {
+    return {
+    }
+}
 
 class Goontube extends React.Component {
     constructor(props, context) {
@@ -15,7 +27,7 @@ class Goontube extends React.Component {
 
     render() {
         return (
-            <div id="app">
+            <div style={this.props.bodyStyles} id="app">
                 <SiteBar />
                 <div id="goontube">
                     <Layout />
@@ -23,10 +35,11 @@ class Goontube extends React.Component {
                 <div id="modals">
                     <AddMediaModal />
                     <LoginModal />
+                    <SettingsModal />
                 </div>
             </div>
         )
     }
 }
 
-export default connect()(Goontube)
+export default connect(mapStateToProps, mapDispatchToProps)(Goontube)

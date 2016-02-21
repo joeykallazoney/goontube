@@ -2,7 +2,6 @@ html {
   font-smoothing: antialiased; }
 
 body {
-  background: #222222;
   margin: 0 0;
   font-family: "Open Sans", sans-serif;
   font-size: 17px; }
@@ -26,8 +25,7 @@ body {
   padding: 0.5em 0.5em; }
 
 .sitebar {
-  width: 100%;
-  background: #ffa800; }
+  width: 100%; }
 
 .playlist {
   background: #444444;
@@ -78,6 +76,14 @@ ul.chat-list {
       padding-left: 0.3em; }
     ul.chat-list .message .from, ul.chat-list .message .body {
       display: inline-block; }
+
+.footer-info {
+  background: #2a2a2a;
+  font-size: 0.85em;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1.125px;
+  color: #444444; }
 
 ::-webkit-scrollbar {
   width: 0.5em;
@@ -149,8 +155,7 @@ ul.playlist {
         font-weight: bold; }
 
 .dropdown-menu {
-  border-radius: 0 !important;
-  background: #ffa800; }
+  border-radius: 0 !important; }
 
 .sitebar {
   padding: 0.3em 0.3em;

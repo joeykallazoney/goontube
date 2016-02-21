@@ -13,9 +13,9 @@ export default function reducer(state = initialState, action) {
         case p.SEARCH_NEW_SEARCH:
             return {
                 ...state,
-                query: action.data,
-                desired: true,
-                results: []
+                query:      action.data,
+                desired:    true,
+                results:    []
             }
 
         case p.SEARCH_RESET:

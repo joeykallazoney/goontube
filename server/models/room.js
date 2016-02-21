@@ -34,6 +34,7 @@ class Room {
     }
 
     broadcastState() {
+        this.broadcastRoomInfo()
         this.broadcastCurrentMedia()
         this.broadcastRoomPlaylist()
         this.broadcastRoomList()
@@ -78,6 +79,19 @@ class Room {
         }
     }
 
+    makeRoomInfoPacket() {
+        return {
+            type: p.ROOM_INFO_UPDATE,
+            data: {
+                name:                   this.name,
+                numberUsers:            this.members.length,
+                currentPlaybackTitle:   this.playing.title,
+                currentMediaStartedAt:  this.playing.startTime,
+                currentMediaDuration:   this.playing.duration_ms
+            }
+        }
+    }
+
     makeCurrentMediaPacket() {
         return {
             type: p.ROOM_MEDIA_UPDATE,
@@ -114,6 +128,12 @@ class Room {
         let playingPacket = this.makeCurrentMediaPacket()
 
         this.broadcast(playingPacket.type, playingPacket.data)
+    }
+
+    broadcastRoomInfo() {
+        let roomInfoPacket = this.makeRoomInfoPacket()
+
+        this.broadcast(roomInfoPacket.type, roomInfoPacket.data)
     }
 
     broadcastRoomList() {

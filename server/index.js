@@ -55,7 +55,7 @@ let serverContext = {
     rooms:          []
 }
 
-let defaultRoom         = new Room(serverContext, 'lobby')
+let defaultRoom         = new Room(serverContext, 'goontube')
 let anotherDefaultRoom  = new Room(serverContext, 'qpu')
 
 serverContext.rooms = [defaultRoom, anotherDefaultRoom]

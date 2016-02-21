@@ -26,15 +26,13 @@ module.exports = {
         }
 
         if(toRoom !== null && (toRoom !== fromRoom)) {
-            console.log(`Moving ${client.user.username} from [${fromRoom.name}] to [${toRoom.name}]`)
+            console.log(`Moving [${client.user.username}] from [${fromRoom.name}] to [${toRoom.name}]`)
 
             toRoom.addUser(client)
             fromRoom.removeUser(client)
             client.room = toRoom
 
-            client.room.broadcastCurrentMedia()
-            client.room.broadcastRoomPlaylist()
-            client.room.broadcastRoomList()
+            client.room.broadcastState()
         }
 
         return true

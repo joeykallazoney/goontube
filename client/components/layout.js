@@ -8,6 +8,7 @@ import { connect } from 'react-redux'
 import { Grid, Col, Row } from 'react-bootstrap'
 
 import Header from './header'
+import Footer from './footer'
 import Users from './users'
 import Player from './player'
 import Chat from './chat'
@@ -45,6 +46,7 @@ class Layout extends React.Component {
                         <Chat />
                         <Playlist />
                         <ContentPane />
+                        <Footer />
                     </Row>
                 </Grid>
             </div>

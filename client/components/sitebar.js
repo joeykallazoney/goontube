@@ -7,8 +7,10 @@ import { ButtonToolbar, MenuItem, DropdownButton, Button, Glyphicon } from 'reac
 
 function mapStateToProps(state) {
     return {
-        user:   state.auth.user,
-        rooms:  state.app.rooms.list
+        user:           state.auth.user,
+        rooms:          state.app.rooms.list,
+        roomTitle:      state.room.name,
+        siteBarStyles:  state.settings.siteBarStyles
     }
 }
 
@@ -54,11 +56,11 @@ class SiteBar extends React.Component {
 
     render() {
         return (
-            <div className="sitebar">
+            <div className="sitebar" style={this.props.siteBarStyles}>
                 <ButtonToolbar>
                     {null !== this.props.user ? (
                         <div className="logged-in">
-                            <DropdownButton title="Goontu.be" id="bg-nested-dropdown">
+                            <DropdownButton title={this.props.roomTitle} id="bg-nested-dropdown">
                                 {this.renderRooms()}
                             </DropdownButton>
                             <Button {...this.props.account}>
