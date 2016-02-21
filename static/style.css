@@ -69,7 +69,13 @@ ul.chat-list {
   overflow-x: hidden;
   width: 100%; }
   ul.chat-list .message {
-    padding: 0.2em 0.2em; }
+    padding: 0.2em 0.2em;
+    font-size: 0.875em; }
+    ul.chat-list .message.system {
+      font-size: 0.75em;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #4d4d4d; }
     ul.chat-list .message .from {
       font-weight: bold; }
     ul.chat-list .message .body {
@@ -159,7 +165,25 @@ ul.playlist {
 
 .sitebar {
   padding: 0.3em 0.3em;
-  padding-left: 0.5em; }
+  padding-left: 0.5em;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-self: center;
+      -ms-flex-item-align: center;
+          align-self: center; }
+  .sitebar .btn-toolbar {
+    display: inline-block; }
+  .sitebar .title {
+    color: #111111;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-self: center;
+        -ms-flex-item-align: center;
+            align-self: center;
+    font-size: 1.2em;
+    font-weight: bold; }
   .sitebar .btn {
     font-size: 1em;
     text-transform: uppercase;

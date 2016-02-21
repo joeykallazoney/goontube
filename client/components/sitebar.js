@@ -7,6 +7,7 @@ import { ButtonToolbar, MenuItem, DropdownButton, Button, Glyphicon } from 'reac
 
 function mapStateToProps(state) {
     return {
+        mediaTitle:     state.room.media.title,
         user:           state.auth.user,
         rooms:          state.app.rooms.list,
         roomTitle:      state.room.name,
@@ -78,6 +79,7 @@ class SiteBar extends React.Component {
                         </div>
                     )}
                 </ButtonToolbar>
+                <div className="title">{this.props.mediaTitle}</div>
             </div>
         )
     }

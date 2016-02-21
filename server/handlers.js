@@ -100,9 +100,8 @@ module.exports = {
     SEND_CHAT_MESSAGE: (server, client, msg) => {
         if(null === msg) return false
 
-        server.parser(server, client, msg)
-
         if(client.user) {
+            server.parser(server, client, msg)
             server.clients
                 .filter(c => (c.room === client.room))
                 .map(c => {

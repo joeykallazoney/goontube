@@ -133,6 +133,8 @@ wss.on('connection', (ws) => {
         }
     }))
 
+    let currentRoomInfo = client.room.makeRoomInfoPacket()
+    client.sendPacket(currentRoomInfo.type, currentRoomInfo.data)
     let currentPlaylistPacket = client.room.makePlaylistUpdatePacket()
     client.sendPacket(currentPlaylistPacket.type, currentPlaylistPacket.data)
 })

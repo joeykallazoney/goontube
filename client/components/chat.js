@@ -34,10 +34,15 @@ function mapDispatchToProps(dispatch, props) {
     }
 }
 
-let ChatMessage = (props) =>
-    <li {...props} className="message">
+const SystemMessage = (props) => <li {...props} className="system message">
+        <div className="body">{props.message}</div>
+    </li>
+
+const ChatMessage = (props) => {
+    return <li {...props} className="message">
         <span className="from">{props.from}:</span> <div className="body">{props.body}</div>
     </li>
+}
 
 class ChatHistory extends Component {
     constructor(props) {
@@ -59,7 +64,12 @@ class ChatHistory extends Component {
     }
 
     renderChat() {
-        return this.props.history.map((message) => <ChatMessage {...this.props} key={message.id} from={message.from} body={message.body} />)
+        console.log(this.props.history)
+        return this.props.history.map(
+            (message) => message.system === true ?
+                <SystemMessage {...this.props} system={true} message={message.message} /> :
+                <ChatMessage {...this.props} key={message.id} from={message.from} body={message.body} />
+        )
     }
 
     render() {

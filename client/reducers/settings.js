@@ -1,13 +1,13 @@
 import p from '../../shared/protocol'
 
 const initialState = {
-    showBackgroundPicker: false,
-    showSiteBarBgPicker: false,
+    showBackgroundPicker:   false,
+    showSiteBarBgPicker:    false,
     bodyStyles: {
-        backgroundColor: '#222222'
+        backgroundColor:    '#222222'
     },
     siteBarStyles: {
-        backgroundColor: '#ffa800'
+        backgroundColor:    '#ffa800'
     }
 }
 

@@ -18,6 +18,10 @@ class Client {
         this.socket.send(makePacket(type, data))
     }
 
+    sendSystemMessage(message) {
+        this.sendPacket(p.SYSTEM_MESSAGE, message)
+    }
+
     closeWithReason(message) {
         this.sendPacket(
             p.DISCONNECTED_WITH_REASON,

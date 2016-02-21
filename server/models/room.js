@@ -30,6 +30,8 @@ class Room {
 
     addUser(user) {
         this.members.push(user)
+
+        user.sendSystemMessage(`You joined ${this.name}`)
         this.updateRoomUsersList()
     }
 

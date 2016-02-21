@@ -3,6 +3,7 @@
 .chat
     background: #ffffff
 
+.message
 ul.chat-list
     list-style-type:    none
     padding:            0.3em 0.3em
@@ -11,6 +12,13 @@ ul.chat-list
 
     .message
         padding: 0.2em 0.2em
+        font-size: 0.875em
+
+        &.system
+            font-size: 0.75em
+            font-weight: bold
+            text-transform: uppercase
+            color: rgb(77, 77, 77)
 
         .from
             font-weight: bold
