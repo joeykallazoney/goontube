@@ -6,6 +6,7 @@ import Banner from './banner'
 
 function mapStateToProps(state) {
     return {
+        showBanner: state.settings.showBanner,
         name: state.room.name,
         motd: state.room.motd,
         playingTitle: state.room.media.title,
@@ -24,10 +25,25 @@ class Header extends Component {
         super(props)
     }
 
+    renderBanner() {
+        const isVisible = this.props.showBanner
+
+        if(!isVisible) {
+            return (
+                <div></div>
+            )
+        } else {
+            return (
+                <Banner />
+            )
+        }
+    }
+
     // collapsible admin options: blacklist video, info, override pos with range slider
     render() {
         return (
             <header>
+                {this.renderBanner()}
             </header>
         )
     }

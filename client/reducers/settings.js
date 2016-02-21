@@ -1,6 +1,7 @@
 import p from '../../shared/protocol'
 
 const initialState = {
+    showBanner:             true,
     showBackgroundPicker:   false,
     showSiteBarBgPicker:    false,
     bodyStyles: {
@@ -13,6 +14,24 @@ const initialState = {
 
 export default function reducer(state = initialState, action) {
     switch(action.type) {
+        case p.TOGGLE_BANNER:
+            return {
+                ...state,
+                showBanner: !state.showBanner
+            }
+
+        case p.SHOW_BANNER:
+            return {
+                ...state,
+                showBanner: true
+            }
+
+        case p.HIDE_BANNER:
+            return {
+                ...state,
+                showBanner: false
+            }
+
         case p.HIDE_SITEBAR_BG_PICKER:
             return {
                 ...state,

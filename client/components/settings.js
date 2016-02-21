@@ -8,6 +8,7 @@ import p from '../../shared/protocol'
 function mapStateToProps(state) {
     return {
         show:                   (state.app.settingsModal === true),
+        showBanner:             state.settings.showBanner,
         showSiteBarBgPicker:    state.settings.showSiteBarBgPicker,
         siteBarBg:              state.settings.siteBarStyles.backgroundColor,
         showBackgroundPicker:   state.settings.showBackgroundPicker,
@@ -59,6 +60,10 @@ function mapDispatchToProps(dispatch, props) {
 
         setSiteBarBg(bgColor) {
             dispatch({ type: p.SET_SITEBAR_BG_COLOR, data: bgColor })
+        },
+
+        toggleBanner: function() {
+            dispatch({ type: p.TOGGLE_BANNER })
         },
 
         onHide: function() {
@@ -117,6 +122,21 @@ class SettingsModal extends Component {
                                     onChange={c => this.props.setBodyBackground('#' + c.hex)}
                                     onClose={(c) => this.props.bodyBackgroundPicker.handleClose()}
                                     type="chrome" />
+                            </div>
+                            <div>
+                                <div className="form-group">
+                                    <div className="control-label col-xs-5">
+                                        <label htmlFor="showbanner">Show Banner Images</label>
+                                    </div>
+                                    <div className="col-xs-7">
+                                        <Input
+                                            type="checkbox"
+                                            id="showbanner"
+                                            checked={this.props.showBanner}
+                                            label="Show Banner Images"
+                                            onChange={() => this.props.toggleBanner()} />
+                                    </div>
+                                </div>
                             </div>
                         </form>
                     </Modal.Body>
