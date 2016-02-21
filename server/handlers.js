@@ -85,6 +85,7 @@ module.exports = {
             if(null === msg) return false
             console.log(msg)
             client.login(msg.username, msg.password)
+            client.sendSystemMessage(`You logged in as ${msg.username}`)
         } catch(e) {
             console.log('Bad AUTHENTICATION_ATTEMPT packet sent.')
         }
@@ -95,6 +96,7 @@ module.exports = {
         client.user = null
         client.sendPacket(p.LOGOUT_USER)
         client.room.updateRoomUsersList()
+        client.sendSystemMessage(`You logged out`)
     },
 
     SEND_CHAT_MESSAGE: (server, client, msg) => {
