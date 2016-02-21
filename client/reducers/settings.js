@@ -1,7 +1,7 @@
 import p from '../../shared/protocol'
 
 const initialState = {
-    showBanner:             true,
+    showBanner:             false,
     showBackgroundPicker:   false,
     showSiteBarBgPicker:    false,
     bodyStyles: {
