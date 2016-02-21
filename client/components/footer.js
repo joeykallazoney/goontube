@@ -22,7 +22,7 @@ class Footer extends Component {
         return (
             <footer>
                 <div className="footer-info">
-                    This is some footer text / playlist summary information / lorem ipsum.
+                    Lorem ipsum dolor sit amet.  Goontube created with ❤︎ and JavaScript.
                 </div>
             </footer>
         )
