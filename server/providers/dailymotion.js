@@ -28,6 +28,10 @@ class DailyMotion {
         return 1
     }
 
+    static getName() {
+        return 'DailyMotion'
+    }
+
     static test() {
         return /dailymotion\.com\/video\/([^\/]+?)_/i
     }

@@ -36,6 +36,10 @@ class YouTube {
         return 2
     }
 
+    static getName() {
+        return 'YouTube'
+    }
+
     static getVideoIDFromURL(url) {
         return null
     }

@@ -89,7 +89,10 @@ class PlaylistEntry extends React.Component {
 
     render() {
         const { accepts, isOver, connectDragSource, isDragging, canDrop, connectDropTarget, lastDroppedItem } = this.props
-        const duration = moment({ milliseconds: this.props.duration_ms }).toObject()
+
+        const secs = parseInt(this.props.duration_ms / 1000 % 60),
+            mins = parseInt((this.props.duration_ms / (1000 * 60)) % 60),
+            hours = parseInt((this.props.duration_ms / (1000 * 60 * 60)) % 24)
 
         return connectDragSource(connectDropTarget(
             <div className="entry" style={{ backgroundColor: isOver ? '#383838' : 'transparent', opacity: isDragging ? 0.5 : 1 }}>
@@ -100,7 +103,7 @@ class PlaylistEntry extends React.Component {
                         <div className="meta">
                             <div className="added-by">added by [name]</div>
                             <div className="duration">
-                            {duration.minutes} : {duration.seconds<10 ? '0':''} {duration.seconds}
+                            {hours ? hours + ' : ' : ''}{mins} : {secs<10 ? '0':''} {secs}
                             </div>
                         </div>
                     </Col>
@@ -135,7 +138,8 @@ class Playlist extends React.Component {
     }
 
     renderPlaylist(props) {
-        return this.props.items.map(i => <DroppableTarget dndRequest={props.onExchange} onDeleteEntry={props.onDeleteEntry} {...i} key={i.id} />
+        return this.props.items.map(
+            i => <DroppableTarget dndRequest={props.onExchange} onDeleteEntry={props.onDeleteEntry} {...i} key={i.id} />
         )
     }
 

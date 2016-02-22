@@ -4,6 +4,7 @@ const initialState = {
     input:              '',
     validating:         false,
     validated:          false,
+    feedback:           '',
     lastEventKey:       null
 }
 
@@ -18,6 +19,7 @@ export default function reducer(state = initialState, action) {
         case p.VALIDATION_RESPONSE:
             return {
                 ...state,
+                feedback:   action.data.info,
                 validating: false,
                 validated:  action.data.validated
             }
@@ -26,6 +28,7 @@ export default function reducer(state = initialState, action) {
         case p.ADD_MEDIA_INPUT:
             return {
                 ...state,
+                feedback:   '',
                 validated:  false,
                 validating: false,
                 input:      action.data

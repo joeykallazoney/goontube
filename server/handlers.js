@@ -20,13 +20,35 @@ module.exports = {
     REQUEST_VALIDATION_FOR_URL: (server, client, msg) => {
         const result = providerForUrl(msg)
 
-        console.log(msg)
-
-        if(null === result) {
-            client.sendPacket(p.VALIDATION_RESPONSE, { validated: false })
-        } else {
-            client.sendPacket(p.VALIDATION_RESPONSE, { validated: true })
+        if(null === msg || !msg.length) {
+            client.sendPacket(p.VALIDATION_RESPONSE, {
+                validated: false,
+                info: {
+                    message: 'Not a valid URL.'
+                }
+            })
+            return true
         }
+
+        setTimeout(() => {
+            if(null === result) {
+                let feedback = {
+                    message: `Not recognized!`
+                }
+
+                client.sendPacket(p.VALIDATION_RESPONSE, { validated: false, info: feedback })
+            } else {
+                let feedback = {
+                    inputURL:       msg,
+                    providerName:   result.provider.getName(),
+                    duration:       100000,
+                    message:        `This is a valid ${result.provider.getName()} video!`,
+                    token:          uuid.v4()
+                }
+
+                client.sendPacket(p.VALIDATION_RESPONSE, { validated: true, info: feedback })
+            }
+        }, 700)
 
         return true
     },

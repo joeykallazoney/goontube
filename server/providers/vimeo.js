@@ -28,6 +28,10 @@ class Vimeo {
         return 1
     }
 
+    static getName() {
+        return 'Vimeo'
+    }
+
     static test() {
         return /vimeo\.com\/(\d+)$/i
     }
