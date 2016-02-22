@@ -16,6 +16,12 @@ module.exports = {
         return true
     },
 
+    REQUEST_VALIDATION_FOR_URL: (server, client, msg) => {
+        console.log('Starting validation for ' + msg)
+        client.sendPacket(p.VALIDATION_RESPONSE, { validated: true })
+        return true
+    },
+
     REQUEST_CHANGE_ROOM: (server, client, msg) => {
         let toRoom = null, fromRoom = client.room
 

@@ -3,7 +3,6 @@
  * @since 1.0.0
  */
 import React from 'react'
-import PureRenderMixin from 'react/lib/ReactComponentWithPureRenderMixin'
 import { connect } from 'react-redux'
 import { Grid, Col, Row } from 'react-bootstrap'
 

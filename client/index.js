@@ -2,6 +2,7 @@
  * @file Provides an entry point for the client script bundle.
  * @since 1.0.0
  */
+import 'babel-polyfill'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Goontube from './components/app'
@@ -29,9 +30,7 @@ window.addEventListener('load', function load(event) {
         document.body.appendChild(origin)
     }
 
-    let socket = new WebSocket(`ws://${window.location.hostname}:7070`)
-    let createConnectedStore = compose(applyMiddleware(webSocketMiddleware(socket)))(finalCreateStore)
-    let store = createConnectedStore(reducer)
+    let store = finalCreateStore(reducer)
 
     ReactDOM.render(
         <Provider store={store}>

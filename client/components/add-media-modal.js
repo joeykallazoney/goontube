@@ -8,6 +8,8 @@ import hash from '../../shared/hash'
 
 function mapStateToProps(state) {
     return {
+        input:          state.add.input,
+        validating:     state.add.validating,
         show:           (state.room.addMediaModal === true)
     }
 }
@@ -16,6 +18,10 @@ function mapDispatchToProps(dispatch, props) {
     return {
         closeButton: function() {
             dispatch({ type: p.ADD_MEDIA_MODAL_CLOSED })
+        },
+
+        onChange: function(ev) {
+            dispatch({ type: p.ADD_MEDIA_INPUT, data: ev.target.value })
         },
 
         onHide: function() {
@@ -40,17 +46,20 @@ class AddMediaModal extends Component {
                     <Modal.Body>
                         <form className="form-horizontal add-media-form">
                             <Input type="text"
-                                value={this.props.userNameInput}
+                                value={this.props.input}
                                 {...this.props.username}
                                 label="URL"
                                 labelClassName="col-xs-4"
+                                onChange={(ev) => this.props.onChange(ev)}
                                 wrapperClassName="col-xs-8" />
                         </form>
                     </Modal.Body>
 
                     <Modal.Footer>
                         <Button onClick={(e) => this.props.closeButton()}>Close</Button>
-                        <Button disabled>Submit</Button>
+                        <Button bsStyle={this.props.validating === false ? 'default' : 'warning'} disabled>
+                            {this.props.validating === false ? 'Submit' : 'Verifying media link...'}
+                        </Button>
                     </Modal.Footer>
                 </Modal>
             </div>

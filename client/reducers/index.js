@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux'
 
+import addReducer from './add'
 import appReducer from './app'
 import authReducer from './auth'
 import bannerReducer from './banner'
@@ -11,6 +12,7 @@ import settingsReducer from './settings'
 import socketReducer from './socket'
 
 export default combineReducers({
+    add:        addReducer,
     app:        appReducer,
     auth:       authReducer,
     banner:     bannerReducer,
