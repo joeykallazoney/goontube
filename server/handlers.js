@@ -20,13 +20,14 @@ module.exports = {
     REQUEST_VALIDATION_FOR_URL: (server, client, msg) => {
         const result = providerForUrl(msg)
 
+        console.log(msg)
+
         if(null === result) {
             client.sendPacket(p.VALIDATION_RESPONSE, { validated: false })
         } else {
-            console.log(providerForUrl(msg))
             client.sendPacket(p.VALIDATION_RESPONSE, { validated: true })
         }
-        
+
         return true
     },
 
@@ -80,7 +81,7 @@ module.exports = {
     },
 
     REQUEST_ADD_MEDIA_BY_URL: (server, client, msg) => {
-        console.log('Client requested add media: ' + msg)
+        console.log('Client requested add media: ' + msg    )
         return true
     },
 

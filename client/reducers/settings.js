@@ -63,7 +63,6 @@ export default function reducer(state = initialState, action) {
             }
 
         case p.SET_SITEBAR_BG_COLOR:
-            console.log(action.data)
             return {
                 ...state,
                 siteBarStyles: {

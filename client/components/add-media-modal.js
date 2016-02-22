@@ -25,6 +25,17 @@ function mapDispatchToProps(dispatch, props) {
             dispatch({ type: p.ADD_MEDIA_INPUT, data: ev.target.value })
         },
 
+        onSubmit: function(ev, input) {
+            ev.preventDefault()
+            ev.stopPropagation()
+
+            dispatch({
+                type: p.REQUEST_ADD_MEDIA_BY_URL,
+                send: true,
+                data: input
+            })
+        },
+
         onHide: function() {
             dispatch({ type: p.ADD_MEDIA_MODAL_CLOSED })
         }
@@ -44,8 +55,8 @@ class AddMediaModal extends Component {
                         <Modal.Title>Add Media</Modal.Title>
                     </Modal.Header>
 
-                    <Modal.Body>
-                        <form className="form-horizontal add-media-form">
+                    <form onSubmit={(ev) => this.props.onSubmit(ev, this.props.input)} className="form-horizontal add-media-form">
+                        <Modal.Body>
                             <Input type="text"
                                 value={this.props.input}
                                 {...this.props.username}
@@ -53,15 +64,15 @@ class AddMediaModal extends Component {
                                 labelClassName="col-xs-4"
                                 onChange={(ev) => this.props.onChange(ev)}
                                 wrapperClassName="col-xs-8" />
-                        </form>
-                    </Modal.Body>
+                        </Modal.Body>
 
-                    <Modal.Footer>
-                        <Button onClick={(e) => this.props.closeButton()}>Close</Button>
-                        <Button bsStyle={this.props.validating === false ? (this.props.validated === true ? 'success' : 'default') : 'warning'} disabled={!this.props.validated}>
-                            {this.props.validating === false ? 'Submit' : 'Verifying media link...'}
-                        </Button>
-                    </Modal.Footer>
+                        <Modal.Footer>
+                            <Button onClick={(e) => this.props.closeButton()}>Close</Button>
+                            <Button type="submit" bsStyle={this.props.validating === false ? (this.props.validated === true ? 'success' : 'default') : 'warning'} disabled={!this.props.validated}>
+                                {this.props.validating === false ? 'Submit' : 'Verifying media link...'}
+                            </Button>
+                        </Modal.Footer>
+                    </form>
                 </Modal>
             </div>
         )

@@ -64,7 +64,6 @@ class ChatHistory extends Component {
     }
 
     renderChat() {
-        console.log(this.props.history)
         return this.props.history.map(
             (message) => message.system === true ?
                 <SystemMessage {...this.props} system={true} message={message.message} /> :
