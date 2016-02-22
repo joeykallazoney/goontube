@@ -5,6 +5,7 @@
 import p from '../shared/protocol'
 import uuid from 'node-uuid'
 import { shuffle } from './commands/shuffle'
+import { providerForUrl } from './providers'
 
 module.exports = {
     CLIENT_HELLO: (server, client, msg) => {
@@ -17,8 +18,15 @@ module.exports = {
     },
 
     REQUEST_VALIDATION_FOR_URL: (server, client, msg) => {
-        console.log('Starting validation for ' + msg)
-        client.sendPacket(p.VALIDATION_RESPONSE, { validated: true })
+        const result = providerForUrl(msg)
+
+        if(null === result) {
+            client.sendPacket(p.VALIDATION_RESPONSE, { validated: false })
+        } else {
+            console.log(providerForUrl(msg))
+            client.sendPacket(p.VALIDATION_RESPONSE, { validated: true })
+        }
+        
         return true
     },
 

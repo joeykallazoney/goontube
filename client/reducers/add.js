@@ -15,15 +15,18 @@ export default function reducer(state = initialState, action) {
                 validating: true
             }
 
-        case p.VALIDATION_RESPONSE: 
+        case p.VALIDATION_RESPONSE:
+            console.log(action)
             return {
                 ...state,
-                validating: false
+                validating: false,
+                validated: action.data.validated
             }
 
         case p.ADD_MEDIA_INPUT:
             return {
                 ...state,
+                validated: false,
                 input: action.data
             }
     }

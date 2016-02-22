@@ -9,6 +9,7 @@ import hash from '../../shared/hash'
 function mapStateToProps(state) {
     return {
         input:          state.add.input,
+        validated:      state.add.validated,
         validating:     state.add.validating,
         show:           (state.room.addMediaModal === true)
     }
@@ -57,7 +58,7 @@ class AddMediaModal extends Component {
 
                     <Modal.Footer>
                         <Button onClick={(e) => this.props.closeButton()}>Close</Button>
-                        <Button bsStyle={this.props.validating === false ? 'default' : 'warning'} disabled>
+                        <Button bsStyle={this.props.validating === false ? (this.props.validated === true ? 'success' : 'default') : 'warning'} disabled={!this.props.validated}>
                             {this.props.validating === false ? 'Submit' : 'Verifying media link...'}
                         </Button>
                     </Modal.Footer>
