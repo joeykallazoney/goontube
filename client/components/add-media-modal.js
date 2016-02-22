@@ -10,6 +10,7 @@ function mapStateToProps(state) {
     return {
         input:          state.add.input,
         feedback:       state.add.feedback.message,
+        latestKey:      state.add.feedback.token,
         validated:      state.add.validated,
         validating:     state.add.validating,
         show:           (state.room.addMediaModal === true)
@@ -22,11 +23,9 @@ function mapDispatchToProps(dispatch, props) {
             dispatch({ type: p.ADD_MEDIA_MODAL_CLOSED })
         },
 
-
         closeButton: function() {
             dispatch({ type: p.ADD_MEDIA_MODAL_CLOSED })
         },
-
 
         onChange: function(ev) {
             ev.stopPropagation()
@@ -34,15 +33,15 @@ function mapDispatchToProps(dispatch, props) {
             dispatch({ type: p.ADD_MEDIA_INPUT, data: ev.target.value })
         },
 
-        onSubmit: function(ev, input) {
+        onSubmit: function(ev, input, key) {
             ev.preventDefault()
             ev.stopPropagation()
 
             dispatch([
                 {
-                    type: p.REQUEST_ADD_MEDIA_BY_URL,
+                    type: p.REQUEST_ADD_MEDIA_BY_KEY,
                     send: true,
-                    data: input
+                    data: key
                 },
                 { type: p.ADD_MEDIA_MODAL_CLOSED }
             ])
@@ -59,6 +58,14 @@ class AddMediaModal extends Component {
         super(props)
     }
 
+    renderFeedback() {
+        return (
+            <Well>
+                {this.props.feedback}
+            </Well>
+        )
+    }
+
     render() {
         return (
             <div className="tube-modal add-media">
@@ -67,7 +74,7 @@ class AddMediaModal extends Component {
                         <Modal.Title>Add Media</Modal.Title>
                     </Modal.Header>
 
-                    <form onSubmit={(ev) => this.props.onSubmit(ev, this.props.input)} className="form-horizontal add-media-form">
+                    <form onSubmit={(ev) => this.props.onSubmit(ev, this.props.input, this.props.latestKey)} className="form-horizontal add-media-form">
                         <Modal.Body>
                             <Input type="text"
                                 value={this.props.input}
@@ -76,7 +83,7 @@ class AddMediaModal extends Component {
                                 labelClassName="col-xs-4"
                                 onChange={(ev) => this.props.onChange(ev)}
                                 wrapperClassName="col-xs-8" />
-                            {this.props.feedback && this.props.input ? (<Well>{this.props.feedback}</Well>) : (<div></div>)}
+                            {this.props.feedback && this.props.input ? (this.renderFeedback()) : (<div></div>)}
                         </Modal.Body>
 
                         <Modal.Footer>

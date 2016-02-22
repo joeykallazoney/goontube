@@ -35,7 +35,12 @@ export default function reducer(state = initialState, action) {
             }
 
         case p.ADD_MEDIA_MODAL_CLOSED:
-            return initialState
+            return {
+                ...state,
+                validated:  false,
+                validating: false,
+                input:      ''
+            }
     }
 
     return state

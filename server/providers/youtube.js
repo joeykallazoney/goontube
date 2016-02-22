@@ -1,8 +1,10 @@
 import moment from 'moment'
 import fetch from 'isomorphic-fetch'
 
+import { youtubeBrowserApiKey } from '../../config'
+
 class YouTube {
-    static fetchMetaById(videoId, apiKey = '') {
+    static fetchMetaById(videoId, apiKey = youtubeBrowserApiKey) {
         return new Promise((res, rej) =>
             fetch(
                 `//www.googleapis.com/youtube/v3/videos?id=${videoId}&key=${apiKey}&part=contentDetails,snippet`

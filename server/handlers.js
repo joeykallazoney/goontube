@@ -30,26 +30,40 @@ module.exports = {
             return true
         }
 
-        setTimeout(() => {
-            if(null === result) {
-                let feedback = {
-                    message: `Not recognized!`
-                }
-
-                client.sendPacket(p.VALIDATION_RESPONSE, { validated: false, info: feedback })
-            } else {
-                let feedback = {
-                    inputURL:       msg,
-                    providerName:   result.provider.getName(),
-                    duration:       100000,
-                    message:        `This is a valid ${result.provider.getName()} video!`,
-                    token:          uuid.v4()
-                }
-
-                client.sendPacket(p.VALIDATION_RESPONSE, { validated: true, info: feedback })
+        if(null === result) {
+            let feedback = {
+                message: `Not a recognized provider!`
             }
-        }, 700)
 
+            client.sendPacket(p.VALIDATION_RESPONSE, { validated: false, info: feedback })
+        } else {
+            /* do a query cache of some sort here */
+            result.provider.fetchMetaById(result.videoId).then(
+                meta => {
+                    let token = uuid.v4()
+                    let feedback = {
+                        inputURL:       msg,
+                        providerName:   result.provider.getName(),
+                        title:          meta.title,
+                        duration:       meta.duration,
+                        message:        `Looks like a ${result.provider.getName()} video with title [${meta.title}] and duration [${meta.duration}] milliseconds.`,
+                        token:          token
+                    }
+
+                    server.tokens.add[token] = {
+                        provider:       result.provider.getName(),
+                        id:             result.videoId,
+                        duration:       meta.duration,
+                        title:          meta.title
+                    }
+
+                    client.sendPacket(p.VALIDATION_RESPONSE, {
+                        validated:      true,
+                        info:           feedback
+                    })
+                }
+            )
+        }
         return true
     },
 
@@ -102,8 +116,24 @@ module.exports = {
         return true
     },
 
+    REQUEST_ADD_MEDIA_BY_KEY: (server, client, msg) => {
+        try {
+            let video = server.tokens.add[msg]
+
+            client.room.addYouTubeVideoToPlaylist(
+                video.id,
+                video.title,
+                video.duration)
+            console.log('Added video!')
+        } catch(e) {
+            console.error('Erroneous media add...')
+        }
+
+        return true
+    },
+
     REQUEST_ADD_MEDIA_BY_URL: (server, client, msg) => {
-        console.log('Client requested add media: ' + msg    )
+        console.log('Client requested add media: ' + msg)
         return true
     },
 

@@ -52,6 +52,9 @@ let serverContext = {
     data:           schemas,
     parser:         commandParser,
     clients:        clients,
+    tokens:         {
+        add:        {}
+    },
     rooms:          []
 }
 
