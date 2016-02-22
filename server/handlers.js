@@ -38,6 +38,8 @@ module.exports = {
             client.sendPacket(p.VALIDATION_RESPONSE, { validated: false, info: feedback })
         } else {
             /* do a query cache of some sort here */
+
+            /* else fetch fresh data async ... */
             result.provider.fetchMetaById(result.videoId).then(
                 meta => {
                     let token = uuid.v4()

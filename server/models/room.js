@@ -176,8 +176,6 @@ class Room {
     }
 
     addYouTubeVideoToPlaylist(id, title, duration) {
-        console.log(duration)
-
         this.playlist.push({
             active:       false,
             id:           id,
@@ -192,9 +190,6 @@ class Room {
     startNextVideo() {
         let nextVideo = this.playlist.shift()
 
-        console.log(nextVideo)
-
-        console.log(nextVideo.duration_ms)
         this.playing = {
             active:                 true,
             id:                     nextVideo.id,
