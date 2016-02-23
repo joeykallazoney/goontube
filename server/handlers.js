@@ -120,7 +120,9 @@ module.exports = {
 
     REQUEST_ADD_MEDIA_BY_KEY: (server, client, msg) => {
         try {
-            let video = server.tokens.add[msg]
+            let video = server.tokens.add[msg.key]
+
+            console.log(msg)
 
             client.room.addYouTubeVideoToPlaylist(
                 video.id,

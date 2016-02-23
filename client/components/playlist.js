@@ -154,7 +154,7 @@ class Playlist extends React.Component {
                             <Button onClick={(e) => this.props.onShuffle(e)}>Shuffle</Button>
                         </ButtonToolbar>
                     </div>
-                    <ul className="playlist" style={{ height: 300, overflowY: 'scroll' }}>
+                    <ul className="playlist" style={{height: ((this.props.playlistHeightUnits * this.props.heightBase) - 40) + 'px', overflowY: 'scroll' }}>
                         <FlipMove easing="cubic-bezier(0.39,0,0.45,1.4)">
                             { this.renderPlaylist(this.props) }
                         </FlipMove>

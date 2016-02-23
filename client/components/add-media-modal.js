@@ -8,12 +8,14 @@ import hash from '../../shared/hash'
 
 function mapStateToProps(state) {
     return {
-        input:          state.add.input,
-        feedback:       state.add.feedback.message,
-        latestKey:      state.add.feedback.token,
-        validated:      state.add.validated,
-        validating:     state.add.validating,
-        show:           (state.room.addMediaModal === true)
+        input:              state.add.input,
+        startAt:            state.add.startAt,
+        feedbackDuration:   state.add.feedback.duration,
+        feedback:           state.add.feedback.message,
+        latestKey:          state.add.feedback.token,
+        validated:          state.add.validated,
+        validating:         state.add.validating,
+        show:               (state.room.addMediaModal === true)
     }
 }
 
@@ -27,13 +29,21 @@ function mapDispatchToProps(dispatch, props) {
             dispatch({ type: p.ADD_MEDIA_MODAL_CLOSED })
         },
 
+        onStartPosChange: function(ev) {
+            ev.preventDefault()
+            ev.stopPropagation()
+
+            dispatch({ type: p.SET_START_AT, data: ev.target.value })
+        },
+
         onChange: function(ev) {
+            ev.preventDefault()
             ev.stopPropagation()
 
             dispatch({ type: p.ADD_MEDIA_INPUT, data: ev.target.value })
         },
 
-        onSubmit: function(ev, input, key) {
+        onSubmit: function(ev, input, key, startAt) {
             ev.preventDefault()
             ev.stopPropagation()
 
@@ -41,7 +51,10 @@ function mapDispatchToProps(dispatch, props) {
                 {
                     type: p.REQUEST_ADD_MEDIA_BY_KEY,
                     send: true,
-                    data: key
+                    data: {
+                        key:        key,
+                        startAt:    startAt
+                    }
                 },
                 { type: p.ADD_MEDIA_MODAL_CLOSED }
             ])
@@ -58,11 +71,39 @@ class AddMediaModal extends Component {
         super(props)
     }
 
+    renderStartTime(t) {
+        const secs = parseInt(t / 1000 % 60)
+        const mins = parseInt((t / (1000 * 60)) % 60)
+        const hours = parseInt((t / (1000 * 60 * 60)) % 24)
+
+        if(0 === t) {
+            return 'the beginning'
+        } else {
+            if(hours) {
+                return `${hours} hours, ${mins} minutes, ${secs} seconds`
+            } else {
+                if(mins) {
+                    return `${mins} minutes, ${secs} seconds`
+                } else {
+                    return `${secs} seconds`
+                }
+            }
+        }
+    }
+
     renderFeedback() {
         return (
-            <Well>
+            <div>
+                <Well>
                 {this.props.feedback}
-            </Well>
+                </Well>
+
+                <div>
+                    <label htmlFor="start-pos">Start playback at {this.renderStartTime(this.props.startAt)}:</label>
+                    <input onChange={(ev) => this.props.onStartPosChange(ev)} id="start-pos" type="range" value={this.props.startAt} max={this.props.feedbackDuration - 1000}/>
+                </div>
+            </div>
+
         )
     }
 
@@ -74,7 +115,7 @@ class AddMediaModal extends Component {
                         <Modal.Title>Add Media</Modal.Title>
                     </Modal.Header>
 
-                    <form onSubmit={(ev) => this.props.onSubmit(ev, this.props.input, this.props.latestKey)} className="form-horizontal add-media-form">
+                    <form onSubmit={(ev) => this.props.onSubmit(ev, this.props.input, this.props.latestKey, this.props.startAt)} className="form-horizontal add-media-form">
                         <Modal.Body>
                             <Input type="text"
                                 value={this.props.input}

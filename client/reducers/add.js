@@ -2,6 +2,7 @@ import p from '../../shared/protocol'
 
 const initialState = {
     input:              '',
+    startAt:            0,
     validating:         false,
     validated:          false,
     feedback:           '',
@@ -10,6 +11,12 @@ const initialState = {
 
 export default function reducer(state = initialState, action) {
     switch(action.type) {
+        case p.SET_START_AT:
+            return {
+                ...state,
+                startAt: action.data
+            }
+
         case p.REQUEST_VALIDATION_FOR_URL:
             return {
                 ...state,
@@ -39,6 +46,7 @@ export default function reducer(state = initialState, action) {
                 ...state,
                 validated:  false,
                 validating: false,
+                startAt:    0,
                 input:      ''
             }
     }
