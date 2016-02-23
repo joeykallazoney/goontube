@@ -98,10 +98,12 @@ class AddMediaModal extends Component {
                 {this.props.feedback}
                 </Well>
 
-                <div>
-                    <label htmlFor="start-pos">Start playback at {this.renderStartTime(this.props.startAt)}:</label>
-                    <input onChange={(ev) => this.props.onStartPosChange(ev)} id="start-pos" type="range" value={this.props.startAt} max={this.props.feedbackDuration - 1000}/>
-                </div>
+                {this.props.validated === true ? (
+                    <div>
+                        <label htmlFor="start-pos">Start playback at {this.renderStartTime(this.props.startAt)}:</label>
+                        <input onChange={(ev) => this.props.onStartPosChange(ev)} id="start-pos" type="range" value={this.props.startAt} max={this.props.feedbackDuration - 1000}/>
+                    </div>
+                ) : <div className="not-validated"></div>}
             </div>
 
         )
