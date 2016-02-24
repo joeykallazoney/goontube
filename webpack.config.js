@@ -9,16 +9,6 @@ module.exports = {
     module: {
         loaders: [
             { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel' },
-            // If you're wondering why the line below is here, so am I!
-            // npm-module youtube-node's subdependencies were
-            // throwing errors with webpack for some reason.
-            // "screendriver"'s post here was the only thing
-            // that worked. Something something webpack needs help with json.
-            // https://github.com/request/request/issues/1529
-            //
-            // I don't care.
-            // Thing works.
-            { test: /\.json$/, loader: 'json-loader' },
             { test: /\.sass$/, loader: ExtractTextPlugin.extract('style', 'css!postcss-loader!sass?indentedSyntax') }
         ]
     },
