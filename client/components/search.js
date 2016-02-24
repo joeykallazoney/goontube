@@ -7,9 +7,8 @@ import { connect } from 'react-redux'
 import p from '../../shared/protocol'
 
 import { makePacket } from '../../shared/util'
-import YoutubeDataApi from 'youtube-node'
-
-let youtubeDataApi      = new YoutubeDataApi
+//import YoutubeDataApi from 'youtube-node'
+//let youtubeDataApi      = new YoutubeDataApi
 
 const KEYCODE_ENTER     = 13
 const NUMBER_OF_RESULTS = 10
@@ -41,6 +40,9 @@ function searchInputChanged(value) {
             dispatch({ type: p.SEARCH_RESET })
             return
         }
+
+        return
+        /*
 
         dispatch({ type: p.SEARCH_NEW_SEARCH, value: value })
 
@@ -74,7 +76,7 @@ function searchInputChanged(value) {
                     })
                 }
             }
-        })
+        })*/
     }
 }
 
@@ -84,7 +86,7 @@ class Search extends React.Component {
     }
 
     componentDidMount() {
-        youtubeDataApi.setKey(this.props.youtubeApiKey)
+        //youtubeDataApi.setKey(this.props.youtubeApiKey)
     }
 
     render() {

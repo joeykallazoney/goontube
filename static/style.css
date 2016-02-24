@@ -105,6 +105,7 @@ ul.chat-list {
 
 .footer-info {
   background: #2a2a2a;
+  padding-left: 0.5em;
   font-size: 0.85em;
   font-weight: 500;
   text-transform: uppercase;
