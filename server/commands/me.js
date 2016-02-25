@@ -4,7 +4,7 @@ export default {
     opts: {
         visibleInChat:  true
     },
-    test: /^kick$/,
+    test: /me$/,
     checkForPermissions: (server, client) =>
         (false === client.user.userHasPermission('kick')),
 

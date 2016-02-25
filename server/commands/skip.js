@@ -18,7 +18,7 @@ export default {
         visibleInChat:  true /* Can other users see $command being entered? */
     },
 
-    test: /skip/,
+    test: /^skip$/,
 
     /* Prior to calling the command handler, this optional callback can
      * return false to prevent executing the command.

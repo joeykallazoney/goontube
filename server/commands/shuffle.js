@@ -26,7 +26,7 @@ export default {
     opts: {
         visibleInChat:  true,
     },
-    test: /shuffle/,
+    test: /^shuffle$/,
     checkForPermissions: (server, client) => true,
     commandHandler: (server, client, message) => {
         shuffle(client.room.playlist)

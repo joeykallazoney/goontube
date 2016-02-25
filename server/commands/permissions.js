@@ -4,7 +4,7 @@ export default {
     opts: {
         visibleInChat:  false
     },
-    test: /(permissions|perms$|privs$|privileges|permission)/,
+    test: /^(permissions|perms$|privs$|privileges|permission)$/,
     checkForPermissions: (server, client) => true,
     commandHandler: (server, client, message) => {
         if(null === message || !message.length) {
