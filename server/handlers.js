@@ -97,24 +97,32 @@ module.exports = {
     },
 
     PLAYLIST_EXCHANGE_REQUEST: (server, client, msg) => {
-        client.room.swapVideosById(msg.a, msg.b)
+        if(null !== client.user && client.user.userHasPermission('lead')) {
+            client.room.swapVideosById(msg.a, msg.b)
+        }
+
         return true
     },
 
     PLAYLIST_SKIP_REQUEST: (server, client, msg) => {
-        client.room.startNextVideo()
+        if(null !== client.user && client.user.userHasPermission('skip'))
+            client.room.startNextVideo()
         return true
     },
 
     PLAYLIST_SHUFFLE_REQUEST: (server, client, msg) => {
-        shuffle(client.room.playlist)
-        client.room.broadcastRoomPlaylist()
+        if(null !== client.user && client.user.userHasPermission('lead')) {
+            shuffle(client.room.playlist)
+            client.room.broadcastRoomPlaylist()
+        }
         return true
     },
 
     REQUEST_DELETE_PLAYLIST_ENTRY: (server, client, msg) => {
-        client.room.playlist = client.room.playlist.filter(v => v.id !== msg)
-        client.room.broadcastRoomPlaylist()
+        if(null !== client.user && client.user.userHasPermission('delete')) {
+            client.room.playlist = client.room.playlist.filter(v => v.id !== msg)
+            client.room.broadcastRoomPlaylist()
+        }
         return true
     },
 

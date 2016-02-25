@@ -20,7 +20,7 @@ export default {
         visibleInChat:  true /* Can other users see $command being entered? */
     },
 
-    test: /^[0-9]+d[0-9]+$/i,
+    test: /^dice$/i,
 
     /* Prior to calling the command handler, this optional callback can
      * return false to prevent executing the command.
@@ -35,5 +35,6 @@ export default {
      * message which is considered to have passed and is being parsed.
      */
     commandHandler: (server, client, message) => {
+        console.log(`Dice command received: ${message}`)
     }
 }
