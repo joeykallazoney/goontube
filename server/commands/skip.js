@@ -26,7 +26,9 @@ export default {
      * In this case we specify an anonymous function which calls and returns
      * the value of User's utility function userHasPermission(perm).
      */
-    checkForPermissions: (server, client) => true,
+    checkForPermissions: (server, client) => {
+         return client.user.userHasPermission('skip')
+    },
 
     /*
      * Command handler which receives handles to the server, client, and the

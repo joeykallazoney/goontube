@@ -9,7 +9,7 @@ export default {
     commandHandler: (server, client, message) => {
         if(null === message || !message.length) {
             client.sendSystemMessage(
-                `Permissions: ${client.user._legacyPermission.join(' ')}`
+                `Permissions: ${client.user._permissions.join(' ')}`
             )
         } else {
 

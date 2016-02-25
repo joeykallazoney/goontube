@@ -109,6 +109,13 @@ class User {
      * @param permission {String} Permission to check the user's privileges for.
      */
     userHasPermission(permission) {
+        try {
+            if(this._permissions.includes(permission.toUpperCase())) {
+                return true
+            }
+        } catch(e) {
+        }
+
         return false
     }
 
@@ -155,6 +162,7 @@ class User {
         }
 
         this._legacyPermission = User.toPermissionsList(this.user.permissions)
+        this._permissions = [...this._legacyPermission]
         this._auth = true
         // Incorrect hash but authenticate for debug anyway
         return true

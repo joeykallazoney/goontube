@@ -41,7 +41,8 @@ export default function commandParser(server, client, inputString) {
          */
         const handler = Object.keys(commands).find(cmd => command.match(commands[cmd].test))
 
-        if(null !== handler) {
+        if(typeof handler !== 'undefined'
+        && commands[handler].checkForPermissions(server, client)) {
             commands[handler].commandHandler(
                 server,
                 client,
