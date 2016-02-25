@@ -6,10 +6,10 @@ import shuffleCmd from './shuffle'
 import skipCmd from './skip'
 
 export default {
-    dice: diceCmd,
-    dummy: dummyCmd,
-    kick: kickCmd,
-    permissions: permissionsCmd,
-    shuffle: shuffleCmd,
-    skip: skipCmd
+    dice:           diceCmd,
+    dummy:          dummyCmd,
+    kick:           kickCmd,
+    permissions:    permissionsCmd,
+    shuffle:        shuffleCmd,
+    skip:           skipCmd
 }

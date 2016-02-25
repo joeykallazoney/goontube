@@ -1,13 +1,11 @@
 export default {
-    name:               'kick',
-    description:        'Kicks a user from the current room.',
+    name:               'me',
+    description:        'Emotes a message to the room.',
     opts: {
-        visibleInChat:  true
+        visibleInChat:  false
     },
-    test: /me$/,
-    checkForPermissions: (server, client) =>
-        (false === client.user.userHasPermission('kick')),
-
+    test: /^me$/,
+    checkForPermissions: (server, client) => true,
     commandHandler: (server, client, message) => {
 
     }

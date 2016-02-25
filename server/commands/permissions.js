@@ -4,12 +4,12 @@ export default {
     opts: {
         visibleInChat:  false
     },
-    test: /^(permissions|perms$|privs$|privileges|permission)$/,
+    test: /^(permissions|perms|privs|privileges|permission)$/,
     checkForPermissions: (server, client) => true,
     commandHandler: (server, client, message) => {
         if(null === message || !message.length) {
             client.sendSystemMessage(
-                `Permissions: ${client.user._permissions.join(' ')}`
+                `Your permissions: ${client.user._permissions.join(' ')}`
             )
         } else {
 
