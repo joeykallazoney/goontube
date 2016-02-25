@@ -140,7 +140,7 @@ class User {
                         this.username = user.dataValues.username
 
                         if(this.hasLegacyPasswordHash()) {
-                            console.log('Account has legacy login')
+                            this.legacy = true
                         }
 
                         res(this)

@@ -162,12 +162,45 @@ module.exports = {
 
     REGISTRATION_ATTEMPT: (server, client, msg) => {
         try {
-            if(null === msg) return false
+            if(client.user !== null) {
+                console.log('Fishy: already active user trying to register')
+                return false
+            }
 
-            console.log('Registration request received.')
+            if(null === msg) return false
+            console.log('Processing registration attempt...')
+
+            server.data
+                .User
+                .create({
+                    username:       msg.username,
+                    password:       msg.password,
+                    email:          '',
+                    permissions:    0,
+                    ignoring:       '',
+                    last_ip:        '',
+                    karma:          0,
+                    bio:            '',
+                    start_ban_at:   0,
+                    ban_duration:   0,
+                    last_seen_at:   Date.now(),
+                    time_spent:     0,
+                    json_data:      ''
+                })
+                .then(() => {
+                    console.log('New user registered!')
+                })
+                .catch((err) => {
+                    console.log('New user registration failed...')
+                    console.log(err)
+                })
+            return true
         } catch(e) {
+            console.log(e)
             console.log('Bad REGISTRATION_ATTEMPT packet sent.')
         }
+
+        return false
     },
 
     AUTHENTICATION_ATTEMPT: (server, client, msg) => {

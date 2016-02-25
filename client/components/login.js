@@ -34,8 +34,8 @@ function mapDispatchToProps(dispatch, props) {
                     type: p.REGISTRATION_ATTEMPT,
                     send: true,
                     data: {
-                    username: user,
-                    password: pass
+                        username: user,
+                        password: hash(user)(pass)
                 }})
             },
 
@@ -44,10 +44,10 @@ function mapDispatchToProps(dispatch, props) {
 
                 dispatch({
                     type: p.AUTHENTICATION_ATTEMPT,
-                    send: true, 
+                    send: true,
                     data: {
-                    username: user,
-                    password: hash(user)(pass)
+                        username: user,
+                        password: hash(user)(pass)
                 }})
             }
         },
