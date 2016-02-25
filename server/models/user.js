@@ -6,6 +6,41 @@ import Sequelize from 'sequelize'
 import hash from '../../shared/hash'
 import config from '../../config'
 
+const bitOrderedLegacyPermissionFlags = [
+    'LEAD',
+    'BUMP',
+    'DELETE',
+    'KICK',
+    'BAN',
+    'RESTART',
+    'CLEAN',
+    'SKIP',
+    'LOCK',
+    'RANDOM',
+    null,
+    'SETSKIP',
+    'POS',
+    'MOTD',
+    'PURGE',
+    'AUTOLEAD',
+    'AUTOSKIP',
+    'POLL',
+    'BLACKLIST',
+    'IMPORT',
+    'ADD',
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+]
+
 /**
  * @class Abstracts data and interaction with User accounts.
  * @since 1.0.0
@@ -22,24 +57,41 @@ class User {
                 type:           Sequelize.STRING,
                 primaryKey:     true
             },
-            password:       Sequelize.STRING,
-            email:          Sequelize.STRING,
-            permissions:    Sequelize.INTEGER,
-            ignoring:       Sequelize.STRING,
-            last_ip:        Sequelize.STRING,
-            karma:          Sequelize.INTEGER,
-            bio:            Sequelize.STRING,
-            avatar_url:     Sequelize.STRING,
-            reset_auth:     Sequelize.STRING,
-            start_ban_at:   Sequelize.DATE,
-            ban_duration:   Sequelize.INTEGER,
-            last_seen_at:   Sequelize.DATE,
-            time_spent:     Sequelize.INTEGER,
-            json_data:      Sequelize.STRING
+            password:           Sequelize.STRING,
+            email:              Sequelize.STRING,
+            permissions:        Sequelize.INTEGER,
+            ignoring:           Sequelize.STRING,
+            last_ip:            Sequelize.STRING,
+            karma:              Sequelize.INTEGER,
+            bio:                Sequelize.STRING,
+            avatar_url:         Sequelize.STRING,
+            reset_auth:         Sequelize.STRING,
+            start_ban_at:       Sequelize.DATE,
+            ban_duration:       Sequelize.INTEGER,
+            last_seen_at:       Sequelize.DATE,
+            time_spent:         Sequelize.INTEGER,
+            json_data:          Sequelize.STRING
         }, {
-            tableName:      'users',
-            timestamps:     false
+            tableName:          'users',
+            timestamps:         false
         })
+    }
+
+    /**
+     * @function Takes an integer value and returns its equivalent list of permissions.
+     * @param {number} permissions - An integer from oldtubes representing user permissions.
+     * @returns A list of strings representing permissions granted by the provided value.
+     */
+    static toPermissionsList(oldPermissions) {
+        let permissions = []
+        for(let i = 0; i < 32; i++) {
+            if(((oldPermissions >>> i) & 0x1)
+            && null !== bitOrderedLegacyPermissionFlags[i]) {
+                permissions.push(bitOrderedLegacyPermissionFlags[i])
+            }
+        }
+
+        return permissions
     }
 
     /**

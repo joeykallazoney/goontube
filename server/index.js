@@ -48,6 +48,10 @@ try {
     console.log(`Failed to initialize database and schemas: ${e.toString()}`)
 }
 
+// default unprivileged - console.log(User.toPermissionsList(0))
+// standard red privilege - console.log(User.toPermissionsList(-1))
+// standard yellow privilege - console.log(User.toPermissionsList(145544))
+
 let serverContext = {
     data:           schemas,
     parser:         commandParser,
