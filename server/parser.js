@@ -53,7 +53,6 @@ export default function commandParser(server, client, inputString) {
             }
         }
     } catch(e) {
-        console.log(e)
     }
 
     return {

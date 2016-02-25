@@ -176,8 +176,6 @@ module.exports = {
         if(client.user) {
             let parseResult = server.parser(server, client, msg)
 
-            console.log(parseResult)
-
             if(false === parseResult.commandParsed || parseResult.visibleInChat === true) {
                 server.clients
                     .filter(c => (c.room === client.room))
@@ -192,7 +190,6 @@ module.exports = {
                     })
             }
         } else {
-            console.log(`Ignored anonymous chat message: ${msg}`)
         }
     }
 }
