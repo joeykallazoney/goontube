@@ -20,6 +20,10 @@ module.exports = {
     REQUEST_VALIDATION_FOR_URL: (server, client, msg) => {
         const result = providerForUrl(msg)
 
+        if(null === client.user) {
+            return
+        }
+
         if(null === msg || !msg.length) {
             client.sendPacket(p.VALIDATION_RESPONSE, {
                 validated: false,
@@ -128,6 +132,10 @@ module.exports = {
 
     REQUEST_ADD_MEDIA_BY_KEY: (server, client, msg) => {
         try {
+            if(null === client.user) {
+                return
+            }
+
             let video = server.tokens.add[msg.key]
 
             console.log(msg)
@@ -145,7 +153,10 @@ module.exports = {
     },
 
     REQUEST_ADD_MEDIA_BY_URL: (server, client, msg) => {
-        console.log('Client requested add media: ' + msg)
+        if(null === client.user) {
+            return
+        }
+
         return true
     },
 
@@ -181,7 +192,7 @@ module.exports = {
     SEND_CHAT_MESSAGE: (server, client, msg) => {
         if(null === msg) return false
 
-        if(client.user) {
+        if(null !== client.user) {
             let parseResult = server.parser(server, client, msg)
 
             if(false === parseResult.commandParsed || parseResult.visibleInChat === true) {

@@ -1,13 +1,14 @@
-#origin, #app, html, body {
-  height: 100%; }
-
 html {
   font-smoothing: antialiased; }
 
 body {
   margin: 0 0;
+  height: 100%;
   font-family: "Open Sans", sans-serif;
   font-size: 17px; }
+
+#origin {
+  height: 100%; }
 
 .spinning {
   -webkit-animation: spin 1000ms infinite linear;
@@ -76,7 +77,7 @@ img.banner-image {
 .chat .chat-input {
   width: 100%; }
 
-#origin {
+#app {
   height: 100%; }
 
 #goontube {
