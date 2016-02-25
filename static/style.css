@@ -1,3 +1,6 @@
+#origin, #app, html, body {
+  height: 100%; }
+
 html {
   font-smoothing: antialiased; }
 
@@ -72,6 +75,9 @@ img.banner-image {
 
 .chat .chat-input {
   width: 100%; }
+
+#origin {
+  height: 100%; }
 
 #goontube {
   width: 960px;
