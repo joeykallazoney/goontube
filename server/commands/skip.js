@@ -15,8 +15,10 @@ export default {
 
     /* Options to specify this command's general behaviour. */
     opts: {
-        visibleInChat:  false /* Can other users see $command being entered? */
+        visibleInChat:  true /* Can other users see $command being entered? */
     },
+
+    test: /skip/,
 
     /* Prior to calling the command handler, this optional callback can
      * return false to prevent executing the command.

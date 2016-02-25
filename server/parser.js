@@ -2,7 +2,7 @@
  * @module Exports a command parser for goontube commands.
  * @since 1.0.0
  */
-import * as commands from './commands'
+import commands from './commands'
 
 /**
  * @function Parses client chat strings and passes to a command handler if appropriate.
@@ -13,7 +13,9 @@ import * as commands from './commands'
  */
 export default function commandParser(server, client, inputString) {
     if(!inputString || (('$' !== inputString[0]) && ('/' !== inputString[0]))) {
-        return false
+        return {
+            commandParsed: false
+        }
     }
 
     try {
@@ -37,32 +39,23 @@ export default function commandParser(server, client, inputString) {
          * I will probably rewrite it before all is said and done, I have some cool
          * ideas to cleanly allow multiple handlers for a single command, etc.
          */
-        Object.keys(commands)
-            .filter((cmd) => commands[cmd].name === command)
-            .map((cmd) => {
-                try {
-                    commands[cmd].commandHandler(
-                        server,
-                        client,
-                        remainingArguments)
-                    return true
-                } catch(e) {
-                }
-            })
+        const handler = Object.keys(commands).find(cmd => command.match(commands[cmd].test))
 
-        /*
-         * Test against regexp /^[0-9]+d[0-9+$/ - is this a tubes dice command?
-         */
-        if(null !== (command.match(/^[0-9]+d[0-9]+$/gi))) {
-            if(null !== commands.diceCommand) {
-                commands
-                    .diceCommand
-                    .commandHandler(server, client, command.split('d').join(' '))
-                return true
+        if(null !== handler) {
+            commands[handler].commandHandler(
+                server,
+                client,
+                remainingArguments)
+            return {
+                commandParsed: true,
+                visibleInChat: commands[handler].opts.visibleInChat
             }
         }
     } catch(e) {
+        console.log(e)
     }
 
-    return false
+    return {
+        commandParsed: false
+    }
 }

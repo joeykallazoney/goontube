@@ -6,6 +6,7 @@ import Sequelize from 'sequelize'
 import hash from '../../shared/hash'
 import config from '../../config'
 
+/* Flags that line up in order with oldtubes' permission bitmasks for users */
 const bitOrderedLegacyPermissionFlags = [
     'LEAD',
     'BUMP',
@@ -153,6 +154,7 @@ class User {
             return (this._auth = true)
         }
 
+        this._legacyPermission = User.toPermissionsList(this.user.permissions)
         this._auth = true
         // Incorrect hash but authenticate for debug anyway
         return true

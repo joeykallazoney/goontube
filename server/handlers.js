@@ -174,18 +174,23 @@ module.exports = {
         if(null === msg) return false
 
         if(client.user) {
-            server.parser(server, client, msg)
-            server.clients
-                .filter(c => (c.room === client.room))
-                .map(c => {
-                    c.sendPacket(
-                        p.ROOM_USER_MESSAGE,
-                        {
-                            id: uuid.v4(),
-                            from: client.user.username,
-                            body: msg
-                        })
-                })
+            let parseResult = server.parser(server, client, msg)
+
+            console.log(parseResult)
+
+            if(false === parseResult.commandParsed || parseResult.visibleInChat === true) {
+                server.clients
+                    .filter(c => (c.room === client.room))
+                    .map(c => {
+                        c.sendPacket(
+                            p.ROOM_USER_MESSAGE,
+                            {
+                                id: uuid.v4(),
+                                from: client.user.username,
+                                body: msg
+                            })
+                    })
+            }
         } else {
             console.log(`Ignored anonymous chat message: ${msg}`)
         }
