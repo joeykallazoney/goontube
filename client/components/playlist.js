@@ -12,7 +12,7 @@ import FlipMove from 'react-flip-move'
 
 function mapStateToProps(state) {
     return {
-        items: state.room.playlist,
+        items:                state.room.playlist,
         heightBase:           state.layout.heightbase,
         playlistWidth:        state.layout.playlist.width,
         playlistHeightUnits:  state.layout.playlist.height

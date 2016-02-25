@@ -6,9 +6,9 @@ import p from '../../shared/protocol'
 
 function mapStateToProps(state) {
     return {
-        src: state.banner.possibilities[state.banner.currentBannerIndex],
-        index: state.banner.currentBannerIndex,
-        heightBase:           state.layout.heightbase,
+        src:                state.banner.possibilities[state.banner.currentBannerIndex],
+        index:              state.banner.currentBannerIndex,
+        heightBase:         state.layout.heightbase,
         bannerWidth:        state.layout.banner.width,
         bannerHeightUnits:  state.layout.banner.height
     }

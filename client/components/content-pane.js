@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 
 function mapStateToProps(state) {
     return {
-        heightBase:             state.layout.heightbase,
+        heightBase:              state.layout.heightbase,
         contentPaneWidth:        state.layout.contentPane.width,
         contentPaneHeightUnits:  state.layout.contentPane.height,
     }

@@ -119,6 +119,16 @@ class User {
         return false
     }
 
+    hasLegacyPasswordHash() {
+        if(null !== this.user
+        && null !== this.user.password
+        && this.user.password.length == 32) {
+            return true
+        }
+
+        return false
+    }
+
     loadByUsername(username) {
         return new Promise((res, rej) => {
             this.context.data
@@ -128,6 +138,11 @@ class User {
                     if(user) {
                         this.user = user
                         this.username = user.dataValues.username
+
+                        if(this.hasLegacyPasswordHash()) {
+                            console.log('Account has legacy login')
+                        }
+
                         res(this)
                     } else {
                         rej(null)
@@ -156,15 +171,13 @@ class User {
             return false
         }
 
-        if(pwdHash === this.user.password) {
-            // Got correct hash!  authenticate...
-            return (this._auth = true)
+        if(pwdHash !== this.user.password) {
+            return false
         }
 
         this._legacyPermission = User.toPermissionsList(this.user.permissions)
         this._permissions = [...this._legacyPermission]
         this._auth = true
-        // Incorrect hash but authenticate for debug anyway
         return true
     }
 }
