@@ -165,9 +165,13 @@ ul.playlist {
     ul.playlist .entry .btn {
       background: transparent;
       color: #8f8f8f !important;
-      border: #3e3e3e;
+      border-color: #3e3e3e;
+      border-radius: 20px;
+      border-width: 0;
       text-shadow: 1px 1px 2px black;
       transition: color 0.1s ease-in; }
+      ul.playlist .entry .btn:focus {
+        outline: none; }
       ul.playlist .entry .btn:hover {
         color: #6e6e6e !important; }
     ul.playlist .entry .row {

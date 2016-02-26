@@ -156,14 +156,14 @@ class SettingsModal extends Component {
                             <div>
                                 <div className="form-group">
                                     <div className="control-label col-xs-5">
-                                        <label htmlFor="showbanner">Show Banner Images</label>
+                                        <label htmlFor="showbanner">Show banner images</label>
                                     </div>
                                     <div className="col-xs-7">
                                         <Input
                                             type="checkbox"
                                             id="showbanner"
                                             checked={this.props.showBanner}
-                                            label="Show Banner Images"
+                                            label="Show banner images"
                                             onChange={() => this.props.toggleBanner()} />
                                     </div>
                                 </div>
