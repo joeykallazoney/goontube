@@ -90,6 +90,9 @@ img.banner-image {
 .chat {
   background: #ffffff; }
 
+.chat-input input:focus {
+  outline: none; }
+
 ul.chat-list {
   list-style-type: none;
   padding: 0.3em 0.3em;
