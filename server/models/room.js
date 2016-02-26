@@ -41,12 +41,7 @@ class Room {
         this.broadcastRoomPlaylist()
         this.broadcastRoomList()
     }
-
-    initConnection() {
-        this.broadcastCurrentMedia()
-        this.broadcastRoomPlaylist()
-    }
-
+    
     swapVideosById(a, b) {
         let indexA = null, indexB = null, c = 0
 

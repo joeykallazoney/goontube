@@ -101,7 +101,6 @@ class PlaylistEntry extends React.Component {
                         <div className="title">{this.props.title}</div>
 
                         <div className="meta">
-                            <div className="added-by">added by [name]</div>
                             <div className="duration">
                             {hours ? hours + ' : ' : ''}{mins} : {secs<10 ? '0':''} {secs}
                             </div>
