@@ -20,6 +20,7 @@ export default {
     LOGOUT_USER:                'LOGOUT_USER',
     HIDE_BANNER:                'HIDE_BANNER',
     SHOW_BANNER:                'SHOW_BANNER',
+    TOGGLE_FLUID:               'TOGGLE_FLUID',
     TOGGLE_BANNER:              'TOGGLE_BANNER',
     SET_SITEBAR_BG_COLOR:       'SET_SITEBAR_BG_COLOR',
     SET_BODY_BG_COLOR:          'SET_BODY_BG_COLOR',

@@ -11,7 +11,8 @@ import { connect } from 'react-redux'
 
 function mapStateToProps(state) {
     return {
-        bodyStyles: state.settings.bodyStyles
+        bodyStyles: state.settings.bodyStyles,
+        fluid: state.layout.fluid
     }
 }
 
@@ -26,10 +27,12 @@ class Goontube extends React.Component {
     }
 
     render() {
+        const fluidStyle = this.props.fluid ? { width: '100%' } : {}
+
         return (
             <div style={this.props.bodyStyles} id="app">
                 <SiteBar />
-                <div id="goontube">
+                <div id="goontube" style={fluidStyle}>
                     <Layout />
                 </div>
                 <div id="modals">

@@ -7,6 +7,7 @@ import p from '../../shared/protocol'
 
 function mapStateToProps(state) {
     return {
+        fluid:                  state.layout.fluid,
         playerWidth:            state.layout.player.width,
         show:                   (state.app.settingsModal === true),
         showBanner:             state.settings.showBanner,
@@ -72,6 +73,10 @@ function mapDispatchToProps(dispatch, props) {
             dispatch({ type: p.TOGGLE_BANNER })
         },
 
+        toggleFluid: function() {
+            dispatch({ type: p.TOGGLE_FLUID })
+        },
+
         togglePlayer: function() {
             dispatch({ type: p.TOGGLE_PLAYER })
         },
@@ -99,6 +104,21 @@ class SettingsModal extends Component {
 
                     <Modal.Body>
                         <form className="form-horizontal add-media-form">
+                            <div>
+                                <div className="form-group">
+                                    <div className="control-label col-xs-5">
+                                        <label htmlFor="fluid">Fluid Mode</label>
+                                    </div>
+                                    <div className="col-xs-7">
+                                        <Input
+                                            type="checkbox"
+                                            id="fluid"
+                                            checked={this.props.showBanner}
+                                            label="Fluid Mode"
+                                            onChange={() => this.props.toggleFluid()} />
+                                    </div>
+                                </div>
+                            </div>
                             <div>
                                 <Input
                                     label="Sitebar Color"
@@ -160,7 +180,14 @@ class SettingsModal extends Component {
                                             label="Enable Player"
                                             checked={this.props.showPlayer}
                                             onChange={() => this.props.togglePlayer()} />
+                                    </div>
+
+                                    <div className="control-label col-xs-5">
+                                        <label htmlFor="playercols">Player Width</label>
+                                    </div>
+                                    <div className="col-xs-7">
                                         <input
+                                            id="playercols"
                                             type="range"
                                             label="Width"
                                             value={this.props.playerWidth}
