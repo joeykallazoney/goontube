@@ -19,6 +19,17 @@ function mapStateToProps(state) {
     }
 }
 
+function mapDispatchToProps(dispatch, props) {
+    return {
+        onAddMediaClicked: (ev) => dispatch({ type: p.ADD_MEDIA_CLICK }),
+        onSkip: (ev) => dispatch({ type: p.PLAYLIST_SKIP_REQUEST, send: true }),
+        onShuffle: (ev) => dispatch({ type: p.PLAYLIST_SHUFFLE_REQUEST, send: true }),
+        onExchange: (a, b) => dispatch({ type: p.PLAYLIST_EXCHANGE_REQUEST, send: true, data: { a, b }}),
+        onDeleteEntry: (ev, id) => dispatch({ type: p.REQUEST_DELETE_PLAYLIST_ENTRY, send: true, data: id }),
+        onWebcamToggle: (ev) => dispatch({ type: p.TOGGLE_WEBCAMS })
+    }
+}
+
 const entryTarget = {
     canDrop: function (props, monitor) {
         return true
@@ -69,16 +80,6 @@ function collect(connect, monitor) {
     return {
         connectDragSource:  connect.dragSource(),
         isDragging:         monitor.isDragging()
-    }
-}
-
-function mapDispatchToProps(dispatch, props) {
-    return {
-        onAddMediaClicked: (ev) => dispatch({ type: p.ADD_MEDIA_CLICK }),
-        onSkip: (ev) => dispatch({ type: p.PLAYLIST_SKIP_REQUEST, send: true }),
-        onShuffle: (ev) => dispatch({ type: p.PLAYLIST_SHUFFLE_REQUEST, send: true }),
-        onExchange: (a, b) => dispatch({ type: p.PLAYLIST_EXCHANGE_REQUEST, send: true, data: { a, b }}),
-        onDeleteEntry: (ev, id) => dispatch({ type: p.REQUEST_DELETE_PLAYLIST_ENTRY, send: true, data: id })
     }
 }
 
@@ -135,9 +136,20 @@ class Playlist extends React.Component {
         super(props)
     }
 
-    renderPlaylist(props) {
+    renderPlaylist() {
         return this.props.items.map(
-            i => <DroppableTarget dndRequest={props.onExchange} onDeleteEntry={props.onDeleteEntry} {...i} key={i.id} />
+            i => <DroppableTarget dndRequest={this.props.onExchange} onDeleteEntry={this.props.onDeleteEntry} {...i} key={i.id} />
+        )
+    }
+
+    renderPlaylistToolbar() {
+        return (
+            <ButtonToolbar>
+                <Button onClick={(e) => this.props.onAddMediaClicked(e)}>Add Media</Button>
+                <Button onClick={(e) => this.props.onSkip(e)}>Skip</Button>
+                <Button onClick={(e) => this.props.onShuffle(e)}>Shuffle</Button>
+                <Button onClick={(e) => this.props.onWebcamToggle()}>Webcams</Button>
+            </ButtonToolbar>
         )
     }
 
@@ -146,15 +158,11 @@ class Playlist extends React.Component {
             <Col xs={this.props.playlistWidth}>
                 <div style={{height: (this.props.playlistHeightUnits * this.props.heightBase) + 'px'}} className="playlist-container">
                     <div className="controls" style={{ backgroundColor: 'rgb(43, 43, 43)' }}>
-                        <ButtonToolbar>
-                            <Button onClick={(e) => this.props.onAddMediaClicked(e)}>Add Media</Button>
-                            <Button onClick={(e) => this.props.onSkip(e)}>Skip</Button>
-                            <Button onClick={(e) => this.props.onShuffle(e)}>Shuffle</Button>
-                        </ButtonToolbar>
+                        { this.renderPlaylistToolbar() }
                     </div>
                     <ul className="playlist" style={{height: ((this.props.playlistHeightUnits * this.props.heightBase) - 40) + 'px', overflowY: 'scroll' }}>
                         <FlipMove easing="cubic-bezier(0.39,0,0.45,1.4)">
-                            { this.renderPlaylist(this.props) }
+                            { this.renderPlaylist() }
                         </FlipMove>
                     </ul>
                 </div>

@@ -9,6 +9,7 @@ import koaStatic from 'koa-static'
 import Sequelize from 'sequelize'
 import uuid from 'node-uuid'
 import { Server as WebSocketServer } from 'ws'
+import easyrtc from 'easyrtc'
 
 import { makePacket } from '../shared/util'
 import hash from '../shared/hash'
@@ -22,8 +23,8 @@ import Room from './models/room'
 import User from './models/user'
 import Video from './models/video'
 
-const MAX_CONCURRENT_CONNECTIONS = 2
-const DEFAULT_SERVER_PORT        = 7070
+const MAX_CONCURRENT_CONNECTIONS = config.maxConcurrentConnections
+const DEFAULT_SERVER_PORT        = config.tubeServerPort
 
 let server          = http.createServer()
 let staticFiles     = new koaStatic(config.staticPath, {})
@@ -83,8 +84,10 @@ const HTML =
         <meta name="keywords" content="goontube goontu.be hamburgers video lounge chat existential despair">
 
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        <link rel="stylesheet" href="/easyrtc.css">
         <link rel="stylesheet" href="/style.css">
 
+        <script src="/easyrtc.js" type="text/javascript"></script>
         <script src="/bundle.js" type="text/javascript"></script>
     </head>
 </html>`

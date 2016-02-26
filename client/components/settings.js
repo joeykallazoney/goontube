@@ -8,6 +8,9 @@ import p from '../../shared/protocol'
 function mapStateToProps(state) {
     return {
         fluid:                  state.layout.fluid,
+        chatHeight:             state.layout.chat.height,
+        chatWidth:              state.layout.chat.width,
+        playerHeight:           state.layout.player.height,
         playerWidth:            state.layout.player.width,
         show:                   (state.app.settingsModal === true),
         showBanner:             state.settings.showBanner,

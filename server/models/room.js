@@ -1,7 +1,7 @@
 import Sequelize from 'sequelize'
 import p from '../../shared/protocol'
 import { makePacket } from '../../shared/util'
-
+import easyrtc from 'easyrtc'
 import Video from './video'
 
 class Room {
@@ -41,7 +41,7 @@ class Room {
         this.broadcastRoomPlaylist()
         this.broadcastRoomList()
     }
-    
+
     swapVideosById(a, b) {
         let indexA = null, indexB = null, c = 0
 

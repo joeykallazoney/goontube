@@ -8,13 +8,21 @@ const initialState = {
     showBackgroundPicker:   false,
     showPlayer:             true,
     showSiteBarBgPicker:    false,
+    showWebcams:            false,
     siteBarStyles: {
         backgroundColor:    '#ffa800'
-    }
+    },
+    webcamBandwidth:        45
 }
 
 export default function reducer(state = initialState, action) {
     switch(action.type) {
+        case p.TOGGLE_WEBCAMS:
+            return {
+                ...state,
+                showWebcams: !state.showWebcams
+            }
+
         case p.TOGGLE_PLAYER:
             return {
                 ...state,
@@ -37,6 +45,12 @@ export default function reducer(state = initialState, action) {
             return {
                 ...state,
                 showBanner: false
+            }
+
+        case p.SET_WEBCAM_BANDWIDTH:
+            return {
+                ...state,
+                webcamBandwidth: action.data
             }
 
         case p.HIDE_SITEBAR_BG_PICKER:

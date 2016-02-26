@@ -3,14 +3,16 @@ import ReactDOM from 'react-dom'
 import { Panel } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import Banner from './banner'
+import Webcams from './webcams'
 
 function mapStateToProps(state) {
     return {
-        showBanner: state.settings.showBanner,
-        name: state.room.name,
-        motd: state.room.motd,
-        playingTitle: state.room.media.title,
-        playbackPos: state.room.media.position
+        showBanner:     state.settings.showBanner,
+        showWebcams:    state.settings.showWebcams,
+        name:           state.room.name,
+        motd:           state.room.motd,
+        playingTitle:   state.room.media.title,
+        playbackPos:    state.room.media.position
     }
 }
 
@@ -26,24 +28,26 @@ class Header extends Component {
     }
 
     renderBanner() {
-        const isVisible = this.props.showBanner
-
-        if(!isVisible) {
-            return (
-                <div></div>
-            )
+        if(this.props.showBanner) {
+            return <Banner />
         } else {
-            return (
-                <Banner />
-            )
+            return <div />
         }
     }
 
-    // collapsible admin options: blacklist video, info, override pos with range slider
+    renderWebcamBlock() {
+        if(this.props.showWebcams) {
+            return <Webcams />
+        } else {
+            return <div />
+        }
+    }
+
     render() {
         return (
             <header>
                 {this.renderBanner()}
+                {this.renderWebcamBlock()}
             </header>
         )
     }

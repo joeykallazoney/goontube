@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { connect } from 'react-redux'
 
 import SiteBar from './sitebar'
 import Layout from './layout'
@@ -7,7 +8,7 @@ import AddMediaModal from './add-media-modal'
 import LoginModal from './login'
 import SettingsModal from './settings'
 
-import { connect } from 'react-redux'
+import config from '../../config'
 
 function mapStateToProps(state) {
     return {
@@ -24,6 +25,10 @@ function mapDispatchToProps(dispatch, props) {
 class Goontube extends React.Component {
     constructor(props, context) {
         super(props, context)
+    }
+
+    componentDidMount() {
+        easyrtc.setSocketUrl(`:${config.tubeServerPort}`)
     }
 
     render() {

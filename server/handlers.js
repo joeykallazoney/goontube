@@ -9,15 +9,6 @@ import { providerForUrl } from './providers'
 import User from './models/user'
 
 module.exports = {
-    CLIENT_HELLO: (server, client, msg) => {
-        let encoded = JSON.stringify({
-            type: p.CLIENT_HELLO,
-            data: `Hello there! `
-        })
-
-        return true
-    },
-
     REQUEST_VALIDATION_FOR_URL: (server, client, msg) => {
         const result = providerForUrl(msg)
 
@@ -182,7 +173,7 @@ module.exports = {
                         message: `Registration failed: ${err}`
                     })
                 })
-                
+
             return true
         } catch(e) {
             console.log(e)

@@ -1,5 +1,12 @@
+/*
+ * We must expect that this config will be bundled into both client and server.
+ * Nothing too sensitive here!
+ */
 module.exports = {
-    youtubeBrowserApiKey:   '',
-    databasePath:           __dirname + '/goontube.db',
-    staticPath:             __dirname + '/static'
+    maxConcurrentConnections:   3,
+    tubeServerPort:             7070,
+    easyRTCPort:                7071,
+    youtubeBrowserApiKey:       '',
+    databasePath:               __dirname + '/goontube.db',
+    staticPath:                 __dirname + '/static'
 }

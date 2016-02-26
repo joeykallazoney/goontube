@@ -66,7 +66,6 @@ export default function reducer(state = initialState, action) {
             }
 
         case p.SYSTEM_MESSAGE:
-            console.log(action.data)
             return {
                 ...state,
                 history: [...state.history, { system: true, message: action.data }]

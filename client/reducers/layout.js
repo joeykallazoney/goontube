@@ -4,6 +4,8 @@ const initialState = {
     heightbase:     32,
     fluid:          false,
     banner:         { width: 12,    height: 4 },
+    webcams:        { width: 12 },
+    webcamFeed:     { width: 2 },
     player:         { width: 7,     height: 9 },
     chat:           { width: 5,     height: 9 },
     chatList:       { width: 8 },

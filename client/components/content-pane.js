@@ -3,6 +3,8 @@ import { Col } from 'react-bootstrap'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
 
+import Poll from './poll'
+
 function mapStateToProps(state) {
     return {
         heightBase:              state.layout.heightbase,
