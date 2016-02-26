@@ -129,6 +129,50 @@ class User {
         return false
     }
 
+    static create(context, username, hash, email) {
+        return new Promise((res, rej) => {
+            if(null === hash || !hash.length) {
+                rej('Hash missing?')
+                return
+            }
+
+            if(null === username || username.length < 3) {
+                rej('Usernames must be at least three characters long.')
+                return
+            }
+
+            // TODO: calculate extra salt w a server secret 
+            context.data
+                .User
+                .create({
+                    username:       username,
+                    password:       hash,
+                    email:          '',
+                    permissions:    0,
+                    ignoring:       '',
+                    last_ip:        '',
+                    karma:          0,
+                    bio:            '',
+                    start_ban_at:   0,
+                    ban_duration:   0,
+                    last_seen_at:   Date.now(),
+                    time_spent:     0,
+                    json_data:      ''
+                })
+                .then(user => {
+                    console.log(`New user created: ${username}`)
+                    res(user)
+                })
+                .catch((err) => {
+                    console.dir(err)
+
+                    if(err.name === 'SequelizeUniqueConstraintError') {
+                        rej(`username is already in use.`)
+                    }
+                })
+        })
+    }
+
     loadByUsername(username) {
         return new Promise((res, rej) => {
             this.context.data
@@ -144,8 +188,10 @@ class User {
                         }
 
                         res(this)
+                        return
                     } else {
                         rej(null)
+                        return
                     }
                 })
         }, (err) => {

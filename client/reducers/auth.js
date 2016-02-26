@@ -5,20 +5,50 @@ const initialState = {
     passwordInput:      '',
     user:               null,
     token:              null,
-    loginModal:         false
+    loginModal:         false,
+    failState:          false,
+    feedback: {
+        type:           '',
+        message:        ''
+    }
 }
 
 export default function reducer(state = initialState, action) {
     switch(action.type) {
+        case p.REGISTRATION_ATTEMPT:
+            return {
+                ...state,
+                failState: false
+            }
+
+        case p.RESET_LOGIN_FAILURE:
+            return {
+                ...state,
+                failState: false,
+                feedback: initialState.feedback
+            }
+
+        case p.LOGIN_DENIED_BAD_DETAILS:
+            return {
+                ...state,
+                failState: true,
+                feedback: {
+                    type: action.data.type,
+                    message: action.data.message
+                }
+            }
+
         case p.LOGIN_FORM_UPDATE_USERNAME:
             return {
                 ...state,
+                failState: false,
                 usernameInput: action.data
             }
 
         case p.LOGIN_FORM_UPDATE_PASSWORD:
             return {
                 ...state,
+                failState: false,
                 passwordInput: action.data
             }
 
@@ -32,6 +62,7 @@ export default function reducer(state = initialState, action) {
             return {
                 ...state,
                 loginModal: false,
+                failState: false,
                 usernameInput: '',
                 passwordInput: ''
             }
@@ -40,6 +71,7 @@ export default function reducer(state = initialState, action) {
             return {
                 ...state,
                 user:       action.data.username,
+                failState:  false,
                 loginModal: false,
                 usernameInput: '',
                 passwordInput: ''

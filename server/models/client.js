@@ -37,6 +37,16 @@ class Client {
     }
 
     login(username, password) {
+        console.log(`Login attempt: ${username}/${password}`)
+
+        if(null === username
+            || null === password
+            || username.length < 3
+            || !password.length) {
+            this.sendPacket(p.LOGIN_DENIED_BAD_DETAILS)
+            return
+        }
+
         let user = new User(this.serverContext)
             .loadByUsername(username)
             .then(
@@ -45,11 +55,15 @@ class Client {
                         this.user = u
                         this.sendPacket(
                             p.LOGIN_ACCEPTED,
-                            { username: username }
+                            { username: u.username }
                         )
+                        this.sendSystemMessage(`You logged in as ${u.username}`)
                         this.room.updateRoomUsersList()
                     } else {
-                        this.sendPacket(p.LOGIN_DENIED_BAD_DETAILS)
+                        this.sendPacket(p.LOGIN_DENIED_BAD_DETAILS, {
+                            type:       'danger',
+                            message:    'The login details you provided were invalid.  Check your username and password, and try again.'
+                        })
                     }
                 },
                 (err) => {

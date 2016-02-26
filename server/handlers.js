@@ -6,12 +6,13 @@ import p from '../shared/protocol'
 import uuid from 'node-uuid'
 import { shuffle } from './commands/shuffle'
 import { providerForUrl } from './providers'
+import User from './models/user'
 
 module.exports = {
     CLIENT_HELLO: (server, client, msg) => {
         let encoded = JSON.stringify({
             type: p.CLIENT_HELLO,
-            data: `Hello there!`
+            data: `Hello there! `
         })
 
         return true
@@ -170,30 +171,18 @@ module.exports = {
             if(null === msg) return false
             console.log('Processing registration attempt...')
 
-            server.data
-                .User
-                .create({
-                    username:       msg.username,
-                    password:       msg.password,
-                    email:          '',
-                    permissions:    0,
-                    ignoring:       '',
-                    last_ip:        '',
-                    karma:          0,
-                    bio:            '',
-                    start_ban_at:   0,
-                    ban_duration:   0,
-                    last_seen_at:   Date.now(),
-                    time_spent:     0,
-                    json_data:      ''
-                })
+            User
+                .create(server, msg.username, msg.password, '')
                 .then(() => {
-                    console.log('New user registered!')
+                    console.log('New user reg succeeded!')
                 })
-                .catch((err) => {
-                    console.log('New user registration failed...')
-                    console.log(err)
+                .catch(err => {
+                    client.sendPacket(p.LOGIN_DENIED_BAD_DETAILS, {
+                        type: 'warning',
+                        message: `Registration failed: ${err}`
+                    })
                 })
+                
             return true
         } catch(e) {
             console.log(e)
@@ -206,9 +195,9 @@ module.exports = {
     AUTHENTICATION_ATTEMPT: (server, client, msg) => {
         try {
             if(null === msg) return false
+
             console.log(msg)
             client.login(msg.username, msg.password)
-            client.sendSystemMessage(`You logged in as ${msg.username}`)
         } catch(e) {
             console.log('Bad AUTHENTICATION_ATTEMPT packet sent.')
         }

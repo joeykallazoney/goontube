@@ -112,7 +112,6 @@ class PlaylistEntry extends React.Component {
                         <div className="pull-right actions">
                             <ButtonToolbar>
                                 <Button onClick={(ev) => {
-                                    console.log('Delete!')
                                     this.props.onDeleteEntry(ev, this.props.id)
                                 }}>
                                     <Glyphicon glyph="trash" />

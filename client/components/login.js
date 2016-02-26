@@ -8,6 +8,9 @@ import hash from '../../shared/hash'
 
 function mapStateToProps(state) {
     return {
+        failed:         state.auth.failState,
+        failureType:    state.auth.feedback.type,
+        failureMessage: state.auth.feedback.message,
         usernameInput:  state.auth.usernameInput,
         passwordInput:  state.auth.passwordInput,
         show:           (state.auth.loginModal === true)
@@ -67,6 +70,20 @@ class Login extends React.Component {
         super(props)
     }
 
+    renderFeedback() {
+        if(this.props.failed) {
+            return (
+                <Alert bsStyle={this.props.failureType}>
+                    {this.props.failureMessage}
+                </Alert>
+            )
+        }
+
+        return (
+            <div />
+        )
+    }
+
     render() {
         return (
             <div className="tube-modal login">
@@ -96,9 +113,7 @@ class Login extends React.Component {
 
                             <div className="form-group">
                                 <div className="col-xs-offset-4 col-xs-8">
-                                    <Alert bsStyle="warning">
-                                        <strong>Debug mode:</strong> auth only checks that the username exists.
-                                    </Alert>
+                                    {this.renderFeedback()}
                                 </div>
                             </div>
 

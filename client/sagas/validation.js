@@ -1,4 +1,4 @@
-import { takeLatest } from 'redux-saga'
+import { takeEvery, takeLatest } from 'redux-saga'
 import { take, call, put } from 'redux-saga/effects'
 import p from '../../shared/protocol'
 
