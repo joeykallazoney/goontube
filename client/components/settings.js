@@ -193,7 +193,7 @@ class SettingsModal extends Component {
                                             value={this.props.playerWidth}
                                             min={1}
                                             max={12}
-                                            onChange={(ev) => this.props.setPlayerWidth(ev.target.value)} />
+                                            onChange={(ev) => this.props.setPlayerWidth(parseInt(ev.target.value))} />
                                     </div>
                                 </div>
                             </div>

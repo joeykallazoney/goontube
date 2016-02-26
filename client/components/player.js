@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
-import { Col } from 'react-bootstrap'
+import { Glyphicon, Col } from 'react-bootstrap'
 
 import DailyMotion from './players/dailymotion'
 import YouTube from './players/youtube'
@@ -37,7 +37,12 @@ class Player extends React.Component {
         let providerMapper = {
             'youtube' : <YouTube />
         }
-        let reactProvider = providerMapper[this.props.media.provider] || 'Loading...'
+        let reactProvider = providerMapper[this.props.media.provider] || (
+            <div>
+                <Glyphicon className="spinning" glyph="refresh" />
+                <span>Loading...</span>
+            </div>
+        )
 
         return (
             <Col xs={this.props.playerWidth}>
