@@ -22,6 +22,17 @@ function mapDispatchToProps(dispatch) {
         gotEasyRTCID: easyRtcId => dispatch({ type: p.SET_EASYRTC_ID, data: easyRtcId }),
         receiveOccupants: (name, occupants, primary) => {
             console.log(occupants)
+        },
+        webcamsConnected: (gotConnection, err) => {
+            if(err) {
+                console.error(`Webcam connection error: ${err}`)
+                return
+            }
+
+            console.log('Got new connection!')
+        },
+        webcamsDisconnected: () => {
+            console.log('Lost webcam connections')
         }
     }
 }
@@ -50,8 +61,10 @@ class Webcams extends Component {
         easyrtc.setOnStreamClosed(id => this.streamClosed(id))
         easyrtc.enableAudio(false)
         easyrtc.enableAudioReceive(false)
+        easyrtc.setDisconnectListener(() => this.props.webcamsDisconnected())
         easyrtc.setRoomOccupantListener((name, occ, primary) => this.props.receiveOccupants(name, occ, primary))
         easyrtc.easyApp(this.props.roomName, 'self', ['caller'], (id) => this.props.gotEasyRTCID(id))
+        easyrtc.setGotConnection(() => this.props.webcamsConnected())
     }
 
     streamAcceptor(caller, stream) {
