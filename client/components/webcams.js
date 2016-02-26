@@ -19,7 +19,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        gotEasyRTCID: (id) => dispatch({ type: p.SET_EASYRTC_ID, data: id }),
+        gotEasyRTCID: easyRtcId => dispatch({ type: p.SET_EASYRTC_ID, data: easyRtcId }),
         receiveOccupants: (name, occupants, primary) => {
             console.log(occupants)
         }
@@ -45,11 +45,21 @@ class Webcams extends Component {
     }
 
     connect() {
-        easyrtc.enableDebug(false)
+        easyrtc.enableDebug(true)
+        easyrtc.setStreamAcceptor((id, stream) => this.streamAcceptor(id, stream))
+        easyrtc.setOnStreamClosed(id => this.streamClosed(id))
         easyrtc.enableAudio(false)
         easyrtc.enableAudioReceive(false)
         easyrtc.setRoomOccupantListener((name, occ, primary) => this.props.receiveOccupants(name, occ, primary))
         easyrtc.easyApp(this.props.roomName, 'self', ['caller'], (id) => this.props.gotEasyRTCID(id))
+    }
+
+    streamAcceptor(caller, stream) {
+        console.log(`New stream: ${caller}`)
+    }
+
+    streamClosed(easyRtcId) {
+        console.log(`Lost stream: ${easyRtcId}`)
     }
 
     componentDidMount() {

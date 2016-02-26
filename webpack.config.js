@@ -5,7 +5,10 @@ var webpack = require('webpack'),
     autoprefixer = require('autoprefixer')
 
 module.exports = {
-    entry: ['./client/index.js', './client/styles/style.sass'],
+    entry: [
+        './client/index.js',
+        './client/styles/style.sass'
+    ],
     module: {
         loaders: [
             { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel' },

@@ -9,7 +9,6 @@ import koaStatic from 'koa-static'
 import Sequelize from 'sequelize'
 import uuid from 'node-uuid'
 import { Server as WebSocketServer } from 'ws'
-import easyrtc from 'easyrtc'
 
 import { makePacket } from '../shared/util'
 import hash from '../shared/hash'
@@ -84,10 +83,11 @@ const HTML =
         <meta name="keywords" content="goontube goontu.be hamburgers video lounge chat existential despair">
 
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-        <link rel="stylesheet" href="/easyrtc.css">
         <link rel="stylesheet" href="/style.css">
 
+        <script src="/socket.io.js" type="text/javascript"></script>
         <script src="/easyrtc.js" type="text/javascript"></script>
+
         <script src="/bundle.js" type="text/javascript"></script>
     </head>
 </html>`
