@@ -113,8 +113,8 @@ class SettingsModal extends Component {
                                         <Input
                                             type="checkbox"
                                             id="fluid"
-                                            checked={this.props.showBanner}
-                                            label="Fluid Mode"
+                                            checked={this.props.fluid}
+                                            label="Allow app to span full wide"
                                             onChange={() => this.props.toggleFluid()} />
                                     </div>
                                 </div>
