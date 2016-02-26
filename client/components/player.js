@@ -12,7 +12,8 @@ function mapStateToProps(state) {
         heightBase:         state.layout.heightbase,
         playerWidth:        state.layout.player.width,
         playerHeightUnits:  state.layout.player.height,
-        media:   state.room.media
+        showPlayer:         state.settings.showPlayer,
+        media:              state.room.media
     }
 }
 
@@ -27,6 +28,12 @@ class Player extends React.Component {
     }
 
     render() {
+        if(!this.props.showPlayer) {
+            return (
+                <div className="hidden-player"></div>
+            )
+        }
+
         let providerMapper = {
             'youtube' : <YouTube />
         }

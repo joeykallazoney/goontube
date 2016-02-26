@@ -1,12 +1,13 @@
 import p from '../../shared/protocol'
 
 const initialState = {
-    showBanner:             false,
-    showBackgroundPicker:   false,
-    showSiteBarBgPicker:    false,
     bodyStyles: {
         backgroundColor:    '#222222'
     },
+    showBanner:             false,
+    showBackgroundPicker:   false,
+    showPlayer:             true,
+    showSiteBarBgPicker:    false,
     siteBarStyles: {
         backgroundColor:    '#ffa800'
     }
@@ -14,6 +15,12 @@ const initialState = {
 
 export default function reducer(state = initialState, action) {
     switch(action.type) {
+        case p.TOGGLE_PLAYER:
+            return {
+                ...state,
+                showPlayer: !state.showPlayer
+            }
+
         case p.TOGGLE_BANNER:
             return {
                 ...state,

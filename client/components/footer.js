@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 
 function mapStateToProps(state) {
     return {
+        footerCols: state.layout.footer.width
     }
 }
 
@@ -20,11 +21,13 @@ class Footer extends Component {
 
     render() {
         return (
-            <footer>
-                <div className="footer-info">
-                    Goontube created with ❤︎ and JavaScript.
-                </div>
-            </footer>
+            <Col xs={this.props.footerCols}>
+                <footer>
+                    <div className="footer-info">
+                        Goontube created with ❤︎ and JavaScript.
+                    </div>
+                </footer>
+            </Col>
         )
     }
 }

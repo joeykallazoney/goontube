@@ -7,8 +7,10 @@ import p from '../../shared/protocol'
 
 function mapStateToProps(state) {
     return {
+        playerWidth:            state.layout.player.width,
         show:                   (state.app.settingsModal === true),
         showBanner:             state.settings.showBanner,
+        showPlayer:             state.settings.showPlayer,
         showSiteBarBgPicker:    state.settings.showSiteBarBgPicker,
         siteBarBg:              state.settings.siteBarStyles.backgroundColor,
         showBackgroundPicker:   state.settings.showBackgroundPicker,
@@ -58,12 +60,20 @@ function mapDispatchToProps(dispatch, props) {
             dispatch({ type: p.SET_BODY_BG_COLOR, data: bgColor })
         },
 
+        setPlayerWidth(cols) {
+            dispatch({ type: p.SET_PLAYER_WIDTH, data: cols })
+        },
+
         setSiteBarBg(bgColor) {
             dispatch({ type: p.SET_SITEBAR_BG_COLOR, data: bgColor })
         },
 
         toggleBanner: function() {
             dispatch({ type: p.TOGGLE_BANNER })
+        },
+
+        togglePlayer: function() {
+            dispatch({ type: p.TOGGLE_PLAYER })
         },
 
         onHide: function() {
@@ -135,6 +145,28 @@ class SettingsModal extends Component {
                                             checked={this.props.showBanner}
                                             label="Show Banner Images"
                                             onChange={() => this.props.toggleBanner()} />
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div className="form-group">
+                                    <div className="control-label col-xs-5">
+                                        <label htmlFor="showplayer">Player</label>
+                                    </div>
+                                    <div className="col-xs-7">
+                                        <Input
+                                            type="checkbox"
+                                            id="showplayer"
+                                            label="Enable Player"
+                                            checked={this.props.showPlayer}
+                                            onChange={() => this.props.togglePlayer()} />
+                                        <input
+                                            type="range"
+                                            label="Width"
+                                            value={this.props.playerWidth}
+                                            min={1}
+                                            max={12}
+                                            onChange={(ev) => this.props.setPlayerWidth(ev.target.value)} />
                                     </div>
                                 </div>
                             </div>
