@@ -19,7 +19,7 @@ Video synchronization and chat lounge.
 - [ ] Repair fullscreen mode.
 - [ ] ```$permissions``` definitely needs to have an alias, ```$privilege```, ```$priv``` (?)
 - [x] “fix video” button skips screen to top, making it hard to click in a row multiple times, change this if non-breaking.
-- [ ] “power button” gets real buggy after “turning it back on”, ie video players wont properly reinsert, retoggling power might not work, etc.
+- [x] “power button” gets real buggy after “turning it back on”, ie video players wont properly reinsert, retoggling power might not work, etc.
 - [ ] Account/Password recovery
   - Users have forgotten email addresses.
     - Idiodance (lost password, no email received, using alt “Idio”)
