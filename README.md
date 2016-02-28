@@ -53,7 +53,7 @@ Video synchronization and chat lounge.
 - [ ] Minimize code for deployment.
 - [x] 2016FEB11 - Google Drive/Docs support. (**woot!**)
     - [ ] Add parsing feature for drive.google.com to docs.google.com, strip '```view?usp=sharing```' from end of line.
-- [ ] Possibly disable youtube annotations by default (suggested by Megaspel) append '```&iv_load_policy=3```' to youtube "```movie```" param/value element (Reference: http://stackoverflow.com/questions/8166846/removing-annotations-on-embedded-youtube-videos)
+- [x] Possibly disable youtube annotations by default (suggested by Megaspel) append '```&iv_load_policy=3```' to youtube "```movie```" param/value element (Reference: http://stackoverflow.com/questions/8166846/removing-annotations-on-embedded-youtube-videos)
 - [ ] allow users to queue videos, taking priority in a turn based/round-robin order? possibly a mod toggleable mode.
 - [ ] make timestamping work and work easily.
 - [ ] Add a video flipping button for backwards vids. (via POOPSOCKBOLLAS)
