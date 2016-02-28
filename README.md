@@ -36,6 +36,7 @@ Video synchronization and chat lounge.
 - [ ] Addition of gDrive/gDocs support has broken vimeo syncronization. 2016FEB11
 
 ##### Resolved #####
+- [x] 2016FEB27 - Cams on oldtubes now close the local media stream correctly when disposed/webcam session closes, no more hanging light/cam session
 - [x] 2016FEB11 - Admin Panel chat log timestamps are crazy wrong.
 - [x] preloading goontube, from typing in go- in like chrome for example, triggers multiple logins and kicks a user. considering how common typing go- into a nav bar is this is non trivial. possible solution is to remove restriction on simultaneous logins.
    - 2016FEB12 - This is a Chrome configuration issue. ```Settings``` --> ```Advanced Settings``` --> ```Privacy``` --> deselect ```Prefetch resources to load pages more quickly```.
