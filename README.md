@@ -18,12 +18,11 @@ Video synchronization and chat lounge.
 ####**Bug Fixes:**####
 - [ ] Repair fullscreen mode.
 - [ ] ```$permissions``` definitely needs to have an alias, ```$privilege```, ```$priv``` (?)
-- [ ] “fix video” button skips screen to top, making it hard to click in a row multiple times, change this if non-breaking.
+- [x] “fix video” button skips screen to top, making it hard to click in a row multiple times, change this if non-breaking.
 - [ ] “power button” gets real buggy after “turning it back on”, ie video players wont properly reinsert, retoggling power might not work, etc.
 - [ ] Account/Password recovery
   - Users have forgotten email addresses.
     - Idiodance (lost password, no email received, using alt “Idio”)
-    - Snirtle (lost password, no email received, using alt “Snurtl”)
     - BlueMoonBeer (lost password, no email received, using alt “SaxTooter”)
   - (Rednames unable to review/alter user registration details).
     - (probably shouldn’t let rednames view plaintext passwords but allow resets)
@@ -33,7 +32,7 @@ Video synchronization and chat lounge.
   - Cam images persist when another user deactivates their camera.
 - [ ] Restructure video-containing frame/divs to be a div with the child-content sized to 100% for easier resizing. (do this before restructuring full screen mode/implementing half screen mode.)
 - [ ] Fix ```$import```
-- [ ] Addition of gDrive/gDocs support has broken vimeo syncronization. 2016FEB11
+- [x] Addition of gDrive/gDocs support has broken vimeo syncronization. 2016FEB11
 
 ##### Resolved #####
 - [x] 2016FEB27 - Cams on oldtubes now close the local media stream correctly when disposed/webcam session closes, no more hanging light/cam session
