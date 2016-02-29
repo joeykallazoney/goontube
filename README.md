@@ -30,7 +30,7 @@ Video synchronization and chat lounge.
 - [ ] Investigate performance issues with cams (EasyRTC) over new SSL implementation.
   - [ ] Things look good initially but frame-rates tend to decline over time.
   - [x] Cam images persist when another user deactivates their camera.
-- [ ] Restructure video-containing frame/divs to be a div with the child-content sized to 100% for easier resizing. (do this before restructuring full screen mode/implementing half screen mode.)
+- [x] Restructure video-containing frame/divs to be a div with the child-content sized to 100% for easier resizing. (do this before restructuring full screen mode/implementing half screen mode.)
 - [ ] Fix ```$import```
 - [x] Addition of gDrive/gDocs support has broken vimeo syncronization. 2016FEB11
 
