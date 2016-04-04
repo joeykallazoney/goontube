@@ -56,7 +56,8 @@ Video synchronization and chat lounge.
 - [x] Possibly disable youtube annotations by default (suggested by Megaspel) append '```&iv_load_policy=3```' to youtube "```movie```" param/value element (Reference: http://stackoverflow.com/questions/8166846/removing-annotations-on-embedded-youtube-videos)
 - [ ] allow users to queue videos, taking priority in a turn based/round-robin order? possibly a mod toggleable mode.
 - [ ] make timestamping work and work easily.
-- [ ] Add a video flipping button for backwards vids. (via POOPSOCKBOLLAS)
+- [x] Add a video flipping button for backwards vids. (via POOPSOCKBOLLAS)
+    - Added to old-tubes by jskz, works for yt only atm.
 - [ ] Add-in ‘milkdrop.js’ so users can have something interesting to look at during ‘still-image’ videos. (suggested by Jynn).
 - [ ] possibly link <3ing a video to liking the video for a user’s youtube account?
 - [ ] possibly add more video adding modes, toggleable by mods, like a relevance mode somehow where people can more easily do a “this video is like the last one!” thing, maybe by limiting to one add per person, stuff like that. default mode should be applicable for most of the time still though. if no mods present should revert automatically in case of problems.
@@ -86,6 +87,7 @@ Video synchronization and chat lounge.
 - [ ] ```$seen``` < _username_ >
 - [ ] ```$seppuku```
 - [ ] ```$setskip``` [ < _1-100_ > ]
+- [ ] ```$showskip```
 - [ ] ```$skip```
 - [ ] ```$tban``` < _username_ > < _hours_ > < _reason_ >
 - [ ] ```$unban``` < _username_ >
