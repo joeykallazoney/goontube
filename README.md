@@ -16,6 +16,8 @@ Video synchronization and chat lounge.
    - Scheduling timetable moved to wiki
 
 ####**Bug Fixes:**####
+- [ ] ```$reboot``` kills goontube
+- [ ] last video in queue loops forever busying-out clients. client-side refresh must be forced if goonbot is unable to auto-add new vids to the queue.
 - [x] Repair fullscreen mode.
 - [x] ```$permissions``` definitely needs to have an alias, ```$privilege```, ```$priv``` (?)
 - [x] “fix video” button skips screen to top, making it hard to click in a row multiple times, change this if non-breaking.
