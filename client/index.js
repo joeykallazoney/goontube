@@ -20,20 +20,24 @@ import webSocketMiddleware from './middleware/websocket'
 
 const sagaMiddleware = createSagaMiddleware()
 const finalCreateStore = compose(
-    ...[...middleware, sagaMiddleware],
+    applyMiddleware(
+        ...middleware,
+        sagaMiddleware
+    ),
     window.devToolsExtension ? window.devToolsExtension() : f => f
 )(createStore)
 
 window.addEventListener('load', function load(event) {
-    let origin = document.getElementById('origin')
-    if(origin === null) {
+    const store = finalCreateStore(reducer)
+    let origin = null
+
+    if(null === (origin = document.getElementById('origin'))) {
         origin = document.createElement('div')
         origin.id = 'origin'
 
         document.body.appendChild(origin)
     }
 
-    let store = finalCreateStore(reducer)
     sagaMiddleware.run(rootSaga)
 
     ReactDOM.render(
