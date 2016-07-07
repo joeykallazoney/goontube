@@ -20,8 +20,7 @@ import webSocketMiddleware from './middleware/websocket'
 
 const sagaMiddleware = createSagaMiddleware()
 const finalCreateStore = compose(
-    middleware,
-    sagaMiddleware,
+    [...middleware, sagaMiddleware],
     window.devToolsExtension ? window.devToolsExtension() : f => f
 )(createStore)
 
