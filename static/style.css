@@ -11,23 +11,12 @@ body {
   height: 100%; }
 
 .spinning {
-  -webkit-animation: spin 1000ms infinite linear;
   animation: spin 1000ms infinite linear; }
-
-@-webkit-keyframes spin {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg); }
-  100% {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg); } }
 
 @keyframes spin {
   0% {
-    -webkit-transform: rotate(0deg);
     transform: rotate(0deg); }
   100% {
-    -webkit-transform: rotate(359deg);
     transform: rotate(359deg); } }
 
 .modal-dialog {
@@ -201,22 +190,18 @@ ul.playlist {
 .sitebar {
   padding: 0.3em 0.3em;
   padding-left: 0.5em;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-align-self: center;
-      -ms-flex-item-align: center;
-          align-self: center; }
+  -ms-flex-item-align: center;
+      align-self: center; }
   .sitebar .btn-toolbar {
     display: inline-block; }
   .sitebar .title {
     color: #111111;
-    display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
-    -webkit-align-self: center;
-        -ms-flex-item-align: center;
-            align-self: center;
+    -ms-flex-item-align: center;
+        align-self: center;
     font-size: 1.2em;
     font-weight: bold; }
   .sitebar .btn {
@@ -273,7 +258,6 @@ ul.playlist {
   float: right; }
 
 .easyrtcMirror {
-  -webkit-transform: scaleX(-1);
   transform: scaleX(-1); }
 
 .easyrtc_closeButton {
