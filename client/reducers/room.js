@@ -71,6 +71,13 @@ export default function reducer(state = initialState, action) {
                 history: [...state.history, { system: true, message: action.data }]
             }
 
+        case p.RESULT_MESSAGE:
+            return {
+                ...state,
+                history: [...state.history, { system: true, message: action.data }]
+            }
+
+
         default:
             return state
     }
