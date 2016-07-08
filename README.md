@@ -16,6 +16,7 @@ Video synchronization and chat lounge.
    - Scheduling timetable moved to wiki
 
 ####**Bug Fixes:**####
+- [ ] NEWTUBES - admin ```$skip``` will skips both currently playing vid as well as first video in queue.
 - [ ] ```$reboot``` kills goontube
 - [ ] last video in queue loops forever busying-out clients. client-side refresh must be forced if goonbot is unable to auto-add new vids to the queue.
 - [x] Repair fullscreen mode.
@@ -68,6 +69,8 @@ Video synchronization and chat lounge.
 - [ ] allow banner toggle and persist for accounts.
 - [ ] Investigate adding BT magnet-links to stream vids.
    - May require heavy discussion/review. We have concerns.
+- [ ] Admin panel
+   - Configure roles and selectable permissions on a per-user basis.
 
 **Commands:**
 - [ ] ```$afk``` < _reason_ >
@@ -121,6 +124,9 @@ Video synchronization and chat lounge.
   - My sources say no
   - Outlook not so good
   - Very doubtful
+- [ ] ```$wish``` - using a weighted table of abilities/permissions ```$wish``` may grant the user an ability or 'curse' for a variable time.
+   - e.g.: ```$skip```, ```$bump```, user banned for 24-hours, user able to post more vids, user unable to post more than vid in the queue. 
+   - user's 'ban' history may be factored-in as well. 
 ##### Complete #####
 - [x] Add 3-second cool-down to $skip so mods/deputies can't over-moderation (possible '-f' option for override?)
 - [x] Allow $ commands to be accessed with / as well.
