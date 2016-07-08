@@ -22,6 +22,10 @@ class Client {
         this.sendPacket(p.SYSTEM_MESSAGE, message)
     }
 
+    sendResultMessage(message) {
+	this.sendPacket(p.RESULT_MESSAGE, message)
+    }
+
     closeWithReason(message) {
         this.sendPacket(
             p.DISCONNECTED_WITH_REASON,
