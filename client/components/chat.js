@@ -38,6 +38,10 @@ const SystemMessage = (props) => <li {...props} className="system message">
         <div className="body">{props.message}</div>
     </li>
 
+const ResultMessage = (props) => <li {...props} className="result message">
+        <div className="body">{props.message}</div>
+    </li>
+
 const ChatMessage = (props) => {
     return <li {...props} className="message">
         <span className="from">{props.from}:</span> <div className="body">{props.body}</div>
@@ -65,9 +69,17 @@ class ChatHistory extends Component {
 
     renderChat() {
         return this.props.history.map(
-            (message) => message.system === true ?
-                <SystemMessage {...this.props} system={true} message={message.message} /> :
-                <ChatMessage {...this.props} key={message.id} from={message.from} body={message.body} />
+              (message) =>
+                  message.result === true
+                  ? <ResultMessage {...this.props} message={message.message} />
+//                  ? <ResultMessage {...this.props} message={message.message} />
+                  : message.system === true
+                      ? <SystemMessage {...this.props} message={message.message} />
+                      : <ChatMessage {...this.props} key={message.id} from={message.from} body={message.body} />
+//            (message) => message.system === true ?
+//                <SystemMessage {...this.props} message={message.message} /> :
+//                <SystemMessage {...this.props} system={true} message={message.message} /> :
+//                <ChatMessage {...this.props} key={message.id} from={message.from} body={message.body} />
         )
     }
 
