@@ -9,7 +9,7 @@ export default {
     commandHandler: (server, client, message) => {
         if(null !== message) {
             client.room.members.forEach(user => {
-                user.sendSystemMessage(
+                user.sendResultMessage(
                     `${client.user.username} ${message}`
                 )
             })
