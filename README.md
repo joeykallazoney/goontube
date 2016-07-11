@@ -18,7 +18,8 @@ Video synchronization and chat lounge.
 ####**Bug Fixes:**####
 - [ ] NEWTUBES - admin ```$skip``` will skips both currently playing vid as well as first video in queue.
 - [ ] ```$reboot``` kills goontube
-- [ ] last video in queue loops forever busying-out clients. client-side refresh must be forced if goonbot is unable to auto-add new vids to the queue.
+- [x] last video in queue loops forever busying-out clients. client-side refresh must be forced if goonbot is unable to auto-add new vids to the queue.
+   - [x] NEWTUBES - Goonbot auto-adds to queue when only 1 video appears in the queue.  
 - [x] Repair fullscreen mode.
    - [ ] Exiting full-screen makes 'like' and 'hate' buttons disappear.
 - [x] ```$permissions``` definitely needs to have an alias, ```$privilege```, ```$priv``` (?)
@@ -35,7 +36,7 @@ Video synchronization and chat lounge.
   - [ ] Things look good initially but frame-rates tend to decline over time.
   - [x] Cam images persist when another user deactivates their camera.
 - [x] Restructure video-containing frame/divs to be a div with the child-content sized to 100% for easier resizing. (do this before restructuring full screen mode/implementing half screen mode.)
-- [ ] Fix ```$import```
+- [x] Fix ```$import``` (enabled for rednames only)
 - [x] Addition of gDrive/gDocs support has broken vimeo syncronization. 2016FEB11
 
 ##### Resolved #####
@@ -49,7 +50,7 @@ Video synchronization and chat lounge.
   - [x] Dailymotion still needs attention. (does not auto-play, does not sync).
   - 2016FEB08 - Dailymotion fixed! switched to HTML5 player.
 - [x] Emotes: ‘yay’ and ‘2beery’ are broken.
-  - these are located in: //forums.goontu.be/Smileys/default/
+  - these were located in: //forums.goontu.be/Smileys/default/
   - FIXED 2016FEB08
 - [x] 2016FEB08 - Streamlined auto-add random videos to empty queue.
 
