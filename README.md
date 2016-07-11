@@ -111,6 +111,7 @@ Video synchronization and chat lounge.
 - [ ] ```$tban``` < _username_ > < _hours_ > < _reason_ >
 - [ ] ```$unban``` < _username_ >
 - [ ] ```$whisper``` ```$w```
+   - currently broken.
 - [ ] ```$help``` - show list of commands available to user@priv-level, ```$help``` < ```command``` > shows description/usage.
 - [ ] ```$fban``` - Works like ```$ban``` (shows message) doesn't actually ban user.
 - [ ] Possible ```$unskip``` feature to undo a ```$skip``` action?
