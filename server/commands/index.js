@@ -1,3 +1,4 @@
+import eightBallCmd from './eightball'
 import diceCmd from './dice'
 import dummyCmd from './dummy'
 import kickCmd from './kick'
@@ -7,6 +8,7 @@ import shuffleCmd from './shuffle'
 import skipCmd from './skip'
 
 export default {
+    eightball:	    eightBallCmd,
     dice:           diceCmd,
     dummy:          dummyCmd,
     kick:           kickCmd,
