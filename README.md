@@ -71,6 +71,18 @@ Video synchronization and chat lounge.
    - May require heavy discussion/review. We have concerns.
 - [ ] Admin panel
    - Configure roles and selectable permissions on a per-user basis.
+   - 2016JUL11 - Alpha in progress. Will need to be folded into main project at some point.
+   - User manager works. Email addresses can be changed by Admins and password reset emails are working.
+      - [ ] List of 'X' last-known IPs should be retreivable (for identifying ban evasion attempts and validating user account changes).
+      - [ ] Add delete/drop feature for cleanup of fake/joke alt accounts. (subject to review)
+      - [ ] Enable display of registration date.
+   - Add 'order by' filter to allow alpha-numeric sorting.
+   - [ ] Role Manager
+      - Roles to be created/assigned from selectable list of permissions instead of using obtuse bit-masks.
+   - [ ] Ban Manager
+      - Detailed ban history for accounts, dates, who banned, and ban reason can be reviewed by Admins/Mods.
+      - [ ] Integrate Emoticon management
+   - [ ] Video Archive enabling reports of blacklisted links, top 10/top 100 weekly/monthly/yearly videos.
 
 **Commands:**
 - [ ] ```$afk``` < _reason_ >
