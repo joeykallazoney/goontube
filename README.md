@@ -120,6 +120,7 @@ Video synchronization and chat lounge.
 - [ ] ```$wish``` - using a weighted table of abilities/permissions ```$wish``` may grant the user an ability or 'curse' for a variable time.
    - e.g.: ```$skip```, ```$bump```, user banned for 24-hours, user able to post more vids, user unable to post more than vid in the queue. 
    - user's 'ban' history may be factored-in as well. 
+
 ##### Complete #####
 - [x] Add 3-second cool-down to $skip so mods/deputies can't over-moderation (possible '-f' option for override?)
 - [x] Allow $ commands to be accessed with / as well.
