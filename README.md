@@ -5,7 +5,7 @@
 Video synchronization and chat lounge.  
 
 ###Dev Notes###
-2016AUG08 - Forked dev project to "Project Honkey-Dong" branch.
+2016AUG08 - Forked dev project to "Project-HonkeyDong" branch.
 
 ### Roadmap
 
