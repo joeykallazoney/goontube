@@ -1,0 +1,43 @@
+@import variables
+
+.chat
+    background: #ffffff
+
+.chat-input
+    input
+        &:focus
+            outline: none
+
+.message
+ul.chat-list
+    list-style-type:    none
+    padding:            0.3em 0.3em
+    overflow-x:         hidden
+    width:              100%
+
+    .message
+        padding: 0.2em 0.2em
+        font-size: 0.875em
+
+        &.system
+            font-size: 0.75em
+            font-weight: bold
+            text-transform: uppercase
+            color: rgb(77, 77, 77)
+
+        .from
+            font-weight: bold
+
+        .body
+            padding-left: 0.3em
+
+        .from, .body
+            display: inline-block
+
+        &.result
+            font-size: 0.75em
+            font-weight: normal
+            font-style: italic
+            color: rgb(119,119,119)
+
+

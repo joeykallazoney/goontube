@@ -1,0 +1,79 @@
+@import variables
+
+// props: http://codepen.io/HugoGiraudel/pen/KFDuB
+@mixin scrollbars($size, $foreground-color, $background-color: mix($foreground-color, white, 50%))
+    ::-webkit-scrollbar
+        width:  $size
+        height: $size
+
+    ::-webkit-scrollbar-thumb
+        background: $foreground-color
+
+    ::-webkit-scrollbar-track
+        background: $background-color
+
+    body
+        scrollbar-face-color: $foreground-color
+        scrollbar-track-color: $background-color
+
+@include scrollbars(.5em, rgb(27, 27, 27))
+
+.controls
+    padding-top: 0.3em
+    padding-bottom: 0.3em
+
+    .btn
+        text-transform: uppercase
+        background: transparent
+        border-radius: 0
+        padding: 0.25em 0.25em
+        color: rgb(201, 201, 201)
+
+        &:hover
+            background: rgb(201, 201, 201)
+            color: rgb(9, 9, 9)
+
+ul.playlist
+    padding-left: 0.15em
+    @include scrollbars(.5em, rgb(47, 47, 47))
+
+    .entry
+        font-size:  0.675em
+        margin:     0.25em 0.5em
+        border:     4px solid rgb(47, 47, 47)
+
+        .btn
+            background: transparent
+            color: rgb(143, 143, 143) !important
+            border-color: rgb(62, 62, 62)
+            border-radius: 20px
+            border-width: 0
+            text-shadow: 1px 1px 2px black
+            transition: color 0.1s ease-in
+
+            &:focus
+                outline: none
+
+            &:hover
+                color: rgb(110, 110, 110) !important
+
+        .row
+            margin:         0 0
+            padding:        0.5em 1em
+            &:hover
+                cursor: pointer
+                background: rgb(96, 96, 96)
+
+        .title
+            color:              rgb(27, 27, 27)
+            font-size:          1.2em
+            font-weight:        bolder
+
+        .meta
+            font-size:          0.75em
+            color:              rgb(145, 145, 145)
+            letter-spacing:     1.25px
+            font-weight:        300
+
+            .duration
+                font-weight:    bold
