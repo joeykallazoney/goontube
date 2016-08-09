@@ -1,11 +1,6 @@
 # :hamburger: [goontube](https://goontu.be/)
 
-![Travis CI build status](https://travis-ci.org/goontube/goontube.svg?branch=master)
-
 Video synchronization and chat lounge.  
-
-###Dev Notes###
-2016AUG08 - Forked dev project to "Project-HonkeyDong" branch.
 
 ### Roadmap
 
